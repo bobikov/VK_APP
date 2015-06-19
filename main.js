@@ -66,6 +66,39 @@ VK.Auth.getLoginStatus(authInfo);
 				$.each(obj, function(key, element){
 					$("<table style='float:left' border='1' cellpadding='6' cellspacing='0'><tr><td>Title</td><td>"+element.title+"<tr><td>AlbumID</td><td><a href='#'>" + element.aid + "</a></td></tr><tr><td>Size</td><td>" + element.size + "</td></tr></table>").appendTo($(".status3"));
 				});
+
+
+				// Get list of photos
+					var owner = $("#uaid").val();
+					$("a").click(function(){
+							$(".status3").html('');
+								var album = $(this).html();
+
+								VK.Api.call("photos.get", {
+								owner_id: owner, 
+								album_id: album
+								}, 
+
+								function(data){
+									if (data.response){
+										var obj = data.response;
+										$.each(obj, function(key, element){
+										
+											$("<table border='0' cellpadding='5' cellspacing='0'><tr><td><a href='"+element.src_big+"'>"+element.src_big+"</a></td></tr></table>").appendTo($(".status3"));
+										// console.log(element.src_big);
+										});
+										
+									}
+									else{
+										alert("something wrong");
+										console.log(data.response);
+
+									}
+					});
+					});
+
+					
+
 					console.log(data.response);
 			}
 			else {
@@ -74,12 +107,7 @@ VK.Auth.getLoginStatus(authInfo);
 			});
 	}
 
-
-// Get list of photos
-// 
-// 
-// 
-
+// Toggler on H1
 		$("h1").click(function(){
 			$(this).next().toggle("fast");
 			

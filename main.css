@@ -22,9 +22,9 @@ div[class^=status]{
 
 
 }
-table{
+table tr, td, a{
 	margin: 10px;
-	font-size: 18px;
+	font-size: 20px;
 }
 h1{
 	cursor: pointer;
@@ -34,6 +34,8 @@ h1{
 	padding: 0 0 0 10px;
 	border-radius: 5px;
 	border: 1px solid #EBEBEB;
+	height: 60px;
+	line-height: 60px;
 
 }
 h1:hover{
