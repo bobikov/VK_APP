@@ -25,7 +25,7 @@
 	<h1>Albums</h1>
 	<div class="status3" id="status3">not loaded</div>
 
-</body>
+
 </html>
 
 
