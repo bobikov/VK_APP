@@ -13,6 +13,9 @@
     "tests"
   ],
   "devDependencies": {
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "jcarousel": "~0.3.3",
+    "slick.js": "~1.5.5",
+    "jquery-cookie": "~1.4.1"
   }
 }

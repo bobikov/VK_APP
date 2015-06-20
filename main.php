@@ -4,8 +4,13 @@
 	<meta charset="UTF-8">
 	<title>VK APP</title>
 	<link rel="stylesheet" href="main.css">
-	<script src="http://vkontakte.ru/js/api/openapi.js"></script>	
+	<link rel="stylesheet" href="bower_components/slick.js/slick/slick.css">
+	<link rel="stylesheet" href="bower_components/slick.js/slick/slick-theme.css">
+		
 	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/jquery-cookie/jquery.cookie.js"></script>
+	<script src="http://vkontakte.ru/js/api/openapi.js"></script>
+	<script src="bower_components/slick.js/slick/slick.js"></script>
 	
 	<script src="main.js"></script>
 	
@@ -26,6 +31,8 @@
 	<div class="status3" id="status3">not loaded</div>
 
 
+
+</body>	
 </html>
 
 

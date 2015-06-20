@@ -5,6 +5,14 @@ $(document).ready(function(){
 
 	  });
 
+// $.removeCookie("album_id", {path: "/"});
+// alert($.cookie('album_id'));
+var arrp =[];
+var album_from_cookie = $("#uaid").val($.cookie('album_id'));
+	if(album_from_cookie){
+		$(".status3").html('');
+			GetPhotos($.cookie('album_id'));
+	}
 function authInfo(response) {
 	  if (response.session) {
 	    $(".status1").text('user: '+response.session.mid + " session.");
@@ -30,6 +38,15 @@ VK.Auth.getLoginStatus(authInfo);
 			$(".status3").html('');
 			GetPhotos(uaid);
 	});
+// Cookies 
+// function getCookie(name) {
+//   var matches = document.cookie.match(new RegExp(
+//     "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+//   ));
+//   return matches ? decodeURIComponent(matches[1]) : undefined;
+// }
+
+
 
 // Wall post
 	function postToVk(msg){ 
@@ -56,23 +73,28 @@ VK.Auth.getLoginStatus(authInfo);
 	}
 //Get Albums
 	function GetPhotos(id){
+		// var date = new Date(new Date().getTime()+60*60*60*1000);
+		// document.cookie = "album_id="+ id +"; path=/; expires="+date.toUTCString();
+		$.cookie('album_id', id, {expires: 7, path: "/"} );
 		VK.Api.call("photos.getAlbums", {
 			owner_id: id
+
 		}, 
 			function(data){
 			if(data.response){
 				var obj = data.response;
-
+				$("<table id='albums' border='0'  cellpadding='6' cellspacing='0'><tr><td>AlbumID</td><td>Size</td><td>Tite</td></table>").appendTo($(".status3"));
 				$.each(obj, function(key, element){
-					$("<table style='float:left' border='1' cellpadding='6' cellspacing='0'><tr><td>Title</td><td>"+element.title+"<tr><td>AlbumID</td><td><a href='#'>" + element.aid + "</a></td></tr><tr><td>Size</td><td>" + element.size + "</td></tr></table>").appendTo($(".status3"));
+					$("<tr><td><a href='#'>" + element.aid + "</a></td><td>" + element.size + "</td><td>"+element.title+"</td></tr>").appendTo($("#albums"));
 				});
 
 
 				// Get list of photos
 					var owner = $("#uaid").val();
 					$("a").click(function(){
-							$(".status3").html('');
-								var album = $(this).html();
+							
+
+							var album = $(this).html();
 
 								VK.Api.call("photos.get", {
 								owner_id: owner, 
@@ -82,11 +104,24 @@ VK.Auth.getLoginStatus(authInfo);
 								function(data){
 									if (data.response){
 										var obj = data.response;
-										$.each(obj, function(key, element){
 										
-											$("<table border='0' cellpadding='5' cellspacing='0'><tr><td><a href='"+element.src_big+"'>"+element.src_big+"</a></td></tr></table>").appendTo($(".status3"));
-										// console.log(element.src_big);
+										$(".status3").html('');
+										$(".status3").css("column-count", "1");
+										$(".status3").html('<div class="carousel"></div>');
+										$('<a class="prev" href="#">Prev</a>').insertBefore(".carousel");
+										$('<a class="next" href="#">Next</a>').insertBefore(".carousel");
+										
+
+
+										$.each(obj, function(key, element){ 
+
+											arrp.push(element.src_big);
+											
+
+											console.log(element.src_big);
+											
 										});
+										listPhotos();
 										
 									}
 									else{
@@ -107,7 +142,31 @@ VK.Auth.getLoginStatus(authInfo);
 			});
 	}
 
-// Toggler on H1
+
+
+
+		function listPhotos () {
+			for (var i =0; i < arrp.length; i++){
+		// $(".jcarousel ul").html("<li><img src='"+arrp[i]+"'></li>");
+					$("<div><img src='"+arrp[i]+"'></div>").appendTo($('.carousel'));
+				
+			}
+
+			// $(".carousel img").click(function(){alert($(this).attr("src"));});
+
+			 $('.carousel').slick({
+			    autoplay: false,
+			    // arrows: true,
+			    prevArrow: $(".prev"),
+			    nextArrow: $(".next"),
+			    // centerMode: true
+			    centerPadding: '10px'
+			    // focusOnSelect: true
+			    // adaptiveHeight: true
+			  });
+				
+		}
+			// Toggler on H1
 		$("h1").click(function(){
 			$(this).next().toggle("fast");
 			
