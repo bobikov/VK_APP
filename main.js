@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$(".login_button").click(function(){VK.Auth.login(authInfo);});
+	// $(".login_button").click(function(){VK.Auth.login(authInfo);});
 	  VK.init({
 	    apiId: 4964195
 
@@ -21,7 +21,7 @@ function authInfo(response) {
 	  }
 	}
 VK.Auth.getLoginStatus(authInfo);
-
+VK.UI.button('login_button');
 // Click button events
 
 	$(".getperm").click(function(){
@@ -34,10 +34,11 @@ VK.Auth.getLoginStatus(authInfo);
 	$(".getph").click(function(){
 			var uaid = $("#uaid").val();
 			// GetPhotos("-44426090");
-		
-			$(".status3").html('');
 			GetPhotos(uaid);
+			$(".status3").html('');
+			
 	});
+
 // Cookies 
 // function getCookie(name) {
 //   var matches = document.cookie.match(new RegExp(
@@ -107,10 +108,15 @@ VK.Auth.getLoginStatus(authInfo);
 										
 										$(".status3").html('');
 										$(".status3").css("column-count", "1");
+
 										$(".status3").html('<div class="carousel"></div>');
+										$("<a class='back_main' href='#'>Back to albums</a>").insertBefore(".carousel");
 										$('<a class="prev" href="#">Prev</a>').insertBefore(".carousel");
 										$('<a class="next" href="#">Next</a>').insertBefore(".carousel");
-										
+
+										$(".back_main").click(function(){
+												location.reload(true);
+										});
 
 
 										$.each(obj, function(key, element){ 
@@ -154,15 +160,44 @@ VK.Auth.getLoginStatus(authInfo);
 
 			// $(".carousel img").click(function(){alert($(this).attr("src"));});
 
-			 $('.carousel').slick({
-			    autoplay: false,
-			    // arrows: true,
+		$('.carousel').slick({
+			    // autoplay: true,
+			    accessibility: true,
+			    dots: true,
+			    // fade: true,
+			    arrows: true,
 			    prevArrow: $(".prev"),
 			    nextArrow: $(".next"),
 			    // centerMode: true
-			    centerPadding: '10px'
-			    // focusOnSelect: true
-			    // adaptiveHeight: true
+			    // // centerPadding: '10px',
+			    focusOnSelect: true,
+			    // // adaptiveHeight: true
+			    	 infinite: true,
+					  slidesToShow: 3,
+					  slidesToScroll: 3	
+		// 		centerMode: true,
+  // centerPadding: '60px',
+  // slidesToShow: 3,
+  // responsive: [
+  //   {
+  //     breakpoint: 768,
+  //     settings: {
+  //       arrows: false,
+  //       centerMode: true,
+  //       centerPadding: '40px',
+  //       slidesToShow: 3
+  //     }
+  //   },
+  //   {
+  //     breakpoint: 480,
+  //     settings: {
+  //       arrows: false,
+  //       centerMode: true,
+  //       centerPadding: '40px',
+  //       slidesToShow: 1
+  //     }
+  //   }
+  // ]
 			  });
 				
 		}
@@ -171,4 +206,6 @@ VK.Auth.getLoginStatus(authInfo);
 			$(this).next().toggle("fast");
 			
 		});
+
+
 });
