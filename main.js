@@ -30,14 +30,12 @@ VK.Auth.getLoginStatus(authInfo);
 	});
 	$(".post").click(function(){
 			postToVk("Hello");
-
 	});
 	$(".getph").click(function(){
 			var uaid = $("#uaid").val();
 			// GetPhotos("-44426090");
 			GetPhotos(uaid);
 			$(".status3").html('');
-			
 	});
 // Cookies 
 // function getCookie(name) {
@@ -128,35 +126,35 @@ VK.Auth.getLoginStatus(authInfo);
 			});
 	}
 //END GET ALBUMS
-		function listPhotos () {
-			for (var i =0; i < arrp.length; i++){
-				$("<div><a href='"+arrp[i]+"' class='download_photo' target='_blank'> <img src='"+arrp[i]+"'></a></div>").appendTo($('.carousel'));
-				// $('.download_photo').click(function(){return false;});
-						// $('.download_photo').click(function(){return false;});							
-			}
-		// $(".carousel a").click(function(){alert($(this).attr("href"));});
-		$('.carousel').slick({
-			    autoplay: true,
-			    accessibility: true,
-			    dots: true,
-			    // fade: true,
-			    arrows: true,
-			    prevArrow: $(".prev"),
-			    nextArrow: $(".next"),
-			    // centerMode: true
-			    // // centerPadding: '10px',
-			    // focusOnSelect: true,
-			    // // adaptiveHeight: true
-			    	 infinite: true,
-					  slidesToShow: 3,
-					  slidesToScroll: 3	
-		// 		centerMode: true,
-			  });
+	function listPhotos () {
+		for (var i =0; i < arrp.length; i++){
+			$("<div><a href='"+arrp[i]+"' class='download_photo' target='_blank'> <img src='"+arrp[i]+"'></a></div>").appendTo($('.carousel'));
+	// $('.download_photo').click(function(){return false;});
+	// $('.download_photo').click(function(){return false;});							
 		}
+	// $(".carousel a").click(function(){alert($(this).attr("href"));});
+	$('.carousel').slick({
+		    autoplay: true,
+		    accessibility: true,
+		    // dots: true,
+		    // fade: true,
+		    arrows: true,
+		    prevArrow: $(".prev"),
+		    nextArrow: $(".next"),
+		    // centerMode: true
+		    // centerPadding: '10px',
+		    // focusOnSelect: true,
+		    // adaptiveHeight: true
+	    	infinite: true,
+			slidesToShow: 3,
+			slidesToScroll: 3	
+	// 		centerMode: true,
+		  });
+	}
 // Toggler on H1
-		$("h1").click(function(){
-			$(this).next().toggle("fast");
-		});
+	$("h1").click(function(){
+		$(this).next().toggle("fast");
+	});
 
 //Get User Information
 	function getUserInfo(id){
@@ -164,7 +162,6 @@ VK.Auth.getLoginStatus(authInfo);
 			$("<span id='userinfo' class='statwrap'><a href='https://vk.com/id"+id+"' target='_blank'>"+data.response[0].first_name+ " "+data.response[0].last_name+"</a></span>").appendTo($(".status1"));
 			console.log(data);
 		});
-
 	}
 	getUserInfo("179349317");
 //Download the whole album

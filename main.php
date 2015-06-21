@@ -21,7 +21,7 @@
 
 	<input type="text" id="uaid" autocomplete=true placeholder="user or group id">
 	</header>
-	
+	<main>
 		<h1>Status</h1>
 		<div class="status1"></div>
 		<h1>Permissions</h1>
@@ -33,7 +33,7 @@
 		<!-- <a id="downloadme"href="saveAs.php">Download</a> -->
 		<!-- <a class="downloadme" type="application/octet-stream" href="http://www.vancouverobserver.com/sites/vancouverobserver.com/files/imagecache/vo_scale_w850/images/article/body/bigstock-No-Pets-Allowed-Sign-Showing-U-32860325.jpg" download>Download</a>
 		<iframe id="my_iframe" style="display:none;"></iframe> -->
-		
+	</main>	
 <script src="bower_components/jquery/dist/jquery.js"></script>
 	<script src="bower_components/jquery-cookie/jquery.cookie.js"></script>
 	<script src="http://vkontakte.ru/js/api/openapi.js"></script>
