@@ -16,6 +16,11 @@
     "jquery": "~2.1.4",
     "jcarousel": "~0.3.3",
     "slick.js": "~1.5.5",
-    "jquery-cookie": "~1.4.1"
+    "jquery-cookie": "~1.4.1",
+    "jquery-file-download": "~1.4.3",
+    "photo.swipe": "~4.0.8",
+    "sortable": "~0.6.0",
+    "handsontable": "~0.15.0",
+    "tablesaw": "~1.0.4"
   }
 }

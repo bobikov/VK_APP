@@ -1,27 +1,34 @@
 $(document).ready(function(){
-	// $(".login_button").click(function(){VK.Auth.login(authInfo);});
+	$(".login_button").click(function(){VK.Auth.login(authInfo);});
 	  VK.init({
 	    apiId: 4964195
 
 	  });
+function authInfo(response) {
+	  if (response.session) {
+	  	$(".status1").html('<span id="statwrap"> User: '+response.session.mid + " session.</span>");
+	  } else {
+	    alert('not auth');
+	  }
+	}
 
 // $.removeCookie("album_id", {path: "/"});
-// alert($.cookie('album_id'));
+$.each($.cookie(), function(data){
+	console.log(data);
+
+});
 var arrp =[];
+
+
 var album_from_cookie = $("#uaid").val($.cookie('album_id'));
 	if(album_from_cookie){
 		$(".status3").html('');
 			GetPhotos($.cookie('album_id'));
 	}
-function authInfo(response) {
-	  if (response.session) {
-	    $(".status1").text('user: '+response.session.mid + " session.");
-	  } else {
-	    alert('not auth');
-	  }
-	}
+
+
 VK.Auth.getLoginStatus(authInfo);
-VK.UI.button('login_button');
+// VK.UI.button('login_button');
 // Click button events
 
 	$(".getperm").click(function(){
@@ -94,7 +101,7 @@ VK.UI.button('login_button');
 					var owner = $("#uaid").val();
 					$("a").click(function(){
 							
-
+							var album_name = ($(event.target.parentNode.parentNode.childNodes[2]).html());
 							var album = $(this).html();
 
 								VK.Api.call("photos.get", {
@@ -113,7 +120,7 @@ VK.UI.button('login_button');
 										$("<a class='back_main' href='#'>Back to albums</a>").insertBefore(".carousel");
 										$('<a class="prev" href="#">Prev</a>').insertBefore(".carousel");
 										$('<a class="next" href="#">Next</a>').insertBefore(".carousel");
-
+										$("<span id='albumname'>"+album_name+"</span>").insertBefore($(".back_main"));
 										$(".back_main").click(function(){
 												location.reload(true);
 										});
@@ -131,7 +138,7 @@ VK.UI.button('login_button');
 										
 									}
 									else{
-										alert("something wrong");
+										// alert("something wrong");
 										console.log(data.response);
 
 									}
@@ -153,15 +160,15 @@ VK.UI.button('login_button');
 
 		function listPhotos () {
 			for (var i =0; i < arrp.length; i++){
-		// $(".jcarousel ul").html("<li><img src='"+arrp[i]+"'></li>");
-					$("<div><img src='"+arrp[i]+"'></div>").appendTo($('.carousel'));
+				$("<div><a href='"+arrp[i]+"' class='download_photo' target='_blank'> <img src='"+arrp[i]+"'></a></div>").appendTo($('.carousel'));
+				// $('.download_photo').click(function(){return false;});
+						// $('.download_photo').click(function(){return false;});						
 				
 			}
-
-			// $(".carousel img").click(function(){alert($(this).attr("src"));});
-
+					
+		// $(".carousel a").click(function(){alert($(this).attr("href"));});
 		$('.carousel').slick({
-			    // autoplay: true,
+			    autoplay: true,
 			    accessibility: true,
 			    dots: true,
 			    // fade: true,
@@ -170,34 +177,13 @@ VK.UI.button('login_button');
 			    nextArrow: $(".next"),
 			    // centerMode: true
 			    // // centerPadding: '10px',
-			    focusOnSelect: true,
+			    // focusOnSelect: true,
 			    // // adaptiveHeight: true
 			    	 infinite: true,
 					  slidesToShow: 3,
 					  slidesToScroll: 3	
 		// 		centerMode: true,
-  // centerPadding: '60px',
-  // slidesToShow: 3,
-  // responsive: [
-  //   {
-  //     breakpoint: 768,
-  //     settings: {
-  //       arrows: false,
-  //       centerMode: true,
-  //       centerPadding: '40px',
-  //       slidesToShow: 3
-  //     }
-  //   },
-  //   {
-  //     breakpoint: 480,
-  //     settings: {
-  //       arrows: false,
-  //       centerMode: true,
-  //       centerPadding: '40px',
-  //       slidesToShow: 1
-  //     }
-  //   }
-  // ]
+
 			  });
 				
 		}
@@ -206,6 +192,25 @@ VK.UI.button('login_button');
 			$(this).next().toggle("fast");
 			
 		});
+		
+				// $("#download_all").click(function(){
 
+				// 		$(".download_photo").attr("download", "");
+				// 		$(".download_photo > img").trigger("click");
+				// 		$(".download_photo").removeAttr("download");
+				// 		$('.download_photo').click(function(){return false;});
 
+				// 		return false;
+				// 		// 
+				// 	});
+				// 	
+// $("#download_all").click(function(){
+// 	$.fileDownload('https://pp.vk.me/c7011/v7011325/31e1/MnBJpHyFWfU.jpg');
+//  });
+
+		function Download(url) {
+   				 document.getElementById('my_iframe').src = url;
+		}
+		// Download("http://www.vancouverobserver.com/sites/vancouverobserver.com/files/imagecache/vo_scale_w850/images/article/body/bigstock-No-Pets-Allowed-Sign-Showing-U-32860325.jpg");
+		
 });
