@@ -6,7 +6,8 @@ $(document).ready(function(){
 	  });
 function authInfo(response) {
 	  if (response.session) {
-	  	$(".status1").html('<span id="statwrap"> User: '+response.session.mid + " session.</span>");
+	  	console.log(response.session.mid);
+	  	// $(".status1").html('<span class="statwrap"> User: '+response.session.mid + " session.</span>");
 	  } else {
 	    alert('not auth');
 	  }
@@ -121,9 +122,11 @@ VK.Auth.getLoginStatus(authInfo);
 										$('<a class="prev" href="#">Prev</a>').insertBefore(".carousel");
 										$('<a class="next" href="#">Next</a>').insertBefore(".carousel");
 										$("<span id='albumname'>"+album_name+"</span>").insertBefore($(".back_main"));
+
 										$(".back_main").click(function(){
 												location.reload(true);
 										});
+										
 
 
 										$.each(obj, function(key, element){ 
@@ -193,24 +196,30 @@ VK.Auth.getLoginStatus(authInfo);
 			
 		});
 		
-				// $("#download_all").click(function(){
-
-				// 		$(".download_photo").attr("download", "");
-				// 		$(".download_photo > img").trigger("click");
-				// 		$(".download_photo").removeAttr("download");
-				// 		$('.download_photo').click(function(){return false;});
-
-				// 		return false;
-				// 		// 
-				// 	});
+			
 				// 	
 // $("#download_all").click(function(){
 // 	$.fileDownload('https://pp.vk.me/c7011/v7011325/31e1/MnBJpHyFWfU.jpg');
 //  });
 
-		function Download(url) {
-   				 document.getElementById('my_iframe').src = url;
-		}
+		// function Download(url) {
+  //  				 document.getElementById('my_iframe').src = url;
+		// }
 		// Download("http://www.vancouverobserver.com/sites/vancouverobserver.com/files/imagecache/vo_scale_w850/images/article/body/bigstock-No-Pets-Allowed-Sign-Showing-U-32860325.jpg");
-		
+		//Get User Information
+		function getUserInfo(id){
+			VK.Api.call("users.get", { user_ids: id, fields: "sex, city"}, function(data){
+				$("<span id='userinfo' class='statwrap'><a href='https://vk.com/id"+id+"' target='_blank'>"+data.response[0].first_name+ " "+data.response[0].last_name+"</a></span>").appendTo($(".status1"));
+				console.log(data);
+			});
+
+		}
+		getUserInfo("179349317");
+
+			$("#download_all").click(function(){
+
+											$(".download_photo").attr("download", "");
+											$(".download_photo > img").trigger("click");
+											$(".download_photo").removeAttr("download");
+			});
 });

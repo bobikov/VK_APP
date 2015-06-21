@@ -29,11 +29,11 @@
 		<h1>Albums</h1>
 		
 		<div class="status3" id="status3">not loaded</div>
-		<!-- <div id="download_all">Download album</div> -->
+		<div id="download_all">Get album</div>
 		<!-- <a id="downloadme"href="saveAs.php">Download</a> -->
-		<a class="downloadme" type="application/octet-stream" href="http://www.vancouverobserver.com/sites/vancouverobserver.com/files/imagecache/vo_scale_w850/images/article/body/bigstock-No-Pets-Allowed-Sign-Showing-U-32860325.jpg" download>Download</a>
-		<iframe id="my_iframe" style="display:none;"></iframe>
-
+		<!-- <a class="downloadme" type="application/octet-stream" href="http://www.vancouverobserver.com/sites/vancouverobserver.com/files/imagecache/vo_scale_w850/images/article/body/bigstock-No-Pets-Allowed-Sign-Showing-U-32860325.jpg" download>Download</a>
+		<iframe id="my_iframe" style="display:none;"></iframe> -->
+		
 <script src="bower_components/jquery/dist/jquery.js"></script>
 	<script src="bower_components/jquery-cookie/jquery.cookie.js"></script>
 	<script src="http://vkontakte.ru/js/api/openapi.js"></script>

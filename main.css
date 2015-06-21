@@ -14,7 +14,7 @@ header{
 
 }
 
-.login, .post, .getperm, .logout, .getph{
+.login, .post, .getperm, .logout, .getph, #download_all{
 
 	height: 40px;
 	border: 1px solid #6AC6D2;
@@ -38,6 +38,7 @@ header{
 	background: -webkit-linear-gradient(top, #06E7FF 0%, #3DD2FF 100%);
 
 }
+
 .login:hover, .post:hover, .getperm:hover, .logout:hover, .getph:hover {
 	/*background: -webkit-linear-gradient(top, #16C3E9 0%, #16C3E9 100%);*/
 }
@@ -123,7 +124,7 @@ h1:hover{
 	padding: 5px 10px 5px 10px;
 	/*float: right;*/
 	display: inline-block;
-	background-color: #eee;
+	background-color: #F6F6F6;
 	-webkit-box-shadow: inset 1px 2px 2px #888;
 	/*box-shadow: inset 1px 0px 5px #ccc;*/
 }
@@ -141,8 +142,8 @@ margin: 0 auto 0 auto;
 /*border: 5px solid #ccc;*/
 /*max-width: 100%;
 max-height: 100%;*/
-/*width: 600px;
-height: 300px;*/
+/*width: 600px;*/
+height: 800px;
 /*height: 300px;*/
 margin: 0 auto 0 auto;
 /*border-radius: 10px;*/
@@ -163,7 +164,7 @@ margin: 0 auto 0 auto;
 	border-radius: 10px;
 	padding: 7px;
 }
-#statwrap{
+.statwrap{
 	/*background-color: #D8FFC3;*/
 
 	padding: 10px;
@@ -171,7 +172,7 @@ margin: 0 auto 0 auto;
 	/*color: #6C6E6F;*/
 	text-shadow: 0 1px 0 #fff;
 }
-#statwrap:before{
+.statwrap:before{
 	content:"";
 	/*position: relative;*/
 	border-left:none;
