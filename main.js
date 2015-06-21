@@ -12,26 +12,19 @@ function authInfo(response) {
 	    alert('not auth');
 	  }
 	}
-
 // $.removeCookie("album_id", {path: "/"});
 $.each($.cookie(), function(data){
 	console.log(data);
-
 });
 var arrp =[];
-
-
 var album_from_cookie = $("#uaid").val($.cookie('album_id'));
 	if(album_from_cookie){
 		$(".status3").html('');
 			GetPhotos($.cookie('album_id'));
 	}
-
-
 VK.Auth.getLoginStatus(authInfo);
 // VK.UI.button('login_button');
 // Click button events
-
 	$(".getperm").click(function(){
 			getAccPerm("179349317");
 	});
@@ -46,7 +39,6 @@ VK.Auth.getLoginStatus(authInfo);
 			$(".status3").html('');
 			
 	});
-
 // Cookies 
 // function getCookie(name) {
 //   var matches = document.cookie.match(new RegExp(
@@ -54,8 +46,6 @@ VK.Auth.getLoginStatus(authInfo);
 //   ));
 //   return matches ? decodeURIComponent(matches[1]) : undefined;
 // }
-
-
 
 // Wall post
 	function postToVk(msg){ 
@@ -87,9 +77,8 @@ VK.Auth.getLoginStatus(authInfo);
 		$.cookie('album_id', id, {expires: 7, path: "/"} );
 		VK.Api.call("photos.getAlbums", {
 			owner_id: id
-
 		}, 
-			function(data){
+		function(data){
 			if(data.response){
 				var obj = data.response;
 				$("<table id='albums' border='0'  cellpadding='6' cellspacing='0'><tr><td>AlbumID</td><td>Size</td><td>Tite</td></table>").appendTo($(".status3"));
@@ -97,59 +86,40 @@ VK.Auth.getLoginStatus(authInfo);
 					$("<tr><td><a href='#'>" + element.aid + "</a></td><td>" + element.size + "</td><td>"+element.title+"</td></tr>").appendTo($("#albums"));
 				});
 
-
-				// Get list of photos
-					var owner = $("#uaid").val();
-					$("a").click(function(){
-							
-							var album_name = ($(event.target.parentNode.parentNode.childNodes[2]).html());
-							var album = $(this).html();
-
-								VK.Api.call("photos.get", {
-								owner_id: owner, 
-								album_id: album
-								}, 
-
-								function(data){
-									if (data.response){
-										var obj = data.response;
-										
-										$(".status3").html('');
-										$(".status3").css("column-count", "1");
-
-										$(".status3").html('<div class="carousel"></div>');
-										$("<a class='back_main' href='#'>Back to albums</a>").insertBefore(".carousel");
-										$('<a class="prev" href="#">Prev</a>').insertBefore(".carousel");
-										$('<a class="next" href="#">Next</a>').insertBefore(".carousel");
-										$("<span id='albumname'>"+album_name+"</span>").insertBefore($(".back_main"));
-
-										$(".back_main").click(function(){
-												location.reload(true);
-										});
-										
-
-
-										$.each(obj, function(key, element){ 
-
-											arrp.push(element.src_big);
-											
-
-											console.log(element.src_big);
-											
-										});
-										listPhotos();
-										
-									}
-									else{
-										// alert("something wrong");
-										console.log(data.response);
-
-									}
+		// Get list of photos
+				var owner = $("#uaid").val();
+				$("a").click(function(){
+					var album_name = ($(event.target.parentNode.parentNode.childNodes[2]).html());
+					var album = $(this).html();
+						VK.Api.call("photos.get", {
+						owner_id: owner, 
+						album_id: album
+						}, 
+						function(data){
+							if (data.response){
+								var obj = data.response;	
+								$(".status3").html('');
+								$(".status3").css("column-count", "1");
+								$(".status3").html('<div class="carousel"></div>');
+								$("<a class='back_main' href='#'>Back to albums</a>").insertBefore(".carousel");
+								$('<a class="prev" href="#">Prev</a>').insertBefore(".carousel");
+								$('<a class="next" href="#">Next</a>').insertBefore(".carousel");
+								$("<span id='albumname'>"+album_name+"</span>").insertBefore($(".back_main"));
+								$(".back_main").click(function(){
+									location.reload(true);
+								});
+								$.each(obj, function(key, element){ 
+									arrp.push(element.src_big);
+									console.log(element.src_big);
+								});
+									listPhotos();
+								}
+							else{
+								// alert("something wrong");
+								console.log(data.response);
+							}
+						});
 					});
-					});
-
-					
-
 					console.log(data.response);
 			}
 			else {
@@ -157,18 +127,13 @@ VK.Auth.getLoginStatus(authInfo);
 			}
 			});
 	}
-
-
-
-
+//END GET ALBUMS
 		function listPhotos () {
 			for (var i =0; i < arrp.length; i++){
 				$("<div><a href='"+arrp[i]+"' class='download_photo' target='_blank'> <img src='"+arrp[i]+"'></a></div>").appendTo($('.carousel'));
 				// $('.download_photo').click(function(){return false;});
-						// $('.download_photo').click(function(){return false;});						
-				
+						// $('.download_photo').click(function(){return false;});							
 			}
-					
 		// $(".carousel a").click(function(){alert($(this).attr("href"));});
 		$('.carousel').slick({
 			    autoplay: true,
@@ -186,40 +151,26 @@ VK.Auth.getLoginStatus(authInfo);
 					  slidesToShow: 3,
 					  slidesToScroll: 3	
 		// 		centerMode: true,
-
 			  });
-				
 		}
-			// Toggler on H1
+// Toggler on H1
 		$("h1").click(function(){
 			$(this).next().toggle("fast");
-			
 		});
-		
-			
-				// 	
-// $("#download_all").click(function(){
-// 	$.fileDownload('https://pp.vk.me/c7011/v7011325/31e1/MnBJpHyFWfU.jpg');
-//  });
 
-		// function Download(url) {
-  //  				 document.getElementById('my_iframe').src = url;
-		// }
-		// Download("http://www.vancouverobserver.com/sites/vancouverobserver.com/files/imagecache/vo_scale_w850/images/article/body/bigstock-No-Pets-Allowed-Sign-Showing-U-32860325.jpg");
-		//Get User Information
-		function getUserInfo(id){
-			VK.Api.call("users.get", { user_ids: id, fields: "sex, city"}, function(data){
-				$("<span id='userinfo' class='statwrap'><a href='https://vk.com/id"+id+"' target='_blank'>"+data.response[0].first_name+ " "+data.response[0].last_name+"</a></span>").appendTo($(".status1"));
-				console.log(data);
-			});
+//Get User Information
+	function getUserInfo(id){
+		VK.Api.call("users.get", { user_ids: id, fields: "sex, city"}, function(data){
+			$("<span id='userinfo' class='statwrap'><a href='https://vk.com/id"+id+"' target='_blank'>"+data.response[0].first_name+ " "+data.response[0].last_name+"</a></span>").appendTo($(".status1"));
+			console.log(data);
+		});
 
-		}
-		getUserInfo("179349317");
-
-			$("#download_all").click(function(){
-
-											$(".download_photo").attr("download", "");
-											$(".download_photo > img").trigger("click");
-											$(".download_photo").removeAttr("download");
-			});
+	}
+	getUserInfo("179349317");
+//Download the whole album
+	$("#download_all").click(function(){
+		$(".download_photo").attr("download", "");
+		$(".download_photo > img").trigger("click");
+		$(".download_photo").removeAttr("download");
+	});
 });
