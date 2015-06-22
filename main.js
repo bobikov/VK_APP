@@ -170,4 +170,19 @@ VK.Auth.getLoginStatus(authInfo);
 		$(".download_photo > img").trigger("click");
 		$(".download_photo").removeAttr("download");
 	});
+
+
+//Test php script returning file list
+$.ajax({
+	url: "fileList.py",
+	type: "GET"
+})
+.done(function(data) {
+	var arrr  = [];
+	arrr.push(data);
+	$("<div>"+data+"</div>").appendTo(".status2");
+ // alert(data);
+});
+
+
 });

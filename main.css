@@ -12,7 +12,7 @@ header{
 	height: auto;
 	margin: 0 0 2% 0%;
 	padding: 0 0 1% 0;
-
+	background: -webkit-linear-gradient(top, #C7CCC7 0%, #B5BAB6 100%);
 	box-shadow: 0 1px 5px #aaa;
 	z-index:9999;
 }
@@ -37,6 +37,7 @@ main{
 	display: inline-block;
 	float: left;
 	line-height: 40px;
+	-webkit-user-select: none;
 
 
 	box-shadow: inset 1px 1px 8px #fff, 0px 1px 4px #ccc;
@@ -48,8 +49,9 @@ main{
 #download_all{
 	margin-left: 2%;
 }
-.login:hover, .post:hover, .getperm:hover, .logout:hover, .getph:hover {
+.login:active, .post:active, .getperm:active, .logout:active, .getph:active, #download_all:active {
 	/*background: -webkit-linear-gradient(top, #16C3E9 0%, #16C3E9 100%);*/
+	box-shadow: inset 0 2px 3px #000;
 }
 div[class^=status]{
 	/*background-color: #E4F988;*/
@@ -175,7 +177,7 @@ margin: 0 auto 0 auto;
 }
 .statwrap, .statwrapbad{
 	/*background-color: #00FF01;*/
-	/*border: 1px solid #ccc;*/
+	border: 1px solid #ccc;
 	display: inline-block;
 	border-left: 6px solid #00FF01;
 	/*padding: 10px;*/
@@ -186,7 +188,7 @@ margin: 0 auto 0 auto;
 	/*color: #6C6E6F;*/
 	/*text-shadow: 0 1px 0 #fff;*/
 }
-/*.statwrap:before, .statwrapbad:before{
+.statwrap:before, .statwrapbad:before{
 	content:"";
 	/*position: relative;*/
 	position: absolute;
@@ -196,4 +198,9 @@ margin: 0 auto 0 auto;
 
 	border: 2px solid #59EE00; /* Прозрачные границы */
     /*border-left: 10px solid #00FF01;*/
-}*/
+}
+#comments{
+	margin: 0 auto 0 auto;
+	position: relative;
+	border: 1px solid #000;
+}
