@@ -9,9 +9,9 @@ if ($handle = opendir('.')) {
     }
 
     /* This is the WRONG way to loop over the directory. */
-    while ($entry = readdir($handle)) {
-        echo "$entry";
-    }
+    // while ($entry = readdir($handle)) {
+    //     echo "$entry";
+    // }
 
     closedir($handle);
 }

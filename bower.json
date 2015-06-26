@@ -21,6 +21,9 @@
     "photo.swipe": "~4.0.8",
     "sortable": "~0.6.0",
     "handsontable": "~0.15.0",
-    "tablesaw": "~1.0.4"
+    "tablesaw": "~1.0.4",
+    "dropzone": "~4.0.1",
+    "autosize": "~3.0.6",
+    "oauth-js": "~0.4.3"
   }
 }
