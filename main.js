@@ -1,9 +1,7 @@
 $(document).ready(function(){
 	$(".login_button").click(function(){VK.Auth.login(authInfo);});
 	  VK.init({
-	    apiId: 4964195,
-	    // apiId: 4970381,
-	    scope:["friends","video","offline"]
+	    apiId: 4964195
 	  });
 function authInfo(response) {
 	  if (response.session) {
@@ -196,7 +194,7 @@ function getVideos(id){
 // getVideos("179349317");
 //Test php script returning file list
 $.ajax({
-	url: "fileList.php",
+	url: "plus.py",
 	type: "GET"
 })
 .done(function(data) {

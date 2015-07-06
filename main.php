@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html lang="en">
 <head>
 	<meta Content-type: text/html; charset="UTF-8"  >
@@ -11,9 +11,11 @@
 	<script src="bower_components/oauth-js/dist/oauth.js"></script>
 	<script src="bower_components/jquery-cookie/jquery.cookie.js"></script>
 	<script src="bower_components/slick.js/slick/slick.js"></script>
+	<script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
 	<script src="bower_components/autosize/dist/autosize.js"></script>
 	<script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
-	<script src="SDK.js"></script>
+	<!-- <script src="SDK.js"></script> -->
+	<script src="main.js"></script>
 
 </head>
 <body>
