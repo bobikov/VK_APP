@@ -7,13 +7,12 @@ from html.parser import HTMLParser
 from bs4 import BeautifulSoup
 import random
 import time
+
 vkapi = vk.API(access_token='490914b5c841d81adfceca3310710a2f31f70ec56b523da6b40ef9c37effa9181b786f1504eaddc15b0fd')
 vkapi.account.setOffline()
 other= [-72580409, -61330688]
-groups = [-57014305, -78468103, -34783798]
 person = [179349317]
-pho = []
-chats = []
+app_id = 4967352
 sexwords=[
 	'Почему секс перестал быть чем-то волшебным, перестал быть вершиной любви? Эти пластиковые красотки все такие гладкие, блестящие и... все готовы к сексу. Какая ложь...',
 	'Арчи – с его разговорами о том, что он хотел бы переродиться моими стрингами, – был, по меркам австралийских рокеров, романтичен донельзя... но какая, к черту, романтика, если секс такой, что нужны асбестовые презервативы?',
@@ -55,6 +54,11 @@ sexwords=[
 ]
 life=['Иногда, только сойдя со сцены, можешь узнать, какую роль ты играл.',
 	'Для покойника у тебя бодрый голос.',
+	'— Ты выпил, да?\n— Да, хлорофил.',
+	'Вы, ребят, как два тюленя, которые делят рыбий хвост',
+	'— А ты чудо! Ты умопомрачительно двулична. Как тебе удаётся? Ты не двойной агент, ты тройная дрянь! Я в жизни таких не видел. В тебе есть хоть что-то настоящее?',
+	'Если Вам открыли сердце…, не пытайтесь прогрызть еще и путь и к печени!',
+	'Любовь зла, купидоны — сволочи… Куда смотрит модератор любви???',
 	'А все потому, что новая жизнь на самом деле ничем не отличается от старой; более того, это и есть та же старая жизнь, пока вы сами не загадите ее настолько, что остается только плотно закрыть двери гаража, влезть в машину с включенным двигателем и ждать… Просто ждать…',
 	'«Человеческой натуре свойственно заниматься тем, что у нас хорошо получается.»',
 	'Жизнь подобна телеграмме — короткая и с ошибками.',
@@ -177,73 +181,91 @@ life=['Иногда, только сойдя со сцены, можешь уз�
 	'Если это не любовь, то где-то рядом с ней. ',
 	'— Зачем вы пришли?\n— Хочу быть вашим другом. Я знаю, это невозможно. Но человеку иногда хочется невозможного',
 	'xxx: а что было самое страшное в твоей жизни? :)\nyyy: ну, наверное когда я прыгал с парашютом который сам же и упаковывал',
-	'— Стаканчик крови, пожалуйста.\n— Вам какую группу?'
+	'— Стаканчик крови, пожалуйста.\n— Вам какую группу?',
+	'Неученость не есть недостаток ума, а знание не есть признак гения.',
+	'Уважение к истине - начало премудрости.',
+	'Достоинству нас не научит тот, Кто недостойно сам себя ведет.',
+	'Мы знаем больше бесполезных вещей, чем не знаем полезных.',
+	'Глуп тот человек, который остается всегда неизменным.'
 	]
-
 public1 = []
+
+
 class Comb:
-	'''iterator that yields numbers in the Fibonacci sequence'''
+	'''Super VK combain making collecting and post any data'''
 
-	def __init__(self, count=2):
-		self.count = count
-
-	def super(self, plus):
-		return print(self.count + plus)
-
-newcomb = Comb()
-newcomb.super(5)
-
-# def getwall(wall_id, user_id, count):
-# 	wall = vkapi.wall.get(owner_id=wall_id, count=count)
-# 	myitems = []
-# 	dtype = dtype
-# 	for i in wall['items']:
-# 		if i['from_id'] == user_id:
-# 			print(dict(id=i['from_id'], value= i['text']))
-# # getwall(-61330688, 179349317, 2)
-# def getTopic():
-# 	topics = vkapi.board.getTopics(group_id=53664217)
-# 	for i in topics['items']:
-# 		if i['title'] == 'ЧАТ':
-# 			chats.append(i['id'])
-
-# getTopic()
-# def getPhoto(wall_id, album, count):
-# 	photos = vkapi.photos.get(owner_id=wall_id, album_id=album, count=count)
-# 	for i in photos['items']:
-# 		if i['photo_604']:
-# 			pho.append(i['id'])
-# # getPhoto(-73484869, 'wall', 90)
+	def __init__(self):
+		self.max = 'dd'
+		self.ok = 'dd'
+		self.groups = [-57014305, -78468103]
 
 
-# # print(pho)
-# def postTopic():
-# 	vkapi.board.addComment(group_id=53664217, topic_id=chats[0], text=str(random.choice(life)))
-# 	print('Post in to the chat complete')
+	def getWall(self, wall_id, user_id, count=80):
+		sd = 0
+		while sd<500:
+			sd+=50
+			wall = vkapi.wall.get(owner_id=wall_id, count=count, offset=sd)
+			for i in wall['items']:
+				if i['from_id'] == user_id:
+					print(dict(id=i['from_id'], value= i['text']))
+			time.sleep(1)
+		# ss=getWall()
+		# ss.start()
+
+	def getTopic():
+		topic_ids = []
+		topics = vkapi.board.getTopics(group_id=53664217)
+		for i in topics['items']:
+			if i['title'] == 'ЧАТ':
+				topic_ids.append(i['id'])
+		return topic_ids
+	getTopic()
+
+	def getPhoto(wall_id, album, count):
+		pho = []
+		photos = vkapi.photos.get(owner_id=wall_id, album_id=album, count=count)
+		for i in photos['items']:
+			if i['photo_604']:
+				pho.append(i['id'])
+		return pho
+
+	def postTopic(self, topic_id=getTopic()):
+		
+		vkapi.board.addComment(group_id=53664217, topic_id=topic_id[0], text=str(random.choice(life)))
+		return print('\n-------------------------\n\n' + 'Post complete in topic board: ' + str(topic_id[0]) + '\n\n--------------------------')
 
 
-# def post():
-# 	i=-1
-# 	group = str;
-# 	print('Computer make post photos now... \nTotal number of posts: ' + str(i+1))
-# 	while 1:
-# 		i+=1
-# 		if i == len(groups)-1:
-# 			postTopic()	
-# 			i=-1
-# 		group = str(groups[i])
-# 		ok2 = group[:]
-# 		# group = str(random.choice(groups))
-# 		words = random.choice(life)
-# 		ok = words[:]
-# 		vkapi.wall.post(owner_id=ok2,  message=ok)
-# 		print('В ('+ str(ok2) + ')\nОпубликована запись: '+ str(ok) + '\n\n---------------------------\n\n')
-# 		time.sleep(60*8)
-# gg = post()
-# gg.start()
+	def postMulti(self):
+		i=-1
+		group = str;
+		print('Computer make post photos now... \nTotal number of posts: ' + str(i+1))
+		while 1:
+			i+=1
+			if i == len(self.groups)-1:
+				Comb.postTopic()
+				i=-1
+			group = str(self.groups[i])
+			ok2 = group[:]
+			# group = str(random.choice(groups))
+			words = random.choice(life)
+			ok = words[:]
+			vkapi.wall.post(owner_id=ok2,  message=ok)
+			print('В ('+ str(ok2) + ')\nОпубликована запись: '+ str(ok) + '\n\n---------------------------\n\n')
+			time.sleep(60*10)
+	# gg = post()
+	# gg.start()
+	
+	def postOne(self, photos=getPhoto(-73484869, 'wall', 10)):
+		dd = photos
+		i=0
+		while i<len(dd):
+			i+=1	
+			vkapi.wall.post(owner_id=person[0],  attachments='photo179349317_4967352, photo-73484869_' + str(dd[i]))
+			time.sleep(10)
+		# return print(self.groups)	
+	# def getLikes(self):
+	# 	return 
 
-
-
-
-# postTopic()
-# print(groups)
+if __name__ == "__main__":
+	Combain = Comb()
+	Combain.postOne()
