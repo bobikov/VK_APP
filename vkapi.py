@@ -8,11 +8,11 @@ from urllib.request import urlopen
 from urllib.request import urlparse
 from html.parser import HTMLParser
 from bs4 import BeautifulSoup 
-import timer
+# import timer
 
 url = 'https://oauth.vk.com/authorize?'
 app_id = '4967352'
-scope = 'wall, offline'
+scope = 'wall, offline, status, messages, ads, groups, notes'
 redirect_url = 'https://oauth.vk.com/blank.html'
 api_version = '5.34'
 display = 'popup'

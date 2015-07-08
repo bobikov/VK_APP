@@ -91,7 +91,7 @@ def post():
 		# 	i=-1
 
 		vkapi.wall.post(owner_id=groups[0], message=random.choice(sexwords))
-		time.sleep(60*15)
+		time.sleep(60*25)
 gg = post()
 gg.start()
 
