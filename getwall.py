@@ -8,7 +8,9 @@ from html.parser import HTMLParser
 from bs4 import BeautifulSoup
 import random
 import time
-import datetime
+from datetime import timedelta
+# import datetime
+from datetime import datetime
 from threading import Timer,Thread,Event
 
 # User and app info
@@ -19,7 +21,7 @@ other = [-72580409, -61330688]
 person = [179349317]
 app_id = 4967352
 
-
+supercitat = []
 # VK groups  data for reading
 
 public = { 'items' : [
@@ -90,8 +92,7 @@ if '' in girls+mudreci+life+sex+films+scary+super700:
 for i in public['items']:
 	pub.append(i['id'])
 
-s = 1374681063
-f = datetime.datetime.fromtimestamp(s).strftime('%Y-%m-%d %H:%M:%S.%f')
+
 
 class perpetualTimer():
 
@@ -123,16 +124,26 @@ class Comb:
 		self.ok = 'dd'
 		self.groups = [-57014305, -78468103]
 
+	def cooler(self):
+		while 1:
+			Comb.getWall('self', 'no', person[0], 'text', 1)
+			time.sleep(0.8)
 
-	def getWall( self, offset,  wall_id, dtype, count = 1, user_id = 179349317 ):
+
+
+	def getWall( self, offset,  wall_id, dtype, count = 1, user_id = 179349317, sdate='no' ):
 		'''Get music, image, text data from the wall'''
-
+		rid = []
 		text=[]
 		ids = []
 		i = 0
 		new=[]
 		sd = -50
-
+		date = []
+		formattime = '%y-%m-%d %H:%M:%S'
+		now = datetime.strptime(datetime.strftime(datetime.now(), '%y-%m-%d %H:%M:%S'), '%y-%m-%d %H:%M:%S')
+		# wnow = now[:]
+		# Looking for Post IDs without offset 
 		if offset == 'no' and dtype == 'id':
 			items = wall_id['items']
 			for i in items:
@@ -144,7 +155,9 @@ class Comb:
 						new.append( str(a['owner_id']) + '_'+  str(a['id']) )
 			return new
 
-		elif offset == 'no' and dtype == 'text':
+		# Looking for text in posts without offset
+		elif offset == 'no' and dtype == 'text' and sdate == 'yes' or 'no':
+
 			if type(wall_id) == dict:
 				items = wall_id['items']
 				for i in items:
@@ -154,11 +167,30 @@ class Comb:
 					for a in i['items']:
 						text.append(str(a['text']))
 			elif type(wall_id) == int:
+
 				wall = vkapi.wall.get( owner_id = wall_id, count = count )
 				text.append(wall)
+				for i in text[0]['items']:
+					dd = datetime.strptime(datetime.fromtimestamp(i['date']).strftime('%d.%m.%y %H:%M:%S'), "%d.%m.%y %H:%M:%S")
+					ddd = dd+timedelta(seconds=15)
+					if ddd == now:
+						vkapi.wall.addComment(owner_id=person[0], post_id=i['id'], text='Привет')
 
-			return print(text)
+					# if i['id']
+					# print('post time: '+str(dd)+'\n'+'curent time: ' + str(now))
+					# else:
+					# 	print('notok')
 
+					# date.append(datetime.fromtimestamp(i['date']).strftime('%d.%m.%y %H:%M:%S'))
+					# date.append(i['date'])
+					
+			# return print(datetime.strptime(date[0],'%d.%m.%y %H:%M:%S') - timedelta(weeks=40*17))
+			# return print(datetime.strptime(datetime.strftime(now, '%d.%m.%y %H:%M:%S'), '%d.%m.%y %H:%M:%S'))
+			# return print(date)
+
+			
+		
+		# Looking for text in posts with offset
 		elif offset == 'yes' and dtype == 'text':
 			items = wall_id['items']
 			for i in items:
@@ -166,7 +198,6 @@ class Comb:
 					sd+=50
 					wall = vkapi.wall.get( owner_id = i['id'], count = count, offset = sd )
 					ids.append(wall)
-
 					time.sleep(1)
 			for i in ids:
 				for a in i['items']:
@@ -174,6 +205,11 @@ class Comb:
 					supercitat.append(str(a['text']))
 			return text
 
+		# Looking for date of post
+
+	
+
+	
 
 	# def getCitat( self ):
 
@@ -252,17 +288,18 @@ class Comb:
 			time.sleep(10)
 		# return print(self.groups)	
 		# 
-
+	
 
 
 
 if __name__ == "__main__":
 	Combain = Comb()
-	# Combain.postOne()
-	# Combain.getWall('no', public, 'text', 2)
+	# # Combain.postOne()
+	# Combain.getWall('no', person[0], 'text', 3)
+	Combain.cooler()
 	# Combain.getCitat()
 	# Combain.getLikes()
 	# Combain.rePost()
 	# Combain.postMulti(mudreci)
-	Combain.postMulti(girls)
+	# Combain.postMulti(girls)
 	
