@@ -127,10 +127,13 @@ class Comb:
 	def getWall( self, offset,  wall_id, dtype, count = 1, user_id = 179349317 ):
 		'''Get music, image, text data from the wall'''
 
+		text=[]
+		ids = []
+		i = 0
+		new=[]
+		sd = -50
+
 		if offset == 'no' and dtype == 'id':
-			ids=[]
-			new=[]
-			i=0
 			items = wall_id['items']
 			for i in items:
 				wall = vkapi.wall.get( owner_id = i['id'], count = count )
@@ -142,24 +145,21 @@ class Comb:
 			return new
 
 		elif offset == 'no' and dtype == 'text':
-			text=[]
-			ids = []
-			i=0
-			items = wall_id['items']
-			for i in items:
-				wall = vkapi.wall.get( owner_id = i['id'], count = count )
-				ids.append(wall)
-			for i in ids:
-				for a in i['items']:
-					text.append(str(a['text']))
-			return text
+			if type(wall_id) == dict:
+				items = wall_id['items']
+				for i in items:
+					wall = vkapi.wall.get( owner_id = i['id'], count = count )
+					ids.append(wall)
+				for i in ids:
+					for a in i['items']:
+						text.append(str(a['text']))
+			elif type(wall_id) == int:
+				wall = vkapi.wall.get( owner_id = wall_id, count = count )
+				text.append(wall)
+
+			return print(text)
 
 		elif offset == 'yes' and dtype == 'text':
-			text = []
-			ids = []
-			i = 0
-			sd = -50
-	
 			items = wall_id['items']
 			for i in items:
 				while sd < 100:
@@ -198,9 +198,6 @@ class Comb:
 				topic_ids.append(i['id'])
 		return topic_ids
 	
-	getTopic()
-
-
 
 	def getPhoto( wall_id, album, count ):
 
@@ -262,7 +259,7 @@ class Comb:
 if __name__ == "__main__":
 	Combain = Comb()
 	# Combain.postOne()
-	# Combain.getWall('no', public, 1)
+	# Combain.getWall('no', public, 'text', 2)
 	# Combain.getCitat()
 	# Combain.getLikes()
 	# Combain.rePost()
