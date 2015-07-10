@@ -176,17 +176,6 @@ class Comb:
 					if ddd == now:
 						vkapi.wall.addComment(owner_id=person[0], post_id=i['id'], text='Привет')
 
-					# if i['id']
-					# print('post time: '+str(dd)+'\n'+'curent time: ' + str(now))
-					# else:
-					# 	print('notok')
-
-					# date.append(datetime.fromtimestamp(i['date']).strftime('%d.%m.%y %H:%M:%S'))
-					# date.append(i['date'])
-					
-			# return print(datetime.strptime(date[0],'%d.%m.%y %H:%M:%S') - timedelta(weeks=40*17))
-			# return print(datetime.strptime(datetime.strftime(now, '%d.%m.%y %H:%M:%S'), '%d.%m.%y %H:%M:%S'))
-			# return print(date)
 
 			
 		
