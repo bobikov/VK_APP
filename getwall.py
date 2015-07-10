@@ -22,6 +22,7 @@ person = [179349317]
 app_id = 4967352
 
 supercitat = []
+phrases = ['На всяком кладбище, даже очень старом, всегда ощутим острый, трагический аромат разорванной любви — когда смерть отрывает любящих друг от друга.', 'Приятно знать, каков наш мир и где в нем твое место', 'Надо найти место внутри себя, вокруг себя. Место, которое тебе подходит.Похожее на тебя хотя бы отчасти.','Есть нечто особенное в месте твоего рождения. Не все это знают. Это знает лишь тот, кого силой оторвали от места его рождения.']
 # VK groups  data for reading
 
 public = { 'items' : [
@@ -174,7 +175,7 @@ class Comb:
 					dd = datetime.strptime(datetime.fromtimestamp(i['date']).strftime('%d.%m.%y %H:%M:%S'), "%d.%m.%y %H:%M:%S")
 					ddd = dd+timedelta(seconds=15)
 					if ddd == now:
-						vkapi.wall.addComment(owner_id=person[0], post_id=i['id'], text='Привет')
+						vkapi.wall.addComment(owner_id=person[0], post_id=i['id'], text=random.choice(phrases))
 
 
 			
