@@ -42,4 +42,19 @@
 		}; 
 	func();"
 	>P-frame-tag</a>
+	<a href="javascript: var func = function(){
+					var ptag = document.getElementsByClassName('quote-text-inner');
+					var arr = [];
+					for (var i=0; i<ptag.length;i++){
+						
+							arr.push('b' + ptag[i].textContent);
+						
+					};
+				newwin = window.open();
+				newwin.document.write(arr);
+	 		void 0;
+					
+		}; 
+	func();"
+	>Class Quote</a>
 </html>

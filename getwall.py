@@ -12,6 +12,8 @@ from datetime import timedelta
 from datetime import datetime
 from threading import Timer,Thread,Event
 import webbrowser
+import wget
+import os
 # User and app info
 
 vkapi = vk.API( access_token = '12190cdc5c7c2de92e1f892153e6ec3af558d98afc124f1a2534fae400ec277f8807264ff980f4c403de4')
@@ -231,17 +233,24 @@ class Comb:
 		return topic_ids
 	
 
-	def getPhoto( self, wall_id, album, count ):
+	def getPhoto( self, wall_id, album, count, download='no', path='./'):
 
 		pho = []
 		photos = vkapi.photos.get( owner_id = wall_id, album_id = album, count = count ,  v='5.34')
-
+		if download == 'yes':
+			os.mkdir(path=path,  mode=765)
+			
 		for i in photos['items']:
 			if i['photo_604']:
+				if download == 'yes':
+					
 				# pho.append(i['photo_604'])
+					wget.download(i['photo_604'], out=path)
 				pho.append(i['id'])
 				# webbrowser.open_new_tab(i['photo_604'])
-
+		if download == 'yes':			
+			os.system("chmod 777 "+str(path))
+			os.system('rm ./*.tmp')
 		return pho
 
 	def copyPhoto( self, owner_id, titleNewAlbum, fromWall ):
@@ -325,9 +334,9 @@ if __name__ == "__main__":
 	# Combain.getWall('no', person[0], 'text', 3)
 	# Combain.dateChecker()
 	# Combain.getCitat()
-	# Combain.getPhoto( -46773594, 'wall', 10 )
+	Combain.getPhoto( -54179178, 'wall', 10, 'yes', '/Users/hal/NEW2')
 	# Combain.rePost()
 	# Combain.copyPhoto( person[0], 'dfsdfasfassd', -46773594)
-	Combain.postMulti(slist)
+	# Combain.postMulti(slist)
 
 	
