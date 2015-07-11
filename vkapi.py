@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 
 url = 'https://oauth.vk.com/authorize?'
 app_id = '4967352'
-scope = 'wall, offline, status, messages, ads, groups, notes'
+scope = 'wall, offline, status, messages, ads, groups, notes, photos'
 redirect_url = 'https://oauth.vk.com/blank.html'
 api_version = '5.34'
 display = 'popup'
@@ -49,7 +49,7 @@ def auth_user():
 		saveFile = open('subb.html', 'w')
 		saveFile.write(str(html))
 		# saveFile.close()
-		webbrowser.open('subb.html')
+		webbrowser.open_new_tab('subb.html')
 		url_action = soup.form['action']
 		print(url_action)
 		print(headers)

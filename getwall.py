@@ -9,21 +9,21 @@ from bs4 import BeautifulSoup
 import random
 import time
 from datetime import timedelta
-# import datetime
 from datetime import datetime
 from threading import Timer,Thread,Event
-
+import webbrowser
 # User and app info
 
-vkapi = vk.API( access_token = '490914b5c841d81adfceca3310710a2f31f70ec56b523da6b40ef9c37effa9181b786f1504eaddc15b0fd')
+vkapi = vk.API( access_token = '12190cdc5c7c2de92e1f892153e6ec3af558d98afc124f1a2534fae400ec277f8807264ff980f4c403de4')
 vkapi.account.setOffline()
 other = [-72580409, -61330688]
 person = [179349317]
 app_id = 4967352
 
 supercitat = []
-phrases = ['На всяком кладбище, даже очень старом, всегда ощутим острый, трагический аромат разорванной любви — когда смерть отрывает любящих друг от друга.', 'Приятно знать, каков наш мир и где в нем твое место', 'Надо найти место внутри себя, вокруг себя. Место, которое тебе подходит.Похожее на тебя хотя бы отчасти.','Есть нечто особенное в месте твоего рождения. Не все это знают. Это знает лишь тот, кого силой оторвали от места его рождения.']
-# VK groups  data for reading
+phrases = ['На всяком кладбище, даже очень старом, всегда ощутим острый, трагический аромат разорванной любви — когда смерть отрывает любящих друг от друга.', 'Приятно знать, каков наш мир и где в нем твое место', 'Надо найти место внутри себя, вокруг себя. Место, которое тебе подходит.Похожее на тебя хотя бы отчасти.','Есть нечто особенное в месте твоего рождения. Не все это знают. Это знает лишь тот, кого силой оторвали от места его рождения.','Так же, как кожа выделяет пот, печень— желчь, а поджелудочная железа — инсулин, мозг — этот поразительный орган, состоящий из миллиардов клеток — «выделяет» сознание.']
+
+# VK groups info for reading
 
 public = { 'items' : [
 						{	'name' : 'techtroit', 
@@ -50,6 +50,13 @@ citat = { 'items' : [
 					]
 		}
 
+images = { 'items' : [
+						{	'name' : 'VILLAN',
+							'id': -46773594		}
+					
+
+					]
+		}
 # List text sources 		
 
 pub = []
@@ -85,10 +92,9 @@ ofile7 = open('words/sex.txt')
 rofile7 = ofile7.read()
 sex = rofile7.split('b')
 
-if '' in girls+mudreci+life+sex+films+scary+super700:
-	girls.remove('')
-
-
+slist = mudreci+life+girls+sex+films+scary+super700
+# if '' in slist:
+# 	slist.remove('')
 
 for i in public['items']:
 	pub.append(i['id'])
@@ -116,6 +122,7 @@ class perpetualTimer():
 
 
 # Main Programm Classes and Functions
+
 class Comb:
 	'''Super VK combain making collecting and post any data'''
 
@@ -125,9 +132,13 @@ class Comb:
 		self.ok = 'dd'
 		self.groups = [-57014305, -78468103]
 
-	def cooler(self):
+
+	def dateChecker(self):
+
+		# Waiting for the post to give parametrs of group walls and date of current post
+
 		while 1:
-			Comb.getWall('self', 'no', person[0], 'text', 1)
+			Comb.getWall('self', 'no', self.groups[0], 'text', 1)
 			time.sleep(0.8)
 
 
@@ -143,8 +154,9 @@ class Comb:
 		date = []
 		formattime = '%y-%m-%d %H:%M:%S'
 		now = datetime.strptime(datetime.strftime(datetime.now(), '%y-%m-%d %H:%M:%S'), '%y-%m-%d %H:%M:%S')
-		# wnow = now[:]
+
 		# Looking for Post IDs without offset 
+
 		if offset == 'no' and dtype == 'id':
 			items = wall_id['items']
 			for i in items:
@@ -157,6 +169,7 @@ class Comb:
 			return new
 
 		# Looking for text in posts without offset
+
 		elif offset == 'no' and dtype == 'text' and sdate == 'yes' or 'no':
 
 			if type(wall_id) == dict:
@@ -175,12 +188,11 @@ class Comb:
 					dd = datetime.strptime(datetime.fromtimestamp(i['date']).strftime('%d.%m.%y %H:%M:%S'), "%d.%m.%y %H:%M:%S")
 					ddd = dd+timedelta(seconds=15)
 					if ddd == now:
-						vkapi.wall.addComment(owner_id=person[0], post_id=i['id'], text=random.choice(phrases))
+						vkapi.wall.addComment(owner_id=wall_id, post_id=i['id'], text=random.choice(phrases))
 
 
-			
-		
 		# Looking for text in posts with offset
+
 		elif offset == 'yes' and dtype == 'text':
 			items = wall_id['items']
 			for i in items:
@@ -194,12 +206,6 @@ class Comb:
 					text.append(str(a['text']))
 					supercitat.append(str(a['text']))
 			return text
-
-		# Looking for date of post
-
-	
-
-	
 
 	# def getCitat( self ):
 
@@ -225,24 +231,55 @@ class Comb:
 		return topic_ids
 	
 
-	def getPhoto( wall_id, album, count ):
+	def getPhoto( self, wall_id, album, count ):
 
 		pho = []
-		photos = vkapi.photos.get( owner_id = wall_id, album_id = album, count = count )
+		photos = vkapi.photos.get( owner_id = wall_id, album_id = album, count = count ,  v='5.34')
 
 		for i in photos['items']:
 			if i['photo_604']:
+				# pho.append(i['photo_604'])
 				pho.append(i['id'])
+				# webbrowser.open_new_tab(i['photo_604'])
 
 		return pho
 
+	def copyPhoto( self, owner_id, titleNewAlbum, fromWall ):
+		album_id=[]
+		photo_id=[]
+		# albumToCreate = vkapi.photos.createAlbum( group_id=owner_id, title=titleNewAlbum, privacy_view='nobody', v='5.34' )
+		# photosToCopy = Comb.getPhoto('self', fromWall, 'wall', 1 )
+		albumsToGet = vkapi.photos.getAlbums( owner_id=owner_id, v='5.34' )
+		for i in albumsToGet['items']:
+			if i['title'] == 'TEST':
+				album_id.append(i['id'])
 
+		photosToCopy = Comb.getPhoto('self', fromWall, 'wall', 100 )
+		for i in photosToCopy:
+			copyPhotos = vkapi.photos.copy(owner_id=fromWall, photo_id=i, v='5.34')
+			movePhotos = vkapi.photos.move(owner_id=owner_id, target_album_id=album_id[0], photo_id=copyPhotos, v='5.34')
+			time.sleep(0.8)
+			print("Copied to " + str(album_id[0]) + '  - ' + str(copyPhotos))
+			# for i in copyPhotos:
+			# 	photo_id.append(i)
+
+			# for i in photo_id:
+			# 	movePhotos = vkapi.photos.move(owner_id=owner_id, target_album_id=album_id[0], photo_id=i, v='5.34')
+			
+			# print(i)
+		
+				# print(i)
+		# print(photo_id[0])
+		
+		
+
+		# return print(copyPhotos)
 
 	def postTopicComment( self ):
 		'''Post comment into topic block of group'''
 
 		topic_id = Comb.getTopic() 
-		# vkapi.board.addComment( group_id = 53664217, topic_id = topic_id[0], text = str( random.choice( super700 ) ) )
+		vkapi.board.addComment( group_id = 53664217, topic_id = topic_id[0], text = str( random.choice( super700 ) ) )
 
 		return print('\n-------------------------\n\n' + 'Post complete in topic board: ' + str(topic_id[0]) + '\n\n--------------------------')
 
@@ -263,14 +300,14 @@ class Comb:
 			# group = str(random.choice(groups))
 			words = random.choice( feed )
 			ok = words[:]
-			# vkapi.wall.post( owner_id = ok2,  message = ok )
+			vkapi.wall.post( owner_id = ok2,  message = ok )
 			print('В (' + str(ok2) + ')\nОпубликована запись: ' + str(ok) + '\n\n---------------------------\n\n')
-			time.sleep(2)
+			time.sleep(60*7)
 		
 	
 	def postOne( self ):
 
-		dd = getPhoto( -73484869, 'wall', 10 )
+		dd = getPhoto( 'self', -73484869, 'wall', 10 )
 		i=0
 		while i < len( dd ):
 			i+=1	
@@ -286,10 +323,11 @@ if __name__ == "__main__":
 	Combain = Comb()
 	# # Combain.postOne()
 	# Combain.getWall('no', person[0], 'text', 3)
-	Combain.cooler()
+	# Combain.dateChecker()
 	# Combain.getCitat()
-	# Combain.getLikes()
+	# Combain.getPhoto( -46773594, 'wall', 10 )
 	# Combain.rePost()
-	# Combain.postMulti(mudreci)
-	# Combain.postMulti(girls)
+	# Combain.copyPhoto( person[0], 'dfsdfasfassd', -46773594)
+	Combain.postMulti(slist)
+
 	
