@@ -14,6 +14,8 @@ from threading import Timer,Thread,Event
 import webbrowser
 import wget
 import os
+import cgi
+
 # User and app info
 
 vkapi = vk.API( access_token = '12190cdc5c7c2de92e1f892153e6ec3af558d98afc124f1a2534fae400ec277f8807264ff980f4c403de4')
@@ -155,14 +157,14 @@ class Comb:
 		
 
 
-	def getWall( self, offset,  wall_id, dtype, count = 1, bot='yes', sdate='no', likes='no', user_id = 179349317,  ):
+	def getWall( self, offset,  wall_id, dtype, count = 1, bot='no', sdate='no', likes='no', user_id = 179349317,  ):
 		'''Get music, image, text data from the wall'''
 		rid = []
 		text=[]
 		ids = []
 		i = 0
 		new=[]
-		sd = -50
+		step = -50
 		date = []
 		formattime = '%y-%m-%d %H:%M:%S'
 		now = datetime.strptime(datetime.strftime(datetime.now(), '%y-%m-%d %H:%M:%S'), '%y-%m-%d %H:%M:%S')
@@ -243,18 +245,31 @@ class Comb:
 
 
 		elif offset == 'yes' and dtype == 'text':
-			items = wall_id['items']
-			for i in items:
-				while sd < 100:
-					sd+=50
-					wall = vkapi.wall.get( owner_id = i['id'], count = count, offset = sd )
+			if type(wall_id) == dict:
+				items = wall_id['items']
+				for i in items:
+					while step < 100:
+						step+=50
+						wall = vkapi.wall.get( owner_id = i['id'], count = count, offset = step )
+						ids.append(wall)
+						time.sleep(1)
+				for i in ids:
+					for a in i['items']:
+						text.append(str(a['text']))
+						supercitat.append(str(a['text']))
+				return text
+			if type(wall_id) == int:
+				while step < 100:
+					step+=50
+					wall = vkapi.wall.get( owner_id = wall_id, count = count, offset = step)
 					ids.append(wall)
-					time.sleep(1)
-			for i in ids:
-				for a in i['items']:
-					text.append(str(a['text']))
-					supercitat.append(str(a['text']))
-			return text
+					# time.sleep(1)
+				for i in ids:
+					# for a in i['items']:
+					# 	print(a['text'])
+					print(i)
+
+
 
 	# def getCitat( self ):
 
@@ -384,7 +399,8 @@ class Comb:
 if __name__ == "__main__":
 	Combain = Comb()
 	# # Combain.postOne()
-	Combain.getWall('no', person[0], 'text', 1, 'no')
+
+	Combain.getWall('no', -78468103, 'text', 20) #args (offset, wall_id, dtype, count = 1, bot='no', sdate='no', likes='no')
 	# Combain.dateChecker()
 	# Combain.getCitat()
 	# Combain.getPhoto( -54179178, 'wall', 10, 'yes', '/Users/hal/NEW2')
