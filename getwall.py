@@ -400,7 +400,7 @@ if __name__ == "__main__":
 	Combain = Comb()
 	# # Combain.postOne()
 
-	Combain.getWall('no', -78468103, 'text', 20) #args (offset, wall_id, dtype, count = 1, bot='no', sdate='no', likes='no')
+	# Combain.getWall('no', -78468103, 'text', 20) #args (offset, wall_id, dtype, count = 1, bot='no', sdate='no', likes='no')
 	# Combain.dateChecker()
 	# Combain.getCitat()
 	# Combain.getPhoto( -54179178, 'wall', 10, 'yes', '/Users/hal/NEW2')
