@@ -1,5 +1,5 @@
 #!/usr/local/bin/python3
-#coding=UTF-8
+#coding: UTF-8
 import vk
 import sys
 import urllib
@@ -17,7 +17,7 @@ import os
 # User and app info
 
 vkapi = vk.API( access_token = '12190cdc5c7c2de92e1f892153e6ec3af558d98afc124f1a2534fae400ec277f8807264ff980f4c403de4')
-vkapi.account.setOffline()
+
 other = [-72580409, -61330688]
 person = [179349317]
 app_id = 4967352
@@ -94,7 +94,15 @@ ofile7 = open('words/sex.txt')
 rofile7 = ofile7.read()
 sex = rofile7.split('b')
 
-slist = mudreci+life+girls+sex+films+scary+super700
+ofile8 = open('words/vselen.txt')
+rofile8 = ofile8.read()
+vselen = rofile8.split('b')
+
+ofile9 = open('words/psy.txt')
+rofile9 = ofile9.read()
+psy = rofile9.split('b')
+
+slist = mudreci+life+girls+sex+films+scary+super700+vselen
 # if '' in slist:
 # 	slist.remove('')
 
@@ -140,12 +148,14 @@ class Comb:
 		# Waiting for the post to give parametrs of group walls and date of current post
 
 		while 1:
-			Comb.getWall('self', 'no', self.groups[0], 'text', 1)
+			Comb.getWall('self', 'no', person[0], 'text', 1)
 			time.sleep(0.8)
 
 
+		
 
-	def getWall( self, offset,  wall_id, dtype, count = 1, user_id = 179349317, sdate='no' ):
+
+	def getWall( self, offset,  wall_id, dtype, count = 1, bot='yes', sdate='no', likes='no', user_id = 179349317,  ):
 		'''Get music, image, text data from the wall'''
 		rid = []
 		text=[]
@@ -159,16 +169,36 @@ class Comb:
 
 		# Looking for Post IDs without offset 
 
+
 		if offset == 'no' and dtype == 'id':
-			items = wall_id['items']
-			for i in items:
-				wall = vkapi.wall.get( owner_id = i['id'], count = count )
-				ids.append(wall)
-			for i in ids:
-				for a in i['items']:
-					if a['likes']['count'] > 10:
-						new.append( str(a['owner_id']) + '_'+  str(a['id']) )
-			return new
+			if type(wall_id) == dict:
+				items = wall_id['items']
+				for i in items:
+					wall = vkapi.wall.get( owner_id = i['id'], count = count )
+					ids.append(wall)
+
+				if likes == 'yes':
+					for i in ids:
+						for a in i['items']:
+							if a['likes']['count'] > 10:
+								new.append( str(a['owner_id']) + '_'+  str(a['id']) )
+				return ids
+
+			if type(wall_id) == int:
+
+				wall = vkapi.wall.get(owner_id=wall_id, count=count)
+				for i in wall['items']:
+					ids.append(i['id'])
+
+					return  ids
+
+				if likes == 'yes':
+					for i in ids:
+						for a in i['items']:
+							if a['likes']['count'] > 10:
+								new.append( str(a['owner_id']) + '_'+  str(a['id']) )
+					return
+
 
 		# Looking for text in posts without offset
 
@@ -182,18 +212,35 @@ class Comb:
 				for i in ids:
 					for a in i['items']:
 						text.append(str(a['text']))
-			elif type(wall_id) == int:
+						print(text)
+
+						return 
+
+			elif type(wall_id) == int and bot == 'yes':
 
 				wall = vkapi.wall.get( owner_id = wall_id, count = count )
 				text.append(wall)
 				for i in text[0]['items']:
 					dd = datetime.strptime(datetime.fromtimestamp(i['date']).strftime('%d.%m.%y %H:%M:%S'), "%d.%m.%y %H:%M:%S")
-					ddd = dd+timedelta(seconds=15)
+					ddd = dd+timedelta(seconds=5)
+
 					if ddd == now:
-						vkapi.wall.addComment(owner_id=wall_id, post_id=i['id'], text=random.choice(phrases))
+						comment1 = vkapi.wall.addComment( owner_id=wall_id, post_id=i['id'], text=random.choice(phrases) )
+						post = comment1['comment_id']
+						hoo = Comb.getWall('self', 'no', person[0], 'id', 1)
+						getcomm = vkapi.wall.getComments(owner_id=wall_id, post_id=hoo[0])
+						if getcomm:
+							print(getcomm)
 
 
-		# Looking for text in posts with offset
+
+			elif type(wall_id) == int and bot == 'no':
+				wall = vkapi.wall.get( owner_id = wall_id, count = count )
+				text.append(wall)
+				for i in text[0]['items']:
+					print(i['text'])
+
+
 
 		elif offset == 'yes' and dtype == 'text':
 			items = wall_id['items']
@@ -288,10 +335,10 @@ class Comb:
 		'''Post comment into topic block of group'''
 
 		topic_id = Comb.getTopic() 
-		vkapi.board.addComment( group_id = 53664217, topic_id = topic_id[0], text = str( random.choice( super700 ) ) )
+		vkapi.board.addComment( group_id = 53664217, topic_id = topic_id[0], text = str( random.choice( vselen ) ) )
 
-		return print('\n-------------------------\n\n' + 'Post complete in topic board: ' + str(topic_id[0]) + '\n\n--------------------------')
-
+		print('\n-------------------------\n\n' + 'Post complete in topic board: ' + str(topic_id[0]) + '\n\n--------------------------') 
+		return
 
 
 	def postMulti( self, feed ):
@@ -309,6 +356,7 @@ class Comb:
 			# group = str(random.choice(groups))
 			words = random.choice( feed )
 			ok = words[:]
+
 			vkapi.wall.post( owner_id = ok2,  message = ok )
 			print('В (' + str(ok2) + ')\nОпубликована запись: ' + str(ok) + '\n\n---------------------------\n\n')
 			time.sleep(60*7)
@@ -324,19 +372,28 @@ class Comb:
 			time.sleep(10)
 		# return print(self.groups)	
 		# 
-	
+	def changeOwnPhoto(self):
+		result = vkapi.photos.getOwnerPhotoUploadServer(owner_id=person[0])
+		# webbrowser.open_new_tab(result['upload_url'])
+		# save = vkapi.saveOwnerPhoto(server=result['upload_url'])
 
+		print (result)
+		return
 
 
 if __name__ == "__main__":
 	Combain = Comb()
 	# # Combain.postOne()
-	# Combain.getWall('no', person[0], 'text', 3)
+	Combain.getWall('no', person[0], 'text', 1, 'no')
 	# Combain.dateChecker()
 	# Combain.getCitat()
-	Combain.getPhoto( -54179178, 'wall', 10, 'yes', '/Users/hal/NEW2')
+	# Combain.getPhoto( -54179178, 'wall', 10, 'yes', '/Users/hal/NEW2')
 	# Combain.rePost()
 	# Combain.copyPhoto( person[0], 'dfsdfasfassd', -46773594)
-	# Combain.postMulti(slist)
+	# Combain.changeOwnPhoto()
+	# try:
+	# 	Combain.postMulti(slist)
+	# except:
+	# 	Combain.postMulti(vselen+psy+mudreci)
 
 	
