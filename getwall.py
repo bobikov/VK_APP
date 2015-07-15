@@ -183,7 +183,7 @@ class Comb:
 		
 
 
-	def getWall( self, offset,  wall_id, dtype, count = 1, bot='no', sdate='no', likes='no', user_id = 179349317,  ):
+	def getWall( self, offset,  wall_id, dtype, count = 1, bot='no', sdate='no', likes='no', user_id = 179349317  ):
 		'''Get music, image, text data from the wall'''
 		rid = []
 		text=[]
@@ -208,18 +208,23 @@ class Comb:
 				time.sleep(0.6)
 			print(json.loads(dros))
 				
-		if offset == 'no' and dtype == 'photo':
+		if offset == 'no' and dtype == 'photo' :
 			urls = []
 
 			wall = vkapi.wall.get( owner_id = wall_id, count = count )
 			for i in wall['items']:
 				# print(json.dumps(i['attachments']['photo'], sort_keys=True, indent=4,ensure_ascii=False))
 				# urls.append(i)
-				if i['attachments']:
+				if 'attachments' in i:
 					for a in i['attachments']:
-						if a['photo']:
+						if 'photo' in a:
 							urls.append(a['photo']['photo_604'])
+
 			return print(urls)
+
+			# 			if a['photo']:
+			# 				urls.append(a['photo']['photo_604'])
+			# return print(urls)
 
 		if offset == 'no' and dtype == 'id':
 			if type(wall_id) == dict:
@@ -253,7 +258,7 @@ class Comb:
 
 		# Looking for text in posts without offset
 
-		elif offset == 'no' and dtype == 'text' and sdate == 'yes' or 'no':
+		elif offset == 'no' and dtype == 'text' :
 
 			if type(wall_id) == dict:
 				items = wall_id['items']
@@ -394,7 +399,7 @@ class Comb:
 									os.mkdir( path=path+groupName + '/' + str(i['title'])  ) 
 								else:	
 									wget.download( a['photo_604'], out=path+groupName+'/'+str(i['title']) )
-		
+								
 
 			if download == 'no':
 					for i in album:
@@ -547,13 +552,13 @@ if __name__ == "__main__":
 	Combain = Comb()
 	# aa = Combain.getAlbums(-40485321)
 	# # Combain.postOne()
-	# Combain.getWall('no', -78468103, 'text', 20) #args (offset, wall_id, dtype, count = 1, bot='no', sdate='no', likes='no')
-	# Combain.getWall('yes', -32149661, 'photo', 10) #args (offset, wall_id, dtype, count = 1, bot='no', sdate='no', likes='no')
+	Combain.getWall('no', -32149661, 'photo', 20) #args (offset, wall_id, dtype, count = 1, bot='no', sdate='no', likes='no')
+	# Combain.getWall('yes', -32149661, 'photo', 20) #args (offset, wall_id, dtype, count = 1, bot='no', sdate='no', likes='no')
 	# Combain.dateChecker()
 	# Combain.getCitat()
 	# Combain.getAlbums(-40485321)
 # 40485321
-	Combain.getPhoto( -59740963, Combain.getAlbums(-59740963, 1), 50, 'yes', '/Users/hal/', 'id', 'yes')
+	# Combain.getPhoto( -59740963, Combain.getAlbums(-59740963, 1), 50, 'yes', '/Users/hal/', 'id', 'yes')
 	# Combain.rePost()
 	# Combain.copyPhoto( person[0], 'JOsdfasdfKER', -32149661 )
 	# Combain.changeOwnPhoto()
