@@ -373,18 +373,18 @@ class Comb:
 
 		elif multi == 'yes' and type(album) == list:
 			urls=[]
-
+			step = 0
 			if download == 'yes':
 				for i in album:
 					if i['count'] >= 1000:
-						print('BIG COCK')
 
-
-
-
-
+						offs = i['count']-800
+						step = step - offs
 					else:
-						for a in vkapi.photos.get( owner_id=wall_id, album_id=i['id'], count=i['count'], v=5.34 )['items']:
+						offs = 0
+					while step < i['count']:
+						step+=offs
+						for a in vkapi.photos.get( owner_id=wall_id, album_id=i['id'], count=i['count']/2, offset=step, v=5.34,  )['items']:
 							if i['id'] == a['album_id']:
 								# print(i)
 								if not os.path.exists(path+groupName):
