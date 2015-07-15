@@ -279,7 +279,7 @@ class Comb:
 						comment1 = vkapi.wall.addComment( owner_id=wall_id, post_id=i['id'], text=random.choice(phrases) )
 						post = comment1['comment_id']
 						hoo = Comb.getWall('self', 'no', person[0], 'id', 1)
-						getcomm = vkapi.wall.getComments(owner_id=wall_id, post_id=hoo[0])
+						getcomm = vkapi.wall.getComments( owner_id=wall_id, post_id=hoo[0] )
 						if getcomm:
 							print(getcomm)
 
@@ -310,7 +310,7 @@ class Comb:
 			if type(wall_id) == int:
 				while step < 100:
 					step+=50
-					wall = vkapi.wall.get( owner_id = wall_id, count = count, offset = step)
+					wall = vkapi.wall.get( owner_id = wall_id, count = count, offset = step )
 					ids.append(wall)
 					# time.sleep(1)
 				for i in ids:
@@ -344,15 +344,17 @@ class Comb:
 		return topic_ids
 	
 
-	def getPhoto( self, wall_id, album, count, download='no', path='./', dtype='id', multi='no'):
+	def getPhoto( self, wall_id, album, count, download='no', path='./', dtype='id', multi='no' ):
 
 		pho = []
-		
+
+		groupName = vkapi.groups.getById( group_id = abs(wall_id))[0]['name']
+
 		# if download == 'yes':
 		# 	os.mkdir(path=path,  mode=765)
 
 		if multi == 'no' and type(album)==int:
-			photos = vkapi.photos.get( owner_id = wall_id, album_id = album['id'], count = count ,  v=5.34)	
+			photos = vkapi.photos.get( owner_id = wall_id, album_id = album['id'], count = count ,  v=5.34 )	
 			for i in photos['items']:
 				if i['photo_604']:
 					if download == 'yes':
@@ -365,40 +367,41 @@ class Comb:
 						pho.append(i['photo_604'])
 					# webbrowser.open_new_tab(i['photo_604'])
 			if download == 'yes':			
-				os.system("chmod 777 "+str(path))
+				os.system("chmod 777 " + str(path))
 				os.system('rm ./*.tmp')
 			return print(pho)
 
-		if multi == 'yes' and type(album) == list:
+		elif multi == 'yes' and type(album) == list:
 			urls=[]
-
+			
 			if download == 'yes':
 				for i in album:
 					for a in vkapi.photos.get( owner_id=wall_id, album_id=i['id'], count=i['count'], v=5.34 )['items']:
 						if i['id'] == a['album_id']:
 							# print(i)
-							if not os.path.exists('/Users/hal/'+str(i['title'])):
-								os.mkdir(path='/Users/hal/'+str(i['title']),  mode=765)
+							if not os.path.exists(path+groupName):
+								os.mkdir(path=path+groupName)
+
+							elif not os.path.exists( path+groupName + '/' +str(i['title'] ) ):
+								os.mkdir( path=path+groupName + '/' + str(i['title']),  mode=765 ) 
 							else:	
-								wget.download(a['photo_604'], out='/Users/hal/'+str(i['title']))
-							# if 'photo_807' in a:
-							# 	print(a['photo_807'])
-							# else:
-							# 	print(a['photo_604'])
-						# print(json.dumps(a, indent=4, sort_keys=True, ensure_ascii=False))
-					# print(i['id'])
-					
-					# print(json.dumps(photos2, indent=4, sort_keys=True, ensure_ascii=False))
-				# print(album)
+								wget.download( a['photo_604'], out=path+groupName+'/'+str(i['title']) )
+		
 
 			if download == 'no':
-					photos2 = vkapi.photos.get( owner_id=wall_id, album_id=i, count=1, v=5.34 )
+					for i in album:
+						for a in vkapi.photos.get( owner_id=wall_id, album_id=i['id'], count=i['count'], v=5.34 )['items']:
+							if i['id'] == a['album_id']:
+								if 'photo_807' in a:
+									print(json.dumps(a, indent=4, sort_keys=True, ensure_ascii=False))
+								else:
+									print(json.dumps(a, indent=4, sort_keys=True, ensure_ascii=False))
 
 
 	def getAlbums(self, public_id):
 		titles = []
 		ids= []
-		albums = vkapi.photos.getAlbums( owner_id = public_id, count = 4)['items']
+		albums = vkapi.photos.getAlbums( owner_id = public_id, count = 1)['items']
 		for i in albums:
 			ids.append({"id":i['id'], "title":i['title'], "count":i['size']})
 
@@ -410,29 +413,28 @@ class Comb:
 	def copyPhoto( self, owner_id, titleNewAlbum, fromWall ):
 		album_id=[]
 		photo_id=[]
-		# albumToCreate = vkapi.photos.createAlbum( group_id=owner_id, title=titleNewAlbum, privacy_view='friends_of_friends_only ', privacy_comment='friends_of_friends_only ', v=5.34 )
-		# photosToCopy = Comb.getPhoto('self', fromWall, 'wall', 1 )
-		# albumsToGet = vkapi.photos.getAlbums( owner_id=owner_id, v='5.34' )
-		# for i in albumsToGet['items']:
-		# 	if i['title'] == 'TEST':
-		# 		album_id.append(i['id'])
+		albumToCreate = vkapi.photos.createAlbum( group_id=owner_id, title=titleNewAlbum, privacy_view='friends_of_friends_only ', privacy_comment='friends_of_friends_only ', v=5.34 )
+		photosToCopy = Comb.getPhoto('self', fromWall, 'wall', 1 )
+		albumsToGet = vkapi.photos.getAlbums( owner_id=owner_id, v='5.34' )
+		for i in albumsToGet['items']:
+			if i['title'] == 'TEST':
+				album_id.append(i['id'])
 
-		# photosToCopy = Comb.getPhoto('self', fromWall, 'wall', 100 )
-		# for i in photosToCopy:
-		# 	copyPhotos = vkapi.photos.copy(owner_id=fromWall, photo_id=i, v='5.34')
-		# 	movePhotos = vkapi.photos.move(owner_id=owner_id, target_album_id=album_id[0], photo_id=copyPhotos, v='5.34')
-		# 	time.sleep(0.8)
-		# 	print("Copied to " + str(album_id[0]) + '  - ' + str(copyPhotos))
-			# for i in copyPhotos:
-			# 	photo_id.append(i)
+		photosToCopy = Comb.getPhoto('self', fromWall, 'wall', 100 )
+		for i in photosToCopy:
+			copyPhotos = vkapi.photos.copy(owner_id=fromWall, photo_id=i, v='5.34')
+			movePhotos = vkapi.photos.move(owner_id=owner_id, target_album_id=album_id[0], photo_id=copyPhotos, v='5.34')
+			time.sleep(0.8)
+			print("Copied to " + str(album_id[0]) + '  - ' + str(copyPhotos))
+			for i in copyPhotos:
+				photo_id.append(i)
 
-			# for i in photo_id:
-			# 	movePhotos = vkapi.photos.move(owner_id=owner_id, target_album_id=album_id[0], photo_id=i, v='5.34')
+			for i in photo_id:
+				movePhotos = vkapi.photos.move(owner_id=owner_id, target_album_id=album_id[0], photo_id=i, v='5.34')
 			
-			# print(i)
+
 		
-				# print(i)
-		# print(photo_id[0])
+		print(photo_id[0])
 		
 		
 
@@ -543,7 +545,7 @@ if __name__ == "__main__":
 	# Combain.getCitat()
 	# Combain.getAlbums(-40485321)
 
-	Combain.getPhoto( -40485321, Combain.getAlbums(-40485321), 50, 'no', '/Users/hal/NEW4', 'id', 'yes')
+	Combain.getPhoto( -40485321, Combain.getAlbums(-40485321), 50, 'yes', '/Users/hal/', 'id', 'yes')
 	# Combain.rePost()
 	# Combain.copyPhoto( person[0], 'JOsdfasdfKER', -32149661 )
 	# Combain.changeOwnPhoto()
