@@ -220,7 +220,7 @@ class Comb:
 						if 'photo' in a:
 							urls.append(a['photo']['photo_604'])
 
-			return print(urls)
+			return urls
 
 			# 			if a['photo']:
 			# 				urls.append(a['photo']['photo_604'])
@@ -349,66 +349,72 @@ class Comb:
 		return topic_ids
 	
 
-	def getPhoto( self, wall_id, album, count, download='no', path='./', dtype='id', multi='no' ):
+	def getPhoto( self, wall_id, album, count, download='no', path='./', dtype='id', multi='no', wall='no' ):
 
 		pho = []
-
+		
 		groupName = vkapi.groups.getById( group_id = abs(wall_id))[0]['name']
 
 		# if download == 'yes':
 		# 	os.mkdir(path=path,  mode=765)
+		if wall == 'yes':
+			photoFromWall = Combain.getWall('no', wall_id, 'photo', count)
+			for i in photoFromWall:
+				if not os.path.exists(path+groupName):
+					os.mkdir(path=path+groupName)
 
-		if multi == 'no' and type(album)==int:
-			photos = vkapi.photos.get( owner_id = wall_id, album_id = album['id'], count = count ,  v=5.34 )	
-			for i in photos['items']:
-				if i['photo_604']:
-					if download == 'yes':
-						
-					# pho.append(i['photo_604'])
-						wget.download(i['photo_604'], out=path)
-					if dtype == 'id':
-						pho.append(i['id'])
-					elif dtype == 'url':
-						pho.append(i['photo_604'])
-					# webbrowser.open_new_tab(i['photo_604'])
-			if download == 'yes':			
-				os.system("chmod 777 " + str(path))
-				os.system('rm ./*.tmp')
-			return print(pho)
+				elif not os.path.exists( path+groupName ):
+					os.mkdir( path=path+groupName ) 
+				else:	
+					wget.download( i, out=path+groupName )
+		else:
 
-		elif multi == 'yes' and type(album) == list:
-			urls=[]
-			step = 0
-			if download == 'yes':
-				for i in album:
-					if i['count'] >= 1000:
+			if multi == 'no' and type(album)==int:
+				photos = vkapi.photos.get( owner_id = wall_id, album_id = album['id'], count = count ,  v=5.34 )	
+				for i in photos['items']:
+					if i['photo_604']:
+						if download == 'yes':
+							
+						# pho.append(i['photo_604'])
+							wget.download(i['photo_604'], out=path)
+						if dtype == 'id':
+							pho.append(i['id'])
+						elif dtype == 'url':
+							pho.append(i['photo_604'])
+			
+				return print(pho)
 
-						offs = i['count']-800
-						step = step - offs
-					else:
-						offs = 0
-					while step < i['count']:
-						step+=offs
-						for a in vkapi.photos.get( owner_id=wall_id, album_id=i['id'], count=i['count']/2, offset=step, v=5.34,  )['items']:
-							if i['id'] == a['album_id']:
-								# print(i)
-								if not os.path.exists(path+groupName):
-									os.mkdir(path=path+groupName)
-
-								elif not os.path.exists( path+groupName + '/' +str(i['title'] ) ):
-									os.mkdir( path=path+groupName + '/' + str(i['title'])  ) 
-								else:	
-									wget.download( a['photo_604'], out=path+groupName+'/'+str(i['title']) )
-								
-
-			if download == 'no':
+			elif multi == 'yes' and type(album) == list:
+				urls=[]
+				step = 0			
+				if download == 'yes':
 					for i in album:
-						for a in vkapi.photos.get( owner_id=wall_id, album_id=i['id'], count=i['count'], v=5.34 )['items']:
-							if i['id'] == a['album_id']:
-								if 'photo_807' in a:
-									print(json.dumps(a, indent=4, sort_keys=True, ensure_ascii=False))
-								else:
-									print(json.dumps(a, indent=4, sort_keys=True, ensure_ascii=False))
+						if i['count'] >= 1000:
+
+							offs = i['count']-800
+							step = step - offs
+						else:
+							offs = 0
+						while step < i['count']:
+							step+=offs
+							for a in vkapi.photos.get( owner_id=wall_id, album_id=i['id'], count=i['count']/2, offset=step, v=5.34,  )['items']:
+								if i['id'] == a['album_id']:
+									# print(i)
+									if not os.path.exists(path+groupName):
+										os.mkdir(path=path+groupName)
+
+									elif not os.path.exists( path+groupName + '/' +str(i['title'] ) ):
+										os.mkdir( path=path+groupName + '/' + str(i['title'])  ) 
+									else:	
+										wget.download( a['photo_604'], out=path+groupName+'/'+str(i['title']) )
+				if download == 'no':
+						for i in album:
+							for a in vkapi.photos.get( owner_id=wall_id, album_id=i['id'], count=i['count'], v=5.34 )['items']:
+								if i['id'] == a['album_id']:
+									if 'photo_807' in a:
+										print(json.dumps(a, indent=4, sort_keys=True, ensure_ascii=False))
+									else:
+										print(json.dumps(a, indent=4, sort_keys=True, ensure_ascii=False))
 
 
 	def getAlbums(self, public_id, count):
@@ -552,13 +558,13 @@ if __name__ == "__main__":
 	Combain = Comb()
 	# aa = Combain.getAlbums(-40485321)
 	# # Combain.postOne()
-	Combain.getWall('no', -32149661, 'photo', 20) #args (offset, wall_id, dtype, count = 1, bot='no', sdate='no', likes='no')
+	# Combain.getWall('no', -32149661, 'photo', 20, 'yes') #args (offset, wall_id, dtype, count = 1, bot='no', sdate='no', likes='no')
 	# Combain.getWall('yes', -32149661, 'photo', 20) #args (offset, wall_id, dtype, count = 1, bot='no', sdate='no', likes='no')
 	# Combain.dateChecker()
 	# Combain.getCitat()
 	# Combain.getAlbums(-40485321)
 # 40485321
-	# Combain.getPhoto( -59740963, Combain.getAlbums(-59740963, 1), 50, 'yes', '/Users/hal/', 'id', 'yes')
+	Combain.getPhoto( -39669294, Combain.getAlbums(-39669294, 1), 1, 'yes', '/Users/hal/', 'id', 'yes', 'yes')
 	# Combain.rePost()
 	# Combain.copyPhoto( person[0], 'JOsdfasdfKER', -32149661 )
 	# Combain.changeOwnPhoto()
