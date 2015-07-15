@@ -50,6 +50,7 @@
 		<div class="status4">
 			<textarea name="" id="" cols="70" rows="4"></textarea>
 			<div class="make_post">Post</div>
+			<div class="exit">Exit</div>
 		</div>
 	</main>	
 

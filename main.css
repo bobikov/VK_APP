@@ -21,7 +21,7 @@ main{
 	top: 120px;
 	z-index: 2;
 }
-.login_button, .post, .getperm, .logout, .getph, #download_all, .make_post{
+.login_button, .post, .getperm, .logout, .getph, #download_all, .make_post, .exit{
 
 	height: 40px;
 	border: 1px solid #6AC6D2;
@@ -57,7 +57,7 @@ div[class^=status]{
 	/*background-color: #E4F988;*/
 	margin: 1% auto 2% auto ;
 	width: 90%;
-	height: auto;
+	height: 200px;
 	font-size: 15px;
 	/*margin: 2%;*/
 	/*border: 1px solid #ccc;*/

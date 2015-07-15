@@ -27,13 +27,22 @@ VK.Auth.getLoginStatus(authInfo);
 	$(".getperm").click(function(){
 			getPerm("179349317");
 	});
-	$(".post").click(function(){
-			postToVk("Hello");
+	$(".make_post").click(function(){
+			$.post('getwall.py', {action:'multi'}, function(data){
+				$('.status1').html(data);
+			});
 			
 			// $(wrapper).on("onWindowFocus", function(){alert("ok");}); 
 
 
 	});
+
+	$(".exit").click(function(){
+		$.post('getwall.py', {action:1, exit:0}, function(data){
+			alert('exit ok');
+		});
+	});
+
 	$(".getph").click(function(){
 			var uaid = $("#uaid").val();
 			// GetPhotos("-44426090");
