@@ -272,10 +272,10 @@ class Comb:
 				wall = vkapi.wall.get( owner_id = wall_id, count = count )
 				text.append(wall)
 				for i in text[0]['items']:
-					dd = datetime.strptime(datetime.fromtimestamp(i['date']).strftime('%d.%m.%y %H:%M:%S'), "%d.%m.%y %H:%M:%S")
-					ddd = dd+timedelta(seconds=5)
+					timeToPlus = datetime.strptime(datetime.fromtimestamp(i['date']).strftime('%d.%m.%y %H:%M:%S'), "%d.%m.%y %H:%M:%S")
+					plusTime = dd+timedelta(seconds=5)
 
-					if ddd == now:
+					if plusTime == now:
 						comment1 = vkapi.wall.addComment( owner_id=wall_id, post_id=i['id'], text=random.choice(phrases) )
 						post = comment1['comment_id']
 						hoo = Comb.getWall('self', 'no', person[0], 'id', 1)
@@ -373,19 +373,27 @@ class Comb:
 
 		elif multi == 'yes' and type(album) == list:
 			urls=[]
-			
+
 			if download == 'yes':
 				for i in album:
-					for a in vkapi.photos.get( owner_id=wall_id, album_id=i['id'], count=i['count'], v=5.34 )['items']:
-						if i['id'] == a['album_id']:
-							# print(i)
-							if not os.path.exists(path+groupName):
-								os.mkdir(path=path+groupName)
+					if i['count'] >= 1000:
+						print('BIG COCK')
 
-							elif not os.path.exists( path+groupName + '/' +str(i['title'] ) ):
-								os.mkdir( path=path+groupName + '/' + str(i['title']),  mode=765 ) 
-							else:	
-								wget.download( a['photo_604'], out=path+groupName+'/'+str(i['title']) )
+
+
+
+
+					else:
+						for a in vkapi.photos.get( owner_id=wall_id, album_id=i['id'], count=i['count'], v=5.34 )['items']:
+							if i['id'] == a['album_id']:
+								# print(i)
+								if not os.path.exists(path+groupName):
+									os.mkdir(path=path+groupName)
+
+								elif not os.path.exists( path+groupName + '/' +str(i['title'] ) ):
+									os.mkdir( path=path+groupName + '/' + str(i['title'])  ) 
+								else:	
+									wget.download( a['photo_604'], out=path+groupName+'/'+str(i['title']) )
 		
 
 			if download == 'no':
@@ -398,10 +406,10 @@ class Comb:
 									print(json.dumps(a, indent=4, sort_keys=True, ensure_ascii=False))
 
 
-	def getAlbums(self, public_id):
+	def getAlbums(self, public_id, count):
 		titles = []
 		ids= []
-		albums = vkapi.photos.getAlbums( owner_id = public_id, count = 1)['items']
+		albums = vkapi.photos.getAlbums( owner_id = public_id, count = count)['items']
 		for i in albums:
 			ids.append({"id":i['id'], "title":i['title'], "count":i['size']})
 
@@ -544,8 +552,8 @@ if __name__ == "__main__":
 	# Combain.dateChecker()
 	# Combain.getCitat()
 	# Combain.getAlbums(-40485321)
-
-	Combain.getPhoto( -40485321, Combain.getAlbums(-40485321), 50, 'yes', '/Users/hal/', 'id', 'yes')
+# 40485321
+	Combain.getPhoto( -59740963, Combain.getAlbums(-59740963, 1), 50, 'yes', '/Users/hal/', 'id', 'yes')
 	# Combain.rePost()
 	# Combain.copyPhoto( person[0], 'JOsdfasdfKER', -32149661 )
 	# Combain.changeOwnPhoto()
