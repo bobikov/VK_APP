@@ -1,21 +1,33 @@
 {
  "background": {"scripts": ["background.js"]},
  "browser_action": {
- "default_icon": "icon-128.png",
- "default_title": "HIDER"
+	"default_icon": "icon-128.png",
+	"default_title": "VK SPAM KILLER",
+	"default_popup": "popup.html"
  },
- "name": "HIDER",
- "description": "SPAM KILLER - Created with http://blog.self.li",
- "homepage_url": "http://blog.self.li/post/16366939413/how-to-convert-bookmarklet-to-chrome-extension",
+ "name": "VK SPAM KILLER",
+ "description": "SPAM KILLER",
+ "homepage_url": "https://vk.com/id179349317",
  "icons": {
      "16": "icon-16.png",
      "48": "icon-48.png",
      "128": "icon-128.png" },
  "permissions": [
      "tabs",
-     "http://*/*",
-     "https://*/*"
+     "http://vk.com/*",
+     "https://vk.com/chat_official"
  ],
- "version": "0.1",
+ "content_scripts": [
+    {
+      "matches": ["https://vk.com/*"],
+      "css": ["main.css"],
+      "js": [ "jquery-1.11.3.js", "jquery.cookie.js", "spamKiller.js", "jsonParser.js" ]
+    }
+],
+
+"web_accessible_resources": [
+    "banlist.json"
+ ],
+ "version": "1.0",
  "manifest_version": 2
 }

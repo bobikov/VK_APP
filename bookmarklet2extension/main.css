@@ -1,0 +1,75 @@
+.spam_killer{
+	background-color: #fff;
+	z-index: 9999;
+	width:180px;
+	height:auto;
+	position: fixed;
+	right: 10px;
+	border-radius: 3px;
+	font-family: sans-serif;
+}
+.logo{
+	width:180px;
+	background: -webkit-linear-gradient(top, #4F7094 0%, #537599 50%, #597BA0 100%);
+	height: 40px;
+	line-height: 40px;
+	position: realitve;
+	font-size: 18px;
+	color: #fff;
+	text-align: center;
+	text-transform: uppercase;
+	border-bottom-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	
+}
+.banlist{
+	width: 178px;
+	outline: none;
+	border:none;
+	border-bottom-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	resize: vertical;
+	max-height: 300px;
+	border: 1px solid #EEF1F7;
+	overflow:scroll;
+	
+
+}
+.kill{
+	display: inline-block;
+	border-radius:3px;
+	outline: none;
+	cursor: pointer;
+	background-color: #597BA0;
+	color: #fff;
+	border: none;
+	height: 20px;
+	width: auto;
+	margin-left: 5px;
+
+
+
+}
+.bar{
+	background-color: #E9EDF1;
+	height: 20px;
+	width: 180px;
+	font-size: 10px;
+	color: #678FB9;
+	font-size: 10px;
+	color: #557699;
+	line-height: 20px;
+}
+.AddToBan{
+	display: block;
+	border-radius:3px;
+	outline: none;
+	cursor: pointer;
+	background-color: #597BA0;
+	color: #fff;
+	border: none;
+	height: 20px;
+	width: auto;
+}
