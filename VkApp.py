@@ -99,14 +99,15 @@ class Comb:
 
 		self.max = 'dd'
 		self.ok = 'dd'
-		self.group_ids = [-57014305, -60409637, -33881737]
+		self.group_ids = [-57014305, -60409637, -33881737, -72580409, -52521233, -47229030]
 		self.group_Ids_ToString = str.join(',', [str(abs(x)) for x in self.group_ids])
-		self.groups = json.dumps(vkapi.groups.getById(group_ids=self.group_Ids_ToString),indent=4, sort_keys=True, ensure_ascii=False)
-		self.group_names = [i['name'] for i in json.loads(self.groups)]
-		self.dict_names_and_ids={};
-		for i,x in zip(self.group_names, self.group_ids):
-			self.dict_names_and_ids[i]=x
-	
+		self.groupsNoDumps = vkapi.groups.getById(group_ids=self.group_Ids_ToString, indent=4, sort_keys=True, ensure_ascii=False)
+		self.groupsWithDumps = json.dumps(vkapi.groups.getById(group_ids=self.group_Ids_ToString),indent=4, sort_keys=True, ensure_ascii=False)
+		self.group_names = [i['name'] for i in json.loads(self.groupsWithDumps)]
+		self.group_screen_names=[i['screen_name'] for i in json.loads(self.groupsWithDumps)]
+		self.dict_names_and_ids=[];
+		for i,x,y in zip(self.group_names, self.group_ids, self.group_screen_names):
+				self.dict_names_and_ids.append({'name':i, 'id':x, 'screen_name':y})
 
 
 	def dateChecker(self):
@@ -321,27 +322,32 @@ class Comb:
 
 			elif multi == 'yes' and type(album) == list:
 				urls=[]
-				step = 0			
+				step = 1		
+				offs=0	
 				if download == 'yes':
 					for i in album:
 						if i['count'] >= 1000:
 
 							offs = i['count']-800
 							step = step - offs
-						else:
-							offs = 0
-						while step < i['count']:
-							step+=offs
-							for a in vkapi.photos.get( owner_id=wall_id, album_id=i['id'], count=i['count'], offset=step, v=5.34 )['items']:
-								if i['id'] == a['album_id']:
-									print(i)
-									# if not os.path.exists(path+groupName):
-									# 	os.mkdir(path=path+groupName)
+							while step < i['count']:
+								step+=1
+								for a in vkapi.photos.get( owner_id=wall_id, album_id=i['id'], count=i['count'], offset=0, v=5.34 )['items']:
+									if i['id'] == a['album_id']:
+										print(i)
+						elif i['count']<1000:
+								for a in vkapi.photos.get( owner_id=wall_id, album_id=i['id'], count=i['count'], offset=0, v=5.34 )['items']:
+									# if i['id'] == a['album_id']:
 
-									# elif not os.path.exists( path+groupName + '/' +str(i['title'] ) ):
-									# 	os.mkdir( path=path+groupName + '/' + str(i['title'])  ) 
-									# else:	
-									# 	wget.download( a['photo_604'], out=path+groupName+'/'+str(i['title']) )
+							
+									if not os.path.exists(path+groupName):
+										os.mkdir(path=path+groupName)
+
+									elif not os.path.exists( path+groupName + '/' +str(i['title'] ) ):
+										os.mkdir( path=path+groupName + '/' + str(i['title'])  ) 
+									else:
+										wget.download( a['photo_604'], out=path+groupName+'/'+str(i['title']) )
+						print('\n\n--------------------------\n\nDownload is complete\n\n')
 				if download == 'no':
 
 						for i in album:
@@ -359,11 +365,7 @@ class Comb:
 		ids= []
 		albums = vkapi.photos.getAlbums( owner_id = public_id, count = count)['items']
 		for i in albums:
-			# ids.append({"id":i['id'], "title":i['title'], "count":i['size']})
 			ids.append(dict(id=i['id'], title=i['title'], count=i['size']))
-
-		# print("TITLE:",i['title'],'\nID: ',i['id'])
-		# dids = json.loads(ids)
 		return ids
 
 
@@ -388,9 +390,6 @@ class Comb:
 
 			for i in photo_id:
 				movePhotos = vkapi.photos.move(owner_id=owner_id, target_album_id=album_id[0], photo_id=i, v='5.34')
-			
-
-		
 		print(photo_id[0])
 		
 		# return print(copyPhotos)
@@ -399,25 +398,26 @@ class Comb:
 		'''Post comment into topic block of group'''
 
 		topic_id = Comb.getTopic() 
-		# vkapi.board.addComment( group_id = 53664217, topic_id = topic_id[0], text = str( random.choice( slist ) ) )
+		vkapi.board.addComment( group_id = 53664217, topic_id = topic_id[0], text = str( random.choice( slist ) ) )
 
 		print(' TOPIC ID: ' + str(topic_id[0]) + '\n\n' + "{:-^50}".format("") +'\n') 
 		return
 
 
-	def postMulti( self, feed, mins):
+	def postMulti( self, feed, mins ):
 		
 		i=-1
 		group = str;
 		# print('Computer make post photos now... \nTotal number of posts: ' + str(i+1))
 		while 1:
 			i+=1
-			if i == len(self.groups)-1:
+			if i == len(self.group_ids)-1:
 				Comb.postTopicComment('self')
 				i=-1
-			group = str(self.groups[i])
-			ok2 = group[:]
-			# group = str(random.choice(groups))
+			group_id = str(self.dict_names_and_ids[i]['id'])	
+			ok2 = group_id[:]
+			group_name=self.dict_names_and_ids[i]['name'][:]
+			screen_name = self.dict_names_and_ids[i]['screen_name'][:]
 			if type(feed) == list:
 				words = random.choice( feed )
 				ok = words[:]
@@ -428,8 +428,8 @@ class Comb:
 					words=wiki()
 					ok=words
 
-			# vkapi.wall.post( owner_id = ok2,  message = ok )
-			print(' PUBLIC ID: ' + str(ok2) + '\n\n TEXT: \n\n  ' + str(ok) + '\n\n' + "{:-^50}".format("")+ '\n')
+			vkapi.wall.post( owner_id = ok2,  message = ok )
+			print(' PUBLIC: ' + str(ok2) + '      |      ' + group_name + '       |      ' + screen_name + '\n\n TEXT: \n\n  ' + str(ok) + '\n\n' + "{:-^50}".format("")+ '\n')
 
 			if end == 1:
 				break
@@ -516,7 +516,7 @@ if __name__ == "__main__":
 	# Combain.getCitat()
 	# Combain.getAlbums(-57014305, 1)
 
-	# Combain.getPhoto( -57014305, Combain.getAlbums(-57014305, 2), 1, 'yes', '/Users/hal/', 'id', 'yes', 'no')
+	# Combain.getPhoto( -57014305, Combain.getAlbums(-57014305, 3), 1, 'yes', '/Users/hal/', 'id', 'yes', 'no')
 	# Combain.getPhoto( -57014305, 'none', 50, 'yes', '/Users/hal/', 'id', 'yes', 'yes')
 	# Combain.rePost()
 	# Combain.copyPhoto( person[0], 'JOsdfasdfKER', -32149661 )
@@ -524,41 +524,46 @@ if __name__ == "__main__":
 	# Combain.getDialogs()
 	
 
-	# print('{:=^80}'.format(" Wellcome to VK API combain ") + '\n\n  Please type kind of action would you like to do with this program.\n\n')
+	print('{:=^80}'.format(" Wellcome to VK API combain ") + '\n\n  Please type kind of action would you like to do with this program.\n\n'+'{:=^80}'.format('=')+'\n')
 
-	# actions = ['multi-post', 'download photo', 'copy photo', 'auto reply', 'get text from wall,']
+	actions = ['Multi-post', 'Download photos', 'Copy photos', 'Auto reply', 'Get text from wall']
 
 	# elist = [i for i in enumerate(actions, start=1)]
 	# for i in elist:
 	# 	for a in i:
 	# 		print(a)
-	# 	# print('%s. %s\n' % (i, actions[i]))
-	# 	# print('   %s\n' % (str(i)))
+		# print('%s. %s\n' % (i, actions[i]))
+		# print('   %s\n' % (str(i)))
+	for i,y in zip(range(len(actions)), actions):
+		if i == 0:
+			print(str(1)+'.', actions[0])
+		else:
+			print(str(i+1)+'.', y)
 
 
-	
-	# def actions():
-	# 	action = input('Enter action: ')
+	def actions():
+		action = input('\nEnter action: ')
 
-	# 	if int(action) == 1:
-	# 		mins = int(input('Time delay in minutes: '))
-	# 		try:
-	# 			Combain.postMulti(psy+psy2+mudreci2+mudreci, mins)
-	# 		except:
-	# 			Combain.postMulti(psy+psy2+mudreci2+mudreci, mins)
-	# 	elif int(action) == 5:
-	# 		ioffset = int(input('Offset: '))
-	# 		from_id = int(input('From_id: '))
-	# 		count = int(input('Count: '))
-	# 		Combain.getWall('yes', ioffset, -57014305, 'text', count)
-	# 	elif int(action) == 2:
-	# 		groupId = int(input('group id: '))
-	# 		countAlbums = int(input('count albums: '))
-	# 		countPhotos = int(input('count photos: '))
-	# 		path = input('path to save: ')
-	# 		print('Downloading...')
-	# 		Combain.getPhoto( groupId, Combain.getAlbums(groupId, countAlbums), 'none', 'yes', path, 'id', 'yes', 'no')
+		if int(action) == 1:
+			mins = int(input('Time delay in minutes: '))
+			try:
+				Combain.postMulti(psy+psy2+mudreci2+mudreci, mins)
+			except:
+				Combain.postMulti(psy+psy2+mudreci2+mudreci, mins)
+		elif int(action) == 5:
+			ioffset = int(input('Offset: '))
+			from_id = int(input('From_id: '))
+			count = int(input('Count: '))
+			Combain.getWall('yes', ioffset, -57014305, 'text', count)
+		elif int(action) == 2:
+			groupId = int(input('group id: '))
+			countAlbums = int(input('count albums: '))
+			countPhotos = int(input('count photos: '))
+			path = input('path to save photos: ')
+			if not path: path = os.environ['HOME']+'/'
+			print('\n\nDownload is starting\n\n--------------------------\n\n')
+			Combain.getPhoto( groupId, Combain.getAlbums(groupId, countAlbums), 'none', 'yes', path, 'id', 'yes', 'no')
 
-	# actions()
+	actions()
 
 	
