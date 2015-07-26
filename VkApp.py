@@ -1,7 +1,7 @@
 #!/usr/local/bin/python3
 # coding: UTF-8
 
-
+from words import *
 import vk
 import sys
 import urllib
@@ -28,7 +28,6 @@ from itertools import islice
 # print('Content-type: text/html')
 # print()
 
-
 # User and app info
 vkapi = vk.API( access_token = '12190cdc5c7c2de92e1f892153e6ec3af558d98afc124f1a2534fae400ec277f8807264ff980f4c403de4')
 other = [-72580409, -61330688]
@@ -36,39 +35,28 @@ person = [179349317]
 app_id = 4967352
 
 supercitat = []
-phrases = ['На всяком кладбище, даже очень старом, всегда ощутим острый, трагический аромат разорванной любви — когда смерть отрывает любящих друг от друга.', 'Приятно знать, каков наш мир и где в нем твое место', 'Надо найти место внутри себя, вокруг себя. Место, которое тебе подходит.Похожее на тебя хотя бы отчасти.','Есть нечто особенное в месте твоего рождения. Не все это знают. Это знает лишь тот, кого силой оторвали от места его рождения.','Так же, как кожа выделяет пот, печень— желчь, а поджелудочная железа — инсулин, мозг — этот поразительный орган, состоящий из миллиардов клеток — «выделяет» сознание.']
-
 end = 0
-
-
 
 # VK groups info for reading
 
 public = { 'items' : [
 						{	'name' : 'techtroit', 
 							'id' : -69107269 	},
-
 						{	'name' : 'mnmlsm', 
 							'id' : -80982654	},
-
 						{	'name' : 'sklr', 
 							'id' : -45327998	},
-
 						{	'name' : 'IMAGE',
-							'id' : 	-54179178	},
-							
+							'id' : 	-54179178	},				
 						{	'name' : 'SKYFALL',	
 							'id' : -39669294	}
 					]
 		}
-
 citat = { 'items' : [
 						{	'name' : 'cfb',	
 							'id' : -31164499	}
-
 					]
 		}
-
 images = { 'items' : [
 						{	'name' : 'VILLAN',
 							'id': -46773594		}
@@ -78,73 +66,11 @@ images = { 'items' : [
 		}
 # List text sources 		
 
-
-
 pub = list(i['id'] for i in public['items'] if i['name']=='techtroit')
-# pub2 =list(map(lambda x: x['id'], filter(lambda x: x['name']=='techtroit', public['items'])))
-
-# print(pub)
-# Reading words from files
-
-ofile = open('words/super700.txt', encoding='UTF-8')
-rofile = ofile.read()
-super700 = list(rofile.split('b'))
-ofile.close()
-
-ofile2 = open('words/scary.txt', encoding='UTF-8')
-rofile2 = ofile2.read()
-scary = list(rofile2.split('b'))
-ofile2.close()
-
-ofile3 = open('words/films.txt', encoding='UTF-8')
-rofile3 = ofile3.read()
-films = list(rofile3.split('b'))
-ofile3.close()
-
-ofile4 = open('words/girls.txt', encoding='UTF-8')
-rofile4 = ofile4.read()
-girls = list(rofile4.split('b'))
-ofile4.close()
-
-ofile5 = open('words/mudreci.txt', encoding='UTF-8')
-rofile5 = ofile5.read()
-mudreci = list(rofile5.split('b'))
-ofile5.close()
-
-ofile6 = open('words/life.txt', encoding='UTF-8')
-rofile6 = ofile6.read()
-life = rofile6.split('b')
-ofile6.close()
-
-ofile7 = open('words/sex.txt', encoding='UTF-8')
-rofile7 = ofile7.read()
-sex = rofile7.split('b')
-ofile7.close()
-
-
-ofile8 = open('words/vselen.txt', encoding='UTF-8')
-rofile8 = ofile8.read()
-vselen = rofile8.split('b')
-ofile8.close()
-
-ofile9 = open('words/psy.txt', encoding='UTF-8')
-rofile9 = ofile9.read()
-psy = rofile9.split('b')
-ofile9.close()
-
-slist = mudreci+life+girls+sex+films+scary+super700+vselen
-# if '' in slist:
-# 	slist.remove('')
-spisok = ['sdf\ndssdfsd\nsdfsdfsdf\n', '\nsdfsdf\nsdfsdf1121212\n']
 
 
 mypost = '''Привет. Одиноко? Грустно? Скучно? Нужен собеседник понимающий? - Забудь эти проблемы! Я их решу за тебя. Всего за 100$ в час. Без интима. Предоплата - 20$, без возврата. \n\nP.S. Детям не беспокоить без родителей.'''
 
-
-# print()
-# while 1:
-# 	print(random.choice(sex))
-# 	time.sleep(1)
 
 class perpetualTimer():
 
@@ -164,8 +90,6 @@ class perpetualTimer():
    def cancel(self):
       self.thread.cancel()
 
-
-
 # Main Programm Classes and Functions
 
 class Comb:
@@ -175,7 +99,14 @@ class Comb:
 
 		self.max = 'dd'
 		self.ok = 'dd'
-		self.groups = [-57014305, -78468103]
+		self.group_ids = [-57014305, -60409637, -33881737]
+		self.group_Ids_ToString = str.join(',', [str(abs(x)) for x in self.group_ids])
+		self.groups = json.dumps(vkapi.groups.getById(group_ids=self.group_Ids_ToString),indent=4, sort_keys=True, ensure_ascii=False)
+		self.group_names = [i['name'] for i in json.loads(self.groups)]
+		self.dict_names_and_ids={};
+		for i,x in zip(self.group_names, self.group_ids):
+			self.dict_names_and_ids[i]=x
+	
 
 
 	def dateChecker(self):
@@ -186,11 +117,7 @@ class Comb:
 			Comb.getWall('self', 'no', person[0], 'text', 1)
 			time.sleep(0.8)
 
-
-		
-
-
-	def getWall( self, offset,  wall_id, dtype, count = 1, bot='no', sdate='no', likes='no', user_id = 179349317  ):
+	def getWall( self, offset,  ioffset, wall_id, dtype, count = 1, bot='no', sdate='no', likes='no', user_id = 179349317  ):
 		'''Get music, image, text data from the wall'''
 		rid = []
 		text=[]
@@ -321,15 +248,16 @@ class Comb:
 						supercitat.append(str(a['text']))
 				return text
 			if type(wall_id) == int:
-				while step < 100:
+				while step < ioffset:
 					step+=50
 					wall = vkapi.wall.get( owner_id = wall_id, count = count, offset = step )
 					ids.append(wall)
 					# time.sleep(1)
 				for i in ids:
-					# for a in i['items']:
-					# 	print(a['text'])
-					print(i)
+					for a in i['items']:
+						if a['from_id']==user_id: 
+							print(json.dumps(a['text'], indent=4, sort_keys=True, ensure_ascii=False), '\n')
+					# print(j)
 
 
 
@@ -363,8 +291,7 @@ class Comb:
 		
 		groupName = vkapi.groups.getById( group_id = abs(wall_id))[0]['name']
 
-		# if download == 'yes':
-		# 	os.mkdir(path=path,  mode=765)
+
 		if wall == 'yes':
 			photoFromWall = Combain.getWall('no', wall_id, 'photo', count)
 			for i in photoFromWall:
@@ -405,22 +332,24 @@ class Comb:
 							offs = 0
 						while step < i['count']:
 							step+=offs
-							for a in vkapi.photos.get( owner_id=wall_id, album_id=i['id'], count=i['count']/2, offset=step, v=5.34,  )['items']:
+							for a in vkapi.photos.get( owner_id=wall_id, album_id=i['id'], count=i['count'], offset=step, v=5.34 )['items']:
 								if i['id'] == a['album_id']:
-									# print(i)
-									if not os.path.exists(path+groupName):
-										os.mkdir(path=path+groupName)
+									print(i)
+									# if not os.path.exists(path+groupName):
+									# 	os.mkdir(path=path+groupName)
 
-									elif not os.path.exists( path+groupName + '/' +str(i['title'] ) ):
-										os.mkdir( path=path+groupName + '/' + str(i['title'])  ) 
-									else:	
-										wget.download( a['photo_604'], out=path+groupName+'/'+str(i['title']) )
+									# elif not os.path.exists( path+groupName + '/' +str(i['title'] ) ):
+									# 	os.mkdir( path=path+groupName + '/' + str(i['title'])  ) 
+									# else:	
+									# 	wget.download( a['photo_604'], out=path+groupName+'/'+str(i['title']) )
 				if download == 'no':
+
 						for i in album:
 							for a in vkapi.photos.get( owner_id=wall_id, album_id=i['id'], count=i['count'], v=5.34 )['items']:
 								if i['id'] == a['album_id']:
-									if 'photo_807' in a:
-										print(json.dumps(a, indent=4, sort_keys=True, ensure_ascii=False))
+									if 'photo_604' in a:
+
+										print(json.dumps(a['photo_604'], indent=4, sort_keys=True, ensure_ascii=False))
 									else:
 										print(json.dumps(a, indent=4, sort_keys=True, ensure_ascii=False))
 
@@ -464,8 +393,6 @@ class Comb:
 		
 		print(photo_id[0])
 		
-		
-
 		# return print(copyPhotos)
 
 	def postTopicComment( self ):
@@ -478,7 +405,7 @@ class Comb:
 		return
 
 
-	def postMulti( self, feed ):
+	def postMulti( self, feed, mins):
 		
 		i=-1
 		group = str;
@@ -506,7 +433,7 @@ class Comb:
 
 			if end == 1:
 				break
-			time.sleep(1)
+			time.sleep(60*mins)
 
 		
 	
@@ -587,37 +514,51 @@ if __name__ == "__main__":
 	# Combain.getWall('yes', -32149661, 'photo', 20) #args (offset, wall_id, dtype, count = 1, bot='no', sdate='no', likes='no')
 	# Combain.dateChecker()
 	# Combain.getCitat()
-	# Combain.getAlbums(-40485321)
+	# Combain.getAlbums(-57014305, 1)
 
-	# Combain.getPhoto( -54179178, Combain.getAlbums(-54179178, 1), 10, 'yes', '/Users/hal/', 'id', 'yes', 'yes')
-	# Combain.getPhoto( -37502375, 'none', 50, 'yes', '/Users/hal/', 'id', 'yes', 'yes')
+	# Combain.getPhoto( -57014305, Combain.getAlbums(-57014305, 2), 1, 'yes', '/Users/hal/', 'id', 'yes', 'no')
+	# Combain.getPhoto( -57014305, 'none', 50, 'yes', '/Users/hal/', 'id', 'yes', 'yes')
 	# Combain.rePost()
 	# Combain.copyPhoto( person[0], 'JOsdfasdfKER', -32149661 )
 	# Combain.changeOwnPhoto()
 	# Combain.getDialogs()
 	
 
-	print('{:=^80}'.format(" Wellcome to VK API combain ") + '\n\n  Please type kind of action would you like to do with this program.\n\n')
+	# print('{:=^80}'.format(" Wellcome to VK API combain ") + '\n\n  Please type kind of action would you like to do with this program.\n\n')
 
-	actions = ['multi-post', 'download-photo', 'copy-photo', 'autoreply']
+	# actions = ['multi-post', 'download photo', 'copy photo', 'auto reply', 'get text from wall,']
 
-	elist = [i for i in enumerate(actions, start=1)]
-	for i in elist:
-		for a in i:
-			print(a)
-		# print('%s. %s\n' % (i, actions[i]))
-		# print('   %s\n' % (str(i)))
+	# elist = [i for i in enumerate(actions, start=1)]
+	# for i in elist:
+	# 	for a in i:
+	# 		print(a)
+	# 	# print('%s. %s\n' % (i, actions[i]))
+	# 	# print('   %s\n' % (str(i)))
 
-  
+
 	
-	def actions():
-		action = input('Enter action: ')
+	# def actions():
+	# 	action = input('Enter action: ')
 
-		if int(action) == 1:
-			try:
-				Combain.postMulti('wiki')
-			except:
-				Combain.postMulti('wiki')
-	actions()
+	# 	if int(action) == 1:
+	# 		mins = int(input('Time delay in minutes: '))
+	# 		try:
+	# 			Combain.postMulti(psy+psy2+mudreci2+mudreci, mins)
+	# 		except:
+	# 			Combain.postMulti(psy+psy2+mudreci2+mudreci, mins)
+	# 	elif int(action) == 5:
+	# 		ioffset = int(input('Offset: '))
+	# 		from_id = int(input('From_id: '))
+	# 		count = int(input('Count: '))
+	# 		Combain.getWall('yes', ioffset, -57014305, 'text', count)
+	# 	elif int(action) == 2:
+	# 		groupId = int(input('group id: '))
+	# 		countAlbums = int(input('count albums: '))
+	# 		countPhotos = int(input('count photos: '))
+	# 		path = input('path to save: ')
+	# 		print('Downloading...')
+	# 		Combain.getPhoto( groupId, Combain.getAlbums(groupId, countAlbums), 'none', 'yes', path, 'id', 'yes', 'no')
+
+	# actions()
 
 	
