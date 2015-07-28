@@ -118,7 +118,7 @@ class Comb:
 			Comb.getWall('self', 'no', person[0], 'text', 1)
 			time.sleep(0.8)
 
-	def getWall( self, offset,  ioffset, wall_id, dtype, count = 1, bot='no', sdate='no', likes='no', user_id = 179349317  ):
+	def getWall( self, offset,  ioffset, wall_id, dtype, remove, count = 1, bot='no', sdate='no', likes='no', user_id = 179349317,  ):
 		'''Get music, image, text data from the wall'''
 		rid = []
 		text=[]
@@ -200,13 +200,21 @@ class Comb:
 				items = wall_id['items']
 				for i in items:
 					wall = vkapi.wall.get( owner_id = i['id'], count = count )
-					ids.append(wall)
+					ids.append(wall)	
 				for i in ids:
 					for a in i['items']:
 						text.append(str(a['text']))
 						print(text)
+			if type(wall_id) == int:
+				if remove == True:
+					wall = vkapi.wall.get(owner_id=wall_id, count = count)['items']
+					for i in wall:
+						if i['from_id'] == user_id:
+							vkapi.wall.delete(owner_id=wall_id, post_id=i['id'])
+							time.sleep(0.5)
 
-						return 
+
+						# return 
 
 			elif type(wall_id) == int and bot == 'yes':
 
@@ -547,19 +555,19 @@ if __name__ == "__main__":
 		if int(action) == 1:
 			mins = int(input('Time delay in minutes: '))
 			try:
-				Combain.postMulti(psy+psy2+mudreci2+mudreci, mins)
+				Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science, mins)
 			except:
-				Combain.postMulti(psy+psy2+mudreci2+mudreci, mins)
+				Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science, mins)
 		elif int(action) == 5:
 			ioffset = int(input('Offset: '))
-			from_id = int(input('From_id: '))
+			wall_id = int(input('Wall_id: '))
 			count = int(input('Count: '))
-			Combain.getWall('yes', ioffset, -57014305, 'text', count)
+			Combain.getWall('no', 0, wall_id, 'text', True, count, )
 		elif int(action) == 2:
 			groupId = int(input('group id: '))
 			countAlbums = int(input('count albums: '))
 			countPhotos = int(input('count photos: '))
-			path = input('path to save photos: ')
+			path = input('path to save photos[default is your HOME directory]: ')
 			if not path: path = os.environ['HOME']+'/'
 			print('\n\nDownload is starting\n\n--------------------------\n\n')
 			Combain.getPhoto( groupId, Combain.getAlbums(groupId, countAlbums), 'none', 'yes', path, 'id', 'yes', 'no')
