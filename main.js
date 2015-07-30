@@ -1,36 +1,42 @@
 $(document).ready(function(){
-	$(".login_button").click(function(){VK.Auth.login(authInfo);});
-	  VK.init({
-	    apiId: 4964195
-	  });
-function authInfo(response) {
-	  if (response.session) {
-	  	console.log(response.session.mid);
-	  	// $(".status1").html('<span class="statwrap"> User: '+response.session.mid + " session.</span>");
-	  } else {
-	    alert('not auth');
-	  }
-	}
-// $.removeCookie("album_id", {path: "/"});
-$.each($.cookie(), function(data){
-	console.log(data);
-});
-var arrp =[];
-var album_from_cookie = $("#uaid").val($.cookie('album_id'));
-	if(album_from_cookie){
-		$(".status3").html('');
-			GetPhotos($.cookie('album_id'));
-	}
-VK.Auth.getLoginStatus(authInfo);
-// VK.UI.button('login_button');
-// Click button events
-	$(".getperm").click(function(){
-			getPerm("179349317");
-	});
-	$(".make_post").click(function(){
-			$.post('getwall.py', {action:'multi'}, function(data){
-				$('.status1').html(data);
-			});
+// 	$(".login_button").click(function(){VK.Auth.login(authInfo);});
+// 	  VK.init({
+// 	    apiId: 4964195
+// 	  });
+// function authInfo(response) {
+// 	  if (response.session) {
+// 	  	console.log(response.session.mid);
+// 	  	// $(".status1").html('<span class="statwrap"> User: '+response.session.mid + " session.</span>");
+// 	  } else {
+// 	    alert('not auth');
+// 	  }
+// 	}
+// // $.removeCookie("album_id", {path: "/"});
+// $.each($.cookie(), function(data){
+// 	console.log(data);
+// });
+// var arrp =[];
+// var album_from_cookie = $("#uaid").val($.cookie('album_id'));
+// 	if(album_from_cookie){
+// 		$(".status3").html('');
+// 			GetPhotos($.cookie('album_id'));
+// 	}
+// VK.Auth.getLoginStatus(authInfo);
+// // VK.UI.button('login_button');
+// // Click button events
+// 	$(".getperm").click(function(){
+// 			getPerm("179349317");
+// 	});
+	// $(".make_post").click(function(){
+	// 	var message=$('.status4 textarea').val()
+	// 	$.ajax({
+	// 		url: "https://api.vk.com/method/wall.post?owner_id=179349317&message="+message+"&v=5.34&access_token=12190cdc5c7c2de92e1f892153e6ec3af558d98afc124f1a2534fae400ec277f8807264ff980f4c403de4",
+	// 		type: 'GET',
+	// 		dataType: 'jsonp',
+	// 		success:function(msg){
+	// 			console.log(msg.response);
+	// 		}
+	// });
 			
 			// $(wrapper).on("onWindowFocus", function(){alert("ok");}); 
 
@@ -200,18 +206,8 @@ function getVideos(id){
 		console.log(data);
 	});
 }
-// getVideos("179349317");
-//Test php script returning file list
-$.ajax({
-	url: "plus.py",
-	type: "GET"
-})
-.done(function(data) {
-	var arrr  = [];
-	arrr.push(data);
-	$("<div>"+data+"</div>").appendTo(".status2");
- // alert(data);
-});
+
+
 $("#uaid").click(function(){
 	var element = $("#uaid").val();
 	var pattern = /\d+/;

@@ -22,14 +22,14 @@ import wsgiref.handlers
 import json
 import wikipedia
 from itertools import islice
-
+from newsBlock import euronewsNews, vestiRss, euronewsUSA
 # cgitb.enable()
 
 # print('Content-type: text/html')
 # print()
 
 # User and app info
-vkapi = vk.API( access_token = '12190cdc5c7c2de92e1f892153e6ec3af558d98afc124f1a2534fae400ec277f8807264ff980f4c403de4')
+vkapi = vk.API( access_token = '00af0cff7458595045e1893775acf9b561dad00d6df9de580f9839e2722d5090e3fbf819a471461094666')
 other = [-72580409, -61330688]
 person = [179349317]
 app_id = 4967352
@@ -212,7 +212,11 @@ class Comb:
 						if i['from_id'] == user_id:
 							vkapi.wall.delete(owner_id=wall_id, post_id=i['id'])
 							time.sleep(0.5)
-
+				if remove == False:
+					wall = vkapi.wall.get(owner_id=wall_id, count = count)['items']
+					for i in wall:
+						if i['from_id'] == user_id:
+							print(i['text'])
 
 						# return 
 
@@ -355,18 +359,18 @@ class Comb:
 										os.mkdir( path=path+groupName + '/' + str(i['title'])  ) 
 									else:
 										wget.download( a['photo_604'], out=path+groupName+'/'+str(i['title']) )
+								os.system("rm ./*.tmp")		
 						print('\n\n--------------------------\n\nDownload is complete\n\n')
 				if download == 'no':
-
-						for i in album:
-							for a in vkapi.photos.get( owner_id=wall_id, album_id=i['id'], count=i['count'], v=5.34 )['items']:
-								if i['id'] == a['album_id']:
-									if 'photo_604' in a:
-
-										print(json.dumps(a['photo_604'], indent=4, sort_keys=True, ensure_ascii=False))
-									else:
-										print(json.dumps(a, indent=4, sort_keys=True, ensure_ascii=False))
-
+					ids = []
+					for i in album:
+						for a in vkapi.photos.get( owner_id=wall_id, album_id=i['id'], count=i['count'], v=5.34 )['items']:
+							if i['id'] == a['album_id']:
+								if 'photo_604' in a:
+									ids.append(a['id'])
+								else:
+									ids.append(a['id'])
+					print(ids)
 
 	def getAlbums(self, public_id, count):
 		titles = []
@@ -377,31 +381,51 @@ class Comb:
 		return ids
 
 
-	def copyPhoto( self, owner_id, titleNewAlbum, fromWall ):
-		album_id=[]
-		photo_id=[]
-		albumToCreate = vkapi.photos.createAlbum( group_id=owner_id, title=titleNewAlbum, privacy_view='friends_of_friends_only ', privacy_comment='friends_of_friends_only ', v=5.34 )
-		photosToCopy = Comb.getPhoto('self', fromWall, 'wall', 1 )
-		albumsToGet = vkapi.photos.getAlbums( owner_id=owner_id, v='5.34' )
-		for i in albumsToGet['items']:
-			if i['title'] == 'TEST':
+	def copyPhotoToAlbum( self, to_id, titleNewAlbum, from_id, albumNameToCopy ):
+		album_id = []
+		photo_id = []
+		albumsFromIds = []
+		photosToCopy = []
+		getAlbumsFromId = Comb.getAlbums('self', from_id, 4)
+		getAlbumsTo = Comb.getAlbums('self', person[0], 1)
+		for i in getAlbumsTo:
+			if i['title'] == albumNameToCopy:
 				album_id.append(i['id'])
+		# for i in getAlbumsFromId:
 
-		photosToCopy = Comb.getPhoto('self', fromWall, 'wall', 100 )
-		for i in photosToCopy:
-			copyPhotos = vkapi.photos.copy(owner_id=fromWall, photo_id=i, v='5.34')
-			movePhotos = vkapi.photos.move(owner_id=owner_id, target_album_id=album_id[0], photo_id=copyPhotos, v='5.34')
-			time.sleep(0.8)
-			print("Copied to " + str(album_id[0]) + '  - ' + str(copyPhotos))
-			for i in copyPhotos:
-				photo_id.append(i)
-
-			for i in photo_id:
-				movePhotos = vkapi.photos.move(owner_id=owner_id, target_album_id=album_id[0], photo_id=i, v='5.34')
-		print(photo_id[0])
+		for i,y in zip(range(len(getAlbumsFromId)), getAlbumsFromId):
+			if i == 0:
+				print(str(1)+'.', y['title'])
+			else:
+				print(str(i+1)+'.', y['title'])
+			if i==len(getAlbumsFromId)-1:
+				albumChoice = input('Choice the album you want to be copied [default: all]: ')
+				if albumChoice == 'all':
+					for a in vkapi.photos.get(owner_id=from_id, album_id=i['id'], count=i['count'])['items']:
+							copyPhotos = vkapi.photos.copy(owner_id=from_id, photo_id=a['id'], v=5.35)
+							movePhotos = vkapi.photos.move(owner_id=to_id, target_album_id=album_id[0], photo_id=copyPhotos, v=5.35)
+							time.sleep(1)
 		
-		# return print(copyPhotos)
-
+	def getTopicCommentIds(self):
+		topic_id=Comb.getTopic()
+		ids = []
+		offset=0
+		while offset<500:
+			offset+=10
+			topics = vkapi.board.getComments(group_id=53664217, offset=offset, topic_id=topic_id[0], count=10, sort='desc')['items']
+			for i in topics:
+				if (i['from_id']==person[0]):
+					ids.append(i['id'])
+			time.sleep(0.4)
+		
+		
+		return ids
+	def delTopicComments(self):
+		topic_id=Comb.getTopic()
+		ids=Comb.getTopicCommentIds('self')
+		for i in ids:
+			vkapi.board.deleteComment(group_id=53664217, topic_id=topic_id[0], comment_id=i)
+			time.sleep(0.4)
 	def postTopicComment( self ):
 		'''Post comment into topic block of group'''
 
@@ -415,10 +439,12 @@ class Comb:
 	def postMulti( self, feed, mins ):
 		
 		i=-1
-		group = str;
+		group = str
+		period = 0
 		# print('Computer make post photos now... \nTotal number of posts: ' + str(i+1))
 		while 1:
 			i+=1
+			period+=1
 			if i == len(self.group_ids)-1:
 				Comb.postTopicComment('self')
 				i=-1
@@ -437,10 +463,10 @@ class Comb:
 					ok=words
 
 			vkapi.wall.post( owner_id = ok2,  message = ok )
-			print(' PUBLIC: ' + str(ok2) + '      |      ' + group_name + '       |      ' + screen_name + '\n\n TEXT: \n\n  ' + str(ok) + '\n\n' + "{:-^50}".format("")+ '\n')
+			print(' PUBLIC: ' + str(ok2) + '      |      ' + group_name + '       |      https://vk.com/' + screen_name + '\n\n TEXT: \n\n  ' + str(ok) + '\n\n' + "{:-^50}".format("")+ '\n')
 
-			if end == 1:
-				break
+			if period == 40:
+				return period
 			time.sleep(60*mins)
 
 		
@@ -462,12 +488,28 @@ class Comb:
 
 		print (result)
 		return
-	def getDialogs(self, delete='no', count=1):
-		dialogs = vkapi.messages.getDialogs(count=200)
+	def getDialogs(self, delete='no', count=1, unread =1):
+		dialogs = vkapi.messages.getDialogs(count=200, unread =unread)
 		ids = [i['message']['user_id'] for i in dialogs['items']]
-		for i in ids:
-			vkapi.messages.deleteDialog(user_id=i)
-			time.sleep(0.6)
+		# texts = [i['message']['text'] for i in dialogs['items']]
+		if delete == 'yes':
+			for i in ids:
+				vkapi.messages.deleteDialog(user_id=i)
+				time.sleep(0.6)
+		elif delete == 'no' and unread==1:
+			for i in dialogs['items']:
+
+					print(i['message']['user_id'],'\n',i['message']['body'],'\n')
+	def crossDeletingPosts(self, group_ids):
+		# offset=-60
+		# while offset<480:
+		for i in group_ids:
+			# offset+=10
+			for post in vkapi.wall.get(owner_id=i['id'], count=100)['items']:
+				if post['from_id'] == person[0]:
+					vkapi.wall.delete(owner_id=i['id'], post_id=post['id'])
+					print(post['owner_id'], post['text'])
+				time.sleep(0.4)	
 
 	
 def wiki():
@@ -481,49 +523,31 @@ def wiki():
 		summ = wikipedia.summary(wpage, sentences=5)
 	return summ
 
+def newsBlock():
+	while 1:
+		vkapi.wall.post(owner_id=person[0], message=euronewsUSA())
+		time.sleep(10)
+		vkapi.wall.post(owner_id=person[0], message=euronewsNews())
+		time.sleep(10)
+		vkapi.wall.post(owner_id=person[0], message=vestiRss())
+		time.sleep(1)
 
-# storage = cgi.FieldStorage()
-# action = storage.getvalue('action')
-# if action == 'multi':
-# 	# dd=[1,2,3]
-# 	# # for i in dd:
-# 	# while 1:
-# 	# 	# print(i)
-# 	# 	sys.stdout.write('ok')
-# 	# 	sys.stdout.flush()
-# 	# 	time.sleep(1)
-# 	class MyApplication(object):
-# 	    def __call__(self, environ, start_response):
-# 	        start_response('200 OK', [('Content-Type', 'text/html;charset=utf-8')])
-# 	        return self.page()
 
-# 	    def page(self):
-# 	        yield '<html><body>'
-# 	        for i in range(10):
-# 	            yield '<div>%i</div>'%i
-# 	            time.sleep(1)
 
-# 	application= MyApplication()
-# 	if __name__=='__main__':
-# 	    wsgiref.handlers.CGIHandler().run(application)
-	# try:
-	# 	Combain = Comb()
-	# 	Combain.postMulti(slist)
-	# 	exit = storage.getvalue('exit')
-	# 	if exit == 1:
-	# 		end = 1
-	# except:
-	# 	Combain.postMulti(vselen+psy+mudreci)
+
+
 if __name__ == "__main__":
 	Combain = Comb()
 	# aa = Combain.getAlbums(-40485321)
 	# # Combain.postOne()
 	# Combain.getWall('no', -32149661, 'photo', 20, 'yes') #args (offset, wall_id, dtype, count = 1, bot='no', sdate='no', likes='no')
 	# Combain.getWall('yes', -32149661, 'photo', 20) #args (offset, wall_id, dtype, count = 1, bot='no', sdate='no', likes='no')
+	# Combain.crossDeletingPosts(Combain.dict_names_and_ids)
 	# Combain.dateChecker()
 	# Combain.getCitat()
 	# Combain.getAlbums(-57014305, 1)
-
+	# Combain.getTopicCommentIds()
+	# Combain.delTopicComments()
 	# Combain.getPhoto( -57014305, Combain.getAlbums(-57014305, 3), 1, 'yes', '/Users/hal/', 'id', 'yes', 'no')
 	# Combain.getPhoto( -57014305, 'none', 50, 'yes', '/Users/hal/', 'id', 'yes', 'yes')
 	# Combain.rePost()
@@ -532,37 +556,38 @@ if __name__ == "__main__":
 	# Combain.getDialogs()
 	
 
-	print('{:=^80}'.format(" Wellcome to VK API combain ") + '\n\n  Please type kind of action would you like to do with this program.\n\n'+'{:=^80}'.format('=')+'\n')
-
-	actions = ['Multi-post', 'Download photos', 'Copy photos', 'Auto reply', 'Get text from wall']
-
-	# elist = [i for i in enumerate(actions, start=1)]
-	# for i in elist:
-	# 	for a in i:
-	# 		print(a)
-		# print('%s. %s\n' % (i, actions[i]))
-		# print('   %s\n' % (str(i)))
-	for i,y in zip(range(len(actions)), actions):
-		if i == 0:
-			print(str(1)+'.', actions[0])
-		else:
-			print(str(i+1)+'.', y)
-
+	
 
 	def actions():
+		print('{:=^80}'.format(" Wellcome to VK API combain ") + '\n\n  Please type kind of action would you like to do with this program.\n\n'+'{:=^80}'.format('=')+'\n')
+
+		actions = ['Multi-post', 'Download photos', 'Copy photos', 'Auto reply', 'Get text from wall', 'Cross delete posts']
+
+		# elist = [i for i in enumerate(actions, start=1)]
+		# for i in elist:
+		# 	for a in i:
+		# 		print(a)
+			# print('%s. %s\n' % (i, actions[i]))
+			# print('   %s\n' % (str(i)))
+		for i,y in zip(range(len(actions)), actions):
+			if i == 0:
+				print(str(1)+'.', actions[0])
+			else:
+				print(str(i+1)+'.', y)
+
 		action = input('\nEnter action: ')
 
 		if int(action) == 1:
 			mins = int(input('Time delay in minutes: '))
 			try:
-				Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science, mins)
+				Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space, mins)
 			except:
-				Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science, mins)
+				Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space, mins)
 		elif int(action) == 5:
 			ioffset = int(input('Offset: '))
 			wall_id = int(input('Wall_id: '))
 			count = int(input('Count: '))
-			Combain.getWall('no', 0, wall_id, 'text', True, count, )
+			Combain.getWall('no', 0, wall_id, 'text', False, count, )
 		elif int(action) == 2:
 			groupId = int(input('group id: '))
 			countAlbums = int(input('count albums: '))
@@ -571,7 +596,19 @@ if __name__ == "__main__":
 			if not path: path = os.environ['HOME']+'/'
 			print('\n\nDownload is starting\n\n--------------------------\n\n')
 			Combain.getPhoto( groupId, Combain.getAlbums(groupId, countAlbums), 'none', 'yes', path, 'id', 'yes', 'no')
+		elif int(action) == 6:
+			# list_ids = input("Enter list of groups use ','. Default multi-post group ids list is used ")
+			# makeListToDir = 
+			Combain.crossDeletingPosts(Combain.dict_names_and_ids)
+		elif int(action) == 3:
+			from_id = int(input("Pubic either user where will be copied from: "))
+			albumNameToCopy = input("Album name will be copied to: ")
+			Combain.copyPhotoToAlbum(person[0], '', from_id, albumNameToCopy)
+	if sys.argv[1] == 'manual':
+		actions()
 
-	actions()
-
+	elif sys.argv[1] == 'auto':
+		Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space, int(sys.argv[2]))
 	
+
+	# Combain.getPhoto(-682618, Combain.getAlbums(-682618, 1)[0], 1 )

@@ -207,6 +207,16 @@ margin: 0 auto 0 auto;
 .status4 textarea{
 	resize: none;
 	padding: 10px;
+	border:none;
+	outline:1px solid #ccc;
+	transition: outline 0.3s ease-in-out 0s;
+
+}
+.status4 textarea:focus{
+	/*border:2px solid #ccc;*/
+	outline:5px solid #ccc;
+
+
 }
 .make_post{
 	float: none;
