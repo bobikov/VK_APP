@@ -552,9 +552,9 @@ if __name__ == "__main__":
 		if int(action) == 1:
 			mins = int(input('Time delay in minutes: '))
 			try:
-				Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space, mins)
+				Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space+other+zeland, mins)
 			except:
-				Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space, mins)
+				Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space+other+zeland, mins)
 		elif int(action) == 5:
 			ioffset = int(input('Offset: '))
 			wall_id = int(input('Wall_id: '))
@@ -580,7 +580,7 @@ if __name__ == "__main__":
 		actions()
 
 	elif sys.argv[1] == 'auto':
-		Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space+psy, int(sys.argv[2]))
+		Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space+psy+other+zeland, int(sys.argv[2]))
 	
 
 	# Combain.getPhoto(-682618, Combain.getAlbums(-682618, 1)[0], 1 )

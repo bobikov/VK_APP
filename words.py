@@ -50,7 +50,12 @@ with open('words/prosv.txt', encoding='utf-8') as pr:
 
 with open('words/space.txt', encoding='utf-8') as sp:
 	space = sp.read().split('b')
-	
-slist = list(filter(None, mudreci+life+girls+sex+films+scary+super700+vselen+psy2+mudreci2+davch+XXvek+science+atlant+prosv+space))
+with open('words/other.txt', encoding='utf-8') as oth:
+	other = oth.read().split('b')
+
+with open('words/zeland.txt', encoding='utf-8') as zel:
+	zeland = zel.read().split('b')
+
+slist = list(filter(None, mudreci+life+girls+sex+films+scary+super700+vselen+psy2+mudreci2+davch+XXvek+science+atlant+prosv+space+psy+other+zeland))
 
 phrases = ['На всяком кладбище, даже очень старом, всегда ощутим острый, трагический аромат разорванной любви — когда смерть отрывает любящих друг от друга.', 'Приятно знать, каков наш мир и где в нем твое место', 'Надо найти место внутри себя, вокруг себя. Место, которое тебе подходит.Похожее на тебя хотя бы отчасти.','Есть нечто особенное в месте твоего рождения. Не все это знают. Это знает лишь тот, кого силой оторвали от места его рождения.','Так же, как кожа выделяет пот, печень— желчь, а поджелудочная железа — инсулин, мозг — этот поразительный орган, состоящий из миллиардов клеток — «выделяет» сознание.']
