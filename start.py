@@ -501,15 +501,34 @@ class Comb:
 
 					print(i['message']['user_id'],'\n',i['message']['body'],'\n')
 	def crossDeletingPosts(self, group_ids):
-		# offset=-60
-		# while offset<480:
-		for i in group_ids:
-			# offset+=10
-			for post in vkapi.wall.get(owner_id=i['id'], count=100)['items']:
+		ids = []
+		selectedId=int
+		countPosts = int
+		offset=-100
+		for i,y in zip(range(len(group_ids)), group_ids):
+			if i == 0:
+				print(str(1)+'.', group_ids[0]['id'], group_ids[0]['screen_name'])
+			else:
+				print(str(i+1)+'.', y['id'], y['screen_name'])
+				ids.append({"number":str(i+1),"id":str(y['id'])})
+		selector = input('select public to delete posts: ')
+		if selector:
+			for i in ids:
+				if i['number'] == selector:
+					selectedId=int(i['id'])
+		if int(selector)==1:
+			selectedId=group_ids[0]['id']
+
+		countPosts = int(input('count of posts to delete: '))
+		selectedOffset = int(input('offset: '))
+		while offset < selectedOffset:
+			offset+=100
+			time.sleep(0.5)
+			for post in vkapi.wall.get(owner_id=selectedId, count=countPosts, offset=offset, v=5.35)['items']:
 				if post['from_id'] == person[0]:
-					vkapi.wall.delete(owner_id=i['id'], post_id=post['id'])
+					vkapi.wall.delete(owner_id=selectedId, post_id=post['id'], v=5.35)
 					print(post['owner_id'], post['text'])
-				time.sleep(0.4)	
+					time.sleep(0.4)	
 
 	
 def wiki():
@@ -539,7 +558,7 @@ if __name__ == "__main__":
 	def actions():
 		print('{:=^80}'.format(" Wellcome to VK API combain ") + '\n\n  Please type kind of action would you like to do with this program.\n\n'+'{:=^80}'.format('=')+'\n')
 
-		actions = ['Multi-post', 'Download photos', 'Copy photos', 'Auto reply', 'Get text from wall', 'Cross delete posts']
+		actions = ['Multi-post', 'Download photos', 'Copy photos', 'Auto reply', 'Get text from wall', 'Cross delete posts', 'Delete from board']
 
 		for i,y in zip(range(len(actions)), actions):
 			if i == 0:
@@ -576,6 +595,9 @@ if __name__ == "__main__":
 			from_id = int(input("Pubic either user where will be copied from: "))
 			albumNameToCopy = input("Album name will be copied to: ")
 			Combain.copyPhotoToAlbum(person[0], '', from_id, albumNameToCopy)
+		elif int(action) == 7:
+			Combain.delTopicComments()
+
 	if sys.argv[1] == 'manual':
 		actions()
 
@@ -584,7 +606,7 @@ if __name__ == "__main__":
 	
 
 	# Combain.getPhoto(-682618, Combain.getAlbums(-682618, 1)[0], 1 )
-		# aa = Combain.getAlbums(-40485321)
+	# 	aa = Combain.getAlbums(-40485321)
 	# # Combain.postOne()
 	# Combain.getWall('no', -32149661, 'photo', 20, 'yes') #args (offset, wall_id, dtype, count = 1, bot='no', sdate='no', likes='no')
 	# Combain.getWall('yes', -32149661, 'photo', 20) #args (offset, wall_id, dtype, count = 1, bot='no', sdate='no', likes='no')
@@ -600,4 +622,4 @@ if __name__ == "__main__":
 	# Combain.copyPhoto( person[0], 'JOsdfasdfKER', -32149661 )
 	# Combain.changeOwnPhoto()
 	# Combain.getDialogs()
-	
+	# Combain.crossDeletingPosts(Combain.dict_names_and_ids)
