@@ -22,6 +22,7 @@ import wsgiref.handlers
 import json
 import wikipedia
 import requests
+import re
 from itertools import islice
 from newsBlock import euronewsNews, vestiRss, euronewsUSA
 # cgitb.enable()
@@ -561,20 +562,20 @@ def sendMesBot(message):
 	guid = random.randint(1, 10000)
 
 	if message == 'default':
-		botMessage="""Добрый день, человек, человечище, человечек. 
+		botMessage="""Приветствую и тебя(Вас). 
 		В данный момент я не могу тебе(Вам) ответить по следующим наиболее вероятным причинам: 
 		1. я занят очень чем то очень важным; 
-		2. мне просто очень грустно; 
-		3. меня в данный момент нет за компьютером.\n
+		2. меня в данный момент нет за компьютером.\n
 		Что делать? Как поступить?\n
 		Попробуй(те) написать несколько позже.\n
 		Так же ты(Вы) можешь почитать Википедию, набрав слово "wiki", что бы тебе(Вам) было не очень скучно.\n
 		Спасибо за понимание.\n
 		Константин."""
+		vkapi.messages.send(user_id=from_id, message=botMessage, guid=guid, attachment='photo179349317_373669841')
 	elif message == 'wiki':
 		botMessage = wiki()
-
-	vkapi.messages.send(user_id=from_id, message=botMessage, guid=guid)
+		vkapi.messages.send(user_id=from_id, message=botMessage, guid=guid)
+	
 		# times=0
 
 
@@ -582,39 +583,34 @@ def getPollingServer():
 		params = vkapi.messages.getLongPollServer()	
 		ts = params['ts']
 		url = 'http://%s?act=a_check&key=%s&ts=%s&wait=25&mode=2' % (params['server'], params['key'], ts)
+		arr1 = ['привет', 'Привет', 'Привет. Как дела?', 'Как дела?']
+		pattern = re.compile('[\w\W]*[^wiki]')
 		global from_id
 		global times
+
 		while True:
 			req = requests.get(url).json()
 			ts = req['ts']
 			if req:
 				os.system('clear')
 				for i in req['updates']:
-					# if i[6]=='hello':
-					# 	print('wow')
-					# else:
-					# for a in i:
-						# if a =='hello':
-						# 	print('wow')
-					if len(i)>6 and i[6]=='hello':
-						print(i, '\n')
-						if time.ctime(i[4])==time.asctime(time.localtime()):
-							from_id=i[3]
-							sendMesBot('default')
-							time.sleep(1)
-					elif len(i)>6 and i[6]=='wiki':
-						print(i, '\n')
-						if time.ctime(i[4])==time.asctime(time.localtime()):
-							from_id=i[3]
-							sendMesBot('wiki')
-							time.sleep(1)
-
-			# time.sleep(25)
-					
-				
-
-
-
+					if len(i)>6:
+						if i[6] and i[6]!='wiki':
+							
+							if time.ctime(i[4])==time.asctime(time.localtime()):
+								sys.stdout=open('MessagesBotLog.txt', 'a+')
+								from_id=i[3]
+								sendMesBot('default')
+								print(i, '\n')
+								time.sleep(2)
+						elif len(i)>6 and i[6]=='wiki':
+							
+							if time.ctime(i[4])==time.asctime(time.localtime()):
+								sys.stdout=open('MessagesBotLog.txt', 'a+')
+								from_id=i[3]
+								sendMesBot('wiki')
+								print(i, '\n')
+								time.sleep(2)
 
 if __name__ == "__main__":
 	Combain = Comb()
