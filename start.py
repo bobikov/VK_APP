@@ -21,6 +21,7 @@ import cgitb
 import wsgiref.handlers
 import json
 import wikipedia
+import requests
 from itertools import islice
 from newsBlock import euronewsNews, vestiRss, euronewsUSA
 # cgitb.enable()
@@ -99,7 +100,7 @@ class Comb:
 
 		self.max = 'dd'
 		self.ok = 'dd'
-		self.group_ids = [-57014305, -60409637, -33881737, -72580409, -52521233, -34783798]
+		self.group_ids = [-57014305, -60409637, -33881737, -72580409, -52521233, -34783798, -80822106]
 		self.group_Ids_ToString = str.join(',', [str(abs(x)) for x in self.group_ids])
 		self.groupsNoDumps = vkapi.groups.getById(group_ids=self.group_Ids_ToString, indent=4, sort_keys=True, ensure_ascii=False)
 		self.groupsWithDumps = json.dumps(vkapi.groups.getById(group_ids=self.group_Ids_ToString),indent=4, sort_keys=True, ensure_ascii=False)
@@ -431,7 +432,7 @@ class Comb:
 
 		topic_id = Comb.getTopic() 
 		vkapi.board.addComment( group_id = 53664217, topic_id = topic_id[0], text = str( random.choice( slist ) ) )
-
+		sys.stdout=open('MyLog.txt', 'a+')
 		print(' TOPIC ID: ' + str(topic_id[0]) + '\n\n' + "{:-^50}".format("") +'\n') 
 		return
 
@@ -463,9 +464,10 @@ class Comb:
 					ok=words
 
 			vkapi.wall.post( owner_id = ok2,  message = ok )
+			sys.stdout=open('MyLog.txt', 'a+')
 			print(' PUBLIC: ' + str(ok2) + '      |      ' + group_name + '       |      https://vk.com/' + screen_name + '\n\n TEXT: \n\n  ' + str(ok) + '\n\n' + "{:-^50}".format("")+ '\n')
 
-			if period == 40:
+			if period == 80:
 				return period
 			time.sleep(60*mins)
 
@@ -521,6 +523,7 @@ class Comb:
 
 		countPosts = int(input('count of posts to delete: '))
 		selectedOffset = int(input('offset: '))
+		
 		while offset < selectedOffset:
 			offset+=100
 			time.sleep(0.5)
@@ -550,6 +553,67 @@ def newsBlock():
 		time.sleep(10)
 		vkapi.wall.post(owner_id=person[0], message=vestiRss())
 		time.sleep(1)
+from_id=int
+times=0
+def sendMesBot(message):
+
+	botMessage=str
+	guid = random.randint(1, 10000)
+
+	if message == 'default':
+		botMessage="""Добрый день, человек, человечище, человечек. 
+		В данный момент я не могу тебе(Вам) ответить по следующим наиболее вероятным причинам: 
+		1. я занят очень чем то очень важным; 
+		2. мне просто очень грустно; 
+		3. меня в данный момент нет за компьютером.\n
+		Что делать? Как поступить?\n
+		Попробуй(те) написать несколько позже.\n
+		Так же ты(Вы) можешь почитать Википедию, набрав слово "wiki", что бы тебе(Вам) было не очень скучно.\n
+		Спасибо за понимание.\n
+		Константин."""
+	elif message == 'wiki':
+		botMessage = wiki()
+
+	vkapi.messages.send(user_id=from_id, message=botMessage, guid=guid)
+		# times=0
+
+
+def getPollingServer():
+		params = vkapi.messages.getLongPollServer()	
+		ts = params['ts']
+		url = 'http://%s?act=a_check&key=%s&ts=%s&wait=25&mode=2' % (params['server'], params['key'], ts)
+		global from_id
+		global times
+		while True:
+			req = requests.get(url).json()
+			ts = req['ts']
+			if req:
+				os.system('clear')
+				for i in req['updates']:
+					# if i[6]=='hello':
+					# 	print('wow')
+					# else:
+					# for a in i:
+						# if a =='hello':
+						# 	print('wow')
+					if len(i)>6 and i[6]=='hello':
+						print(i, '\n')
+						if time.ctime(i[4])==time.asctime(time.localtime()):
+							from_id=i[3]
+							sendMesBot('default')
+							time.sleep(1)
+					elif len(i)>6 and i[6]=='wiki':
+						print(i, '\n')
+						if time.ctime(i[4])==time.asctime(time.localtime()):
+							from_id=i[3]
+							sendMesBot('wiki')
+							time.sleep(1)
+
+			# time.sleep(25)
+					
+				
+
+
 
 
 if __name__ == "__main__":
@@ -558,7 +622,7 @@ if __name__ == "__main__":
 	def actions():
 		print('{:=^80}'.format(" Wellcome to VK API combain ") + '\n\n  Please type kind of action would you like to do with this program.\n\n'+'{:=^80}'.format('=')+'\n')
 
-		actions = ['Multi-post', 'Download photos', 'Copy photos', 'Auto reply', 'Get text from wall', 'Cross delete posts', 'Delete from board']
+		actions = ['Multi-post', 'Download photos', 'Copy photos', 'Auto reply', 'Get text from wall', 'Cross delete posts', 'Delete from board', 'longpoll']
 
 		for i,y in zip(range(len(actions)), actions):
 			if i == 0:
@@ -597,14 +661,15 @@ if __name__ == "__main__":
 			Combain.copyPhotoToAlbum(person[0], '', from_id, albumNameToCopy)
 		elif int(action) == 7:
 			Combain.delTopicComments()
-
+		elif int(action) == 8:
+			getPollingServer()
 	if sys.argv[1] == 'manual':
 		actions()
 
 	elif sys.argv[1] == 'auto':
-		Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space+psy+other+zeland, int(sys.argv[2]))
+		Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space+psy+other+zeland+slovo+cuts, int(sys.argv[2]))
 	
-
+	
 	# Combain.getPhoto(-682618, Combain.getAlbums(-682618, 1)[0], 1 )
 	# 	aa = Combain.getAlbums(-40485321)
 	# # Combain.postOne()
