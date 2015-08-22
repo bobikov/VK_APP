@@ -14,7 +14,10 @@ import os
 # import timer
 
 url = 'https://oauth.vk.com/authorize?'
-app_id = '4967352'
+app_id = '5040349'
+# app_id = '5031468'
+# app_id = '5038329'
+# app_id = '5038789'
 scope = 'wall, offline, status, messages, ads, groups, notes, photos'
 redirect_url = 'https://oauth.vk.com/blank.html'
 api_version = 5.35

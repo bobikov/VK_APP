@@ -2,6 +2,7 @@
 # coding: UTF-8
 
 from words import *
+from zakon import *
 import vk
 import sys
 import urllib
@@ -25,20 +26,38 @@ import requests
 import re
 from itertools import islice
 from newsBlock import euronewsNews, vestiRss, euronewsUSA
+import date_converter
+import easy_date
+import tkinter
+from tkinter import *
+import base64
+from PIL import Image
+from PIL import ImageTk
+import io
+from math import *
 # cgitb.enable()
 
 # print('Content-type: text/html')
 # print()
-
+# https://api.vk.com/method/photos.get?owner_id=-77093415&album_id=wall&count=40&access_token=00af0cff7458595045e1893775acf9b561dad00d6df9de580f9839e2722d5090e3fbf819a471461094666
 # User and app info
-vkapi = vk.API( access_token = '00af0cff7458595045e1893775acf9b561dad00d6df9de580f9839e2722d5090e3fbf819a471461094666')
+vkapi = vk.API( access_token = '01dcff6887e30cff9a116d1e4aa6419b41a625c21b36b28c5b9ca2a76f501908a8cb11a86bf1471bf833d')
+# vkapi = vk.API( access_token = '8c214f76b9870dcc6af61507afd364ebd060ffbb60ec1a495398e9507a143d6622f8322127dbd338d0617')
+# vkapi = vk.API( access_token = 'aa0d8008ce0ef760746439bac0415bb0b577857a142e2de8c26d3b803e8eb5e724416ff684579ad5c3944')
+# vkapi = vk.API( access_token = '9a57a431b60318aa06ce1e6624761a9a539f14c4979a165f57c598f9347bd6e7476022e5265d74d2212df')
 other = [-72580409, -61330688]
 person = [179349317]
-app_id = 4967352
-
+# person = [319258436]
+# person = [319315119]
+# app_id = 4967352
+app_id = 5040349
+accTok = '01dcff6887e30cff9a116d1e4aa6419b41a625c21b36b28c5b9ca2a76f501908a8cb11a86bf1471bf833d'
+# accTok = 'aa0d8008ce0ef760746439bac0415bb0b577857a142e2de8c26d3b803e8eb5e724416ff684579ad5c3944'
+# accTok = '8c214f76b9870dcc6af61507afd364ebd060ffbb60ec1a495398e9507a143d6622f8322127dbd338d0617'
+# accTok = '9a57a431b60318aa06ce1e6624761a9a539f14c4979a165f57c598f9347bd6e7476022e5265d74d2212df'
 supercitat = []
 end = 0
-
+key=str
 # VK groups info for reading
 
 public = { 'items' : [
@@ -101,13 +120,15 @@ class Comb:
 
 		self.max = 'dd'
 		self.ok = 'dd'
-		self.group_ids = [-57014305, -60409637, -33881737, -72580409, -52521233, -34783798, -80822106]
+		self.group_ids = [-60409637, -72580409, -52521233, -34783798, -80822106, -35376525]
 		self.group_Ids_ToString = str.join(',', [str(abs(x)) for x in self.group_ids])
 		self.groupsNoDumps = vkapi.groups.getById(group_ids=self.group_Ids_ToString, indent=4, sort_keys=True, ensure_ascii=False)
 		self.groupsWithDumps = json.dumps(vkapi.groups.getById(group_ids=self.group_Ids_ToString),indent=4, sort_keys=True, ensure_ascii=False)
 		self.group_names = [i['name'] for i in json.loads(self.groupsWithDumps)]
 		self.group_screen_names=[i['screen_name'] for i in json.loads(self.groupsWithDumps)]
 		self.dict_names_and_ids=[];
+		self.captchaSid=None
+		self.captchaKey=None
 		for i,x,y in zip(self.group_names, self.group_ids, self.group_screen_names):
 				self.dict_names_and_ids.append({'name':i, 'id':x, 'screen_name':y})
 
@@ -308,15 +329,22 @@ class Comb:
 
 
 		if wall == 'yes':
-			photoFromWall = Combain.getWall('no', wall_id, 'photo', count)
-			for i in photoFromWall:
-				if not os.path.exists(path+groupName):
-					os.mkdir(path=path+groupName)
+			if download=='yes':
+				photoFromWall = Combain.getWall('no', wall_id, 'photo', count)
+				for i in photoFromWall:
+					if not os.path.exists(path+groupName):
+						os.mkdir(path=path+groupName)
 
-				elif not os.path.exists( path+groupName ):
-					os.mkdir( path=path+groupName ) 
-				else:	
-					wget.download( i, out=path+groupName )
+					elif not os.path.exists( path+groupName ):
+						os.mkdir( path=path+groupName ) 
+					else:	
+						wget.download( i, out=path+groupName )
+			elif download == 'no':
+				ids=[]
+				photoFromWall = Comb.getWall('no', 'no', wall_id, 'photo', 'no', count)  
+				for i in photoFromWall:
+					ids.append(i)
+				return ids
 		else:
 
 			if multi == 'no' and type(album)==int:
@@ -372,42 +400,124 @@ class Comb:
 									ids.append(a['id'])
 								else:
 									ids.append(a['id'])
-					print(ids)
+					return ids
 
-	def getAlbums(self, public_id, count):
+	def getAlbums(self, public_id):
 		titles = []
 		ids= []
-		albums = vkapi.photos.getAlbums( owner_id = public_id, count = count)['items']
-		for i in albums:
-			ids.append(dict(id=i['id'], title=i['title'], count=i['size']))
+		albums = vkapi.photos.getAlbums( owner_id = public_id)['items']
+		for y,i in zip(range(len(albums)), albums):
+			ids.append(dict(number=y+1, id=i['id'], title=i['title'], count=i['size']))
 		return ids
 
+	def photoUpdateData(self, fromId, date):
+		names=[]
+		publicName = vkapi.groups.getById( group_id = abs(fromId))[0]['name']
+		if os.path.isfile('updatePhotoData.json'):
+			with open('updatePhotoData.json') as f:
+				data = json.load(f)
+			for i in data:
+				names.append(i['name'])
+			if publicName in names:
+				for i in data:
+					if i['name']==publicName:
+						i['date']=date
+			elif publicName not in names:
+				data.append({"id":fromId, "date": date,"name":publicName})
 
-	def copyPhotoToAlbum( self, to_id, titleNewAlbum, from_id, albumNameToCopy ):
+			with open('updatePhotoData.json', 'w') as f:
+				json.dump(data, f, indent=4, ensure_ascii=False)
+
+		else:
+			file1 = open('updatePhotoData.json', 'a+')
+			data=[{"id":fromId, "date": date,"name":publicName}]
+			file1.write(json.dumps(data, indent=4, sort_keys=True))
+			file1.close()
+
+	def delPhotos(self):
+		photos = vkapi.photos.get(owner_id=person[0], album_id='saved')['items']
+		for i in photos:
+			vkapi.photos.delete(owner_id=person[0], photo_id=i['id'])
+			time.sleep(0.4)
+
+	def copyPhotoToAlbum( self, to_id, from_id, albumNameToCopyTo, albumIdToCopyFrom, countPhotos ):
 		album_id = []
 		photo_id = []
 		albumsFromIds = []
 		photosToCopy = []
-		getAlbumsFromId = Comb.getAlbums('self', from_id, 4)
-		getAlbumsTo = Comb.getAlbums('self', person[0], 1)
+		updateDate=int
+		# getAlbumsFromId = Comb.getAlbums('self', from_id)
+		step=-100
+		getAlbumsTo = Comb.getAlbums('self', to_id)
+		if albumIdToCopyFrom=='wall':
+			rev = 1
+		else:
+			rev = 0
 		for i in getAlbumsTo:
-			if i['title'] == albumNameToCopy:
+			if i['title'] == albumNameToCopyTo:
 				album_id.append(i['id'])
-		# for i in getAlbumsFromId:
+		with open("updatePhotoData.json") as f:
+				data = json.load(f)	
+				for i in data:
+					if i['id']==from_id:
+						updateDate=i['date']
 
-		for i,y in zip(range(len(getAlbumsFromId)), getAlbumsFromId):
-			if i == 0:
-				print(str(1)+'.', y['title'])
-			else:
-				print(str(i+1)+'.', y['title'])
-			if i==len(getAlbumsFromId)-1:
-				albumChoice = input('Choice the album you want to be copied [default: all]: ')
-				if albumChoice == 'all':
-					for a in vkapi.photos.get(owner_id=from_id, album_id=i['id'], count=i['count'])['items']:
-							copyPhotos = vkapi.photos.copy(owner_id=from_id, photo_id=a['id'], v=5.35)
-							movePhotos = vkapi.photos.move(owner_id=to_id, target_album_id=album_id[0], photo_id=copyPhotos, v=5.35)
+		if countPhotos>1000:
+			photosGet=requests.get("https://api.vk.com/method/photos.get?owner_id="+str(from_id)+"&album_id="+str(albumIdToCopyFrom)+"&count=100&v=5.35&rev="+str(rev)+"&access_token="+accTok).json()
+			Comb.photoUpdateData('self', from_id, photosGet['response']['items'][0]['date'])
+
+			while step<countPhotos:
+				step+=100
+			
+				photosGet=requests.get("https://api.vk.com/method/photos.get?owner_id="+str(from_id)+"&album_id="+str(albumIdToCopyFrom)+"&count=100&offset="+str(step)+"&v=5.35&rev="+str(rev)+"&access_token="+accTok).json()
+				time.sleep(1)
+				for a in photosGet['response']['items']:
+				
+					copyPhotos = requests.get("https://api.vk.com/method/photos.copy?owner_id="+str(from_id)+"&photo_id="+str(a['id'])+"&v=5.35&access_token="+accTok).json()
+					
+					if 'error' in copyPhotos:
+						if copyPhotos['error']['error_code'] == 14:
+							self.captchaSid=copyPhotos['error']['captcha_sid']
+							webbrowser.open_new_tab(copyPhotos['error']['captcha_img'])
+							self.captchaKey=input('enter captcha: ')
+							copyPhotos = requests.get("https://api.vk.com/method/photos.copy?owner_id="+str(from_id)+"&photo_id="+str(a['id'])+"&v=5.35&captcha_sid="+str(self.captchaSid)+"&captcha_key="+str(self.captchaKey)+"&access_token="+accTok).json()
+							movePhotos = requests.get("https://api.vk.com/method/photos.move?owner_id="+str(to_id)+"&target_album_id="+str(album_id[0])+"&photo_id="+str(copyPhotos['response'])+"&v=5.35&access_token="+accTok).json()
 							time.sleep(1)
+
 		
+					movePhotos = requests.get("https://api.vk.com/method/photos.move?owner_id="+str(to_id)+"&target_album_id="+str(album_id[0])+"&photo_id="+str(copyPhotos['response'])+"&v=5.35&access_token="+accTok).json()
+					time.sleep(1)
+		else:	
+			
+			photosGet=requests.get("https://api.vk.com/method/photos.get?owner_id="+str(from_id)+"&album_id="+str(albumIdToCopyFrom)+"&count="+str(countPhotos)+"&v=5.35&rev="+str(rev)+"&access_token="+accTok).json()
+
+			Comb.photoUpdateData('self', from_id, photosGet['response']['items'][0]['date'])
+
+			for a in photosGet['response']['items']:
+				# copyPhotos = vkapi.photos.copy(owner_id=from_id, photo_id=a['id'])
+				
+				copyPhotos = requests.get("https://api.vk.com/method/photos.copy?owner_id="+str(from_id)+"&photo_id="+str(a['id'])+"&access_token="+accTok).json()
+				time.sleep(0.4)
+				if updateDate:
+					if a['date']==updateDate:
+						break
+				if 'error' in copyPhotos:
+					if copyPhotos['error']['error_code'] == 14:
+						self.captchaSid=copyPhotos['error']['captcha_sid']
+						# webbrowser.open_new_tab(copyPhotos['error']['captcha_img'])
+						# self.captchaKey=input('enter captcha: ')
+						self.captchaKey = Comb.captcha('self', copyPhotos['error']['captcha_img'])
+						# print(self.captchaKey)
+						copyPhotos = requests.get("https://api.vk.com/method/photos.copy?owner_id="+str(from_id)+"&photo_id="+str(a['id'])+"&captcha_sid="+str(self.captchaSid)+"&captcha_key="+str(self.captchaKey)+"&access_token="+accTok).json()
+						movePhotos = requests.get("https://api.vk.com/method/photos.move?owner_id="+str(to_id)+"&target_album_id="+str(album_id[0])+"&photo_id="+str(copyPhotos['response'])+"&access_token="+accTok).json()
+						time.sleep(1)
+
+				movePhotos = requests.get("https://api.vk.com/method/photos.move?owner_id="+str(to_id)+"&target_album_id="+str(album_id[0])+"&photo_id="+str(copyPhotos['response'])+"&access_token="+accTok).json()
+				time.sleep(1)
+
+			Comb.delPhotos('self')	
+
+	
 	def getTopicCommentIds(self):
 		topic_id=Comb.getTopic()
 		ids = []
@@ -484,13 +594,6 @@ class Comb:
 			time.sleep(10)
 		# return print(self.groups)	
 		# 
-	def changeOwnPhoto( self ):
-		result = vkapi.photos.getOwnerPhotoUploadServer(owner_id=person[0])
-		# webbrowser.open_new_tab(result['upload_url'])
-		# save = vkapi.saveOwnerPhoto(server=result['upload_url'])
-
-		print (result)
-		return
 	def getDialogs(self, delete='no', count=1, unread =1):
 		dialogs = vkapi.messages.getDialogs(count=200, unread =unread)
 		ids = [i['message']['user_id'] for i in dialogs['items']]
@@ -533,19 +636,201 @@ class Comb:
 					vkapi.wall.delete(owner_id=selectedId, post_id=post['id'], v=5.35)
 					print(post['owner_id'], post['text'])
 					time.sleep(0.4)	
+	def downlPhotos(self, public_id, album_id, title, path, albumCountPhotos):
+		p=re.compile("/")
+		if album_id=='wall':
+			rev=1
+		else:
+			rev=0	
+		if public_id==person[0]:
+			publicName="179349317"
+		else:
+			publicName = vkapi.groups.getById( group_id = abs(public_id))[0]['name']
+			publicName = p.sub('',publicName)
 
+		for a in vkapi.photos.get( owner_id=public_id, album_id=album_id, count=albumCountPhotos, rev=rev, v=5.37 )['items']:
+
+			if not os.path.exists(path+publicName):
+				os.mkdir(path=path+publicName)
+
+			elif not os.path.exists( path+publicName + '/' + str(title) ):
+				os.mkdir( path=path+publicName + '/' + str(title)  ) 
+			else:
+				wget.download( a['photo_604'], out=path+publicName+'/'+str(title) )
+			os.system("rm ./*.tmp")		
+		print('\n\n--------------------------\n\nDownload is complete\n\n')
+
+	def addLikes(self, action, action2, owner, count):
+
+		posts = requests.get('https://api.vk.com/method/wall.get?owner_id='+owner+'&count='+count+'&v=5.35&access_token='+accTok).json()
+		if action == 'add':
+			for i in posts['response']['items']:
+				addLikes = requests.get('https://api.vk.com/method/likes.add?owner_id='+owner+'&type=post&item_id='+str(i['id'])+'&access_token='+accTok).json()
+				time.sleep(0.5)
+
+				if 'error' in addLikes:
+					if addLikes['error']['error_code']==14:
+						webbrowser.open_new_tab(addLikes['error']['captcha_img'])
+						self.captchaKey = input('enter captcha: ')
+						self.captchaSid = addLikes['error']['captcha_sid']
+						addLikes = requests.get('https://api.vk.com/method/likes.add?owner_id='+owner+'&item_id='+str(i['id'])+'&captcha_key='+str(self.captchaKey)+'&captcha_sid='+str(self.captchaSid)+'&access_token='+accTok).json()
+						time.sleep(0.5)
+					elif addLikes['error']['error_code'] == 9:
+						print(addLikes['error']['error_msg'])
+						break
+						
+		elif action == 'checkLikes':
+			for i in posts['response']['items']:
+				checkLikes = requests.get('https://api.vk.com/method/likes.isLiked?owner_id='+owner+'&type=post&item_id='+str(i['id'])+'&access_token='+accTok).json()
+				if 'error' in checkLikes:
+					if checkLikes['error']['error_code']==14:
+						webbrowser.open_new_tab(checkLikes['error']['captcha_img'])
+						self.captchaKey = input('enter captcha: ')
+						self.captchaSid = checkLikes['error']['captcha_sid']
+						checkLikes = requests.get('https://api.vk.com/method/likes.isLiked?user_id='+str(person[0])+'&owner_id='+owner+'&type=post&item_id='+str(i['id'])+'&captcha_key='+str(self.captchaKey)+'&captcha_sid='+str(self.captchaSid)+'&access_token='+accTok).json()
+						print(checkLikes)
+				else:
+					if checkLikes['response'] == 1 and action2 == 'del':
+						delLikes = requests.get('https://api.vk.com/method/likes.delete?owner_id='+owner+'&type=post&item_id='+str(i['id'])+'&access_token='+accTok)
+						if 'error' in delLikes:
+							if delLikes['error']['error_code']==14:
+								webbrowser.open_new_tab(delLikes['error']['captcha_img'])
+								self.captchaKey=input('enter captcha: ')
+								self.captchSid = delLikes['error']['captcha_sid']
+								delLikes = requests.get('https://api.vk.com/method/likes.delete?owner_id='+owner+'&type=post&item_id='+str(i['id'])+'&captcha_sid='+str(self.captchaSid)+'&captcha_key='+str(self.captchaKey)+'&access_token='+accTok)
+	def uploadOwnerPhoto(self, photo):
+		ids=[]
+		headers = {"User-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.107 Safari/537.36", "Accept-Language":"ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4"}
+		uploadUrl = requests.get("https://api.vk.com/method/photos.getOwnerPhotoUploadServer?access_token="+accTok, headers=headers).json()['response']['upload_url']
+		r = requests.post(uploadUrl, files={ 'file' : open('/Users/hal/Pictures/179349317/VILLAIN/'+photo, 'rb') }).json()
+		# photoSave = vkapi.photos.saveOwnerPhoto(server=r['server'], photo=r['photo'], hash=r['hash'], v=5.37)
+		photoSave = requests.get("https://api.vk.com/method/photos.saveOwnerPhoto?server="+str(r['server'])+"&photo="+str(r['photo'])+"&hash="+str(r['hash'])+"&v=5.37&access_token="+accTok).json()
+		if 'error' in photoSave:
+			self.captchaSid=photoSave['error']['captcha_sid']
+			webbrowser.open_new_tab(photoSave['error']['captcha_img'])
+			self.captchaKey=input('enter captcha: ')
+			photoSave = requests.get("https://api.vk.com/method/photos.saveOwnerPhoto?server="+str(r['server'])+"&photo="+str(r['photo'])+"&hash="+str(r['hash'])+"&v=5.37&captcha_key="+str(self.captchaKey)+"&captcha_sid="+str(self.captchaSid)+"&access_token="+accTok).json()
+		for i in vkapi.wall.get(owner_id=person[0], count=1)['items']:
+			if 'copy_history' not in i:
+				vkapi.wall.delete(owner_id=person[0], post_id=i['id'])
+
+		for i in vkapi.photos.get(owner_id=person[0], album_id='profile')['items']:
+			ids.append(i['id'])
+		
+		vkapi.photos.delete(owner_id=person[0], photo_id=ids[0])
+
+	def statusSet(self):
+		step=0
+		text = """▲▼▲▼▲▼・●⦿◎◉ ▲▼▲▼▲▼ ・●⦿◎◉ ▲▼▲▼▲▼ ・●⦿◎◉ ▲▼▲▼▲▼・●⦿◎◉ ▲▼▲▼▲▼ ・●⦿◎◉ ▲▼▲▼▲▼ ・●⦿◎◉ """
+		while True: 
+			step+=1
+			if step==1:
+				# vkapi.status.set(owner_id=person[0], text=text)
+				req=requests.get("https://api.vk.com/method/status.set?owner_id="+str(person[0])+"&text="+text+"&v=5.37&access_token="+accTok).json()
+				time.sleep(5)
+				if 'error' in req and req['error']['error_code'] == 14:
+					self.captchaSid=req['error']['captcha_sid']
+					webbrowser.open_new_tab(req['error']['captcha_img'])
+					self.captchaKey = input('enter captcha: ')
+					req = requests.get('https://api.vk.com/method/status.set?owner_id='+str(person[0])+'&text='+text+'&captcha_sid='+str(self.captchaSid)+'&captcha_key='+str(self.captchaKey)+'&access_token='+accTok)
+					time.sleep(5)
+			elif step==2:
+				# vkap.status.set(owner_id=person[0], text=weather('Майами', 'current'))
+				req=requests.get('https://api.vk.com/method/status.set?owner_id='+str(person[0])+'&text='+weather('Майами', 'current')+'&v=5.37&access_token='+accTok).json()
+				time.sleep(5)
+				if 'error' in req and req['error']['error_code'] == 14:
+					self.captchaSid=req['error']['captcha_sid']
+					webbrowser.open_new_tab(req['error']['captcha_img'])
+					self.captchaKey = input('enter captcha: ')
+					req = requests.get('https://api.vk.com/method/status.set?owner_id='+str(person[0])+'&text='+weather('Майами', 'current')+'&captcha_sid='+str(self.captchaSid)+'&captcha_key='+str(self.captchaKey)+'&access_token='+accTok)
+					time.sleep(5)
+			elif step>2:
+				step=0
+				time.sleep(5)
+
+	def captcha(self, urlImg):
+
+		def getKey(event):
+			global key
+			key = e1.get()
+		url = urlImg
+		u = urlopen(url)
+		raw_data=u.read()
+		u.close()
+		root = Tk()
+		s = io.BytesIO(raw_data)
+		pil_image = Image.open(s)
+		image = ImageTk.PhotoImage(pil_image)
+		root.title('Captcha')
+		root.geometry('200x200+500+200')
+		root.resizable(False, False)
+		root.configure(bg='#ccc')
+		e1=Entry(root)
+		e1.place(x=15, y=100)
+		# e1.pack()
+		button1 = Button(root, text='Button1')
+		button1.bind('<Button-1>', getKey)
+		button1.place(x=50, y=150)
+
+		label=Label(root, image = image).place(x=40, y=20)
+		root.call('wm', 'attributes', '.', '-topmost', True)							
+		root.mainloop()		
+		# print(posts)
+		return(key)
 	
 def wiki():
 	try:
 		wikipedia.set_lang('ru')
 		# wpage = wikipedia.summary('Билл Клинтон', sentences=5)
 		wpage = wikipedia.random(pages=1)
-		summ = wikipedia.summary(wpage, sentences=5)
+		summ = wikipedia.summary(wpage, sentences=8)
+		# wpage2 = wikipedia.page(wpage)
+		# images = wpage2.images
+		# box = {'text':summ, 'images':images}
+		
 	except:
 		wpage = wikipedia.random(pages=1)
 		summ = wikipedia.summary(wpage, sentences=5)
+	
 	return summ
+def weather(city_name, mode):
+	headers = {"User-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.107 Safari/537.36", "Accept-Language":"ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4"}
+	appId="26641b63856d78bdbc1c25643f3bebee"
+	if mode == 'forecast':
+		text=[]
+		weatherUrl = "http://api.openweathermap.org/data/2.5/forecast?q=%s&lang=ru&units=metric&APPID=%s" % (city_name, appId)
+		getWeather = requests.get(weatherUrl).json()
+		d = getWeather
+		for i,y in zip(range(len(d['list'])), d['list']):
+			if i%8==1:
+				# print(y)
+				text.append('Дата: '+easy_date.convert_from_timestamp(y['dt'], "%d.%m.%y"))
+				text.append('Описание: ' + str(y['weather'][0]['description']))
+				text.append('Температура: ' + str(y['main']['temp']) + ' C˚')
+				text.append('Влажность: ' + str(y['main']['humidity']) + '%')
+				text.append('Давление: ' + str(y['main']['pressure']) + 'мм')
+				text.append('Скорость ветра: ' + str(y['wind']['speed'])+'м/с')
+				text.append(' ')
+				# text.append('Восход солнца: ' + str(easy_date.convert_from_timestamp(y['sys']['sunrise'], " %H:%M:%S")))
+				# text.append('Закат солнца: ' + str(easy_date.convert_from_timestamp(y['sys']['sunset'], " %H:%M:%S")))
+			# print(json.dumps(y[1], indent=4, ensure_ascii=False))	
+		text =str(text).replace(', ','\n')
+		p = re.compile("\[|\]|'")
+		# print(p.sub('', text))
+		text = p.sub('', text)
+		# text = 'Дата:%s\nОписание: %s\nТемпература: %s С˚\nВлажность: %s%s\nДавление: %s мм\nСкорость ветра: %s м/с\nВосход солнца: %s\nЗакат солнца: %s\n' % (easy_date.convert_from_timestamp(d['list']['dt'], "%d.%m.%y %H:%M:%S"), d['list']['weather'][0]['description'], d['list']['main']['temp'], d['list']['main']['humidity'],'%',d['list']['main']['pressure'], d['list']['wind']['speed'], easy_date.convert_from_timestamp(d['list']['sys']['sunrise'], " %H:%M:%S"),easy_date.convert_from_timestamp(d['list']['sys']['sunset'], " %H:%M:%S"))
 
+
+	elif mode == 'current':
+		weatherUrl= "http://api.openweathermap.org/data/2.5/weather?q=%s&lang=ru&units=metric&APPID=%s" % (city_name, appId)
+		getWeather = requests.get(weatherUrl).json()
+		d = getWeather
+		# text =  'Описание: %s\nТемпература: %s С˚\nВлажность: %s%s\nДавление: %s мм\nСкорость ветра: %s м/с\nВосход солнца: %s\nЗакат солнца: %s\n' % (d['weather'][0]['description'], d['main']['temp'], d['main']['humidity'],'%',d['main']['pressure'], d['wind']['speed'], easy_date.convert_from_timestamp(d['sys']['sunrise'], " %H:%M:%S"),easy_date.convert_from_timestamp(d['sys']['sunset'], " %H:%M:%S"))
+	text =  'Описание: %s\nТемпература: %s С˚\nВлажность: %s%s\nДавление: %s мм\nСкорость ветра: %s м/с' % (d['weather'][0]['description'], d['main']['temp'], d['main']['humidity'],'%',d['main']['pressure'], d['wind']['speed'])
+	
+
+	return text
+	
 def newsBlock():
 	while 1:
 		vkapi.wall.post(owner_id=person[0], message=euronewsUSA())
@@ -554,71 +839,156 @@ def newsBlock():
 		time.sleep(10)
 		vkapi.wall.post(owner_id=person[0], message=vestiRss())
 		time.sleep(1)
+# wiki()
 from_id=int
 times=0
 def sendMesBot(message):
-
+	photoAlbums = Comb.getAlbums('self', person[0])
+	photos=[]
+	
 	botMessage=str
 	guid = random.randint(1, 10000)
 
+	for i in photoAlbums:
+		if i['title'] == 'space':
+			for a in vkapi.photos.get(owner_id=person[0], album_id=i['id'], count=900)['items']:
+				photos.append(a['id'])
+
 	if message == 'default':
-		botMessage="""Приветствую и тебя(Вас). 
-		В данный момент я не могу тебе(Вам) ответить по следующим наиболее вероятным причинам: 
-		1. я занят очень чем то очень важным; 
-		2. меня в данный момент нет за компьютером.\n
-		Что делать? Как поступить?\n
-		Попробуй(те) написать несколько позже.\n
-		Так же ты(Вы) можешь почитать Википедию, набрав слово "wiki", что бы тебе(Вам) было не очень скучно.\n
-		Спасибо за понимание.\n
-		Константин."""
-		vkapi.messages.send(user_id=from_id, message=botMessage, guid=guid, attachment='photo179349317_373669841')
+		botMessage="""
+		Попробуйте написать несколько позже.\n
+		Так же вы можете: \n 1. почитать Википедию, прислав слово "wiki"; \n 2. почитать конституцию РФ прилав мне текст: "конст" + пробел + номер статьи от 1 до 137; \n3. узнать текущую погоду в городе прислав мне текст: погода "название города" или для прогноза погоды на 5 дней: погода 5 "название города".
+		"""
+		# botMessage=""" 
+		# """
+		vkapi.messages.send(user_id=from_id, message=botMessage, guid=guid, attachment='photo'+str(person[0])+'_'+str(random.choice(photos)))
+		# vkapi.messages.send(user_id=from_id, message=botMessage, guid=guid, attachment='photo179349317_374641254')
 	elif message == 'wiki':
 		botMessage = wiki()
-		vkapi.messages.send(user_id=from_id, message=botMessage, guid=guid)
-	
+		vkapi.messages.send(user_id=from_id, message=botMessage, guid=guid);
+		# vkapi.messages.send(user_id=from_id, message=botMessage['text'], guid=guid)
+	elif re.search('конст \d+', message):
+		res = re.search('\d+', message)
+		state = res.group(0)
+		if int(state)<=137:
+			botMessage = const(state)
+			vkapi.messages.send(user_id=from_id, message=botMessage, guid=guid);
+		else:
+			botMessage='Такой статьи нет в Конституции. Повторите поиск.'
+			vkapi.messages.send(user_id=from_id, message=botMessage, guid=guid);
 		# times=0
+	elif re.search('погода', message):
+		res = str.split(message,' ')
+		if len(res)==3 and res[1]=='5':
+			city = res[2]
+			botMessage = weather(city, 'forecast')
+		elif len(res)==2:	
+			botMessage = weather(res[1], 'current')
 
+		vkapi.messages.send(user_id=from_id, message=botMessage, guid=guid);
+	
+	
 
 def getPollingServer():
+		headers = {"User-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.107 Safari/537.36", "Accept-Language":"ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4"}
 		params = vkapi.messages.getLongPollServer()	
+		# params = requests.get("https://api.vk.com/method/messages.getLongPollServer?use_ssl=0&access_token="+accTok, headers=headers).json()
+
 		ts = params['ts']
+
 		url = 'http://%s?act=a_check&key=%s&ts=%s&wait=25&mode=2' % (params['server'], params['key'], ts)
-		arr1 = ['привет', 'Привет', 'Привет. Как дела?', 'Как дела?']
-		pattern = re.compile('[\w\W]*[^wiki]')
 		global from_id
 		global times
+		try:
+			while True:
+				req = requests.get(url).json()
+				# if req['ts']:
+				# 	ts = req['ts']
+				# else:
+				# 	ts=params['ts']
+				if req:
+					os.system('clear')
+					if 'updates' in req:
+						for i in req['updates']:
+							if len(i)>6:
+								if i[6] and i[6]!='wiki' and not re.search('конст \d+',i[6]) and not re.search('погода ', i[6]):
+									if time.ctime(i[4])==time.asctime(time.localtime()):
+										sys.stdout=open('MessagesBotLog.txt', 'a+')
+										from_id=i[3]
+										sendMesBot('default')
+										print(i, '\n')
+										time.sleep(1)
+								elif i[6] and i[6]=='wiki':
+									if time.ctime(i[4])==time.asctime(time.localtime()):
+										sys.stdout=open('MessagesBotLog.txt', 'a+')
+										from_id=i[3]
+										sendMesBot('wiki')
+										print(i, '\n')
+										time.sleep(1)
+								elif i[6] and re.search('конст \d+', i[6]):
+									if time.ctime(i[4])==time.asctime(time.localtime()):
+										sys.stdout=open('MessagesBotLog.txt', 'a+')
+										from_id=i[3]
+										sendMesBot(i[6])
+										print(i, '\n')
+										time.sleep(1)
+								elif i[6] and re.search('погода ', i[6]):
+									if time.ctime(i[4])==time.asctime(time.localtime()):
+										sys.stdout=open('MessagesBotLog.txt', 'a+')
+										from_id=i[3]
+										sendMesBot(i[6])
+										print(i, '\n')
+										time.sleep(1)
 
-		while True:
-			req = requests.get(url).json()
-			ts = req['ts']
-			if req:
-				os.system('clear')
-				for i in req['updates']:
-					if len(i)>6:
-						if i[6] and i[6]!='wiki':
-							
-							if time.ctime(i[4])==time.asctime(time.localtime()):
-								sys.stdout=open('MessagesBotLog.txt', 'a+')
-								from_id=i[3]
-								sendMesBot('default')
-								print(i, '\n')
-								time.sleep(2)
-						elif len(i)>6 and i[6]=='wiki':
-							
-							if time.ctime(i[4])==time.asctime(time.localtime()):
-								sys.stdout=open('MessagesBotLog.txt', 'a+')
-								from_id=i[3]
-								sendMesBot('wiki')
-								print(i, '\n')
-								time.sleep(2)
-
+					else:
+						req
+		except:
+			while True:
+				req = requests.get(url).json()
+				# if req['ts']:
+				# 	ts = req['ts']
+				# else:
+				# 	ts=params['ts']
+				if req:
+					os.system('clear')
+					if 'updates' in req:
+						for i in req['updates']:
+							if len(i)>6:
+								if i[6] and i[6]!='wiki' and not re.search('конст \d+',i[6]) and not re.search('погода ', i[6]):
+									if time.ctime(i[4])==time.asctime(time.localtime()):
+										sys.stdout=open('MessagesBotLog.txt', 'a+')
+										from_id=i[3]
+										sendMesBot('default')
+										print(i, '\n')
+										time.sleep(1)
+								elif i[6] and i[6]=='wiki':
+									if time.ctime(i[4])==time.asctime(time.localtime()):
+										sys.stdout=open('MessagesBotLog.txt', 'a+')
+										from_id=i[3]
+										sendMesBot('wiki')
+										print(i, '\n')
+										time.sleep(1)
+								elif i[6] and re.search('конст \d+', i[6]):
+									if time.ctime(i[4])==time.asctime(time.localtime()):
+										sys.stdout=open('MessagesBotLog.txt', 'a+')
+										from_id=i[3]
+										sendMesBot(i[6])
+										print(i, '\n')
+										time.sleep(1)
+								elif i[6] and re.search('погода ', i[6]):
+									if time.ctime(i[4])==time.asctime(time.localtime()):
+										sys.stdout=open('MessagesBotLog.txt', 'a+')
+										from_id=i[3]
+										sendMesBot(i[6])
+										print(i, '\n')
+										time.sleep(1)		
 if __name__ == "__main__":
 	Combain = Comb()
 
 	def actions():
 		print('{:=^80}'.format(" Wellcome to VK API combain ") + '\n\n  Please type kind of action would you like to do with this program.\n\n'+'{:=^80}'.format('=')+'\n')
 
-		actions = ['Multi-post', 'Download photos', 'Copy photos', 'Auto reply', 'Get text from wall', 'Cross delete posts', 'Delete from board', 'longpoll']
+		actions = ['Multi-post', 'Download photos', 'Copy photos', 'Comments Bot', 'Get text from wall', 'Cross delete posts', 'Delete from board', 'Messages Bot', 'Delete photos', 'Likes', 'wheather test', 'test tkinter', 'Upload owner photo', 'status']
 
 		for i,y in zip(range(len(actions)), actions):
 			if i == 0:
@@ -631,34 +1001,119 @@ if __name__ == "__main__":
 		if int(action) == 1:
 			mins = int(input('Time delay in minutes: '))
 			try:
-				Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space+other+zeland, mins)
+				Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space+other+zeland+cuts+slovo, mins)
 			except:
-				Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space+other+zeland, mins)
+				Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space+other+zeland+cuts+slovo, mins)
 		elif int(action) == 5:
 			ioffset = int(input('Offset: '))
 			wall_id = int(input('Wall_id: '))
 			count = int(input('Count: '))
-			Combain.getWall('no', 0, wall_id, 'text', False, count, )
+			print(Combain.getWall('yes', ioffset, wall_id, 'text', 'no', count))
+			# Combain.getWall('no', 0, wall_id, 'text', False, count, )
 		elif int(action) == 2:
-			groupId = int(input('group id: '))
-			countAlbums = int(input('count albums: '))
-			countPhotos = int(input('count photos: '))
-			path = input('path to save photos[default is your HOME directory]: ')
-			if not path: path = os.environ['HOME']+'/'
-			print('\n\nDownload is starting\n\n--------------------------\n\n')
-			Combain.getPhoto( groupId, Combain.getAlbums(groupId, countAlbums), 'none', 'yes', path, 'id', 'yes', 'no')
+			print('1. Albums\n2. Wall')
+			selectedSource = int(input('select source will be copied from: '))
+			if selectedSource==1:
+				publicId = int(input('public id: '))
+				albums = Combain.getAlbums(publicId)
+				for i in albums:
+					print(str(i['number'])+'. '+i['title'],i['count'])
+				selectedAlbum = int(input('select number with album: '))
+				for i in albums:
+					if selectedAlbum == i['number']:
+						print(i['title'])
+						albumId=i['id']
+						albumTitle=i['title']
+						albumCountPhotos = i['count']
+				path = input('path to save photos[default is your HOME directory]: ')
+				if not path: path = os.environ['HOME']+'/'
+				Combain.downlPhotos(publicId, albumId, albumTitle, path, albumCountPhotos)
+			elif selectedSource==2:
+				albumId='wall'
+				albumTitle='Wall'
+				publicId = int(input('public id: '))
+				countPhotos=int(input('count photos to download: '))
+				path = input('path to save photos[default is your HOME directory]: ')
+				if not path: path = os.environ['HOME']+'/'
+				Combain.downlPhotos(publicId, albumId, albumTitle, path, countPhotos)
 		elif int(action) == 6:
 			# list_ids = input("Enter list of groups use ','. Default multi-post group ids list is used ")
 			# makeListToDir = 
 			Combain.crossDeletingPosts(Combain.dict_names_and_ids)
 		elif int(action) == 3:
-			from_id = int(input("Pubic either user where will be copied from: "))
-			albumNameToCopy = input("Album name will be copied to: ")
-			Combain.copyPhotoToAlbum(person[0], '', from_id, albumNameToCopy)
+			sources = [{'number':1, 'title':'Albums'}, {'number':2,'title':'Wall'}];
+			for i in sources:
+				print(str(i['number'])+'. '+i['title'])
+			selectedSource = int(input('select source will be copied from: '))
+			if selectedSource==1:
+				fromId = int(input("Pubic either user will be copied from: "))
+				albumsToCopyFrom = Combain.getAlbums(fromId)
+				for i in albumsToCopyFrom:
+					print(str(i['number'])+'. '+i['title'], i['count'])
+				selectedAlbumToCopyFrom = int(input('Select number of album will be copied from: '))
+				for i in albumsToCopyFrom:
+					if selectedAlbumToCopyFrom==i['number']:
+						albumIdToCopyFrom = i['id']
+						countPhotosToCopyFrom=i['count']
+				albumsToCopyTo = Combain.getAlbums(person[0])
+				for i in albumsToCopyTo:
+					print(str(i['number'])+'. '+i['title'], i['count'])
+				selectedAlbumNameToCopyTo = int(input("Select number of album where will be copied to: "))
+				for i in albumsToCopyTo:
+					if selectedAlbumNameToCopyTo==i['number']:
+						albumNameToCopyTo=i['title']
+			elif selectedSource==2:
+				albumIdToCopyFrom='wall'
+				fromId=int(input('from id: '))
+				print('Dow you want to create new album to place new photos in to it?')
+				createAlbumState=input('[n]default[y/n]:')
+				if createAlbumState == 'y':
+					title = input('title [default inherits donor group name]: ')
+					if not title:
+						publicName = vkapi.groups.getById(group_id=str(abs(fromId)))[0]['name']
+						title = publicName
+					vkapi.photos.createAlbum(owner_id=person[0], title=title, privacy_view='nobody', v=5.35)
+					countPhotosToCopyFrom = int(input('count: '))
+					albumNameToCopyTo = publicName
+				elif createAlbumState == 'n':
+					albumsToCopyTo = Combain.getAlbums(person[0])
+					for i in albumsToCopyTo:
+						print(str(i['number'])+'. '+i['title'], i['count'])
+					selectedAlbumNameToCopyTo = int(input("Select number of album where will be copied to: "))
+					for i in albumsToCopyTo:
+						if selectedAlbumNameToCopyTo==i['number']:
+							albumNameToCopyTo=i['title']
+					countPhotosToCopyFrom = int(input('count: '))
+			Combain.copyPhotoToAlbum(person[0], fromId, albumNameToCopyTo, albumIdToCopyFrom, countPhotosToCopyFrom)	
+			# print(person[0], fromId, albumNameToCopyTo, albumIdToCopyFrom, countPhotosToCopyFrom )
 		elif int(action) == 7:
 			Combain.delTopicComments()
 		elif int(action) == 8:
 			getPollingServer()
+		elif int(action) == 9:
+			Combain.delPhotos()
+		elif int(action) == 10:
+			print('1. Add\n2. Del')
+			selectedAction = int(input('select number of action: '))
+			owner = input('public or user id: ')
+			count = input('count: ') 
+			if selectedAction == 1:
+				Combain.addLikes('add','no', owner, count)
+			elif selectedAction == 2:
+				Combain.addLikes('checkLikes', 'del', owner, count)
+		elif int(action) == 11:
+			weather('Новоуральск', 'forecast')
+		elif int(action) == 12:
+			Combain.captcha('http://api.vk.com/captcha.php?sid=986265422898&s=1')
+		elif int(action) == 13:
+			dir1 = os.listdir('/Users/hal/Pictures/179349317/VILLAIN/')
+			dir1.pop(0)
+
+			while True:
+				Combain.uploadOwnerPhoto(random.choice(dir1))
+				time.sleep(60*3)
+		elif int(action) == 14:
+			Combain.statusSet()
 	if sys.argv[1] == 'manual':
 		actions()
 
