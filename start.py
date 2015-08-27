@@ -36,13 +36,14 @@ from PIL import ImageTk
 import io
 from math import *
 from operator import itemgetter, attrgetter
+from requests.utils import quote
 # cgitb.enable()
 
 # print('Content-type: text/html')
 # print()
 # https://api.vk.com/method/photos.get?owner_id=-77093415&album_id=wall&count=40&access_token=00af0cff7458595045e1893775acf9b561dad00d6df9de580f9839e2722d5090e3fbf819a471461094666
 # User and app info
-vkapi = vk.API( access_token = '025a39c762b413dc99ced908cb5f083441766414e8fd062bbf5486c24bd583684b9f09e2d075d3d75d51d')
+vkapi = vk.API( access_token = 'c578c314eb08a60f03ac64ad2567aecfd2c1acd7378f16506d4a81d7473b0050a0cccccf5ee3f8d727cb4')
 # vkapi = vk.API( access_token = '8c214f76b9870dcc6af61507afd364ebd060ffbb60ec1a495398e9507a143d6622f8322127dbd338d0617')
 # vkapi = vk.API( access_token = 'aa0d8008ce0ef760746439bac0415bb0b577857a142e2de8c26d3b803e8eb5e724416ff684579ad5c3944')
 # vkapi = vk.API( access_token = '9a57a431b60318aa06ce1e6624761a9a539f14c4979a165f57c598f9347bd6e7476022e5265d74d2212df')
@@ -52,7 +53,7 @@ person = [179349317]
 # person = [319315119]
 # app_id = 4967352
 app_id = 5040349
-accTok = '025a39c762b413dc99ced908cb5f083441766414e8fd062bbf5486c24bd583684b9f09e2d075d3d75d51d'
+accTok = 'c578c314eb08a60f03ac64ad2567aecfd2c1acd7378f16506d4a81d7473b0050a0cccccf5ee3f8d727cb4'
 # accTok = 'aa0d8008ce0ef760746439bac0415bb0b577857a142e2de8c26d3b803e8eb5e724416ff684579ad5c3944'
 # accTok = '8c214f76b9870dcc6af61507afd364ebd060ffbb60ec1a495398e9507a143d6622f8322127dbd338d0617'
 # accTok = '9a57a431b60318aa06ce1e6624761a9a539f14c4979a165f57c598f9347bd6e7476022e5265d74d2212df'
@@ -491,13 +492,13 @@ class Comb:
 					time.sleep(1)
 		else:	
 			
-			photosGet=requests.get("https://api.vk.com/method/photos.get?owner_id="+str(from_id)+"&album_id="+str(albumIdToCopyFrom)+"&count="+str(countPhotos)+"&v=5.35&rev="+str(rev)+"&access_token="+accTok).json()
+			photosGet=requests.get("https://api.vk.com/method/photos.get?owner_id="+str(from_id)+"&album_id="+str(albumIdToCopyFrom)+"&extended=1&count="+str(countPhotos)+"&v=5.35&rev="+str(rev)+"&access_token="+accTok).json()
 
 			Comb.photoUpdateData('self', from_id, photosGet['response']['items'][0]['date'])
 
 			for a in photosGet['response']['items']:
 				# copyPhotos = vkapi.photos.copy(owner_id=from_id, photo_id=a['id'])
-				
+
 				copyPhotos = requests.get("https://api.vk.com/method/photos.copy?owner_id="+str(from_id)+"&photo_id="+str(a['id'])+"&access_token="+accTok).json()
 				time.sleep(0.4)
 				if updateDate:
@@ -719,7 +720,7 @@ class Comb:
 		ids=[]
 		headers = {"User-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.107 Safari/537.36", "Accept-Language":"ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4"}
 		uploadUrl = requests.get("https://api.vk.com/method/photos.getOwnerPhotoUploadServer?access_token="+accTok, headers=headers).json()['response']['upload_url']
-		r = requests.post(uploadUrl, files={ 'file' : open('/Users/hal/Pictures/179349317/VILLAIN/'+photo, 'rb') }).json()
+		r = requests.post(uploadUrl, files={ 'file' : open('/Users/hal/Pictures/179349317/Трипофобия/'+photo, 'rb') }).json()
 		# photoSave = vkapi.photos.saveOwnerPhoto(server=r['server'], photo=r['photo'], hash=r['hash'], v=5.37)
 		photoSave = requests.get("https://api.vk.com/method/photos.saveOwnerPhoto?server="+str(r['server'])+"&photo="+str(r['photo'])+"&hash="+str(r['hash'])+"&v=5.37&access_token="+accTok).json()
 		if 'error' in photoSave:
@@ -734,7 +735,7 @@ class Comb:
 
 		for i in vkapi.photos.get(owner_id=person[0], album_id='profile')['items']:
 			ids.append(i['id'])
-		
+
 		vkapi.photos.delete(owner_id=person[0], photo_id=ids[0])
 
 	def statusSet(self):
@@ -787,6 +788,8 @@ class Comb:
 			arr.append({'number': x+1, "title":y['title'], "count":y['count'], "id":y['id']})
 		return arr
 
+	
+
 
 	def captcha(self, urlImg):
 
@@ -817,7 +820,23 @@ class Comb:
 		root.mainloop()		
 		# print(posts)
 		return(key)
-	
+
+	def getGifs(self, ownerId, count):
+		step=-10
+		while step<count:
+			step+=10
+			wall = vkapi.wall.get(owner_id=ownerId, offset=step, count=10)
+			for i in wall['items']:
+				if 'attachments' in i:
+					for a in i['attachments']:
+						if a['type']=='doc' and a['doc']['ext']=='gif':
+							req = requests.get("https://api.vk.com/method/docs.add?owner_id="+str(a['doc']["owner_id"])+"&doc_id="+str(a['doc']['id'])+"&v=5.37&access_token="+accTok).json()
+							time.sleep(1)
+							if 'error' in req and req['error']['error_code']==14:
+								self.captchaSid=req['error']['captcha_sid']
+								self.captchaKey=Comb.captcha('self', req['error']['captcha_img'])
+								req = requests.get("https://api.vk.com/method/docs.add?owner_id="+str(a['doc']["owner_id"])+"&doc_id="+str(a['doc']['id'])+"&captcha_sid="+str(self.captchaSid)+"&captcha_key="+str(self.captchaKey)+"&access_token="+accTok).json()
+								time.sleep(1)
 def wiki():
 	try:
 		wikipedia.set_lang('ru')
@@ -1002,9 +1021,6 @@ def getPollingServer():
 										sendMesBot(i[6])
 										print(i, '\n')
 										time.sleep(1)
-
-					else:
-						req
 		except:
 			while True:
 				req = requests.get(url).json()
@@ -1051,7 +1067,7 @@ if __name__ == "__main__":
 	def actions():
 		print('{:=^80}'.format(" Wellcome to VK API combain ") + '\n\n  Please type kind of action would you like to do with this program.\n\n'+'{:=^80}'.format('=')+'\n')
 
-		actions = ['Multi-post', 'Download photos', 'Copy photos', 'Comments Bot', 'Get text from wall', 'Cross delete posts', 'Delete from board', 'Messages Bot', 'Delete photos', 'Likes', 'wheather test', 'test tkinter', 'Upload owner photo', 'status', 'Get Videos', 'equake']
+		actions = ['Multi-post', 'Download photos', 'Copy photos', 'Comments Bot', 'Get text from wall', 'Cross delete posts', 'Delete from board', 'Messages Bot', 'Delete photos', 'Likes', 'wheather test', 'test tkinter', 'Upload owner photo', 'status', 'Get Videos', 'equake', 'GetGifs']
 
 		for i,y in zip(range(len(actions)), actions):
 			if i == 0:
@@ -1180,7 +1196,7 @@ if __name__ == "__main__":
 		elif int(action) == 12:
 			Combain.captcha('http://api.vk.com/captcha.php?sid=986265422898&s=1')
 		elif int(action) == 13:
-			dir1 = os.listdir('/Users/hal/Pictures/179349317/VILLAIN/')
+			dir1 = os.listdir('/Users/hal/Pictures/179349317/Трипофобия/')
 			dir1.pop(0)
 			while True:
 				Combain.uploadOwnerPhoto(random.choice(dir1))
@@ -1204,13 +1220,16 @@ if __name__ == "__main__":
 			print(len(titles))
 		elif int(action) == 16:
 			equake()
+		elif int(action)==17:
+			ownerId=int(input('public id: '))
+			count = int(input('count of wall posts: '))
+			Combain.getGifs(ownerId, count)
 	if sys.argv[1] == 'manual':
 		actions()
 
 	elif sys.argv[1] == 'auto':
 		Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space+psy+other+zeland+slovo+cuts, int(sys.argv[2]))
-	
-	
+		
 	# Combain.getPhoto(-682618, Combain.getAlbums(-682618, 1)[0], 1 )
 	# 	aa = Combain.getAlbums(-40485321)
 	# # Combain.postOne()
