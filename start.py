@@ -738,7 +738,7 @@ class Comb:
 
 		vkapi.photos.delete(owner_id=person[0], photo_id=ids[0])
 
-	def statusSet(self):
+	def statusSet(self, timer):
 		step=0
 		text = """▲▼▲▼▲▼・●⦿◎◉ ▲▼▲▼▲▼ ・●⦿◎◉ ▲▼▲▼▲▼ ・●⦿◎◉ ▲▼▲▼▲▼・●⦿◎◉ ▲▼▲▼▲▼ ・●⦿◎◉ ▲▼▲▼▲▼ ・●⦿◎◉ """
 		while True: 
@@ -756,7 +756,7 @@ class Comb:
 			if step==1:
 				# vkap.status.set(owner_id=person[0], text=weather('Майами', 'current'))
 				req=requests.get('https://api.vk.com/method/status.set?owner_id='+str(person[0])+'&text='+weather('Майами', 'current')+'&v=5.37&access_token='+accTok).json()
-				time.sleep(60*2)
+				time.sleep(timer)
 				if 'error' in req and req['error']['error_code'] == 14:
 					self.captchaSid=req['error']['captcha_sid']
 					# webbrowser.open_new_tab(req['error']['captcha_img'])
@@ -767,7 +767,7 @@ class Comb:
 
 			elif step==2:
 				req=requests.get('https://api.vk.com/method/status.set?owner_id='+str(person[0])+'&text='+equake()+'&v=5.37&access_token='+accTok).json()
-				time.sleep(60*2)
+				time.sleep(timer)
 				if 'error' in req and req['error']['error_code'] == 14:
 					self.captchaSid=req['error']['captcha_sid']
 					# webbrowser.open_new_tab(req['error']['captcha_img'])
@@ -862,7 +862,7 @@ def equake():
 	url = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&minmagnitude=4.5&maxmagnitude=10&starttime="+yestedayDate
 	req = requests.get(url).json()
 	for i in req['features']:
-		mags.append(('Маг: '+str(i['properties']['mag']), 'Место: '+re.sub('M\s\d+\.\d+\s-\s.*,\s', '', i['properties']['title']), 'Угроза: '+str(i['properties']['alert'])))
+		mags.append(('Маг: '+str(i['properties']['mag']), 'Место: '+re.sub("M\s\d\.\d\s-\s.*\s", '', i['properties']['title']), 'Угроза: '+str(i['properties']['alert'])))
 
 	quakes = re.sub("\[|\]|'|\)|\(",'',str(sorted(mags, reverse=True, key=itemgetter(0))[:3])).replace('None','Нет').replace('green', 'зелёный').replace('yellow', 'жёлтый').replace('orange', 'оранжевый').replace('red', 'красный').replace('of', 'от').replace('km', 'км')
 	return quakes
@@ -964,13 +964,19 @@ def sendMesBot(message):
 		if len(res)==3 and res[1]=='5':
 			city = res[2]
 			botMessage = weather(city, 'forecast')
+			vkapi.messages.send(user_id=from_id, message=botMessage, guid=guid);
 		elif len(res)==2:	
 			botMessage = weather(res[1], 'current')
 
-		vkapi.messages.send(user_id=from_id, message=botMessage, guid=guid);
+			vkapi.messages.send(user_id=from_id, message=botMessage, guid=guid);
 	
-	
-
+def getFests():
+	headers = {"User-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.107 Safari/537.36", "Accept-Language":"ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4"}
+	req = requests.get("https://www.fest300.com/festivals", headers=headers).content
+	parsed = BeautifulSoup(req, "html.parser")
+	with open('tempFest.html', 'w') as a:
+		a.write(parsed.prettify())
+	# print(parsed)
 def getPollingServer():
 		headers = {"User-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.107 Safari/537.36", "Accept-Language":"ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4"}
 		params = vkapi.messages.getLongPollServer()	
@@ -978,96 +984,59 @@ def getPollingServer():
 
 		ts = params['ts']
 
-		url = 'http://%s?act=a_check&key=%s&ts=%s&wait=25&mode=2' % (params['server'], params['key'], ts)
+		url = 'http://%s?act=a_check&key=%s&ts=%s&wait=0&mode=2' % (params['server'], params['key'], params['ts'])
 		global from_id
 		global times
-		try:
-			while True:
+
+		while True:
+			try:
 				req = requests.get(url).json()
-				# if req['ts']:
-				# 	ts = req['ts']
-				# else:
-				# 	ts=params['ts']
-				if req:
-					os.system('clear')
-					if 'updates' in req:
-						for i in req['updates']:
-							if len(i)>6:
-								if i[6] and i[6]!='wiki' and not re.search('конст \d+',i[6]) and not re.search('погода ', i[6]):
-									if time.ctime(i[4])==time.asctime(time.localtime()):
-										sys.stdout=open('MessagesBotLog.txt', 'a+')
-										from_id=i[3]
-										sendMesBot('default')
-										print(i, '\n')
-										time.sleep(1)
-								elif i[6] and i[6]=='wiki':
-									if time.ctime(i[4])==time.asctime(time.localtime()):
-										sys.stdout=open('MessagesBotLog.txt', 'a+')
-										from_id=i[3]
-										sendMesBot('wiki')
-										print(i, '\n')
-										time.sleep(1)
-								elif i[6] and re.search('конст \d+', i[6]):
-									if time.ctime(i[4])==time.asctime(time.localtime()):
-										sys.stdout=open('MessagesBotLog.txt', 'a+')
-										from_id=i[3]
-										sendMesBot(i[6])
-										print(i, '\n')
-										time.sleep(1)
-								elif i[6] and re.search('погода ', i[6]):
-									if time.ctime(i[4])==time.asctime(time.localtime()):
-										sys.stdout=open('MessagesBotLog.txt', 'a+')
-										from_id=i[3]
-										sendMesBot(i[6])
-										print(i, '\n')
-										time.sleep(1)
-		except:
-			while True:
+			except:
 				req = requests.get(url).json()
-				# if req['ts']:
-				# 	ts = req['ts']
-				# else:
-				# 	ts=params['ts']
-				if req:
-					os.system('clear')
-					if 'updates' in req:
-						for i in req['updates']:
-							if len(i)>6:
-								if i[6] and i[6]!='wiki' and not re.search('конст \d+',i[6]) and not re.search('погода ', i[6]):
-									if time.ctime(i[4])==time.asctime(time.localtime()):
-										sys.stdout=open('MessagesBotLog.txt', 'a+')
-										from_id=i[3]
-										sendMesBot('default')
-										print(i, '\n')
-										time.sleep(1)
-								elif i[6] and i[6]=='wiki':
-									if time.ctime(i[4])==time.asctime(time.localtime()):
-										sys.stdout=open('MessagesBotLog.txt', 'a+')
-										from_id=i[3]
-										sendMesBot('wiki')
-										print(i, '\n')
-										time.sleep(1)
-								elif i[6] and re.search('конст \d+', i[6]):
-									if time.ctime(i[4])==time.asctime(time.localtime()):
-										sys.stdout=open('MessagesBotLog.txt', 'a+')
-										from_id=i[3]
-										sendMesBot(i[6])
-										print(i, '\n')
-										time.sleep(1)
-								elif i[6] and re.search('погода ', i[6]):
-									if time.ctime(i[4])==time.asctime(time.localtime()):
-										sys.stdout=open('MessagesBotLog.txt', 'a+')
-										from_id=i[3]
-										sendMesBot(i[6])
-										print(i, '\n')
-										time.sleep(1)		
+			if req!=None:
+				# os.system('clear')
+				if 'updates' in req and req['updates']!='':
+					for i in req['updates']:
+						if len(i)>6:
+							if i[6] and i[6]!='wiki' and not re.search('конст \d+',i[6]) and not re.search('погода ', i[6]):
+								if easy_date.convert_from_timestamp(i[4], "%H:%M:%S") == easy_date.convert_from_timestamp(time.time(), "%H:%M:%S"):
+									sys.stdout=open('MessagesBotLog.txt', 'a+')
+									from_id=i[3]
+									sendMesBot('default')
+									print(i, '\n')
+									time.sleep(5)
+							elif i[6] and i[6]=='wiki':
+								if easy_date.convert_from_timestamp(i[4], "%H:%M:%S") == easy_date.convert_from_timestamp(time.time(), "%H:%M:%S"):
+									sys.stdout=open('MessagesBotLog.txt', 'a+')
+									from_id=i[3]
+									sendMesBot('wiki')
+									print(i, '\n')
+									time.sleep(5)
+							elif i[6] and re.search('конст \d+', i[6]):
+								if easy_date.convert_from_timestamp(i[4], "%H:%M:%S") == easy_date.convert_from_timestamp(time.time(), "%H:%M:%S"):
+									sys.stdout=open('MessagesBotLog.txt', 'a+')
+									from_id=i[3]
+									sendMesBot(i[6])
+									print(i, '\n')
+									time.sleep(5)
+							elif i[6] and re.search('погода ', i[6]):
+								if easy_date.convert_from_timestamp(i[4], "%H:%M:%S") == easy_date.convert_from_timestamp(time.time(), "%H:%M:%S"):
+									sys.stdout=open('MessagesBotLog.txt', 'a+')
+									from_id=i[3]
+									sendMesBot(i[6])
+									print(i, '\n')
+									time.sleep(5)
+				elif 'error' in req:
+					print('error')
+
+
 if __name__ == "__main__":
 	Combain = Comb()
 
 	def actions():
 		print('{:=^80}'.format(" Wellcome to VK API combain ") + '\n\n  Please type kind of action would you like to do with this program.\n\n'+'{:=^80}'.format('=')+'\n')
 
-		actions = ['Multi-post', 'Download photos', 'Copy photos', 'Comments Bot', 'Get text from wall', 'Cross delete posts', 'Delete from board', 'Messages Bot', 'Delete photos', 'Likes', 'wheather test', 'test tkinter', 'Upload owner photo', 'status', 'Get Videos', 'equake', 'GetGifs']
+		actions = ['Multi-post', 'Download photos', 'Copy photos', 'Comments Bot', 'Get text from wall', 'Cross delete posts', 'Delete from board', 'Messages Bot', 'Delete photos', 'Likes', 'wheather test', 'test tkinter', 'Upload owner photo', 'status', 'Get Videos', 'equake', 'GetGifs', 'getFests']
 
 		for i,y in zip(range(len(actions)), actions):
 			if i == 0:
@@ -1202,7 +1171,7 @@ if __name__ == "__main__":
 				Combain.uploadOwnerPhoto(random.choice(dir1))
 				time.sleep(60*10)
 		elif int(action) == 14:
-			Combain.statusSet()
+			Combain.statusSet(60*2)
 		elif int(action) == 15:
 			public_id = input("public_id: ")
 			for i in Combain.getVideoAlbums(public_id):
@@ -1224,6 +1193,13 @@ if __name__ == "__main__":
 			ownerId=int(input('public id: '))
 			count = int(input('count of wall posts: '))
 			Combain.getGifs(ownerId, count)
+		elif int(action)==18:
+			# getFests()
+			
+			
+			with open("subscribes.txt", "w") as o:
+				o.write(str(vkapi.users.getSubscriptions(user_id=person[0], extended=0)['groups']['items']+vkapi.users.getSubscriptions(user_id=person[0], extended=0)['users']['items']))
+
 	if sys.argv[1] == 'manual':
 		actions()
 
