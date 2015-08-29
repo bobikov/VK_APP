@@ -43,7 +43,7 @@ from requests.utils import quote
 # print()
 # https://api.vk.com/method/photos.get?owner_id=-77093415&album_id=wall&count=40&access_token=00af0cff7458595045e1893775acf9b561dad00d6df9de580f9839e2722d5090e3fbf819a471461094666
 # User and app info
-vkapi = vk.API( access_token = 'c578c314eb08a60f03ac64ad2567aecfd2c1acd7378f16506d4a81d7473b0050a0cccccf5ee3f8d727cb4')
+vkapi = vk.API( access_token = 'fd2da3dfa320d31274248fbba13834fc3706e559e207f489e04589466745233608a5452cf88fa0d6c5b5e')
 # vkapi = vk.API( access_token = '8c214f76b9870dcc6af61507afd364ebd060ffbb60ec1a495398e9507a143d6622f8322127dbd338d0617')
 # vkapi = vk.API( access_token = 'aa0d8008ce0ef760746439bac0415bb0b577857a142e2de8c26d3b803e8eb5e724416ff684579ad5c3944')
 # vkapi = vk.API( access_token = '9a57a431b60318aa06ce1e6624761a9a539f14c4979a165f57c598f9347bd6e7476022e5265d74d2212df')
@@ -53,7 +53,7 @@ person = [179349317]
 # person = [319315119]
 # app_id = 4967352
 app_id = 5040349
-accTok = 'c578c314eb08a60f03ac64ad2567aecfd2c1acd7378f16506d4a81d7473b0050a0cccccf5ee3f8d727cb4'
+accTok = 'fd2da3dfa320d31274248fbba13834fc3706e559e207f489e04589466745233608a5452cf88fa0d6c5b5e'
 # accTok = 'aa0d8008ce0ef760746439bac0415bb0b577857a142e2de8c26d3b803e8eb5e724416ff684579ad5c3944'
 # accTok = '8c214f76b9870dcc6af61507afd364ebd060ffbb60ec1a495398e9507a143d6622f8322127dbd338d0617'
 # accTok = '9a57a431b60318aa06ce1e6624761a9a539f14c4979a165f57c598f9347bd6e7476022e5265d74d2212df'
@@ -122,7 +122,7 @@ class Comb:
 
 		self.max = 'dd'
 		self.ok = 'dd'
-		self.group_ids = [-60409637, -72580409, -52521233, -34783798, -80822106, -35376525]
+		self.group_ids = [-60409637, -72580409, -52521233, -80822106, -35376525]
 		self.group_Ids_ToString = str.join(',', [str(abs(x)) for x in self.group_ids])
 		self.groupsNoDumps = vkapi.groups.getById(group_ids=self.group_Ids_ToString, indent=4, sort_keys=True, ensure_ascii=False)
 		self.groupsWithDumps = json.dumps(vkapi.groups.getById(group_ids=self.group_Ids_ToString),indent=4, sort_keys=True, ensure_ascii=False)
@@ -524,10 +524,10 @@ class Comb:
 	def getTopicCommentIds(self):
 		topic_id=Comb.getTopic()
 		ids = []
-		offset=-10
-		while offset<100:
-			offset+=10
-			topics = vkapi.board.getComments(group_id=53664217, offset=offset, topic_id=topic_id[0], count=10, sort='desc')['items']
+		offset=-50
+		while offset<10000:
+			offset+=50
+			topics = vkapi.board.getComments(group_id=53664217, offset=offset, topic_id=topic_id[0], count=50, sort='desc')['items']
 			for i in topics:
 				if (i['from_id']==person[0]):
 					ids.append(i['id'])
@@ -561,7 +561,7 @@ class Comb:
 			i+=1
 			period+=1
 			if i == len(self.group_ids)-1:
-				Comb.postTopicComment('self')
+			# 	Comb.postTopicComment('self')
 				i=-1
 			group_id = str(self.dict_names_and_ids[i]['id'])	
 			ok2 = group_id[:]
@@ -763,7 +763,7 @@ class Comb:
 					# self.captchaKey = input('enter captcha: ')
 					Comb.captcha(req['error']['captcha_img'])
 					req = requests.get('https://api.vk.com/method/status.set?owner_id='+str(person[0])+'&text='+equake()+'&captcha_sid='+str(self.captchaSid)+'&captcha_key='+str(self.captchaKey)+'&access_token='+accTok)
-					time.sleep(60*2)
+					time.sleep(timer)
 
 			elif step==2:
 				req=requests.get('https://api.vk.com/method/status.set?owner_id='+str(person[0])+'&text='+equake()+'&v=5.37&access_token='+accTok).json()
@@ -774,8 +774,19 @@ class Comb:
 					# self.captchaKey = input('enter captcha: ')
 					Comb.captcha(req['error']['captcha_img'])
 					req = requests.get('https://api.vk.com/method/status.set?owner_id='+str(person[0])+'&text='+equake()+'&captcha_sid='+str(self.captchaSid)+'&captcha_key='+str(self.captchaKey)+'&access_token='+accTok)
+					time.sleep(timer)
+
+			elif step==3:
+				req=requests.get('https://api.vk.com/method/status.set?owner_id='+str(person[0])+'&text='+getFires()+'&v=5.37&access_token='+accTok).json()
+				time.sleep(timer)
+				if 'error' in req and req['error']['error_code'] == 14:
+					self.captchaSid=req['error']['captcha_sid']
+					# webbrowser.open_new_tab(req['error']['captcha_img'])
+					# self.captchaKey = input('enter captcha: ')
+					Comb.captcha(req['error']['captcha_img'])
+					req = requests.get('https://api.vk.com/method/status.set?owner_id='+str(person[0])+'&text='+getFires()+'&captcha_sid='+str(self.captchaSid)+'&captcha_key='+str(self.captchaKey)+'&access_token='+accTok)
 					time.sleep(60*2)
-			elif step>2:
+			elif step>3:
 				step=0
 				time.sleep(5)
 	def getVideoAlbums(self, public_id):
@@ -837,6 +848,56 @@ class Comb:
 								self.captchaKey=Comb.captcha('self', req['error']['captcha_img'])
 								req = requests.get("https://api.vk.com/method/docs.add?owner_id="+str(a['doc']["owner_id"])+"&doc_id="+str(a['doc']['id'])+"&captcha_sid="+str(self.captchaSid)+"&captcha_key="+str(self.captchaKey)+"&access_token="+accTok).json()
 								time.sleep(1)
+	def getDiffGroups(self, userId):
+		ids=[]
+		with open("groups.json", "r") as o:
+			data = json.load(o)
+		for i in data:
+			ids.append(i['id'])
+		return ids
+	def getGroups(self, userId):
+
+		groups=[]
+		count=vkapi.groups.get(user_id=userId, extended=1)['count']
+		# if count > 1000:
+		# 	step=-1000
+		# 	while step < count:
+		# 		step+=1000
+		# 		for i in vkapi.groups.get(user_id=userId, extended=1, offset=step, count=1000)['items']:
+		# 			groups.append({"name":i['name'], "id":i['id']})
+		# else:
+		# 	for i in vkapi.groups.get(user_id=userId, extended=1, count=1000)['items']:
+		# 			groups.append({"name":i['name'], "id":i['id']})
+		# with open("groups.json", "w") as o:
+		# 	o.write(json.dumps(groups, indent=4, sort_keys=True, ensure_ascii=False))
+		if count > 1000:
+			step=-1000
+			while step < count:
+				step+=1000
+				for i in vkapi.groups.get(user_id=userId, extended=1, offset=step, fields='members_count', count=1000)['items']:
+					if i['id'] not in Comb.getDiffGroups('self', person[0]) and i['members_count']>100000:
+						print(i['id'],i['name'])
+		else:
+			for i in vkapi.groups.get(user_id=userId, extended=1, fields='members_count', count=1000)['items']:
+				if "members_count" in i:
+					if i['id'] not in Comb.getDiffGroups('self', person[0]) and i['members_count'] > 100000:
+						print(i['id'],i['name'], i['members_count'])
+						# vkapi.groups.join(group_id=i['id'])
+						req = requests.get("https://api.vk.com/method?groups.join?group_id="+str(i['id'])+"&access_token="+accTok)
+						time.sleep(0.3)
+						if 'error' in req :
+							self.captchaSid=req['error']['captcha_sid']
+							self.captchaKey= Comb.captcha('self', req['error']['captcha_key'])
+							req = requests.get("https://api.vk.com/method?groups.join?group_id="+str(i['id'])+"&captcha_key="+str(self.captchaKey)+"&captcha_sid="+str(self.captchaSid)+"&access_token="+accTok)
+							time.sleep(0.3)
+			# getGroups(person[0])
+		
+
+
+		
+		# getDiffGroups(person[0])
+		# with open("subscribes.txt", "w") as o:
+		# 	o.write(str(vkapi.users.getSubscriptions(user_id=person[0], extended=0)['groups']['items']+vkapi.users.getSubscriptions(user_id=person[0], extended=0)['users']['items']))	
 def wiki():
 	try:
 		wikipedia.set_lang('ru')
@@ -969,7 +1030,32 @@ def sendMesBot(message):
 			botMessage = weather(res[1], 'current')
 
 			vkapi.messages.send(user_id=from_id, message=botMessage, guid=guid);
-	
+def getFires():
+		tuples=[]
+		arr=[]
+		names=[]
+		urlBase ="http://maps.kosmosnimki.ru/rest/ver1/layers/F2840D287CD943C4B1122882C5B92565/search?query="
+		apiKey="&api_key=7GRVU2S7I5"
+		params=quote(""""DateTime">='2015-08-28' and "DateTime"<'2015-08-29'""")
+		req=requests.get(urlBase+params+apiKey).json()
+		for i in req['features']:
+			if i['properties']['Power']>200:
+				arr.append({"power":round(i['properties']['Power'], 3), "location":str.split(requests.get("http://nominatim.openstreetmap.org/reverse?format=json&lat=%s&lon=%s&zoom=%s&addressdetails=1" % (round(i['geometry']['coordinates'][1], 3), round(i['geometry']['coordinates'][0],3), 12) ).json()['display_name'],',')[2]})
+		for i in arr:
+			names.append(i['location'])
+
+		seen=set()
+		res=[]
+		for x in names:
+			if x in seen:
+				continue
+			else:
+				seen.add(x)
+				res.append(x)
+		for i in res:
+			tuples.append((str(names.count(i))+':',i))
+		text = "Пожары: "+re.sub("\(|\)|'|\[|\]|(?<=\d:),\s", '', str(sorted(tuples, reverse=True, key=itemgetter(0))[:4]))
+		return text
 def getFests():
 	headers = {"User-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.107 Safari/537.36", "Accept-Language":"ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4"}
 	req = requests.get("https://www.fest300.com/festivals", headers=headers).content
@@ -984,50 +1070,56 @@ def getPollingServer():
 
 		ts = params['ts']
 
-		url = 'http://%s?act=a_check&key=%s&ts=%s&wait=0&mode=2' % (params['server'], params['key'], params['ts'])
+		url = 'http://%s?act=a_check&key=%s&ts=%s&wait=25&mode=2' % (params['server'], params['key'], ts)
 		global from_id
 		global times
 
 		while True:
-			try:
-				req = requests.get(url).json()
-			except:
-				req = requests.get(url).json()
-			if req!=None:
+			# try:
+			
+			req = requests.get(url).json()
+
+			# except:
+			# 	req = requests.get(url).json()
+
+			if req!=None and 'updates' in req and req['updates']!='':
 				# os.system('clear')
-				if 'updates' in req and req['updates']!='':
+				# if 'updates' in req and req['updates']!='':
 					for i in req['updates']:
 						if len(i)>6:
-							if i[6] and i[6]!='wiki' and not re.search('конст \d+',i[6]) and not re.search('погода ', i[6]):
+							if i[0]==4 and i[6] and i[6]!='wiki' and not re.search('конст \d+',i[6]) and not re.search('погода ', i[6]):
 								if easy_date.convert_from_timestamp(i[4], "%H:%M:%S") == easy_date.convert_from_timestamp(time.time(), "%H:%M:%S"):
 									sys.stdout=open('MessagesBotLog.txt', 'a+')
 									from_id=i[3]
 									sendMesBot('default')
 									print(i, '\n')
-									time.sleep(5)
+									time.sleep(1)
 							elif i[6] and i[6]=='wiki':
 								if easy_date.convert_from_timestamp(i[4], "%H:%M:%S") == easy_date.convert_from_timestamp(time.time(), "%H:%M:%S"):
 									sys.stdout=open('MessagesBotLog.txt', 'a+')
 									from_id=i[3]
 									sendMesBot('wiki')
 									print(i, '\n')
-									time.sleep(5)
+									time.sleep(1)
 							elif i[6] and re.search('конст \d+', i[6]):
 								if easy_date.convert_from_timestamp(i[4], "%H:%M:%S") == easy_date.convert_from_timestamp(time.time(), "%H:%M:%S"):
 									sys.stdout=open('MessagesBotLog.txt', 'a+')
 									from_id=i[3]
 									sendMesBot(i[6])
 									print(i, '\n')
-									time.sleep(5)
+									time.sleep(1)
 							elif i[6] and re.search('погода ', i[6]):
 								if easy_date.convert_from_timestamp(i[4], "%H:%M:%S") == easy_date.convert_from_timestamp(time.time(), "%H:%M:%S"):
 									sys.stdout=open('MessagesBotLog.txt', 'a+')
 									from_id=i[3]
 									sendMesBot(i[6])
 									print(i, '\n')
-									time.sleep(5)
-				elif 'error' in req:
-					print('error')
+									time.sleep(1)
+			elif 'failed' in req:
+				# print(req['failed'])
+				# break
+				os.system("python3 start.py poll")
+
 
 
 if __name__ == "__main__":
@@ -1036,7 +1128,7 @@ if __name__ == "__main__":
 	def actions():
 		print('{:=^80}'.format(" Wellcome to VK API combain ") + '\n\n  Please type kind of action would you like to do with this program.\n\n'+'{:=^80}'.format('=')+'\n')
 
-		actions = ['Multi-post', 'Download photos', 'Copy photos', 'Comments Bot', 'Get text from wall', 'Cross delete posts', 'Delete from board', 'Messages Bot', 'Delete photos', 'Likes', 'wheather test', 'test tkinter', 'Upload owner photo', 'status', 'Get Videos', 'equake', 'GetGifs', 'getFests']
+		actions = ['Multi-post', 'Download photos', 'Copy photos', 'Comments Bot', 'Get text from wall', 'Cross delete posts', 'Delete from board', 'Messages Bot', 'Delete photos', 'Likes', 'wheather test', 'test tkinter', 'Upload owner photo', 'status', 'Get Videos', 'equake', 'GetGifs', 'get subscriptions', 'get groups']
 
 		for i,y in zip(range(len(actions)), actions):
 			if i == 0:
@@ -1049,14 +1141,32 @@ if __name__ == "__main__":
 		if int(action) == 1:
 			mins = int(input('Time delay in minutes: '))
 			try:
-				Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space+other+zeland+cuts+slovo, mins)
+				Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space+other+zeland+cuts+slovo+sapienti, mins)
 			except:
-				Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space+other+zeland+cuts+slovo, mins)
+				Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space+other+zeland+cuts+slovo+sapienti, mins)
 		elif int(action) == 5:
-			ioffset = int(input('Offset: '))
+			# ioffset = int(input('Offset: '))
 			wall_id = int(input('Wall_id: '))
 			count = int(input('Count: '))
-			print(Combain.getWall('yes', ioffset, wall_id, 'text', 'no', count))
+			keyword=input("keyword: ")
+			if count>100:
+				step=-50
+				while step<count:
+					step+=50
+					for i in vkapi.wall.get(owner_id=wall_id, offset=step, count=50)['items']:
+						# sys.stdout = open("words/sapienti.txt", "a+")
+						
+						if keyword!='':
+							if keyword in i['text']:
+								print('b'+i['text'])
+							time.sleep(0.3)
+						elif keyword=='':
+							print('b'+i['text'])
+							time.sleep(0.3)
+
+
+
+			# print(Combain.getWall('yes', ioffset, wall_id, 'text', 'no', count))
 			# Combain.getWall('no', 0, wall_id, 'text', False, count, )
 		elif int(action) == 2:
 			print('1. Albums\n2. Wall')
@@ -1195,17 +1305,40 @@ if __name__ == "__main__":
 			Combain.getGifs(ownerId, count)
 		elif int(action)==18:
 			# getFests()
-			
-			
-			with open("subscribes.txt", "w") as o:
-				o.write(str(vkapi.users.getSubscriptions(user_id=person[0], extended=0)['groups']['items']+vkapi.users.getSubscriptions(user_id=person[0], extended=0)['users']['items']))
+			def getSubs(userId):
+				names=[]
+				count = vkapi.users.getSubscriptions(user_id=userId, extended=1)['count']
+				if count > 1000:
+					step=-200
+					while step<count:
+						step+=200
+						for i in vkapi.users.getSubscriptions(user_id=userId, extended=1, offset=step, count=200)['items']:
+							if 'name' in i:
+								names.append({"name":i['name'], "id":i['id']})
+								# time.sleep(0.1)
+							# print(i['name'])
+							# time.sleep(0.3)
+				with open("subscribes.json", "w") as o:
+					o.write(str(json.dumps(names, indent=4, sort_keys=True, ensure_ascii=False)))
+			getSubs(person[0])
+		elif int(action)==19:
+			for i in vkapi.friends.get(user_id=person[0], fields='nickname', count=10)['items']:
+			# print(i['first_name'], i['last_name'], i['id'])
+				Combain.getGroups(i['id'])
 
+		elif int(action)==20:
+			getFires()
+
+			# req2=requests.get("http://nominatim.openstreetmap.org/reverse?format=json&lat=%s&lon=%s&zoom=%s&addressdetails=1" % (43.611, 24.153, 12) ).json()['address']
+			# print(req2)
 	if sys.argv[1] == 'manual':
 		actions()
 
 	elif sys.argv[1] == 'auto':
 		Combain.postMulti(psy+psy2+mudreci2+mudreci+XXvek+davch+science+atlant+prosv+space+psy+other+zeland+slovo+cuts, int(sys.argv[2]))
-		
+	
+	elif sys.argv[1] == 'poll':
+		getPollingServer()
 	# Combain.getPhoto(-682618, Combain.getAlbums(-682618, 1)[0], 1 )
 	# 	aa = Combain.getAlbums(-40485321)
 	# # Combain.postOne()

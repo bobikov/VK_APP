@@ -62,6 +62,11 @@ with open('words/slovo.txt', encoding='utf-8') as slov:
 with open('words/cuts.txt', encoding='utf-8') as cut:
 	cuts = cut.read().split('b')
 
-slist = list(filter(None, mudreci+life+girls+sex+films+scary+super700+vselen+psy2+mudreci2+davch+XXvek+science+atlant+prosv+space+psy+other+slovo+zeland+cuts))
+
+with open('words/sapienti.txt', encoding='utf-8') as sap:
+	sapienti = sap.read().split('b')
+
+
+slist = list(filter(None, mudreci+life+girls+sex+films+scary+super700+vselen+psy2+mudreci2+davch+XXvek+science+atlant+prosv+space+psy+other+slovo+zeland+cuts+sapienti))
 
 phrases = ['На всяком кладбище, даже очень старом, всегда ощутим острый, трагический аромат разорванной любви — когда смерть отрывает любящих друг от друга.', 'Приятно знать, каков наш мир и где в нем твое место', 'Надо найти место внутри себя, вокруг себя. Место, которое тебе подходит.Похожее на тебя хотя бы отчасти.','Есть нечто особенное в месте твоего рождения. Не все это знают. Это знает лишь тот, кого силой оторвали от места его рождения.','Так же, как кожа выделяет пот, печень— желчь, а поджелудочная железа — инсулин, мозг — этот поразительный орган, состоящий из миллиардов клеток — «выделяет» сознание.']
