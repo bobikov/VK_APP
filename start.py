@@ -38,13 +38,14 @@ from math import *
 from operator import itemgetter, attrgetter
 from requests.utils import quote
 from urllib.parse import urlparse
+from pync import Notifier
 # cgitb.enable()
 
 # print('Content-type: text/html')
 # print()
 # https://api.vk.com/method/photos.get?owner_id=-77093415&album_id=wall&count=40&access_token=00af0cff7458595045e1893775acf9b561dad00d6df9de580f9839e2722d5090e3fbf819a471461094666
 # User and app info
-vkapi = vk.API( access_token = 'fd2da3dfa320d31274248fbba13834fc3706e559e207f489e04589466745233608a5452cf88fa0d6c5b5e')
+vkapi = vk.API( access_token = 'c9e2bb861e50406a6a8c585435dcc2b0dd776acb8f419f1ca8007e7c03753405ba4cb57ea8fc133b18c6e')
 
 other = [-72580409, -61330688]
 person = [179349317]
@@ -52,7 +53,7 @@ person = [179349317]
 # person = [319315119]
 # app_id = 4967352
 app_id = 5040349
-accTok = 'fd2da3dfa320d31274248fbba13834fc3706e559e207f489e04589466745233608a5452cf88fa0d6c5b5e'
+accTok = 'c9e2bb861e50406a6a8c585435dcc2b0dd776acb8f419f1ca8007e7c03753405ba4cb57ea8fc133b18c6e'
 
 supercitat = []
 end = 0
@@ -417,7 +418,12 @@ class Comb:
 			fname='updateGifData.json'
 		if dtype=='pdf':
 			fname='updatePdfData.json'
-		publicName = vkapi.groups.getById( group_id = abs(fromId))[0]['name']
+		if dtype=='audio':
+			fname='updateAudioToCopy.json'
+		if fromId<0:
+			publicName = vkapi.groups.getById( group_id = abs(fromId))[0]['name']
+		elif fromId>0:
+			publicName=vkapi.users.get(user_ids=str(fromId), fields='nickname')
 		if os.path.isfile(fname):
 			with open(fname) as f:
 				data = json.load(f)
@@ -519,12 +525,12 @@ class Comb:
 								text1=f.group(0)
 							else:
 								text1=i['text']
-				if albumIdToCopyFrom!='wall':
-					textFromCaption=a['text'].replace(',','').replace('#','')	
+				if albumIdToCopyFrom!='wall' and a['text']!='':
+					text1=a['text'].replace(',','').replace('#','')	
 				copyPhotos = requests.get("https://api.vk.com/method/photos.copy?owner_id="+str(from_id)+"&photo_id="+str(a['id'])+"&access_token="+accTok).json()
 				# time.sleep(0.4)
 				if "response" in copyPhotos and text1!='':
-					toFile.append({"id":copyPhotos['response'], "text":textFromCaption})
+					toFile.append({"id":copyPhotos['response'], "text":text1})
 				
 				if updateDate:
 					if a['date']==updateDate:
@@ -555,7 +561,7 @@ class Comb:
 				# 	self.captchaKey =Comb.captcha('self', cap['error']['captcha_img'])
 				# 	cap = requests.get("https://api.vk.com/method/photos.edit?owner_id="+str(person[0])+"&photo_id="+str(copyPhotos['response'])+"&caption="+texta+"&captcha_key="+str(self.captchaKey)+"&captcha_sid="+str(self.captchaSid)+"&access_token="+accTok).json()
 				# 	time.sleep(1)
-				if text==True or textFromCaption!='':
+				if text==True or albumIdToCopyFrom!='wall':
 					with open("photoCaptions.json", "w") as jj:
 						jj.write(json.dumps(toFile, indent=4, ensure_ascii=False))
 			Comb.delPhotos('self')	
@@ -795,14 +801,14 @@ class Comb:
 			# 		time.sleep(5)
 			if step==1:
 				# vkap.status.set(owner_id=person[0], text=weather('Майами', 'current'))
-				req=requests.get('https://api.vk.com/method/status.set?owner_id='+str(person[0])+'&text='+weather('Новоуральск', 'current')+'&v=5.37&access_token='+accTok).json()
+				req=requests.get('https://api.vk.com/method/status.set?owner_id='+str(person[0])+'&text='+weather('Майами', 'current')+'&v=5.37&access_token='+accTok).json()
 				time.sleep(timer)
 				if 'error' in req and req['error']['error_code'] == 14:
 					self.captchaSid=req['error']['captcha_sid']
 					# webbrowser.open_new_tab(req['error']['captcha_img'])
 					# self.captchaKey = input('enter captcha: ')
 					Comb.captcha(req['error']['captcha_img'])
-					req = requests.get('https://api.vk.com/method/status.set?owner_id='+str(person[0])+'&text='+weather('Новоуральск', 'current')+'&captcha_sid='+str(self.captchaSid)+'&captcha_key='+str(self.captchaKey)+'&access_token='+accTok)
+					req = requests.get('https://api.vk.com/method/status.set?owner_id='+str(person[0])+'&text='+weather('Майами', 'current')+'&captcha_sid='+str(self.captchaSid)+'&captcha_key='+str(self.captchaKey)+'&access_token='+accTok)
 					time.sleep(timer)
 
 			elif step==2:
@@ -842,6 +848,7 @@ class Comb:
 	
 
 
+
 	def captcha(self, urlImg):
 
 		def getKey(event):
@@ -871,6 +878,78 @@ class Comb:
 		root.mainloop()		
 		# print(posts)
 		return(key)
+
+	def copyAudio(seld, public_id, count, source='wall'):
+		if public_id>0:
+			publicName=vkapi.users.get(user_ids=str(public_id), fields='nickname')[0]['nickname']
+		elif public_id<0:
+			 publicName = vkapi.groups.getById( group_id = abs(public_id))[0]['name']
+		albumTitles=[]
+		fname='updateAudioToCopy.json'
+		dtype='audio'
+		updateDate=int
+		if os.path.isfile(fname):
+			with open(fname) as f:
+					data = json.load(f)	
+					for i in data:
+						if i['id']==public_id and i['name']==publicName:
+							updateDate=i['date']
+		for i in vkapi.audio.getAlbums(owner_id=person[0])['items']:
+				albumTitles.append(i['title'])
+		if publicName not in albumTitles:
+			TargetAlbumId=vkapi.audio.addAlbum(owner_id=person[0], title=publicName)['album_id']
+		elif publicName in albumTitles:
+			for i in vkapi.audio.getAlbums(owner_id=person[0])['items']:
+				if i['title']==publicName:
+					TargetAlbumId=i['id']
+		if source=='audiobox':
+			Comb.UpdateData('self', public_id, [i['date']  for i in vkapi.audio.get(owner_id=public_id, count=1)['items']][0], dtype)	
+			
+
+			for i in vkapi.audio.get(owner_id=public_id, count=count)['items']:
+				if updateDate!=None:
+					if updateDate==i['date']:
+						break
+				add=requests.get('https://api.vk.com/method/audio.add?owner_id='+str(public_id)+'&audio_id='+str(i['id'])+'&access_token='+accTok).json()
+
+				time.sleep(1)
+				if 'error' in add:
+					print(add)
+					captchaSid=add['error']['captcha_sid']
+					captchaKey=Comb.captcha('self', add['error']['captcha_img'])
+					add=requests.get('https://api.vk.com/method/audio.add?owner_id='+str(public_id)+'&audio_id='+str(i['id'])+'&captcha_sid='+str(captchaSid)+'&captcha_key='+str(captchaKey)+'&access_token='+accTok).json()
+					move=vkapi.audio.moveToAlbum(owner_id=person[0], album_id=TargetAlbumId, audio_ids=add['response'])
+					time.sleep(1)
+				move=vkapi.audio.moveToAlbum(owner_id=person[0], album_id=TargetAlbumId, audio_ids=add['response'])
+				time.sleep(1)
+		elif source=='wall':
+			ld=[]
+			for dd in vkapi.wall.get(owner_id=public_id, count=count, filter='owner')['items']:
+				if 'attachments' in dd:
+					for bb in dd['attachments']:
+						if bb['type']=='audio':
+							ld.append(dd['date'])
+								
+			Comb.UpdateData('self', public_id, ld[-1], dtype)	
+			for i in vkapi.wall.get(owner_id=public_id, count=count, filte='owner')['items']:
+				if updateDate!=None:
+					if updateDate==i['date']:
+						break
+				if 'attachments' in i:
+					for jo in i['attachments']:
+						if jo['type']=='audio':
+							print(jo['audio']['id'])
+							add=requests.get('https://api.vk.com/method/audio.add?owner_id='+str(jo['audio']['owner_id'])+'&audio_id='+str(jo['audio']['id'])+'&access_token='+accTok).json()
+							time.sleep(1)
+							if 'error' in add:
+								print(add)
+								captchaSid=add['error']['captcha_sid']
+								captchaKey=Comb.captcha('self', add['error']['captcha_img'])
+								add=requests.get('https://api.vk.com/method/audio.add?owner_id='+str(jo['audio']['owner_id'])+'&audio_id='+str(jo['audio']['id'])+'&captcha_sid='+str(captchaSid)+'&captcha_key='+str(captchaKey)+'&access_token='+accTok).json()
+								move=vkapi.audio.moveToAlbum(owner_id=person[0], album_id=TargetAlbumId, audio_ids=add['response'])
+								time.sleep(1)
+							move=vkapi.audio.moveToAlbum(owner_id=person[0], album_id=TargetAlbumId, audio_ids=add['response'])
+							time.sleep(1)
 	def getSubs(userId):
 				names=[]
 				count = vkapi.users.getSubscriptions(user_id=userId, extended=1)['count']
@@ -916,7 +995,7 @@ class Comb:
 				break
 			wall = vkapi.wall.get(owner_id=ownerId, offset=step, count=1)
 			for i in wall['items']:
-				print(i['date'])
+				# print(i['date'])
 				if 'is_pinned' not in i:
 					if updateDate:
 						if i['date']==updateDate:
@@ -954,7 +1033,7 @@ class Comb:
 										if dtype=='gif':
 											[os.rename(path2+f, path2+fname2+'.'+dtype) for f in os.listdir(path2) if f==(urlparse(a['doc']['url']).path.replace('/',''))]
 										elif dtype=='pdf' or dtype=='djvu':
-											[os.rename(path2+f, path2+a['doc']['title']+'.'+dtype) for f in os.listdir(path2) if f==(urlparse(a['doc']['url']).path.replace('/',''))]
+											[os.rename(path2+f, path2+a['doc']['title'])for f in os.listdir(path2) if f==(urlparse(a['doc']['url']).path.replace('/',''))]
 										else:
 											[os.rename(path2+f, path2+a['doc']['title']) for f in os.listdir(path2) if f==(urlparse(a['doc']['url']).path.replace('/',''))]
 
@@ -985,7 +1064,7 @@ class Comb:
 		for i in data:
 			ids.append(i['id'])
 		return ids
-	def getGroups(self, userId):
+	def getGroups(self, userId, count):
 
 		groups=[]
 		count=vkapi.groups.get(user_id=userId, extended=1)['count']
@@ -1013,7 +1092,7 @@ class Comb:
 					if i['id'] not in Comb.getDiffGroups('self', person[0]) and i['members_count'] > 100000:
 						print(i['id'],i['name'], i['members_count'])
 						# vkapi.groups.join(group_id=i['id'])
-						req = requests.get("https://api.vk.com/method?groups.join?group_id="+str(i['id'])+"&access_token="+accTok)
+						# req = requests.get("https://api.vk.com/method?groups.join?group_id="+str(i['id'])+"&access_token="+accTok)
 						time.sleep(0.3)
 						if 'error' in req :
 							self.captchaSid=req['error']['captcha_sid']
@@ -1021,6 +1100,48 @@ class Comb:
 							req = requests.get("https://api.vk.com/method?groups.join?group_id="+str(i['id'])+"&captcha_key="+str(self.captchaKey)+"&captcha_sid="+str(self.captchaSid)+"&access_token="+accTok)
 							time.sleep(0.3)
 			# getGroups(person[0])
+	def friendsAdd(self):
+		friendList=[]
+		today = datetime.fromtimestamp(time.time())
+		yesterday=today-timedelta(days=1)
+		today=easy_date.convert_from_timestamp(round(time.mktime(today.timetuple())), '%y-%m-%d')
+		yesterday=easy_date.convert_from_timestamp(round(time.mktime(yesterday.timetuple())),'%y-%m-%d')
+
+		if not os.path.isfile('friendList.json'):
+			for i in vkapi.friends.get(user_id=person[0], fields='nickname')['items']:
+				if 'deactivated' in i:
+					status=i['deactivated']
+				else:
+					status=None
+				friendList.append({'id':i['id'], 'fn':i['first_name'], 'ln':i['last_name'], 'deactivated':status})
+			with open('friendList.json', 'w') as o:
+				o.write(json.dumps(friendList, indent=4, ensure_ascii=False))
+			with open('friendList.json', 'r') as o:
+				data = json.load(o)
+			for i in data:
+				if i['deactivated'] == None:
+					i['count']=vkapi.friends.get(user_id=i['id'], count=1)['count']
+					time.sleep(0.5)
+			with open('friendList.json', 'w') as l:
+				l.write(json.dumps(data, indent=4, ensure_ascii=False))
+
+		with open('friendList.json', "r") as a:
+			data =json.load(a)
+
+		for i in data:
+			if i['deactivated']==None:
+				for us in vkapi.friends.get(user_id=i['id'], order='random',fields='nickname, last_seen', count=1)['items']:
+					if 'last_seen' in us:
+						# print(easy_date.convert_from_timestamp(us['last_seen']['time'], '20'+'%y-%m-%d'))
+						# time.sleep(1)
+						if 'deactivated' not in us:
+							if easy_date.convert_from_timestamp(us['last_seen']['time'], '%y-%m-%d')==yesterday or easy_date.convert_from_timestamp(us['last_seen']['time'], '%y-%m-%d')==today :
+								req= requests.get('https://api.vk.com/method/friends.add?user_id='+str(us['id'])+'&text=Привет, '+us['first_name']+'.&access_token='+accTok)
+								if 'error' in req:
+									self.captchaSid=req['error']['captcha_sid']
+									self.captchaKey=Comb.captcha('self', req['error']['captcha_img'])
+									req=requests.get('https://api.vk.com/method/friends.add?user_id='+str(us['id'])+'&text=Привет, '+us['first_name']+'.&captcha_sid='+str(self.captchaSid)+'&captcha_key='+str(self.captchaKey)+'&access_token='+accTok)
+					time.sleep(1)
 	def readPhotoCaptions(self):
 		with open("photoCaptions.json", "r") as jo:
 			data = json.load(jo)
@@ -1197,7 +1318,9 @@ def getFires():
 		tuples=[]
 		arr=[]
 		names=[]
+		# query=%22Timestamp%22%3E=%272014-11-07%27%20%20and%20%22Timestamp%22%3C%272014-11-08%27%20&api_key=7GRVU2S7I5
 		urlBase ="http://maps.kosmosnimki.ru/rest/ver1/layers/F2840D287CD943C4B1122882C5B92565/search?query="
+		# urlBase ="http://maps.kosmosnimki.ru/rest/ver1/layers/C13B4D9706F7491EBC6DC70DFFA988C0/search?query="
 		apiKey="&api_key=7GRVU2S7I5"
 		now=easy_date.convert_from_timestamp(time.time(), '20'+"%y-%m-%d")
 		p=re.compile('(?<=\d{4}-\d{2}-)(\d+)')
@@ -1206,10 +1329,12 @@ def getFires():
 		yestedayDate = re.sub(p, yesterdayDay, now)
 		# params=quote(""""DateTime">='"""+yestedayDate+""""' and "DateTime"<'"""+now+""""'""")
 		params=quote(""""DateTime">='"""+yestedayDate+""""' and "DateTime"<'"""+now+""""'""")
+		# params=quote(""""Timestamp">='"""+yestedayDate+""""' and "Timestamp"<'"""+now+""""'""")
 		req=requests.get(urlBase+params+apiKey).json()
 		for i in req['features']:
 			if i['properties']['Power']>200:
 				arr.append((round(i['properties']['Power'], 3), str.split(requests.get("http://nominatim.openstreetmap.org/reverse?format=json&lat=%s&lon=%s&zoom=%s&addressdetails=1" % (round(i['geometry']['coordinates'][1], 3), round(i['geometry']['coordinates'][0],3), 12) ).json()['display_name'],',')[-1:]))
+				# print((round(i['properties']['Power'], 3), str.split(requests.get("http://nominatim.openstreetmap.org/reverse?format=json&lat=%s&lon=%s&zoom=%s&addressdetails=1" % (round(i['geometry']['coordinates'][1], 3), round(i['geometry']['coordinates'][0],3), 12) ).json()['display_name'],',')[-1:]))
 				# print({"power":round(i['properties']['Power'], 3), "location":str.split(requests.get("http://nominatim.openstreetmap.org/reverse?format=json&lat=%s&lon=%s&zoom=%s&addressdetails=1" % (round(i['geometry']['coordinates'][1], 3), round(i['geometry']['coordinates'][0], 3), 12) ).json()['display_name'],',')[-1:]})
 				# print(round(i['properties']['Power'], 3), i['geometry']['coordinates'] )
 
@@ -1511,20 +1636,27 @@ if __name__ == "__main__":
 			Combain.getSubs(person[0])
 
 		elif int(action)==20:
-			for i in vkapi.friends.get(user_id=person[0], fields='nickname', count=10)['items']:
-			# print(i['first_name'], i['last_name'], i['id'])
-				Combain.getGroups(i['id'])
+			Combain.friendsAdd()
+				# for i in friendList:
+				# 	i['count']='there will be count'
+			# print(json.dumps(friendList, indent=4, ensure_ascii=False))
 
 		elif int(action)==21:
 			getFires()
 			# garber(-101190616)
 		elif int(action)==22:
-			# getArtistsFromWall()
-			requests.get("https://api.vk.com/method/photos.edit?owner_id="+str(person[0])+"&photo_id=377608717&caption=sexysexey&v=5.37&access_token="+accTok).json()
+			getArtistsFromWall()
+		# 	requests.get("https://api.vk.com/method/photos.edit?owner_id="+str(person[0])+"&photo_id=377608717&caption=sexysexey&v=5.37&access_token="+accTok).json()
 			# req2=requests.get("http://nominatim.openstreetmap.org/reverse?format=json&lat=%s&lon=%s&zoom=%s&addressdetails=1" % (43.611, 24.153, 12) ).json()['address']
 			# print(req2)
 		elif int(action)==23:
 			Combain.readPhotoCaptions()
+		elif int(action)==24:
+			public_id=int(input('public id: '))
+			count=int(input('count: '))
+			source=input('source[wall or audiobox]: ')
+			Notifier.notify('Copying of audio files is starting')
+			Combain.copyAudio(public_id, count, source)
 	if sys.argv[1] == 'manual':
 		actions()
 
