@@ -411,8 +411,9 @@ class Comb:
 			ids.append(dict(number=y+1, id=i['id'], title=i['title'], count=i['size']))
 		return ids
 
-	def UpdateData(self, fromId, date, dtype):
+	def UpdateData(self, fromId, date, dtype, source, album_id=False):
 		names=[]
+
 		if dtype=='photo':
 			fname='updatePhotoData.json'
 		if dtype=='gif':
@@ -423,38 +424,70 @@ class Comb:
 			fname='updateAudioToCopy.json'
 		if dtype=='video':
 			fname='updateVideoToCopy.json'
-		if fromId<0:
-			publicName = vkapi.groups.getById( group_id = abs(fromId))[0]['name']
-		elif fromId>0:
-			publicName=vkapi.users.get(user_ids=str(fromId), fields='nickname')
-		if os.path.isfile(fname):
-			with open(fname) as f:
-				data = json.load(f)
-			for i in data:
-				names.append(i['name'])
-			if publicName in names:
+
+		if source=='wall':
+			if fromId<0:
+				publicName = vkapi.groups.getById( group_id = abs(fromId))[0]['name']
+			elif fromId>0:
+				publicName=vkapi.users.get(user_ids=str(fromId), fields='nickname')
+			if os.path.isfile(os.path.join('updates',source,fname)):
+				with open(os.path.join('updates',source,fname)) as f:
+					data = json.load(f)
 				for i in data:
-					if i['name']==publicName:
-						i['date']=date
-			elif publicName not in names:
-				data.append({"id":fromId, "date": date,"name":publicName})
+					names.append(i['name'])
+				if publicName in names:
+					for i in data:
+						if i['name']==publicName:
+							i['date']=date
+				elif publicName not in names:
+					data.append({"id":fromId, "date": date,"name":publicName})
 
-			with open(fname, 'w') as f:
-				json.dump(data, f, indent=4, ensure_ascii=False)
+				with open(os.path.join('updates',source,fname), 'w') as f:
+					json.dump(data, f, indent=4, ensure_ascii=False)
 
-		else:
-			file1 = open(fname, 'a+')
-			data=[{"id":fromId, "date": date,"name":publicName}]
-			file1.write(json.dumps(data, indent=4, sort_keys=True, ensure_ascii=False))
-			file1.close()
+			else:
+				file1 = open(os.path.join('updates',source,fname), 'a+')
+				data=[{"id":fromId, "date": date,"name":publicName}]
+				file1.write(json.dumps(data, indent=4, sort_keys=True, ensure_ascii=False))
+				file1.close()
+		elif source=='album':
+			if dtype=='video':
+				albumName=vkapi.video.getAlbumById(owner_id=fromId, album_id=album_id)['title']
+				print(albumName)
 
+			if fromId<0:
+				publicName = vkapi.groups.getById( group_id = abs(fromId))[0]['name']
+			elif fromId>0:
+				publicName=vkapi.users.get(user_ids=str(fromId), fields='nickname')
+			if os.path.isfile(os.path.join('updates',source,fname)):
+				with open(os.path.join('updates',source,fname)) as f:
+					data = json.load(f)
+				for i in data:
+					names.append({'public':i['name'],'album':i['album']})
+			# print([i['public'] for i in names if i['album']=='Органы'])
+				if publicName in [i['public'] for i in names if i['album']==albumName]:
+					for i in data:
+						if i['name']==publicName and i['album']==albumName:
+							i['date']=date
+
+				elif publicName not in [i['public'] for i in names if i['album']==albumName]:
+					data.append({"id":fromId, "date": date,"name":publicName, 'album':albumName})
+
+				with open(os.path.join('updates',source,fname), 'w') as f:
+					json.dump(data, f, indent=4, ensure_ascii=False)
+
+			else:
+				file1 = open(os.path.join('updates',source,fname), 'a+')
+				data=[{"id":fromId, "date": date,"name":publicName, 'album':albumName}]
+				file1.write(json.dumps(data, indent=4, sort_keys=True, ensure_ascii=False))
+				file1.close()
 	def delPhotos(self):
 		photos = vkapi.photos.get(owner_id=person[0], album_id='saved')['items']
 		for i in photos:
 			vkapi.photos.delete(owner_id=person[0], photo_id=i['id'])
 			time.sleep(0.4)
 
-	def copyPhotoToAlbum( self, to_id, from_id, albumNameToCopyTo, albumIdToCopyFrom, countPhotos, text=False ):
+	def copyPhotoToAlbum( self, to_id, from_id, albumNameToCopyTo, albumIdToCopyFrom, countPhotos, text=False):
 		album_id = []
 		photo_id = []
 		albumsFromIds = []
@@ -467,16 +500,20 @@ class Comb:
 		getAlbumsTo = Comb.getAlbums('self', to_id)
 		if albumIdToCopyFrom=='wall':
 			rev = 1
+			source='wall'
 		else:
 			rev = 0
+			source='album'
 		for i in getAlbumsTo:
 			if i['title'] == albumNameToCopyTo:
 				album_id.append(i['id'])
-		with open("updatePhotoData.json") as f:
-				data = json.load(f)	
-				for i in data:
-					if i['id']==from_id:
-						updateDate=i['date']
+
+
+		# with open(os.path.join('updates', source, "updatePhotoData.json")) as f:
+		# 		data = json.load(f)	
+		# 		for i in data:
+		# 			if i['id']==from_id:
+		# 				updateDate=i['date']
 
 		if countPhotos>1000:
 			photosGet=requests.get("https://api.vk.com/method/photos.get?owner_id="+str(from_id)+"&album_id="+str(albumIdToCopyFrom)+"&count=100&v=5.35&rev="+str(rev)+"&access_token="+accTok).json()
@@ -515,7 +552,9 @@ class Comb:
 		else:	
 			photosGet=requests.get("https://api.vk.com/method/photos.get?owner_id="+str(from_id)+"&album_id="+str(albumIdToCopyFrom)+"&extended=1&count="+str(countPhotos)+"&v=5.35&rev="+str(rev)+"&access_token="+accTok).json()
 			if albumIdToCopyFrom=='wall':
-				Comb.UpdateData('self', from_id, photosGet['response']['items'][0]['date'], 'photo')
+				Comb.UpdateData('self', from_id, photosGet['response']['items'][0]['date'], 'photo', 'wall')
+			elif albumIdToCopyFrom!='wall':
+				Comb.UpdateData('self', from_id, photosGet['response']['items'][0]['date'], 'photo', 'album')
 
 			for a in photosGet['response']['items']:
 				if 'post_id' in a and "copy_history" not in a :
@@ -704,16 +743,18 @@ class Comb:
 		if albumCountPhotos > 1000:
 			while step<albumCountPhotos:
 				step+=10
+
 				for a in vkapi.photos.get( owner_id=public_id, album_id=album_id, count=10, offset=step, rev=rev, v=5.37 )['items']:
 
 					if not os.path.exists(path+publicName):
-						os.mkdir(path=path+publicName)
-
-					elif not os.path.exists( path+publicName + '/' + str(title) ):
-						os.mkdir( path=path+publicName + '/' + str(title)  ) 
+						os.mkdir(path=os.path.join(path,publicName))
+					elif not os.path.exists( os.path.join(path, publicName, str(title)) ):
+						os.mkdir( path=os.path.join(path,publicName,str(title)) )
 					else:
-						wget.download( a['photo_604'], out=path+publicName+'/'+str(title) )
+						if requests.get(a['photo_604']).headers['content-type']=='image/jpeg':
+							wget.download( a['photo_604'], out=path+publicName+'/'+str(title) )
 					os.system("rm ./*.tmp")		
+
 
 		else:
 			for a in vkapi.photos.get( owner_id=public_id, album_id=album_id, count=albumCountPhotos, rev=rev, v=5.37 )['items']:
@@ -892,8 +933,12 @@ class Comb:
 		fname='updateAudioToCopy.json'
 		dtype='audio'
 		updateDate=int
-		if os.path.isfile(fname):
-			with open(fname) as f:
+		if source=='wall':
+			source2='wall'
+		elif source=='audiobox':
+			source2='box'
+		if os.path.isfile(os.path.join('updates',source2,fname)):
+			with open(os.path.join('updates',source2,fname)) as f:
 					data = json.load(f)	
 					for i in data:
 						if i['id']==public_id and i['name']==publicName:
@@ -907,9 +952,9 @@ class Comb:
 				if i['title']==publicName:
 					TargetAlbumId=i['id']
 		if source=='audiobox':
-			# Comb.UpdateData('self', public_id, [i['date']  for i in vkapi.audio.get(owner_id=public_id, count=1)['items']][0], dtype)	
+			Comb.UpdateData('self', public_id, [i['date']  for i in vkapi.audio.get(owner_id=public_id, count=1)['items']][0], dtype, 'box')	
 			
-
+		# 	source='box'
 			for i in vkapi.audio.get(owner_id=public_id, count=count)['items']:
 				
 				if updateDate!=None:
@@ -934,12 +979,12 @@ class Comb:
 					for bb in dd['attachments']:
 						if bb['type']=='audio':
 							ld.append(dd['date'])		
-			Comb.UpdateData('self', public_id, ld[-1], dtype)	
-			for i in vkapi.wall.get(owner_id=public_id, count=count, filte='owner')['items']:
+			Comb.UpdateData('self', public_id, ld[0], dtype, 'wall')	
+			for i in vkapi.wall.get(owner_id=public_id, count=count, filter='owner')['items']:
 				if updateDate!=None:
 					if updateDate==i['date']:
 						break
-				if 'attachments' in i:
+				if 'attachments' in i and 'is_pinned' not in i: 
 					for jo in i['attachments']:
 						if jo['type']=='audio':
 							print(jo['audio']['id'])
@@ -991,47 +1036,51 @@ class Comb:
 					if i['title']==publicName+'_'+albumName:
 						TargetAlbumId=i['id']
 		if type(source)==int:
-			# Comb.UpdateData('self', public_id, [i['date']  for i in vkapi.video.get(owner_id=public_id, count=1)['items']][0], dtype)	
+			print(source)
+			Comb.UpdateData('self', public_id, [i['date']  for i in vkapi.video.get(owner_id=public_id, album_id=source, count=1)['items']][0], dtype, 'album', source)	
+			time.sleep(1)
+			step=-200
+			while step<1000:
+				step+=200
+				for i in vkapi.video.get(owner_id=public_id, album_id=source, offset=step, count=200)['items']:
+					if updateDate!=None:
+						if updateDate==i['date']:
+							break
+					add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(public_id)+'&album_id='+str(TargetAlbumId)+'&video_id='+str(i['id'])+'&access_token='+accTok).json()
+					time.sleep(1)
+					if 'error' in add:
+						print(add)
+						captchaSid=add['error']['captcha_sid']
+						captchaKey=Comb.captcha('self', add['error']['captcha_img'])
+						add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(public_id)+'&album_id='+str(TargetAlbumId)+'&video_id='+str(i['id'])+'&captcha_sid='+str(captchaSid)+'&captcha_key='+str(captchaKey)+'&access_token='+accTok).json()
+						time.sleep(1)
 
-			for i in vkapi.video.get(owner_id=public_id, album_id=source, count=200)['items']:
+		elif source=='wall':
+			ld=[]
+			for dd in vkapi.wall.get(owner_id=public_id, count=count, filter='owner')['items']:
+				if 'attachments' in dd:
+					for bb in dd['attachments']:
+						if bb['type']=='video':
+							ld.append(dd['date'])
+								
+			Comb.UpdateData('self', public_id, ld[0], dtype)	
+			for i in vkapi.wall.get(owner_id=public_id, count=count, filter='owner')['items']:
 				if updateDate!=None:
 					if updateDate==i['date']:
 						break
-				add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(public_id)+'&album_id='+str(TargetAlbumId)+'&video_id='+str(i['id'])+'&access_token='+accTok).json()
+				if 'attachments' in i:
+					for jo in i['attachments']:
+						if jo['type']=='video':
+							print(jo['video']['id'])
+							add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(jo['video']['owner_id'])+'&album_id='+str(TargetAlbumId)+'&video_id='+str(jo['video']['id'])+'&access_token='+accTok).json()
+							time.sleep(1)
+							if 'error' in add:
+								print(add)
+								captchaSid=add['error']['captcha_sid']
+								captchaKey=Comb.captcha('self', add['error']['captcha_img'])
+								add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(jo['video']['owner_id'])+'&album_id='+str(TargetAlbumId)+'&video_id='+str(jo['video']['id'])+'&captcha_sid='+str(captchaSid)+'&captcha_key='+str(captchaKey)+'&access_token='+accTok).json()
 
-				if 'error' in add:
-					print(add)
-					captchaSid=add['error']['captcha_sid']
-					captchaKey=Comb.captcha('self', add['error']['captcha_img'])
-					add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(public_id)+'&album_id='+str(TargetAlbumId)+'&video_id='+str(i['id'])+'&captcha_sid='+str(captchaSid)+'&captcha_key='+str(captchaKey)+'&access_token='+accTok).json()
-					time.sleep(1)
-
-		# elif source=='wall':
-		# 	ld=[]
-		# 	for dd in vkapi.wall.get(owner_id=public_id, count=count, filter='owner')['items']:
-		# 		if 'attachments' in dd:
-		# 			for bb in dd['attachments']:
-		# 				if bb['type']=='video':
-		# 					ld.append(dd['date'])
-								
-		# 	Comb.UpdateData('self', public_id, ld[0], dtype)	
-		# 	for i in vkapi.wall.get(owner_id=public_id, count=count, filter='owner')['items']:
-		# 		if updateDate!=None:
-		# 			if updateDate==i['date']:
-		# 				break
-		# 		if 'attachments' in i:
-		# 			for jo in i['attachments']:
-		# 				if jo['type']=='video':
-		# 					print(jo['video']['id'])
-		# 					add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(jo['video']['owner_id'])+'&album_id='+str(TargetAlbumId)+'&video_id='+str(jo['video']['id'])+'&access_token='+accTok).json()
-		# 					time.sleep(1)
-		# 					if 'error' in add:
-		# 						print(add)
-		# 						captchaSid=add['error']['captcha_sid']
-		# 						captchaKey=Comb.captcha('self', add['error']['captcha_img'])
-		# 						add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(jo['video']['owner_id'])+'&album_id='+str(TargetAlbumId)+'&video_id='+str(jo['video']['id'])+'&captcha_sid='+str(captchaSid)+'&captcha_key='+str(captchaKey)+'&access_token='+accTok).json()
-
-		# 						time.sleep(1)
+								time.sleep(1)
 
 	def getSubs(userId):
 				names=[]
@@ -1260,8 +1309,35 @@ class Comb:
 			city=req[0]['city']['id']
 			sex=req[0]['sex']
 			country=req[0]['country']['id']
-			print(city, sex, country)
-			print(json.dumps(vkapi.users.search(sex=1, country=country, count=10), indent=4, ensure_ascii=False))
+			citiesUSA=[]
+			citiesRU=[]
+			users=[]
+			usersIds=[]
+			# print(json.dumps(vkapi.users.search(sex=1, country=country, count=10), indent=4, ensure_ascii=False))
+			for i in vkapi.database.getCities(count=200, need_all=0, country_id=country)['items']:
+				citiesUSA.append(i['id'])
+			for i in vkapi.database.getCities(count=200, need_all=0, country_id=1)['items']:
+				citiesRU.append(i['id'])
+			for a in random.sample(citiesRU,10):
+				for b in [{"id":i['id'],"fn":i['first_name'],"ln":i['last_name'],"city":i['city']['title'], "bdate":i['bdate']} for i in vkapi.users.search(count=1000, city=a, status=1, has_photo=1, age_from=25, age_to=27, fields='nickname,bdate,city,country,last_seen')['items'] if 'city' in i and 'bdate' in i and 'last_seen' in i and easy_date.convert_from_timestamp(i['last_seen']['time'], '%y-%m-%d')==today ]:
+
+						users.append(b)
+				time.sleep(1)
+			print(len(users))
+			users=random.sample(users, 50)
+			
+			for i in users:
+				if i['id'] not in [i for i in vkapi.friends.get(owner_id=person[0])['items']] and vkapi.friends.areFriends(user_ids=i['id'], need_sign=1)[0]['friend_status']!=1:
+					print(i['id'],i['fn'],i['ln'], i['city'],i['bdate'] )
+					time.sleep(1)
+					# users.append(b['id'])
+					# if b not in [i for i in vkapi.friends.get(owner_id=person[0])['items']]:
+					# 	if 'city' in b:
+					# 		print(b['id'], b['first_name'],b['last_name'],b['city']['title'],b['country']['title'])
+					# 		time.sleep(1)
+			
+
+
 	
 
 		# if not os.path.isfile('friendList.json'):
@@ -1405,6 +1481,7 @@ def getArtistsFromWall():
 		# time.sleep(0.3)
 	text = re.sub("FRISKY|\||'|\[|\]|Artist of the Week,|Frisky",'',str(list(set(artists))))
 	print(text)
+
 def weather(city_name, mode):
 	headers = {"User-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.107 Safari/537.36", "Accept-Language":"ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4"}
 	appId="26641b63856d78bdbc1c25643f3bebee"
@@ -1586,7 +1663,7 @@ def getPollingServer():
 									from_id=i[3]
 									# saa=re.search('[а-яА-Я]+', i[6])
 									# print(saa)
-									sendMesBot('wiki2', re.search('[а-яА-Я]+', i[6]).group(0))
+									sendMesBot('wiki2', re.search('(?<=wiki\s)[а-яА-Я\s]+', i[6]).group(0))
 									print(i, '\n')
 									time.sleep(1)
 							# elif i[6] and re.search('конст \d+', i[6], flags=re.IGNORECASE):
@@ -1758,7 +1835,7 @@ if __name__ == "__main__":
 						if selectedAlbumNameToCopyTo==i['number']:
 							albumNameToCopyTo=i['title']
 					countPhotosToCopyFrom = int(input('count: '))
-			Combain.copyPhotoToAlbum(person[0], fromId, albumNameToCopyTo, albumIdToCopyFrom, countPhotosToCopyFrom)	
+			Combain.copyPhotoToAlbum(person[0], fromId, albumNameToCopyTo, albumIdToCopyFrom, countPhotosToCopyFrom, False)	
 			# print(person[0], fromId, albumNameToCopyTo, albumIdToCopyFrom, countPhotosToCopyFrom )
 		elif int(action) == 7:
 			Combain.delTopicComments()
@@ -1923,6 +2000,25 @@ if __name__ == "__main__":
 			Combain.deleteAudioAlbum()
 		elif int(action)==29:
 			wiki('word', 'лондон')
+		elif int(action)==30:
+			count=vkapi.video.getAlbums(owner_id=person[0])['count']
+			for i,a in  zip(range(count), vkapi.video.getAlbums(owner_id=person[0])['items']):
+				i+=1
+				print(i, a['title'])
+			select=int(input('select: '))
+			films=[]
+			for i,a in  zip(range(count), vkapi.video.getAlbums(owner_id=person[0])['items']):
+				i+=1
+				if i == select:
+					step=-200
+					while step<1000:
+						step+=200
+						for l in vkapi.video.get(album_id=a['id'], count=200, offset=step)['items']:
+							if re.search('([а-яА-Я]+\s){1,10}', l['title']):
+								films.append(re.search('([а-яА-Я]+\s){1,10}', l['title']).group(0))
+			print(re.sub("[\]\[']+",'',str(random.sample(films, 100))))
+
+
 	if sys.argv[1] == 'manual':
 		actions()
 
