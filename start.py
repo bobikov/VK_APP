@@ -425,7 +425,7 @@ class Comb:
 		if dtype=='video':
 			fname='updateVideoToCopy.json'
 
-		if source=='wall':
+		if source=='wall' or source=='box':
 			if fromId<0:
 				publicName = vkapi.groups.getById( group_id = abs(fromId))[0]['name']
 			elif fromId>0:
@@ -453,7 +453,7 @@ class Comb:
 		elif source=='album':
 			if dtype=='video':
 				albumName=vkapi.video.getAlbumById(owner_id=fromId, album_id=album_id)['title']
-				print(albumName)
+				time.sleep(1)
 
 			if fromId<0:
 				publicName = vkapi.groups.getById( group_id = abs(fromId))[0]['name']
@@ -579,12 +579,14 @@ class Comb:
 						break
 				
 				if 'error' in copyPhotos:
+
 					if copyPhotos['error']['error_code'] == 14:
 						self.captchaSid=copyPhotos['error']['captcha_sid']
 						self.captchaKey = Comb.captcha('self', copyPhotos['error']['captcha_img'])
 						copyPhotos = requests.get("https://api.vk.com/method/photos.copy?owner_id="+str(from_id)+"&photo_id="+str(a['id'])+"&captcha_sid="+str(self.captchaSid)+"&captcha_key="+str(self.captchaKey)+"&access_token="+accTok).json()
 						movePhotos = requests.get("https://api.vk.com/method/photos.move?owner_id="+str(to_id)+"&target_album_id="+str(album_id[0])+"&photo_id="+str(copyPhotos['response'])+"&access_token="+accTok).json()
 						time.sleep(1)
+
 
 				movePhotos = requests.get("https://api.vk.com/method/photos.move?owner_id="+str(to_id)+"&target_album_id="+str(album_id[0])+"&photo_id="+str(copyPhotos['response'])+"&access_token="+accTok).json()
 				time.sleep(0.3)
@@ -608,7 +610,89 @@ class Comb:
 						jj.write(json.dumps(toFile, indent=4, ensure_ascii=False))
 			Comb.delPhotos('self')	
 
-	
+	def copyPhotoToAlbum2(self, to_id, from_id, albumNameToCopyTo, albumIdToCopyFrom, countPhotos, text=False):
+		album_id = []
+		photo_id = []
+		albumsFromIds = []
+		photosToCopy = []
+		updateDate=int
+		text1=str
+		toFile=[]
+		phlist=[]
+		st=0
+		stop=False
+		# getAlbumsFromId = Comb.getAlbums('self', from_id)
+		step=-1
+		getAlbumsTo = Comb.getAlbums('self', to_id)
+		if albumIdToCopyFrom=='wall':
+			source='wall'
+		else:
+			source='album'
+		for i in getAlbumsTo:
+			if i['title'] == albumNameToCopyTo:
+				album_id.append(i['id'])
+		with open(os.path.join('updates', source, "updatePhotoData.json")) as f:
+				data = json.load(f)	
+				for i in data:
+					if i['id']==from_id:
+						updateDate=i['date']
+		date1=[i['date'] for i in requests.get("https://api.vk.com/method/wall.get?owner_id="+str(from_id)+"&count=10&v=5.37&access_token="+accTok).json()['response']['items'] if 'is_pinned' not in i][0]
+		if albumIdToCopyFrom=='wall':
+			Comb.UpdateData('self', from_id, date1, 'photo', 'wall')
+		elif albumIdToCopyFrom!='wall':
+				Comb.UpdateData('self', from_id, photosGet['response']['items'][0]['date'], 'photo', 'album', from_id)
+
+		while step<countPhotos:
+			step+=1
+			if stop==True:
+				break
+			photosGet=requests.get("https://api.vk.com/method/wall.get?owner_id="+str(from_id)+"&count=1&offset="+str(step)+"&v=5.37&access_token="+accTok).json()
+			for i in photosGet['response']['items'] :
+				if 'is_pinned' not in i:
+					print(i['date'])
+					time.sleep(1)
+					if text == True:
+						if 'text' in i and i['text']!='':
+							if len(i['text'])>500:
+								f = re.search("[\w\W]{500}", i['text'])
+								text1=f.group(0)
+							else:
+								text1=i['text']
+					if updateDate:
+						if i['date']==updateDate:
+							stop=True
+					if 'attachments' in i:
+						for a in i['attachments']:
+							if a['type']=='photo':
+								# st+=1
+								# print(a['photo']['photo_604'],i['text']+'_'+str(st))
+
+								if albumIdToCopyFrom!='wall' and a['text']!=None:
+									text1=a['text'].replace(',','').replace('#','')	
+								copyPhotos = requests.get("https://api.vk.com/method/photos.copy?owner_id="+str(from_id)+"&photo_id="+str(a['photo']['id'])+"&v=5.35&access_token="+accTok).json()
+								if 'response' in copyPhotos and text1!=None:
+									toFile.append({"id":copyPhotos['response'], "text":text1})
+								time.sleep(1)
+								if 'error' in copyPhotos:
+									print(copyPhotos)
+									if copyPhotos['error']['error_code'] == 14:
+										self.captchaSid=copyPhotos['error']['captcha_sid']
+										# webbrowser.open_new_tab(copyPhotos['error']['captcha_img'])
+										# self.captchaKey=input('enter captcha: ')
+										self.captchaKey = Comb.captcha('self', copyPhotos['error']['captcha_img'])
+										copyPhotos = requests.get("https://api.vk.com/method/photos.copy?owner_id="+str(from_id)+"&photo_id="+str(a['photo']['id'])+"&v=5.35&captcha_sid="+str(self.captchaSid)+"&captcha_key="+str(self.captchaKey)+"&access_token="+accTok).json()
+										if 'response' in copyPhotos:
+											movePhotos = requests.get("https://api.vk.com/method/photos.move?owner_id="+str(to_id)+"&target_album_id="+str(album_id[0])+"&photo_id="+str(copyPhotos['response'])+"&v=5.35&access_token="+accTok).json()
+										# vkapi.photos.edit(owner_id=person[0], photo_id=copyPhotos['response'], caption=text1)
+										time.sleep(1)
+								if 'response' in copyPhotos:
+									movePhotos = requests.get("https://api.vk.com/method/photos.move?owner_id="+str(to_id)+"&target_album_id="+str(album_id[0])+"&photo_id="+str(copyPhotos['response'])+"&v=5.35&access_token="+accTok).json()
+								# vkapi.photos.edit(owner_id=person[0], photo_id=copyPhotos['response'], caption=text1)
+								time.sleep(1)
+								if text==True or albumIdToCopyFrom!='wall':
+									with open("photoCaptions.json", "w") as jj:
+										jj.write(json.dumps(toFile, indent=4, ensure_ascii=False))
+			Comb.delPhotos('self')	
 	def getTopicCommentIds(self):
 		topic_id=Comb.getTopic()
 		ids = []
@@ -1014,7 +1098,7 @@ class Comb:
 					for i in data:
 						if i['id']==public_id and i['name']==publicName:
 							updateDate=i['date']
-		if type(source)=='wall':
+		if source=='wall' or source=='videobox':
 			for i in vkapi.video.getAlbums(owner_id=person[0])['items']:
 					albumTitles.append(i['title'])
 			if publicName not in albumTitles:
@@ -1035,6 +1119,7 @@ class Comb:
 				for i in vkapi.video.getAlbums(owner_id=person[0])['items']:
 					if i['title']==publicName+'_'+albumName:
 						TargetAlbumId=i['id']
+
 		if type(source)==int:
 			print(source)
 			Comb.UpdateData('self', public_id, [i['date']  for i in vkapi.video.get(owner_id=public_id, album_id=source, count=1)['items']][0], dtype, 'album', source)	
@@ -1054,16 +1139,35 @@ class Comb:
 						captchaKey=Comb.captcha('self', add['error']['captcha_img'])
 						add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(public_id)+'&album_id='+str(TargetAlbumId)+'&video_id='+str(i['id'])+'&captcha_sid='+str(captchaSid)+'&captcha_key='+str(captchaKey)+'&access_token='+accTok).json()
 						time.sleep(1)
+		elif source=='videobox':
+			Comb.UpdateData('self', public_id, [i['date']  for i in vkapi.video.get(owner_id=public_id, count=1)['items']][0], dtype, 'box')	
+			time.sleep(1)
+			step=-200
+			while step<1000:
+				step+=200
+				for i in vkapi.video.get(owner_id=public_id, offset=step, count=200)['items']:
+					if updateDate!=None:
+						if updateDate==i['date']:
+							break
+					print(i['title'])
+					add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(public_id)+'&album_id='+str(TargetAlbumId)+'&video_id='+str(i['id'])+'&access_token='+accTok).json()
 
+					time.sleep(1)
+					if 'error' in add:
+						print(add)
+						captchaSid=add['error']['captcha_sid']
+						captchaKey=Comb.captcha('self', add['error']['captcha_img'])
+						add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(public_id)+'&album_id='+str(TargetAlbumId)+'&video_id='+str(i['id'])+'&captcha_sid='+str(captchaSid)+'&captcha_key='+str(captchaKey)+'&access_token='+accTok).json()
+						time.sleep(1)
 		elif source=='wall':
 			ld=[]
-			for dd in vkapi.wall.get(owner_id=public_id, count=count, filter='owner')['items']:
+			for dd in vkapi.wall.get(owner_id=public_id, count=count, album_id='wall', filter='owner')['items']:
 				if 'attachments' in dd:
 					for bb in dd['attachments']:
 						if bb['type']=='video':
 							ld.append(dd['date'])
 								
-			Comb.UpdateData('self', public_id, ld[0], dtype)	
+			Comb.UpdateData('self', public_id, ld[0], dtype, 'wall')	
 			for i in vkapi.wall.get(owner_id=public_id, count=count, filter='owner')['items']:
 				if updateDate!=None:
 					if updateDate==i['date']:
@@ -1115,14 +1219,14 @@ class Comb:
 			fname="updateAudioData.json"
 		elif dtype=='video':
 			fname="updateVideoData.json"
-		if os.path.isfile(fname):
-			with open(fname) as f:
+		if os.path.isfile(os.path.join('updates', 'wall', fname)):
+			with open(os.path.join('updates', 'wall', fname)) as f:
 					data = json.load(f)	
 					for i in data:
 						if i['id']==ownerId:
 							updateDate=i['date']
 
-		Comb.UpdateData('self', ownerId, [i['date']  for i in vkapi.wall.get(owner_id=ownerId, count=5)['items'] if 'is_pinned' not in i][0], dtype)				
+		Comb.UpdateData('self', ownerId, [i['date']  for i in vkapi.wall.get(owner_id=ownerId, count=5)['items'] if 'is_pinned' not in i][0], dtype, 'wall')				
 		while step<count:
 			step+=1
 			if stop==True:
@@ -1328,7 +1432,13 @@ class Comb:
 			
 			for i in users:
 				if i['id'] not in [i for i in vkapi.friends.get(owner_id=person[0])['items']] and vkapi.friends.areFriends(user_ids=i['id'], need_sign=1)[0]['friend_status']!=1:
-					print(i['id'],i['fn'],i['ln'], i['city'],i['bdate'] )
+					# print(i['id'],i['fn'],i['ln'], i['city'],i['bdate'] )
+					add= requests.get('https://api.vk.com/method/friends.add?user_id='+str(i['id'])+'&text=Привет, '+i['fn']+'.&access_token='+accTok)
+					if 'error' in add:
+						print(req['error'])
+						captchaSid=req['error']['captcha_sid']
+						captchaKey=Comb.captcha('self', req['error']['captcha_img'])
+						add=requests.get('https://api.vk.com/method/friends.add?user_id='+str(i['id'])+'&text=Привет, '+i['fn']+'.&captcha_sid='+str(self.captchaSid)+'&captcha_key='+str(self.captchaKey)+'&access_token='+accTok)
 					time.sleep(1)
 					# users.append(b['id'])
 					# if b not in [i for i in vkapi.friends.get(owner_id=person[0])['items']]:
@@ -1420,7 +1530,7 @@ def wiki(stype, word):
 	if stype=='word':
 			wikipedia.set_lang('ru')
 		# try:
-			summ = wikipedia.summary(word, sentences=5)
+			summ = wikipedia.summary(word, sentences=10)
 		# except:
 			# summ = wikipedia.summary(word, sentences=5)
 
@@ -1835,7 +1945,8 @@ if __name__ == "__main__":
 						if selectedAlbumNameToCopyTo==i['number']:
 							albumNameToCopyTo=i['title']
 					countPhotosToCopyFrom = int(input('count: '))
-			Combain.copyPhotoToAlbum(person[0], fromId, albumNameToCopyTo, albumIdToCopyFrom, countPhotosToCopyFrom, False)	
+			# Combain.copyPhotoToAlbum(person[0], fromId, albumNameToCopyTo, albumIdToCopyFrom, countPhotosToCopyFrom, False)	
+			Combain.copyPhotoToAlbum2(person[0], fromId, albumNameToCopyTo, albumIdToCopyFrom, countPhotosToCopyFrom, True)	
 			# print(person[0], fromId, albumNameToCopyTo, albumIdToCopyFrom, countPhotosToCopyFrom )
 		elif int(action) == 7:
 			Combain.delTopicComments()
@@ -1940,7 +2051,7 @@ if __name__ == "__main__":
 			Combain.copyAudio(public_id, count, source)
 		elif int(action)==25:
 			public_id=int(input('public id: '))
-			print('1 wall\n2 album')
+			print('1 wall\n2 album\n3 videobox')
 			source=int(input('source: '))
 			if source==2:
 				count=vkapi.video.getAlbums(owner_id=public_id, extended='count')['count']
@@ -1955,7 +2066,9 @@ if __name__ == "__main__":
 			elif source==1:
 				source='wall'
 				count=int(input('count: '))
-
+			elif source==3:
+				source='videobox'
+				count=int(input('count: '))
 			Notifier.notify('Copying of video files is starting')
 			Combain.copyVideo(public_id, count, source)
 		elif int(action)==26:
