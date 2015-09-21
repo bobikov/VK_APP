@@ -497,7 +497,7 @@ class Comb:
 		text1=str
 		toFile=[]
 		# getAlbumsFromId = Comb.getAlbums('self', from_id)
-		step=-100
+		step=400
 		getAlbumsTo = Comb.getAlbums('self', to_id)
 		if albumIdToCopyFrom=='wall':
 			rev = 1
@@ -510,16 +510,18 @@ class Comb:
 				album_id.append(i['id'])
 
 
-		# with open(os.path.join('updates', source, "updatePhotoData.json")) as f:
-		# 		data = json.load(f)	
-		# 		for i in data:
-		# 			if i['id']==from_id:
-		# 				updateDate=i['date']
+		with open(os.path.join('updates', source, "updatePhotoData.json")) as f:
+				data = json.load(f)	
+				for i in data:
+					if i['id']==from_id:
+						updateDate=i['date']
 
 		if countPhotos>1000:
 			photosGet=requests.get("https://api.vk.com/method/photos.get?owner_id="+str(from_id)+"&album_id="+str(albumIdToCopyFrom)+"&count=100&v=5.35&rev="+str(rev)+"&access_token="+accTok).json()
 			if albumIdToCopyFrom=='wall':
-				Comb.UpdateData('self', from_id, photosGet['response']['items'][0]['date'], 'photo')
+				Comb.UpdateData('self', from_id, photosGet['response']['items'][0]['date'], 'photo', 'wall')
+			elif albumIdToCopyFrom!='wall':
+				Comb.UpdateData('self', from_id, photosGet['response']['items'][0]['date'], 'photo', 'album', albumIdToCopyFrom )
 			
 			while step<countPhotos:
 				step+=100
@@ -527,28 +529,35 @@ class Comb:
 				photosGet=requests.get("https://api.vk.com/method/photos.get?owner_id="+str(from_id)+"&album_id="+str(albumIdToCopyFrom)+"&count=100&offset="+str(step)+"&v=5.35&rev="+str(rev)+"&access_token="+accTok).json()
 				time.sleep(1)
 				for a in photosGet['response']['items']:
-					if 'post_id' in a:
-						for b in vkapi.wall.getById(posts=str(from_id)+'_'+str(a['post_id']), extended=1)['items']:
-							# text1=re.sub('(?<=\n).*$','', b['text'])
-							if len(b['text'])>500:
-								text1='sdf'
-				
+					if text==True:
+						if 'post_id' in a:
+							for b in vkapi.wall.getById(posts=str(from_id)+'_'+str(a['post_id']), extended=1)['items']:
+								# text1=re.sub('(?<=\n).*$','', b['text'])
+								if len(b['text'])>500:
+									f = re.search("[\w\W]{500}", i['text'])
+									text1=f.group(0)
+								else:
+									text1=i['text']
+					if albumIdToCopyFrom!='wall' and a['text']!=None:
+						text1=a['text'].replace(',','').replace('#','')	
 					copyPhotos = requests.get("https://api.vk.com/method/photos.copy?owner_id="+str(from_id)+"&photo_id="+str(a['id'])+"&v=5.35&access_token="+accTok).json()
 					
 					if 'error' in copyPhotos:
-						if copyPhotos['error']['error_code'] == 14:
-							self.captchaSid=copyPhotos['error']['captcha_sid']
-							# webbrowser.open_new_tab(copyPhotos['error']['captcha_img'])
-							# self.captchaKey=input('enter captcha: ')
-							self.captchaKey = Comb.captcha('self', copyPhotos['error']['captcha_img'])
-							copyPhotos = requests.get("https://api.vk.com/method/photos.copy?owner_id="+str(from_id)+"&photo_id="+str(a['id'])+"&v=5.35&captcha_sid="+str(self.captchaSid)+"&captcha_key="+str(self.captchaKey)+"&access_token="+accTok).json()
-							movePhotos = requests.get("https://api.vk.com/method/photos.move?owner_id="+str(to_id)+"&target_album_id="+str(album_id[0])+"&photo_id="+str(copyPhotos['response'])+"&v=5.35&access_token="+accTok).json()
+						# if copyPhotos['error']['error_code'] == 14:
+						self.captchaSid=copyPhotos['error']['captcha_sid']
+						# webbrowser.open_new_tab(copyPhotos['error']['captcha_img'])
+						# self.captchaKey=input('enter captcha: ')
+						self.captchaKey = Comb.captcha('self', copyPhotos['error']['captcha_img'])
+						copyPhotos = requests.get("https://api.vk.com/method/photos.copy?owner_id="+str(from_id)+"&photo_id="+str(a['id'])+"&v=5.37&captcha_sid="+str(self.captchaSid)+"&captcha_key="+str(self.captchaKey)+"&access_token="+accTok).json()
+						movePhotos = requests.get("https://api.vk.com/method/photos.move?owner_id="+str(to_id)+"&target_album_id="+str(album_id[0])+"&photo_id="+str(copyPhotos['response'])+"&v=5.35&access_token="+accTok).json()
+						if text1!='':
 							vkapi.photos.edit(owner_id=person[0], photo_id=copyPhotos['response'], caption=text1)
-							time.sleep(1)
+						time.sleep(1)
 
 		
 					movePhotos = requests.get("https://api.vk.com/method/photos.move?owner_id="+str(to_id)+"&target_album_id="+str(album_id[0])+"&photo_id="+str(copyPhotos['response'])+"&v=5.35&access_token="+accTok).json()
-					# vkapi.photos.edit(owner_id=person[0], photo_id=copyPhotos['response'], caption=text1)
+					if text1:
+						vkapi.photos.edit(owner_id=person[0], photo_id=copyPhotos['response'], caption=text1)
 					time.sleep(1)
 		else:	
 			photosGet=requests.get("https://api.vk.com/method/photos.get?owner_id="+str(from_id)+"&album_id="+str(albumIdToCopyFrom)+"&extended=1&count="+str(countPhotos)+"&v=5.35&rev="+str(rev)+"&access_token="+accTok).json()
@@ -571,7 +580,7 @@ class Comb:
 				if albumIdToCopyFrom!='wall' and a['text']!=None:
 					text1=a['text'].replace(',','').replace('#','')	
 				copyPhotos = requests.get("https://api.vk.com/method/photos.copy?owner_id="+str(from_id)+"&photo_id="+str(a['id'])+"&access_token="+accTok).json()
-				# time.sleep(0.4)
+				# time.sleep(1)
 				if "response" in copyPhotos and text1!=None:
 					toFile.append({"id":copyPhotos['response'], "text":text1})
 				
@@ -586,26 +595,31 @@ class Comb:
 						self.captchaKey = Comb.captcha('self', copyPhotos['error']['captcha_img'])
 						copyPhotos = requests.get("https://api.vk.com/method/photos.copy?owner_id="+str(from_id)+"&photo_id="+str(a['id'])+"&captcha_sid="+str(self.captchaSid)+"&captcha_key="+str(self.captchaKey)+"&access_token="+accTok).json()
 						movePhotos = requests.get("https://api.vk.com/method/photos.move?owner_id="+str(to_id)+"&target_album_id="+str(album_id[0])+"&photo_id="+str(copyPhotos['response'])+"&access_token="+accTok).json()
-						time.sleep(1)
 
+						if text1:
+							vkapi.photos.edit(owner_id=person[0], photo_id=copyPhotos['response'], caption=text1)
+						time.sleep(1)
+						
 
 				movePhotos = requests.get("https://api.vk.com/method/photos.move?owner_id="+str(to_id)+"&target_album_id="+str(album_id[0])+"&photo_id="+str(copyPhotos['response'])+"&access_token="+accTok).json()
-				time.sleep(0.3)
+				if text1:
+					vkapi.photos.edit(owner_id=person[0], photo_id=copyPhotos['response'], caption=text1)
+				time.sleep(1)
 
+				# if re.search('#', text1):
+				# 	texta = text1.replace('#', '')
+				# else:
+				# 	texta = text1
 
-				if re.search('#', text1):
-					texta = text1.replace('#', '')
-				else:
-					texta = text1
-				cap = requests.get("https://api.vk.com/method/photos.edit?owner_id="+str(person[0])+"&photo_id="+str(copyPhotos['response'])+"&caption="+str(texta)+"&v=5.37&access_token="+accTok).json()
+				# cap = requests.get("https://api.vk.com/method/photos.edit?owner_id="+str(person[0])+"&photo_id="+str(copyPhotos['response'])+"&caption="+str(texta)+"&v=5.37&access_token="+accTok).json()
 				# time.sleep(1)
 
-				if 'error' in cap:
-					print(cap['error'])
-					self.captchaSid=cap['error']['captcha_sid']
-					self.captchaKey =Comb.captcha('self', cap['error']['captcha_img'])
-					cap = requests.get("https://api.vk.com/method/photos.edit?owner_id="+str(person[0])+"&photo_id="+str(copyPhotos['response'])+"&caption="+texta+"&captcha_key="+str(self.captchaKey)+"&captcha_sid="+str(self.captchaSid)+"&access_token="+accTok).json()
-					time.sleep(1)
+				# if 'error' in cap:
+				# 	print(cap['error'])
+				# 	self.captchaSid=cap['error']['captcha_sid']
+				# 	self.captchaKey =Comb.captcha('self', cap['error']['captcha_img'])
+				# 	cap = requests.get("https://api.vk.com/method/photos.edit?owner_id="+str(person[0])+"&photo_id="+str(copyPhotos['response'])+"&caption="+texta+"&captcha_key="+str(self.captchaKey)+"&captcha_sid="+str(self.captchaSid)+"&access_token="+accTok).json()
+				# 	time.sleep(1)
 				if text==True or albumIdToCopyFrom!='wall':
 					with open("photoCaptions.json", "w") as jj:
 						jj.write(json.dumps(toFile, indent=4, ensure_ascii=False))
@@ -654,7 +668,7 @@ class Comb:
 					print(i['date'])
 					time.sleep(1)
 					if text == True:
-						if 'text' in i and i['text']!='':
+						if 'text' in i and i['text']!=None:
 							if len(i['text'])>500:
 								f = re.search("[\w\W]{500}", i['text'])
 								text1=f.group(0)
@@ -691,7 +705,7 @@ class Comb:
 									movePhotos = requests.get("https://api.vk.com/method/photos.move?owner_id="+str(to_id)+"&target_album_id="+str(album_id[0])+"&photo_id="+str(copyPhotos['response'])+"&v=5.35&access_token="+accTok).json()
 								# vkapi.photos.edit(owner_id=person[0], photo_id=copyPhotos['response'], caption=text1)
 								time.sleep(1)
-								if text==True or albumIdToCopyFrom!='wall':
+								if text1!=None:
 									with open("photoCaptions.json", "w") as jj:
 										jj.write(json.dumps(toFile, indent=4, ensure_ascii=False))
 			Comb.delPhotos('self')	
@@ -1104,7 +1118,7 @@ class Comb:
 			for i in vkapi.video.getAlbums(owner_id=person[0])['items']:
 					albumTitles.append(i['title'])
 			if publicName not in albumTitles:
-				TargetAlbumId=vkapi.video.addAlbum(owner_id=person[0], title=publicName)['album_id']
+				TargetAlbumId=vkapi.video.addAlbum(owner_id=person[0], title=publicName.replace(':',''))['album_id']
 			elif publicName in albumTitles:
 				for i in vkapi.video.getAlbums(owner_id=person[0])['items']:
 					if i['title']==publicName:
