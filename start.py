@@ -497,7 +497,7 @@ class Comb:
 		text1=str
 		toFile=[]
 		# getAlbumsFromId = Comb.getAlbums('self', from_id)
-		step=400
+		step=-100
 		getAlbumsTo = Comb.getAlbums('self', to_id)
 		if albumIdToCopyFrom=='wall':
 			rev = 1
@@ -623,7 +623,7 @@ class Comb:
 				if text==True or albumIdToCopyFrom!='wall':
 					with open("photoCaptions.json", "w") as jj:
 						jj.write(json.dumps(toFile, indent=4, ensure_ascii=False))
-			Comb.delPhotos('self')	
+			Comb.delPhotos('self') 
 
 	def copyPhotoToAlbum2(self, to_id, from_id, albumNameToCopyTo, albumIdToCopyFrom, countPhotos, text=False):
 		album_id = []
@@ -1439,7 +1439,7 @@ class Comb:
 			for i in vkapi.database.getCities(count=200, need_all=0, country_id=1)['items']:
 				citiesRU.append(i['id'])
 			for a in random.sample(citiesRU,10):
-				for b in [{"id":i['id'],"fn":i['first_name'],"ln":i['last_name'],"city":i['city']['title'], "bdate":i['bdate']} for i in vkapi.users.search(count=1000, city=a, status=1, has_photo=1, age_from=25, age_to=27, fields='nickname,bdate,city,country,last_seen')['items'] if 'city' in i and 'bdate' in i and 'last_seen' in i and easy_date.convert_from_timestamp(i['last_seen']['time'], '%y-%m-%d')==today ]:
+				for b in [{"id":i['id'],"fn":i['first_name'],"ln":i['last_name'],"city":i['city']['title'], "bdate":i['bdate']} for i in vkapi.users.search(count=1000, city=a, status=1, has_photo=1, age_from=18, age_to=27, fields='nickname,bdate,city,country,last_seen')['items'] if 'city' in i and 'bdate' in i and 'last_seen' in i and easy_date.convert_from_timestamp(i['last_seen']['time'], '%y-%m-%d')==today ]:
 
 						users.append(b)
 				time.sleep(1)

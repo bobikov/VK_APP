@@ -1,39 +1,44 @@
 [
     {
-        "date": 1442266266,
         "name": "FRISKY Radio",
-        "id": -42311167
+        "id": -42311167,
+        "date": 1442266266
     },
     {
-        "date": 1441537166,
         "name": "Proton Radio",
-        "id": -28062860
+        "id": -28062860,
+        "date": 1441537166
     },
     {
-        "date": 1442841674,
-        "name": "BBC Radio 1 / 1Xtra",
-        "id": -20833574
-    },
-    {
-        "date": 1439958401,
         "name": [
             {
-                "first_name": "Ivan",
                 "nickname": "|Nik Amol|",
+                "id": 25023,
                 "last_name": "Lomakin",
-                "id": 25023
+                "first_name": "Ivan"
             }
         ],
-        "id": 25023
+        "id": 25023,
+        "date": 1439958401
     },
     {
-        "date": 1401376168,
         "name": "DIE ANTWOORD",
-        "id": -31919300
+        "id": -31919300,
+        "date": 1401376168
     },
     {
         "name": "E:\\music\\psychedelic",
-        "date": 1442501977,
-        "id": -29318096
+        "id": -29318096,
+        "date": 1442501977
+    },
+    {
+        "name": "BBC Radio 1 / 1Xtra",
+        "id": -20833574,
+        "date": 1442853045
+    },
+    {
+        "name": "SWAGLux.",
+        "id": -40747210,
+        "date": 1442846888
     }
 ]
