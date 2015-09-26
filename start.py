@@ -2244,9 +2244,10 @@ if __name__ == "__main__":
 				publicName=vkapi.users.get(user_ids=str(public), fields='nickname')
 			path=os.path.join('walls',publicName)
 			if not os.path.exists(path):
-					os.mkdir(path=os.path.join(path, 'imgs'))
+				os.mkdir(path=path)
+				os.mkdir(path=os.path.join(path,'imgs'))
 
-			html="""<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <title>"""+publicName+"""</title> </head> <style>.post{width:500px; margin: 10px auto 5px auto; font-size:12px; font-family:sans-serif;} .wall img{width:60%;} .wall{width:500px; margin: 0 auto 0 auto; font-size:12px; padding:10px; font-family:sans-serif;}p{cursor:pointer; color: blue;}</style><body><div class='wall'> </div><script src='../../../bower_components/jquery/dist/jquery.js'></script><script src='main.js'></script></body> </html> """
+			html="""<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <title>"""+publicName+"""</title> </head> <style>.post{width:500px; margin: 10px auto 5px auto; font-size:12px; font-family:sans-serif;} .wall img{width:60%;} .wall{width:500px; margin: 0 auto 0 auto; font-size:12px; padding:10px; font-family:sans-serif;}p{cursor:pointer; color: blue;}</style><body><div class='wall'> </div><script src='../../bower_components/jquery/dist/jquery.js'></script><script src='../main.js'></script></body> </html> """
 			for i in vkapi.wall.get(owner_id=public, count=80)['items']:
 				
 				if 'attachments' in i:
@@ -2254,7 +2255,7 @@ if __name__ == "__main__":
 						if a['type']=='photo':
 							parseURL=urlparse(a['photo']['photo_604']).path
 							fname = re.sub('^(.[^\/]*){1,50}\/', '', parseURL)
-							divs.append('<div class="post">%s</div><p style="display:none;">Показать полностью</p><img src=%s>' % (i['text'], os.path.join(path, 'imgs', fname)))
+							divs.append('<div class="post">%s</div><p style="display:none;">Показать полностью</p><img src=%s>' % (i['text'].replace('\n', '<br>'), os.path.join('imgs', fname)))
 							# print(fname)
 							wget.download(a['photo']['photo_604'], out=os.path.join(path,'imgs'))
 			html = re.sub('(?<=<div class=.{6}>).*(?=</div>)', re.sub("[\[\],']", '', str(divs)), html)
