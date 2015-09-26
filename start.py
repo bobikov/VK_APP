@@ -911,7 +911,7 @@ class Comb:
 		ids=[]
 		headers = {"User-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.107 Safari/537.36", "Accept-Language":"ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4"}
 		uploadUrl = requests.get("https://api.vk.com/method/photos.getOwnerPhotoUploadServer?access_token="+accTok, headers=headers).json()['response']['upload_url']
-		r = requests.post(uploadUrl, files={ 'file' : open('/Users/hal/Pictures/179349317/Трипофобия/'+photo, 'rb') }).json()
+		r = requests.post(uploadUrl, files={ 'file' : open('/Users/hal/Pictures/179349317/_эстетика отвратительного_/'+photo, 'rb') }).json()
 		# photoSave = vkapi.photos.saveOwnerPhoto(server=r['server'], photo=r['photo'], hash=r['hash'], v=5.37)
 		photoSave = requests.get("https://api.vk.com/method/photos.saveOwnerPhoto?server="+str(r['server'])+"&photo="+str(r['photo'])+"&hash="+str(r['hash'])+"&v=5.37&access_token="+accTok).json()
 		if 'error' in photoSave:
@@ -1014,7 +1014,7 @@ class Comb:
 		e1=Entry(root)
 		e1.place(x=15, y=100)
 		# e1.pack()
-		button1 = Button(root, text='Button1')
+		button1 = Button(root, text='Send')
 		button1.bind('<Button-1>', getKey)
 		button1.place(x=50, y=150)
 
@@ -1202,7 +1202,7 @@ class Comb:
 
 								time.sleep(1)
 
-	def getSubs(userId):
+	def getSubs(self, userId):
 				names=[]
 				count = vkapi.users.getSubscriptions(user_id=userId, extended=1)['count']
 				if count > 1000:
@@ -1283,19 +1283,31 @@ class Comb:
 											fname2=re.sub("\/|:", '',fname1.group(0).replace('.', ''))
 										else:
 											fname2=urlparse(a['doc']['url']).path.replace('/', '')
-										# if requests.get(a['doc']['url']).headers['content-type']=='application/pdf':
-										wget.download( a['doc']['url'], out=os.path.join(path,publicName,dtype) )
-										path2=os.path.join(path,publicName,dtype)+'/'
-										if dtype=='gif':
-											[os.rename(path2+f, path2+fname2+'.'+dtype) for f in os.listdir(path2) if f==(urlparse(a['doc']['url']).path.replace('/',''))]
-										elif dtype=='pdf' or dtype=='djvu':
-											if re.search('...$', a['doc']['title']).group(0)=='pdf':
-												[os.rename(path2+f, path2+a['doc']['title']) for f in os.listdir(path2) if f==(urlparse(a['doc']['url']).path.replace('/',''))]
-											else:
-												[os.rename(path2+f, path2+a['doc']['title']+'.pdf') for f in os.listdir(path2) if f==(urlparse(a['doc']['url']).path.replace('/',''))]
+										if dtype=='pdf':
+											if requests.get(a['doc']['url']).headers['content-type']=='application/pdf':
+												wget.download( a['doc']['url'], out=os.path.join(path,publicName,dtype) )
+												path2=os.path.join(path,publicName,dtype)+'/'
 
-										else:
-											[os.rename(path2+f, path2+a['doc']['title']) for f in os.listdir(path2) if f==(urlparse(a['doc']['url']).path.replace('/',''))]
+												if re.search('...$', a['doc']['title']).group(0)=='pdf':
+													[os.rename(path2+f, path2+a['doc']['title']) for f in os.listdir(path2) if f==(urlparse(a['doc']['url']).path.replace('/',''))]
+												else:
+													[os.rename(path2+f, path2+a['doc']['title']+'.pdf') for f in os.listdir(path2) if f==(urlparse(a['doc']['url']).path.replace('/',''))]
+										elif dtype=='gif':
+											wget.download( a['doc']['url'], out=os.path.join(path,publicName,dtype) )
+											path2=os.path.join(path,publicName,dtype)+'/'
+
+											[os.rename(path2+f, path2+fname2+'.'+dtype) for f in os.listdir(path2) if f==(urlparse(a['doc']['url']).path.replace('/',''))]
+
+										elif dtype=="djvu":
+											if requests.get(a['doc']['url']).headers['content-type']=='application/djvu':
+												wget.download( a['doc']['url'], out=os.path.join(path,publicName,dtype) )
+												path2=os.path.join(path,publicName,dtype)+'/'
+
+												if re.search('....$', a['doc']['title']).group(0)=='djvu':
+													[os.rename(path2+f, path2+a['doc']['title']) for f in os.listdir(path2) if f==(urlparse(a['doc']['url']).path.replace('/',''))]
+												else:
+													[os.rename(path2+f, path2+a['doc']['title']+'.djvu') for f in os.listdir(path2) if f==(urlparse(a['doc']['url']).path.replace('/',''))]
+
 
 
 									os.system("rm ./*.tmp")
@@ -1331,6 +1343,7 @@ class Comb:
 	def getGroups(self, userId, count, mode):
 
 		groups=[]
+		sexgroups=[]
 		count=10000
 
 		if os.path.isfile('groups.json'):
@@ -1338,16 +1351,20 @@ class Comb:
 				step=-1000
 				while step < count:
 					step+=1000
-					for i in vkapi.groups.get(user_id=person[0], extended=1, offset=step, count=1000)['items']:
-						groups.append({"name":i['name'], "id":i['id']})
+					for i in vkapi.groups.get(user_id=person[0], extended=1, offset=step, fields='description', count=1000)['items']:
+						if 'description' in i:
+							groups.append({"name":i['name'], "id":i['id'], 'description':i['description']})
+
+						# print(i)
 					time.sleep(0.5)
+
 			else:
 				for i in vkapi.groups.get(user_id=person[0], extended=1, count=1000)['items']:
 						groups.append({"name":i['name'], "id":i['id']})
 			with open("groups.json", "w") as o:
 				o.write(json.dumps(groups, indent=4, sort_keys=True, ensure_ascii=False))
 		if os.path.isfile('subscribes.json'):
-			Comb.getSubs(person[0])
+			Comb.getSubs('self', person[0])
 
 		with open("friendList.json", 'r') as aa:
 			data=json.load(aa)
@@ -1504,6 +1521,58 @@ class Comb:
 										captchaKey=Comb.captcha('self', req['error']['captcha_img'])
 										add=requests.get('https://api.vk.com/method/friends.add?user_id='+str(us['id'])+'&text=Привет, '+us['first_name']+'.&captcha_sid='+str(self.captchaSid)+'&captcha_key='+str(self.captchaKey)+'&access_token='+accTok)
 						time.sleep(1)
+	def getGroupCategories(self):
+		adult=[]
+		instagram=[]
+		science=[]
+		citates=[]
+		books=[]
+		music=[]
+		step=-200
+		step2=-1000
+		data=[]
+		while step2<5000:
+			step2+=1000
+			for i in vkapi.groups.get(user_id=person[0], extended=1, fields='description', offset=step2, count=1000)['items']:
+				if 'description' in i:
+					data.append({'id':i['id'], 'name':i['name'], 'desc':i['description']})
+				else:
+					data.append({'id':i['id'], 'name':i['name'], 'desc':None})
+
+		while step<5000:
+			step+=200
+			for i in vkapi.users.getSubscriptions(user_id=person[0], extended=1, count=200,fields='description', offset=step)['items']:
+				if 'description' in i:
+					data.append({'id':i['id'], 'name':i['name'],'desc':i['description']})
+		for i in data:
+			if re.search('порн|porn|erotic|эроти[ч,к]|sex|секс', i['name'], flags=re.IGNORECASE):
+			# print(i['name'], i['id'])
+				adult.append(i['id'])
+			elif re.search('инстаграм|instagram', i['name'], flags=re.IGNORECASE):
+				instagram.append(i['id'])
+			elif re.search('scienc|нау[к,ч]', i['name'], flags=re.IGNORECASE):
+					science.append(i['id'])	
+			elif re.search('цитаты|мудрост[ь,и]', i['name'], flags=re.IGNORECASE):
+					citates.append(i['id'])
+			elif re.search('книги|литература|books', i['name'], flags=re.IGNORECASE):
+					books.append(i['id'])
+			elif re.search('музыка|music', i['name'], flags=re.IGNORECASE):
+					music.append(i['id'])
+			if i['desc']!=None:
+				if re.search('порн|porn|erotic|эроти[ч,к]|sex|секс', i['desc'], flags=re.IGNORECASE):
+					adult.append(i['id'])
+				elif re.search('scienc|нау[к,ч]', i['desc'], flags=re.IGNORECASE):
+					science.append(i['id'])
+				elif re.search('цитаты|мудрост[ь,и]', i['desc'], flags=re.IGNORECASE):
+					citates.append(i['id'])
+				elif re.search('книги|литература|books', i['desc'], flags=re.IGNORECASE):
+					books.append(i['id'])
+				elif re.search('музыка|music', i['desc'], flags=re.IGNORECASE):
+					music.append(i['id'])
+		print(len(data))
+		print('adult', len(adult), '\n', 'instagram', len(instagram), '\n', 'science', len(science), '\n', 'citates',len(citates), '\n' 'books', len(books), '\n', 'music', len(music), '\n', 'other', len(data)-len(citates+instagram+science+adult+books+music))
+		print(citates)
+
 	def deleteAudioAlbum(self):
 		count=vkapi.audio.getAlbums(owner_id=person[0])['count']
 		for i,a in zip(range(count), vkapi.audio.getAlbums(owner_id=person[0])['items']):
@@ -1993,7 +2062,7 @@ if __name__ == "__main__":
 			Combain.captcha('http://api.vk.com/captcha.php?sid=986265422898&s=1')
 
 		elif int(action) == 13:
-			dir1 = os.listdir('/Users/hal/Pictures/179349317/Трипофобия/')
+			dir1 = os.listdir('/Users/hal/Pictures/179349317/_эстетика отвратительного_/')
 			dir1.pop(0)
 			while True:
 				Combain.uploadOwnerPhoto(random.choice(dir1))
@@ -2039,7 +2108,18 @@ if __name__ == "__main__":
 			Combain.getDocs(ownerId, count, dtype, path, download=True)
 		elif int(action)==19:
 			# getFests()
-			Combain.getSubs(person[0])
+			# Combain.getSubs(person[0])
+			# with open('subscribes.json', 'r') as o:
+				# data=json.load(o)
+			users=vkapi.friends.getRequests(out=1,sort=1)['items']
+			users=re.sub('[\]\[]', '', str(users))
+			users=vkapi.users.get(user_ids=users, count=200)
+			for num,user in zip(range(len(users)),users):
+				num+=1
+				print(num, user['first_name'], user['last_name'], user['id'])
+				# vkapi.friends.delete(user_id=user['id'])
+				# time.sleep(1)
+			# print()
 
 		elif int(action)==20:
 			print('1 from search friends\n2 from friend list')
@@ -2098,11 +2178,14 @@ if __name__ == "__main__":
 				for i,a in zip(range(count), vkapi.friends.get(owner_id=person[0], fields='nickname')['items']):
 					i+=1
 					print(i, a['first_name'], a['last_name'], a['id'])
+
 				user=int(input('user id:'))
 				for i,a in zip(range(count), vkapi.friends.get(owner_id=person[0], fields='nickname')['items']):
 					i+=1
 					if user==i:
 						user=a['id']
+					else:
+						user=user
 				Combain.getGroups(user, 10, 'oneFriend')
 			elif selectMode==1:
 				Combain.getGroups(user,10, 'allFriends')
@@ -2149,8 +2232,36 @@ if __name__ == "__main__":
 							if re.search('([а-яА-Я]+\s){1,10}', l['title']):
 								films.append(re.search('([а-яА-Я]+\s){1,10}', l['title']).group(0))
 			print(re.sub("[\]\[']+",'',str(random.sample(films, 100))))
+		elif int(action)==31:
+			Combain.getGroupCategories()
+		elif int(action)==32:
+			divs=[]
+			imgs=[]
+			public=int(input('public: '))
+			if public<0:
+				publicName = vkapi.groups.getById( group_id = abs(public))[0]['name']
+			elif public>0:
+				publicName=vkapi.users.get(user_ids=str(public), fields='nickname')
+			path=os.path.join('walls',publicName)
+			if not os.path.exists(path):
+					os.mkdir(path=os.path.join(path, 'imgs'))
 
-
+			html="""<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <title>"""+publicName+"""</title> </head> <style>.post{width:500px; margin: 10px auto 5px auto; font-size:12px; font-family:sans-serif;} .wall img{width:60%;} .wall{width:500px; margin: 0 auto 0 auto; font-size:12px; padding:10px; font-family:sans-serif;}p{cursor:pointer; color: blue;}</style><body><div class='wall'> </div><script src='../../../bower_components/jquery/dist/jquery.js'></script><script src='main.js'></script></body> </html> """
+			for i in vkapi.wall.get(owner_id=public, count=80)['items']:
+				
+				if 'attachments' in i:
+					for a in i['attachments']:
+						if a['type']=='photo':
+							parseURL=urlparse(a['photo']['photo_604']).path
+							fname = re.sub('^(.[^\/]*){1,50}\/', '', parseURL)
+							divs.append('<div class="post">%s</div><p style="display:none;">Показать полностью</p><img src=%s>' % (i['text'], os.path.join(path, 'imgs', fname)))
+							# print(fname)
+							wget.download(a['photo']['photo_604'], out=os.path.join(path,'imgs'))
+			html = re.sub('(?<=<div class=.{6}>).*(?=</div>)', re.sub("[\[\],']", '', str(divs)), html)
+			html = BeautifulSoup(html, 'html.parser').prettify()
+			# print(html)
+			with open(os.path.join(path, 'wall.html'), 'w') as o:
+				o.write(html)
 	if sys.argv[1] == 'manual':
 		actions()
 
