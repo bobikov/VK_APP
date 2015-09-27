@@ -1123,6 +1123,8 @@ class Comb:
 				for i in vkapi.video.getAlbums(owner_id=person[0])['items']:
 					if i['title']==publicName:
 						TargetAlbumId=i['id']
+
+
 		if type(source)==int:
 
 			albumName=vkapi.video.getAlbumById(owner_id=public_id, album_id=source)['title']
@@ -1177,6 +1179,7 @@ class Comb:
 						time.sleep(1)
 		elif source=='wall':
 			ld=[]
+
 			for dd in vkapi.wall.get(owner_id=public_id, count=count, album_id='wall', filter='owner')['items']:
 				if 'attachments' in dd:
 					for bb in dd['attachments']:
@@ -1191,16 +1194,20 @@ class Comb:
 				if 'attachments' in i:
 					for jo in i['attachments']:
 						if jo['type']=='video':
-							print(jo['video']['id'])
-							add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(jo['video']['owner_id'])+'&album_id='+str(TargetAlbumId)+'&video_id='+str(jo['video']['id'])+'&access_token='+accTok).json()
-							time.sleep(1)
-							if 'error' in add:
-								print(add)
-								captchaSid=add['error']['captcha_sid']
-								captchaKey=Comb.captcha('self', add['error']['captcha_img'])
-								add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(jo['video']['owner_id'])+'&album_id='+str(TargetAlbumId)+'&video_id='+str(jo['video']['id'])+'&captcha_sid='+str(captchaSid)+'&captcha_key='+str(captchaKey)+'&access_token='+accTok).json()
-
+							
+							if jo['video']['title'] not in [i['title'] for i in vkapi.video.get(owner_id=person[0], album_id=TargetAlbumId)['items'] if 'title' in i]:
+								# print(jo['video']['title'])
+								add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(jo['video']['owner_id'])+'&album_id='+str(TargetAlbumId)+'&video_id='+str(jo['video']['id'])+'&access_token='+accTok).json()
 								time.sleep(1)
+								if 'error' in add:
+									if add['error']['error_code']==14:
+										captchaSid=add['error']['captcha_sid']
+										captchaKey=Comb.captcha('self', add['error']['captcha_img'])
+										add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(jo['video']['owner_id'])+'&album_id='+str(TargetAlbumId)+'&video_id='+str(jo['video']['id'])+'&captcha_sid='+str(captchaSid)+'&captcha_key='+str(captchaKey)+'&access_token='+accTok).json()
+									elif add['error']['error_code']==204:
+										continue
+										# add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(jo['video']['owner_id'])+'&album_id='+str(TargetAlbumId)+'&video_id='+str(jo['video']['id'])+'&access_token='+accTok).json()
+							time.sleep(1)
 
 	def getSubs(self, userId):
 				names=[]
