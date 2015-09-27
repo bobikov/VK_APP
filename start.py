@@ -2237,6 +2237,7 @@ if __name__ == "__main__":
 		elif int(action)==32:
 			divs=[]
 			imgs=[]
+			phsize='60%'
 			public=int(input('public: '))
 			if public<0:
 				publicName = vkapi.groups.getById( group_id = abs(public))[0]['name']
@@ -2247,20 +2248,27 @@ if __name__ == "__main__":
 				os.mkdir(path=path)
 				os.mkdir(path=os.path.join(path,'imgs'))
 
-			html="""<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <title>"""+publicName+"""</title> </head> <style>.post{width:500px; margin: 10px auto 5px auto; font-size:12px; font-family:sans-serif;} .wall img{width:60%;} .wall{width:500px; margin: 0 auto 0 auto; font-size:12px; padding:10px; font-family:sans-serif;}p{cursor:pointer; color: blue;}</style><body><div class='wall'> </div><script src='../../bower_components/jquery/dist/jquery.js'></script><script src='../main.js'></script></body> </html> """
+			html="""<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <link rel="stylesheet" href="../Magnific-Popup/dist/magnific-popup.css"><title>"""+publicName+"""</title> </head> <style>.post{width:500px; margin: 10px auto 5px auto; font-size:12px; font-family:sans-serif;} .wall{width:500px; margin: 0 auto 0 auto; font-size:12px; padding:10px; font-family:sans-serif;}p{cursor:pointer; color: blue;} .wall img{cursor: pointer;}</style><body><div class='wall'> </div><script src='../../bower_components/jquery/dist/jquery.js'></script><script src='../main.js'></script><script src="../Magnific-Popup/dist/jquery.magnific-popup.js"></script></body> </html> """
 			for i in vkapi.wall.get(owner_id=public, count=80)['items']:
-				
+				divs.append('<div class="post">%s</div>' % (i['text'].replace('\n', '<br>')))
+				divs.append('<p style="display:none;">Показать полностью</p>')
+				divs.append('<p style="display:none;">Показать полностью</p><div style="width: 500px; height: 250px">')
 				if 'attachments' in i:
+					if len(i['attachments'])>1:
+						phwidth='30%'
+						phheight='30%'
+					else:
+						phwidth='80%'
+						phheight='80%'
 					for a in i['attachments']:
 						if a['type']=='photo':
 							parseURL=urlparse(a['photo']['photo_604']).path
 							fname = re.sub('^(.[^\/]*){1,50}\/', '', parseURL)
-							divs.append('<div class="post">%s</div><p style="display:none;">Показать полностью</p><img src=%s>' % (i['text'].replace('\n', '<br>'), os.path.join('imgs', fname)))
-							# print(fname)
+							divs.append('<a href=%s><img src=%s style=%s;%s></a>' % (os.path.join('imgs', fname), os.path.join('imgs', fname), 'max-width:'+phwidth, 'max-height:'+phheight))
 							wget.download(a['photo']['photo_604'], out=os.path.join(path,'imgs'))
+					divs.append('</div>')
 			html = re.sub('(?<=<div class=.{6}>).*(?=</div>)', re.sub("[\[\],']", '', str(divs)), html)
 			html = BeautifulSoup(html, 'html.parser').prettify()
-			# print(html)
 			with open(os.path.join(path, 'wall.html'), 'w') as o:
 				o.write(html)
 	if sys.argv[1] == 'manual':
