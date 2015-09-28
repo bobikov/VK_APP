@@ -3,7 +3,7 @@ $(document).ready(function(){
   	var elem;
   	var src;
   	posts=$('.post')
-	$('.image-link').magnificPopup({type:'image'})
+	// $('.image-link').magnificPopup({type:'image'})
 	// $('img').click(function(){
 	// 	src=$(event.target).attr('src');
 
@@ -24,6 +24,23 @@ $(document).ready(function(){
 
   		// 	$(this).css('overflow', 'hidden')
   		// }
+  		console.log(i)
+  		if($($('.post')[i]).next().next().next().children().children().length==1){
+  			$($('.post')[i]).next().next().next().children().children().css('max-width', '90%')
+  			$($('.post')[i]).next().next().next().children().children().css('max-height', '90%')
+  		}
+  		else if($($('.post')[i]).next().next().next().children().children().length==3){
+  			$($('.post')[i]).next().next().next().children().children().css('max-width', '50%')
+  			$($('.post')[i]).next().next().next().children().children().css('max-height', '50%')
+  		}
+  		else if($($('.post')[i]).next().next().next().children().children().length==6){
+  			$($('.post')[i]).next().next().next().children().children().css('max-width', '45%')
+  			$($('.post')[i]).next().next().next().children().children().css('max-height', '45%')
+  		}
+
+  		
+  		
+
 
   		if (p.exec($($('.post')[i]).css('height'))>500){
   			elem=$($('.post')[i]);
@@ -42,7 +59,9 @@ $(document).ready(function(){
 						$(this).text('Показать полностью');
 					};
 			});
+
 					
 		}
+
   	}
  })
