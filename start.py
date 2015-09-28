@@ -2271,14 +2271,9 @@ if __name__ == "__main__":
 				if 'attachments' in i:
 					
 					for a in i['attachments']:
-						docs+=list(a).count('doc')
-						if len(i['attachments'])>1 and docs<1:
-							phwidth='30%'
-							phheight='30%'
-						elif len(i['attachments'])>1 and docs>0:
-
-							phwidth='80%'
-							phheight='80%'
+						if len(i['attachments']):
+							phwidth='40%'
+							phheight='40%'
 						else:
 							phwidth='80%'
 							phheight='80%'

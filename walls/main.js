@@ -26,16 +26,20 @@ $(document).ready(function(){
   		// }
   		console.log(i)
   		if($($('.post')[i]).next().next().next().children().children().length==1){
-  			$($('.post')[i]).next().next().next().children().children().css('max-width', '90%')
-  			$($('.post')[i]).next().next().next().children().children().css('max-height', '90%')
+  			$($('.post')[i]).next().next().next().children().children().css('max-width', '100%')
+  			$($('.post')[i]).next().next().next().children().children().css('max-height', '100%')
   		}
   		else if($($('.post')[i]).next().next().next().children().children().length==3){
-  			$($('.post')[i]).next().next().next().children().children().css('max-width', '50%')
-  			$($('.post')[i]).next().next().next().children().children().css('max-height', '50%')
+  			$($('.post')[i]).next().next().next().children().children().css('max-width', '70%')
+  			$($('.post')[i]).next().next().next().children().children().css('max-height', '70%')
   		}
   		else if($($('.post')[i]).next().next().next().children().children().length==6){
   			$($('.post')[i]).next().next().next().children().children().css('max-width', '45%')
   			$($('.post')[i]).next().next().next().children().children().css('max-height', '45%')
+  		}
+  		else if($($('.post')[i]).next().next().next().children().children().length==8){
+  			$($('.post')[i]).next().next().next().children().children().css('max-width', '50%')
+  			$($('.post')[i]).next().next().next().children().children().css('max-height', '50%')
   		}
 
   		
