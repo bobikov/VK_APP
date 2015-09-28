@@ -15,7 +15,7 @@ $(document).ready(function(){
 		    // options for gallery
 		    enabled: true
 		  },
-	  delegate: 'a', // child items selector, by clicking on it popup will open
+	  delegate: '.photos', // child items selector, by clicking on it popup will open
 	  type: 'image'
 	  // other options
 	});
@@ -30,23 +30,42 @@ $(document).ready(function(){
   			$($('.post')[i]).next().next().next().children().children().css('max-height', '100%')
   		}
   		else if($($('.post')[i]).next().next().next().children().children().length==3){
-  			$($('.post')[i]).next().next().next().children().children().css('max-width', '70%')
-  			$($('.post')[i]).next().next().next().children().children().css('max-height', '70%')
+  			$($('.post')[i]).next().next().next().children().children().css('max-width', '40%')
+  			$($('.post')[i]).next().next().next().children().children().css('max-height', '40%')
+  		}
+  		else if($($('.post')[i]).next().next().next().children().children().length==2){
+  			$($('.post')[i]).next().next().next().children().children().css('max-width', '60%')
+  			$($('.post')[i]).next().next().next().children().children().css('max-height', '60%')
   		}
   		else if($($('.post')[i]).next().next().next().children().children().length==6){
   			$($('.post')[i]).next().next().next().children().children().css('max-width', '45%')
   			$($('.post')[i]).next().next().next().children().children().css('max-height', '45%')
   		}
   		else if($($('.post')[i]).next().next().next().children().children().length==8){
-  			$($('.post')[i]).next().next().next().children().children().css('max-width', '50%')
-  			$($('.post')[i]).next().next().next().children().children().css('max-height', '50%')
+  			$($('.post')[i]).next().next().next().children().children().css('max-width', '35%')
+  			$($('.post')[i]).next().next().next().children().children().css('max-height', '35%')
   		}
-
+  		else if($($('.post')[i]).next().next().next().children().children().length==9){
+  			$($('.post')[i]).next().next().next().children().children().css('max-width', '30%')
+  			$($('.post')[i]).next().next().next().children().children().css('max-height', '30%')
+  		}
+      else if($($('.post')[i]).next().next().next().children().children().length==10){
+        $($('.post')[i]).next().next().next().children().children().css('max-width', '32%')
+        $($('.post')[i]).next().next().next().children().children().css('max-height', '32%')
+      }
+       else if($($('.post')[i]).next().next().next().children().children().length==7){
+        $($('.post')[i]).next().next().next().children().children().css('max-width', '35%')
+        $($('.post')[i]).next().next().next().children().children().css('max-height', '35%')
+      }
+      else if($($('.post')[i]).next().next().next().children().children().length==5){
+        $($('.post')[i]).next().next().next().children().children().css('max-width', '40%')
+        $($('.post')[i]).next().next().next().children().children().css('max-height', '40%')
+      }
   		
   		
 
 
-  		if (p.exec($($('.post')[i]).css('height'))>500){
+  		if (p.exec($($('.post')[i]).css('height'))>400){
   			elem=$($('.post')[i]);
 			$($('.post')[i]).css('height', '200px');
 			$($('.post')[i]).css('overflow', 'hidden');
@@ -58,7 +77,7 @@ $(document).ready(function(){
 						$(event.target).prev().css('height', 'auto');
 						$(this).text('Скрыть');
 					}
-					else if (p.exec($(event.target).prev().css('height'))>500){
+					else if (p.exec($(event.target).prev().css('height'))>400){
 						$(event.target).prev().css('height', '200px');
 						$(this).text('Показать полностью');
 					};
