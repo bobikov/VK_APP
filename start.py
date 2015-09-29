@@ -693,7 +693,7 @@ class Comb:
 								copyPhotos = requests.get("https://api.vk.com/method/photos.copy?owner_id="+str(from_id)+"&photo_id="+str(a['photo']['id'])+"&v=5.35&access_token="+accTok).json()
 								if 'response' in copyPhotos and text1!=None:
 									toFile.append({"id":copyPhotos['response'], "text":text1})
-								time.sleep(1)
+								# time.sleep(1)
 								if 'error' in copyPhotos:
 									print(copyPhotos)
 									if copyPhotos['error']['error_code'] == 14:
@@ -2298,10 +2298,11 @@ if __name__ == "__main__":
 
 			Comb.UpdateData('self', public, [i['date'] for i in vkapi.wall.get(owner_id=public, count=5)['items'] if 'is_pinned' not in i][0], 'page', 'wall')
 			for i in vkapi.wall.get(owner_id=public, count=80)['items']:
-				if updateDate:
-					if i['date']==updateDate:
-						break
 				if 'is_pinned' not in i:
+					if updateDate:
+						if i['date']==updateDate:
+							break
+					print(i['date'])
 					divs.append('<div class="post">%s</div>' % (i['text']))
 					divs.append('<p style="display:none;">Показать полностью</p>')
 					divs.append('<p style="display:none;">Показать полностью</p><div style="width: 500px; height: 250px">')
@@ -2314,12 +2315,16 @@ if __name__ == "__main__":
 								phwidth='80%'
 								phheight='80%'
 							if a['type']=='photo':
+								
 								parseURL=urlparse(a['photo']['photo_604']).path
 								fname = re.sub('^(.[^\/]*){1,50}\/', '', parseURL)
 								divs.append('<a class="photos" href=%s><img src=%s style=%s;%s></a>' % (os.path.join('imgs', fname), os.path.join('imgs', fname), 'max-width:'+phwidth, 'max-height:'+phheight))
 								wget.download(a['photo']['photo_604'], out=os.path.join(path,'imgs'))
-						divs.append('</div>')
-			if not os.path.exists(os.path.join('walls',publicName, 'wall.html')):
+					divs.append('</div>')
+	
+				
+			print(divs)
+			if not os.path.exists(os.path.join('walls', publicName, 'wall.html')):
 				html = re.sub('(?<=<div class=.{6}>).*(?=</div>)', re.sub("[\[\],']", '', str(divs)), html).replace('\n', '<br>')
 				with open(os.path.join(path, 'wall.html'), 'w') as o:
 					o.write(html)
