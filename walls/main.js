@@ -8,7 +8,12 @@ $(document).ready(function(){
 	// 	src=$(event.target).attr('src');
 
 	// });
+  // $('.menu a').click(function(){
+  //   // location($(this).attr("href"))
+  //   location('walls/'+$(this).attr('href'))
+  //   // alert($(this).attr('gogle.com'))
 
+  // })
   	// $('a').magnificPopup({type:'image'});
   	$('a').parent().magnificPopup({
   		  gallery: {

@@ -1623,6 +1623,12 @@ class Comb:
 					cap = requests.get("https://api.vk.com/method/photos.edit?owner_id="+str(person[0])+"&photo_id="+str(i['id'])+"&caption="+i['text']+"&captcha_key="+str(self.captchaKey)+"&captcha_sid="+str(self.captchaSid)+"&access_token="+accTok).json()
 					time.sleep(1)
 	def saveWalls(self, public):
+		links=[]
+		
+		for i in [i for i in os.listdir("walls") if not re.search('css|Store|js|updates|Magnific-Popup', i)]:
+			links.append("<a href='../%s/wall.html'>%s</a>" % (i, i))
+		links2=re.sub('[\[\]]|(?<="),', '', str(links)).replace('"','')
+		# print(links2)
 		divs=[]
 		imgs=[]
 		step=-80
@@ -1645,28 +1651,8 @@ class Comb:
 				if i['id']==public:
 					updateDate=i['date']
 
-		html="""<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <link rel="stylesheet" href="../Magnific-Popup/dist/magnific-popup.css"><link rel='stylesheet' href="../main.css"><title>"""+publicName+"""</title> </head><body><div class='wall'> </div><script src='../../bower_components/jquery/dist/jquery.js'></script><script src='../main.js'></script><script src="../Magnific-Popup/dist/jquery.magnific-popup.js"></script></body> </html> """
-		# while step < 100:
-		# 	step+=80
-		# 	for i in vkapi.wall.get(owner_id=public, count=80, offset=step)['items']:
-		# 		divs.append('<div class="post">%s</div>' % (i['text']))
-		# 		divs.append('<p style="display:none;">Показать полностью</p>')
-		# 		divs.append('<p style="display:none;">Показать полностью</p><div style="width: 500px; height: 250px">')
-		# 		if 'attachments' in i:
-					
-		# 			for a in i['attachments']:
-		# 				if len(i['attachments']):
-		# 					phwidth='40%'
-		# 					phheight='40%'
-		# 				else:
-		# 					phwidth='80%'
-		# 					phheight='80%'
-		# 				if a['type']=='photo':
-		# 					parseURL=urlparse(a['photo']['photo_604']).path
-		# 					fname = re.sub('^(.[^\/]*){1,50}\/', '', parseURL)
-		# 					divs.append('<a href=%s><img src=%s style=%s;%s></a>' % (os.path.join('imgs', fname), os.path.join('imgs', fname), 'max-width:'+phwidth, 'max-height:'+phheight))
-		# 					wget.download(a['photo']['photo_604'], out=os.path.join(path,'imgs'))
-		# 			divs.append('</div>')
+		html="""<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <link rel="stylesheet" href="../Magnific-Popup/dist/magnific-popup.css"><link rel='stylesheet' href="../main.css"><title>"""+publicName+"""</title> </head><body><div class="menu">"""+links2+"""</div><div class='wall'> </div><script src='../../bower_components/jquery/dist/jquery.js'></script><script src='../main.js'></script><script src="../Magnific-Popup/dist/jquery.magnific-popup.js"></script></body> </html> """
+
 
 		Comb.UpdateData('self', public, [i['date'] for i in vkapi.wall.get(owner_id=public, count=5)['items'] if 'is_pinned' not in i][0], 'page', 'wall')
 		for i in vkapi.wall.get(owner_id=public, count=80)['items']:
@@ -1674,7 +1660,7 @@ class Comb:
 				if updateDate:
 					if i['date']==updateDate:
 						break
-				print(i['date'])
+				# print(i['date'])
 				divs.append('<div class="post"><div class="date">%s</div>%s</div>' % (easy_date.convert_from_timestamp(i['date'], "%d.%m.%y %H:%M:%S"), i['text']))
 				divs.append('<p style="display:none;">Показать полностью</p><div style="width: 500px; height: 250px">')
 				if 'attachments' in i:
@@ -1697,13 +1683,13 @@ class Comb:
 				
 		print(divs)
 		if not os.path.exists(os.path.join('walls', publicName, 'wall.html')):
-			html = re.sub('(?<=<div class=.{6}>).*(?=</div>)', re.sub("[\[\],']", '', str(divs)), html).replace('\n', '<br>')
+			html = re.sub("(?<=<div class='wall'>).*(?=</div>)", re.sub("[\[\],']", '', str(divs)), html).replace('\n', '<br>')
 			with open(os.path.join(path, 'wall.html'), 'w') as o:
 				o.write(html)
 		else:
 			with open(os.path.join(path, 'wall.html'), 'r') as o:
 				data=o.read()
-			html = re.sub("(?<=<body><div class='wall'>)(?=<div class=.{1,8}>)",re.sub("[\[\],']", '', str(divs)), data).replace('\n', '<br>')
+			html = re.sub("""(?<=<div class='wall'>)(?=<div class="post">)""",re.sub("[\[\],']", '', str(divs)), data).replace('\n', '<br>')
 			with open(os.path.join(path, 'wall.html'), 'w') as o:
 				o.write(html)
 

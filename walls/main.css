@@ -2,3 +2,6 @@
 .wall{width:500px; margin: 0 auto 0 auto; font-size:12px; padding:10px; font-family:sans-serif;}p{cursor:pointer; color: blue;} 
 .wall img{cursor: pointer;}
 .date{position: absolute; right:-100px; font-weight: 600;}
+.menu a{font-size: 14px; font-family: sans-serif; margin:10px;border-radius: 5px;  /*margin: 2px;*/ line-height: 10px;  display: block;}
+.menu{width:350px; position: fixed;}
+/*.menu a:hover{font-size: 16px;}*/
