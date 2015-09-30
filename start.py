@@ -705,11 +705,11 @@ class Comb:
 										if 'response' in copyPhotos:
 											movePhotos = requests.get("https://api.vk.com/method/photos.move?owner_id="+str(to_id)+"&target_album_id="+str(album_id[0])+"&photo_id="+str(copyPhotos['response'])+"&v=5.35&access_token="+accTok).json()
 										# vkapi.photos.edit(owner_id=person[0], photo_id=copyPhotos['response'], caption=text1)
-										time.sleep(1)
+										time.sleep(0.5)
 								if 'response' in copyPhotos:
 									movePhotos = requests.get("https://api.vk.com/method/photos.move?owner_id="+str(to_id)+"&target_album_id="+str(album_id[0])+"&photo_id="+str(copyPhotos['response'])+"&v=5.35&access_token="+accTok).json()
 								# vkapi.photos.edit(owner_id=person[0], photo_id=copyPhotos['response'], caption=text1)
-								time.sleep(1)
+								time.sleep(0.5)
 								if text1!=None:
 									with open("photoCaptions.json", "w") as jj:
 										jj.write(json.dumps(toFile, indent=4, ensure_ascii=False))
@@ -1622,7 +1622,90 @@ class Comb:
 					self.captchaKey =Comb.captcha('self', cap['error']['captcha_img'])
 					cap = requests.get("https://api.vk.com/method/photos.edit?owner_id="+str(person[0])+"&photo_id="+str(i['id'])+"&caption="+i['text']+"&captcha_key="+str(self.captchaKey)+"&captcha_sid="+str(self.captchaSid)+"&access_token="+accTok).json()
 					time.sleep(1)
+	def saveWalls(self, public):
+		divs=[]
+		imgs=[]
+		step=-80
+		docs=0
+		phsize='60%'
+		# public=int(input('public: '))
+		updateDate=int
+		if public<0:
+			publicName = vkapi.groups.getById( group_id = abs(public))[0]['name'].replace('/', ' ')
+		elif public>0:
+			publicName=vkapi.users.get(user_ids=str(public), fields='nickname')
+		path=os.path.join('walls',publicName)
+		if not os.path.exists(path):
+			os.mkdir(path=path)
+			os.mkdir(path=os.path.join(path,'imgs'))
+		if os.path.exists(os.path.join('walls', 'updates', 'updatePageToCopy.json')):
+			with open(os.path.join('walls', 'updates', 'updatePageToCopy.json'), 'r') as o:
+				data = json.load(o)	
+			for i in data:
+				if i['id']==public:
+					updateDate=i['date']
 
+		html="""<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <link rel="stylesheet" href="../Magnific-Popup/dist/magnific-popup.css"><link rel='stylesheet' href="../main.css"><title>"""+publicName+"""</title> </head><body><div class='wall'> </div><script src='../../bower_components/jquery/dist/jquery.js'></script><script src='../main.js'></script><script src="../Magnific-Popup/dist/jquery.magnific-popup.js"></script></body> </html> """
+		# while step < 100:
+		# 	step+=80
+		# 	for i in vkapi.wall.get(owner_id=public, count=80, offset=step)['items']:
+		# 		divs.append('<div class="post">%s</div>' % (i['text']))
+		# 		divs.append('<p style="display:none;">Показать полностью</p>')
+		# 		divs.append('<p style="display:none;">Показать полностью</p><div style="width: 500px; height: 250px">')
+		# 		if 'attachments' in i:
+					
+		# 			for a in i['attachments']:
+		# 				if len(i['attachments']):
+		# 					phwidth='40%'
+		# 					phheight='40%'
+		# 				else:
+		# 					phwidth='80%'
+		# 					phheight='80%'
+		# 				if a['type']=='photo':
+		# 					parseURL=urlparse(a['photo']['photo_604']).path
+		# 					fname = re.sub('^(.[^\/]*){1,50}\/', '', parseURL)
+		# 					divs.append('<a href=%s><img src=%s style=%s;%s></a>' % (os.path.join('imgs', fname), os.path.join('imgs', fname), 'max-width:'+phwidth, 'max-height:'+phheight))
+		# 					wget.download(a['photo']['photo_604'], out=os.path.join(path,'imgs'))
+		# 			divs.append('</div>')
+
+		Comb.UpdateData('self', public, [i['date'] for i in vkapi.wall.get(owner_id=public, count=5)['items'] if 'is_pinned' not in i][0], 'page', 'wall')
+		for i in vkapi.wall.get(owner_id=public, count=80)['items']:
+			if 'is_pinned' not in i:
+				if updateDate:
+					if i['date']==updateDate:
+						break
+				print(i['date'])
+				divs.append('<div class="post"><div class="date">%s</div>%s</div>' % (easy_date.convert_from_timestamp(i['date'], "%d.%m.%y %H:%M:%S"), i['text']))
+				divs.append('<p style="display:none;">Показать полностью</p><div style="width: 500px; height: 250px">')
+				if 'attachments' in i:
+					for a in i['attachments']:
+						if len(i['attachments']):
+							phwidth='40%'
+							phheight='40%'
+						else:
+							phwidth='80%'
+							phheight='80%'
+						if a['type']=='photo':
+							parseURL=urlparse(a['photo']['photo_604']).path
+							fname = re.sub('^(.[^\/]*){1,50}\/', '', parseURL)
+
+							divs.append('<a class="photos" href="%s"><img src="%s" style="%s;%s"></a>' % (os.path.join('imgs', fname), os.path.join('imgs', fname), 'max-width:'+phwidth, 'max-height:'+phheight))
+							if fname not in [i for i in os.listdir(os.path.join('walls', publicName, 'imgs'))]:
+								wget.download(a['photo']['photo_604'], out=os.path.join(path,'imgs'))
+				divs.append('</div>')
+
+				
+		print(divs)
+		if not os.path.exists(os.path.join('walls', publicName, 'wall.html')):
+			html = re.sub('(?<=<div class=.{6}>).*(?=</div>)', re.sub("[\[\],']", '', str(divs)), html).replace('\n', '<br>')
+			with open(os.path.join(path, 'wall.html'), 'w') as o:
+				o.write(html)
+		else:
+			with open(os.path.join(path, 'wall.html'), 'r') as o:
+				data=o.read()
+			html = re.sub("(?<=<body><div class='wall'>)(?=<div class=.{1,8}>)",re.sub("[\[\],']", '', str(divs)), data).replace('\n', '<br>')
+			with open(os.path.join(path, 'wall.html'), 'w') as o:
+				o.write(html)
 
 		
 		# getDiffGroups(person[0])
@@ -2251,89 +2334,14 @@ if __name__ == "__main__":
 		elif int(action)==31:
 			Combain.getGroupCategories()
 		elif int(action)==32:
-			divs=[]
-			imgs=[]
-			step=-80
-			docs=0
-			phsize='60%'
-			public=int(input('public: '))
-			updateDate=int
-			if public<0:
-				publicName = vkapi.groups.getById( group_id = abs(public))[0]['name']
-			elif public>0:
-				publicName=vkapi.users.get(user_ids=str(public), fields='nickname')
-			path=os.path.join('walls',publicName)
-			if not os.path.exists(path):
-				os.mkdir(path=path)
-				os.mkdir(path=os.path.join(path,'imgs'))
-			if os.path.exists(os.path.join('walls', 'updates', 'updatePageToCopy.json')):
-				with open(os.path.join('walls', 'updates', 'updatePageToCopy.json'), 'r') as o:
-					data = json.load(o)	
-				for i in data:
-					if i['id']==public:
-						updateDate=i['date']
-
-			html="""<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <link rel="stylesheet" href="../Magnific-Popup/dist/magnific-popup.css"><title>"""+publicName+"""</title> </head> <style>.post{width:500px; margin: 10px auto 5px auto; font-size:12px; font-family:sans-serif;} .wall{width:500px; margin: 0 auto 0 auto; font-size:12px; padding:10px; font-family:sans-serif;}p{cursor:pointer; color: blue;} .wall img{cursor: pointer;}</style><body><div class='wall'> </div><script src='../../bower_components/jquery/dist/jquery.js'></script><script src='../main.js'></script><script src="../Magnific-Popup/dist/jquery.magnific-popup.js"></script></body> </html> """
-			# while step < 100:
-			# 	step+=80
-			# 	for i in vkapi.wall.get(owner_id=public, count=80, offset=step)['items']:
-			# 		divs.append('<div class="post">%s</div>' % (i['text']))
-			# 		divs.append('<p style="display:none;">Показать полностью</p>')
-			# 		divs.append('<p style="display:none;">Показать полностью</p><div style="width: 500px; height: 250px">')
-			# 		if 'attachments' in i:
-						
-			# 			for a in i['attachments']:
-			# 				if len(i['attachments']):
-			# 					phwidth='40%'
-			# 					phheight='40%'
-			# 				else:
-			# 					phwidth='80%'
-			# 					phheight='80%'
-			# 				if a['type']=='photo':
-			# 					parseURL=urlparse(a['photo']['photo_604']).path
-			# 					fname = re.sub('^(.[^\/]*){1,50}\/', '', parseURL)
-			# 					divs.append('<a href=%s><img src=%s style=%s;%s></a>' % (os.path.join('imgs', fname), os.path.join('imgs', fname), 'max-width:'+phwidth, 'max-height:'+phheight))
-			# 					wget.download(a['photo']['photo_604'], out=os.path.join(path,'imgs'))
-			# 			divs.append('</div>')
-
-			Comb.UpdateData('self', public, [i['date'] for i in vkapi.wall.get(owner_id=public, count=5)['items'] if 'is_pinned' not in i][0], 'page', 'wall')
-			for i in vkapi.wall.get(owner_id=public, count=80)['items']:
-				if 'is_pinned' not in i:
-					if updateDate:
-						if i['date']==updateDate:
-							break
-					print(i['date'])
-					divs.append('<div class="post">%s</div>' % (i['text']))
-					divs.append('<p style="display:none;">Показать полностью</p>')
-					divs.append('<p style="display:none;">Показать полностью</p><div style="width: 500px; height: 250px">')
-					if 'attachments' in i:
-						for a in i['attachments']:
-							if len(i['attachments']):
-								phwidth='40%'
-								phheight='40%'
-							else:
-								phwidth='80%'
-								phheight='80%'
-							if a['type']=='photo':
-								
-								parseURL=urlparse(a['photo']['photo_604']).path
-								fname = re.sub('^(.[^\/]*){1,50}\/', '', parseURL)
-								divs.append('<a class="photos" href=%s><img src=%s style=%s;%s></a>' % (os.path.join('imgs', fname), os.path.join('imgs', fname), 'max-width:'+phwidth, 'max-height:'+phheight))
-								wget.download(a['photo']['photo_604'], out=os.path.join(path,'imgs'))
-					divs.append('</div>')
-	
-				
-			print(divs)
-			if not os.path.exists(os.path.join('walls', publicName, 'wall.html')):
-				html = re.sub('(?<=<div class=.{6}>).*(?=</div>)', re.sub("[\[\],']", '', str(divs)), html).replace('\n', '<br>')
-				with open(os.path.join(path, 'wall.html'), 'w') as o:
-					o.write(html)
-			else:
-				with open(os.path.join(path, 'wall.html'), 'r') as o:
-					data=o.read()
-				html = re.sub("(?<=<body><div class='wall'>)(?=<div class=.{1,8}>)",re.sub("[\[\],']", '', str(divs)), data).replace('\n', '<br>')
-				with open(os.path.join(path, 'wall.html'), 'w') as o:
-					o.write(html)
+			# public=int(input('public: '))
+			with open('walls/updates/updatePageToCopy.json', 'r') as o:
+				data=json.load(o) 
+			for i in data:
+				Combain.saveWalls(i['id'])
+			
+				time.sleep(1)
+			# Combain.saveWalls(public)
 	if sys.argv[1] == 'manual':
 		actions()
 
