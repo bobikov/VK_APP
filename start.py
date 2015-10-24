@@ -544,7 +544,7 @@ class Comb:
 								else:
 									text1=i['text']
 					if albumIdToCopyFrom!='wall' and a['text']!=None:
-						text1=a['text'].replace(',','').replace('#','')	
+						text1=re.sub('[^\s]\W', '', a['text'])
 					copyPhotos = requests.get("https://api.vk.com/method/photos.copy?owner_id="+str(from_id)+"&photo_id="+str(a['id'])+"&v=5.35&access_token="+accTok).json()
 					
 					if 'error' in copyPhotos:
@@ -1106,13 +1106,15 @@ class Comb:
 							time.sleep(1)
 	def copyVideo(seld, public_id, count, source):
 		if public_id>0:
-			publicName=vkapi.users.get(user_ids=str(public_id), fields='nickname')[0]['nickname']
+			publicName=vkapi.users.get(user_ids=str(public_id), fields='nickname')[0]['first_name']
+			publicName=publicName+' '+vkapi.users.get(user_ids=str(public_id), fields='nickname')[0]['last_name']
 		elif public_id<0:
 			publicName = vkapi.groups.getById( group_id = abs(public_id))[0]['name']
 		albumTitles=[]
 		fname='updateVideoToCopy.json'
 		dtype='video'
 		updateDate=int
+		albumIds=[]
 		if os.path.isfile(fname):
 			with open(fname) as f:
 					data = json.load(f)	
@@ -1120,14 +1122,29 @@ class Comb:
 						if i['id']==public_id and i['name']==publicName:
 							updateDate=i['date']
 		if source=='wall' or source=='videobox':
+			# for i in vkapi.video.getAlbums(owner_id=person[0])['items']:
+			# 		albumTitles.append(i['title'])
+			# if publicName not in albumTitles:
+				# TargetAlbumId=vkapi.video.addAlbum(owner_id=person[0], privacy='nobody', title=publicName, v=5.37)['album_id']
+
+			# elif publicName in albumTitles:
 			for i in vkapi.video.getAlbums(owner_id=person[0])['items']:
-					albumTitles.append(i['title'])
-			if publicName not in albumTitles:
-				TargetAlbumId=vkapi.video.addAlbum(owner_id=person[0], title=publicName.replace(':',''))['album_id']
-			elif publicName in albumTitles:
-				for i in vkapi.video.getAlbums(owner_id=person[0])['items']:
-					if i['title']==publicName:
-						TargetAlbumId=i['id']
+				if re.search(re.search('[^0-9\+][а-яa-z]+',publicName, flags=re.IGNORECASE).group(0), i['title']):
+					# TargetAlbumId=i['id']
+					albumIds.append(i['id'])
+			print(albumIds)
+			if len(albumIds)<2 and len(albumIds)>0:
+				count2=vkapi.video.getAlbumById(album_id=albumIds[0])['count']
+				if count2<1000:
+					TargetAlbumId=albumIds[0]
+				elif count2>=1000:
+					TargetAlbumId=vkapi.video.addAlbum(owner_id=person[0], privacy='nobody', title=publicName+' '+str(len(albumIds)+1), v=5.37)['album_id']
+			elif len(albumIds)<1:
+				TargetAlbumId=vkapi.video.addAlbum(owner_id=person[0], title=publicName+' '+str(len(albumIds)+1), v=5.37)['album_id']
+			# 	TargetAlbumId=albumIds[0]
+			# elif len(albumIds)>1
+			
+			# print(albumIds)
 
 
 		if type(source)==int:
@@ -1165,15 +1182,20 @@ class Comb:
 		elif source=='videobox':
 			Comb.UpdateData('self', public_id, [i['date']  for i in vkapi.video.get(owner_id=public_id, count=1)['items']][0], dtype, 'box')	
 			time.sleep(1)
-			step=-200
+			step=-1
+			stop=False
 			while step<1000:
-				step+=200
-				for i in vkapi.video.get(owner_id=public_id, offset=step, count=200)['items']:
+				step+=1
+				if stop==True:
+					break
+				for i in vkapi.video.get(owner_id=public_id, offset=step, count=1)['items']:
 					if updateDate!=None:
 						if updateDate==i['date']:
-							break
+							stop=True
 					print(i['title'])
-					add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(public_id)+'&album_id='+str(TargetAlbumId)+'&video_id='+str(i['id'])+'&access_token='+accTok).json()
+					print(i['owner_id'])
+
+					add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(i['owner_id'])+'&album_id='+str(TargetAlbumId)+'&video_id='+str(i['id'])+'&access_token='+accTok).json()
 
 					time.sleep(1)
 					if 'error' in add:
@@ -1181,7 +1203,7 @@ class Comb:
 							print(add)
 							captchaSid=add['error']['captcha_sid']
 							captchaKey=Comb.captcha('self', add['error']['captcha_img'])
-							add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(public_id)+'&album_id='+str(TargetAlbumId)+'&video_id='+str(i['id'])+'&captcha_sid='+str(captchaSid)+'&captcha_key='+str(captchaKey)+'&access_token='+accTok).json()
+							add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(i['owner_id'])+'&album_id='+str(TargetAlbumId)+'&video_id='+str(i['id'])+'&captcha_sid='+str(captchaSid)+'&captcha_key='+str(captchaKey)+'&access_token='+accTok).json()
 							time.sleep(1)
 						# elif add['error']['error_code']==10:
 						# 	print(add)
@@ -1300,7 +1322,7 @@ class Comb:
 										else:
 											fname2=urlparse(a['doc']['url']).path.replace('/', '')
 										if dtype=='pdf':
-											if requests.get(a['doc']['url']).headers['content-type']=='application/pdf':
+											# if requests.get(a['doc']['url']).headers['content-type']=='application/pdf':
 												wget.download( a['doc']['url'], out=os.path.join(path,publicName,dtype) )
 												path2=os.path.join(path,publicName,dtype)+'/'
 
@@ -1625,8 +1647,9 @@ class Comb:
 	def saveWalls(self, public):
 		links=[]
 		
-		for i in [i for i in os.listdir("walls") if not re.search('css|Store|js|updates|Magnific-Popup', i)]:
-			links.append("<a href='../%s/wall.html'>%s</a>" % (i, i))
+		for i in [i for i in os.listdir("walls") if not re.search('src|Store|updates', i)]:
+			links.append("<a href='../%s/wall.html'>%s</a>" % (re.sub('\?', '', i), re.sub('\?','',i)))
+
 		links2=re.sub('[\[\]]|(?<="),', '', str(links)).replace('"','')
 		# print(links2)
 		divs=[]
@@ -1651,9 +1674,12 @@ class Comb:
 				if i['id']==public:
 					updateDate=i['date']
 
-		html="""<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <link rel="stylesheet" href="../Magnific-Popup/dist/magnific-popup.css"><link rel='stylesheet' href="../main.css"><title>"""+publicName+"""</title> </head><body><div class="menu">"""+links2+"""</div><div class='wall'> </div><script src='../../bower_components/jquery/dist/jquery.js'></script><script src='../main.js'></script><script src="../Magnific-Popup/dist/jquery.magnific-popup.js"></script></body> </html> """
+		html="""<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <link rel="stylesheet" href="../src/Magnific-Popup/dist/magnific-popup.css"><link rel='stylesheet' href="../src/main.css"><link rel='stylesheet' href="../src/fa/css/font-awesome.min.css"><title>"""+publicName+"""</title> </head><body><div class="menu">"""+links2+"""</div><div class='wall'> </div><script src='../../bower_components/jquery/dist/jquery.js'></script><script src='../src/main.js'></script><script src="../src/Magnific-Popup/dist/jquery.magnific-popup.js"></script></body> </html> """
 
-
+		fa = "<link rel='stylesheet' href='../src/fa/css/font-awesome.css'>"
+		loading="""<div class="sk-circle"> <div class="sk-circle1 sk-child"></div> <div class="sk-circle2 sk-child"></div> <div class="sk-circle3 sk-child"></div> <div class="sk-circle4 sk-child"></div> <div class="sk-circle5 sk-child"></div> <div class="sk-circle6 sk-child"></div> <div class="sk-circle7 sk-child"></div> <div class="sk-circle8 sk-child"></div> <div class="sk-circle9 sk-child"></div> <div class="sk-circle10 sk-child"></div> <div class="sk-circle11 sk-child"></div> <div class="sk-circle12 sk-child"></div> </div>"""
+		# logo="""<a href='https://vk.com/'><img src="../VK.com-logo.svg" width='50px' height='50px' alt='перейти на вк' title='Перейти в социальную сеть Вконтакте' class='vklogo'></a>"""
+		logo="""<a href='https://vk.com'><div class='vklogo'><i class='fa fa-vk fa-2x'></i></div></a>"""
 		Comb.UpdateData('self', public, [i['date'] for i in vkapi.wall.get(owner_id=public, count=5)['items'] if 'is_pinned' not in i][0], 'page', 'wall')
 		for i in vkapi.wall.get(owner_id=public, count=80)['items']:
 			if 'is_pinned' not in i:
@@ -1661,7 +1687,8 @@ class Comb:
 					if i['date']==updateDate:
 						break
 				# print(i['date'])
-				divs.append('<div class="post"><div class="date">%s</div>%s</div>' % (easy_date.convert_from_timestamp(i['date'], "%d.%m.%y %H:%M:%S"), i['text']))
+				divs.append('<div class="post"><div class="date">%s</div>%s</div>' % (easy_date.convert_from_timestamp(i['date'], "%d.%m.%y %H:%M:%S"), re.sub('[^\s\n\w:,\.;\$#£–—-]', '',i['text'])))
+
 				divs.append('<p style="display:none;">Показать полностью</p><div style="width: 500px; height: 250px">')
 				if 'attachments' in i:
 					for a in i['attachments']:
@@ -1681,19 +1708,22 @@ class Comb:
 				divs.append('</div>')
 
 				
-		print(divs)
-		if not os.path.exists(os.path.join('walls', publicName, 'wall.html')):
-			html = re.sub("(?<=<div class='wall'>).*(?=</div>)", re.sub("[\[\],']", '', str(divs)), html).replace('\n', '<br>')
-			with open(os.path.join(path, 'wall.html'), 'w') as o:
-				o.write(html)
-		else:
-			with open(os.path.join(path, 'wall.html'), 'r') as o:
-				data=o.read()
-			html = re.sub("""(?<=<div class='wall'>)(?=<div class="post">)""",re.sub("[\[\],']", '', str(divs)), data).replace('\n', '<br>')
+		# print(divs)
+		if not os.path.isfile(os.path.join(path, 'wall.html')):
+			html = re.sub("(?<=<div class='wall'>).*(?=</div>)", re.sub("[\[\],']", '', loading+str(divs)), html).replace('\n', '<br>')
 			with open(os.path.join(path, 'wall.html'), 'w') as o:
 				o.write(html)
 
-		
+
+		else:
+			with open(os.path.join(path, 'wall.html'), 'r') as o:
+				data=o.read()
+			html = re.sub("""(?<=<div class='wall'>).+?(?=<div class="post">)""",re.sub("[\[\],']", '', loading+str(divs)), data).replace('\n', '<br>')
+			html = re.sub("(?<=<body>).*(?=<div class='wall'>)", logo+"<div class='menu'>"+links2+"</div>", html)
+			html = re.sub('(?<=<head> <meta charset="UTF-8">).+?(?=<link)', fa, html)
+			with open(os.path.join(path, 'wall.html'), 'w') as o:
+				o.write(html)
+
 		# getDiffGroups(person[0])
 		# with open("subscribes.txt", "w") as o:
 		# 	o.write(str(vkapi.users.getSubscriptions(user_id=person[0], extended=0)['groups']['items']+vkapi.users.getSubscriptions(user_id=person[0], extended=0)['users']['items']))	
@@ -1819,19 +1849,19 @@ def sendMesBot(message, word):
 	guid = random.randint(1, 10000)
 
 	for i in photoAlbums:
-		if i['title'] == 'space':
+		if i['title'] == 'la':
 			for a in vkapi.photos.get(owner_id=person[0], album_id=i['id'], count=900)['items']:
 				photos.append(a['id'])
 
 	if message == 'default':
-		botMessage="""
+		# botMessage="""
 		
-		Попробуйте написать несколько позже.\n
-		Так же вы можете: \n 1. почитать Википедию, прислав слово "wiki"; \n 2. почитать конституцию РФ прислав мне текст: "конст статья (от 1 до 137); \n3. узнать текущую погоду в городе прислав мне:  "погода город" или для прогноза погоды на 5 дней: "погода 5 город".
+		# Попробуйте написать несколько позже.\n
+		# Так же вы можете: \n 1. почитать Википедию, прислав слово "wiki"; \n 2. почитать конституцию РФ прислав мне текст: "конст статья (от 1 до 137); \n3. узнать текущую погоду в городе прислав мне:  "погода город" или для прогноза погоды на 5 дней: "погода 5 город".
 
-		"""
-		# botMessage=""" 
 		# """
+		botMessage=''
+		# vkapi.messages.send(user_id=from_id, message=botMessage, guid=guid, attachment='photo'+str(person[0])+'_'+str(random.choice(photos)))
 		vkapi.messages.send(user_id=from_id, message=botMessage, guid=guid, attachment='photo'+str(person[0])+'_'+str(random.choice(photos)))
 		# vkapi.messages.send(user_id=from_id, message=botMessage, guid=guid, attachment='photo179349317_374641254')
 	elif message == 'wiki':
@@ -1918,36 +1948,37 @@ def getPollingServer():
 			# except:
 			# 	req = requests.get(url).json()
 
-			if req!=None and 'updates' in req and req['updates']!='':
+			# if req!=None and 'updates' in req and req['updates']!='':
 				# os.system('clear')
-				# if 'updates' in req and req['updates']!='':
+			if 'updates' in req and req['updates']!='':
 					for i in req['updates']:
 						if len(i)>6:
-							# if i[0]==4 and i[6] and not re.search('wiki', i[6], flags=re.IGNORECASE) and not re.search('конст \d+',i[6], flags=re.IGNORECASE) and not re.search('погода ', i[6], flags=re.IGNORECASE):
-							# 	if easy_date.convert_from_timestamp(i[4], "%H:%M:%S") == easy_date.convert_from_timestamp(time.time(), "%H:%M:%S"):
-							# 		sys.stdout=open('MessagesBotLog.txt', 'a+')
-							# 		from_id=i[3]
-							# 		sendMesBot('default', 'nothing')
-							# 		print(i, '\n')
-							# 		time.sleep(1)
-							# elif i[6] and re.search('wiki', i[6], flags=re.IGNORECASE):
-							# elif i[6] =='wiki' or i[6]=='WIKI':
+							if i[0]==4 and i[6] and not re.search('wiki', i[6], flags=re.IGNORECASE) and not re.search('конст \d+',i[6], flags=re.IGNORECASE) and not re.search('погода ', i[6], flags=re.IGNORECASE):
+								if easy_date.convert_from_timestamp(i[4], "%H:%M:%S") == easy_date.convert_from_timestamp(time.time(), "%H:%M:%S"):
+									sys.stdout=open('MessagesBotLog.txt', 'a+')
+									from_id=i[3]
+									# sendMesBot('default', 'nothing')
+									vkapi.account.setOffline(v=5.37)
+									print(i, '\n')
+									time.sleep(1)
+							# elif i[0]==4 and i[6] and re.search('wiki', i[6], flags=re.IGNORECASE):
+							# # elif i[6] =='wiki' or i[6]=='WIKI':
 							# 	if easy_date.convert_from_timestamp(i[4], "%H:%M:%S") == easy_date.convert_from_timestamp(time.time(), "%H:%M:%S"):
 							# 		sys.stdout=open('MessagesBotLog.txt', 'a+')
 							# 		from_id=i[3]
 							# 		sendMesBot('wiki', 'nothing')
 							# 		print(i, '\n')
 							# 		time.sleep(1)
-							if i[6] and re.search('wiki\s[а-яА-Я]+', i[6], flags=re.IGNORECASE):
-								if easy_date.convert_from_timestamp(i[4], "%H:%M:%S") == easy_date.convert_from_timestamp(time.time(), "%H:%M:%S"):
-									sys.stdout=open('MessagesBotLog.txt', 'a+')
-									from_id=i[3]
-									# saa=re.search('[а-яА-Я]+', i[6])
-									# print(saa)
-									sendMesBot('wiki2', re.search('(?<=wiki\s)[а-яА-Я\s]+', i[6]).group(0))
-									print(i, '\n')
-									time.sleep(1)
-							# elif i[6] and re.search('конст \d+', i[6], flags=re.IGNORECASE):
+							# elif i[0]==4  and i[6] and re.search('wiki\s[а-яА-Я]+', i[6], flags=re.IGNORECASE):
+							# 	if easy_date.convert_from_timestamp(i[4], "%H:%M:%S") == easy_date.convert_from_timestamp(time.time(), "%H:%M:%S"):
+							# 		sys.stdout=open('MessagesBotLog.txt', 'a+')
+							# 		from_id=i[3]
+							# 		# saa=re.search('[а-яА-Я]+', i[6])
+							# 		# print(saa)
+							# 		sendMesBot('wiki2', re.search('(?<=wiki\s)[а-яА-Я\s]+', i[6]).group(0))
+							# 		print(i, '\n')
+							# 		time.sleep(1)
+							# elif i[0]==4 and i[6] and re.search('конст \d+', i[6], flags=re.IGNORECASE):
 							# 	if easy_date.convert_from_timestamp(i[4], "%H:%M:%S") == easy_date.convert_from_timestamp(time.time(), "%H:%M:%S"):
 							# 		sys.stdout=open('MessagesBotLog.txt', 'a+')
 							# 		from_id=i[3]
@@ -2202,8 +2233,8 @@ if __name__ == "__main__":
 			for num,user in zip(range(len(users)),users):
 				num+=1
 				print(num, user['first_name'], user['last_name'], user['id'])
-				# vkapi.friends.delete(user_id=user['id'])
-				# time.sleep(1)
+				vkapi.friends.delete(user_id=user['id'])
+				time.sleep(1)
 			# print()
 
 		elif int(action)==20:
@@ -2320,14 +2351,21 @@ if __name__ == "__main__":
 		elif int(action)==31:
 			Combain.getGroupCategories()
 		elif int(action)==32:
-			# public=int(input('public: '))
-			with open('walls/updates/updatePageToCopy.json', 'r') as o:
-				data=json.load(o) 
-			for i in data:
-				Combain.saveWalls(i['id'])
-			
-				time.sleep(1)
-			# Combain.saveWalls(public)
+			print('1 update all\n2 add')
+			select=int(input('select: '))
+			if select==1:
+				with open('walls/updates/updatePageToCopy.json', 'r') as o:
+					data=json.load(o) 
+				for i in data:
+					Combain.saveWalls(i['id'])
+					time.sleep(1)
+			elif select==2:
+				public=int(input('public: '))
+				Combain.saveWalls(public)
+		elif int(action)==33:
+			for i in vkapi.account.getBanned(count=200)['items']:
+				vkapi.account.unbanUser(user_id=i['id'] )
+				time.sleep(0.5)
 	if sys.argv[1] == 'manual':
 		actions()
 
