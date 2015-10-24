@@ -1133,18 +1133,16 @@ class Comb:
 					# TargetAlbumId=i['id']
 					albumIds.append(i['id'])
 			print(albumIds)
-			if len(albumIds)<2 and len(albumIds)>0:
-				count2=vkapi.video.getAlbumById(album_id=albumIds[0])['count']
-				if count2<1000:
-					TargetAlbumId=albumIds[0]
-				elif count2>=1000:
-					TargetAlbumId=vkapi.video.addAlbum(owner_id=person[0], privacy='nobody', title=publicName+' '+str(len(albumIds)+1), v=5.37)['album_id']
-			elif len(albumIds)<1:
-				TargetAlbumId=vkapi.video.addAlbum(owner_id=person[0], title=publicName+' '+str(len(albumIds)+1), v=5.37)['album_id']
-			# 	TargetAlbumId=albumIds[0]
-			# elif len(albumIds)>1
-			
-			# print(albumIds)
+			if len(albumIds)==0:
+				TargetAlbumId=vkapi.video.addAlbum(owner_id=person[0], privacy='nobody', title=publicName+' '+str(len(albumIds)+1), v=5.37)['album_id']
+			else:
+				for i in albumIds:
+					if vkapi.video.getAlbumById(album_id=i)['count']<1000:
+						TargetAlbumId=i
+
+					elif vkapi.video.getAlbumById(album_id=i)['count']==1000:
+						TargetAlbumId=vkapi.video.addAlbum(owner_id=person[0], privacy='nobody', title=publicName+' '+str(len(albumIds)+1), v=5.37)['album_id']
+
 
 
 		if type(source)==int:
