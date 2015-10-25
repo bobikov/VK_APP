@@ -433,9 +433,10 @@ class Comb:
 
 		if source=='wall' or source=='box':
 			if fromId<0:
-				publicName = vkapi.groups.getById( group_id = abs(fromId))[0]['name']
+				publicName = re.sub("[\[\]]", '', vkapi.groups.getById( group_id = abs(fromId))[0]['name'])
 			elif fromId>0:
-				publicName=vkapi.users.get(user_ids=str(fromId), fields='nickname')
+				publicName=vkapi.users.get(user_ids=str(fromId), fields='nickname')[0]['first_name']
+				publicName=publicName+' '+vkapi.users.get(user_ids=str(fromId), fields='nickname')[0]['last_name']
 			if os.path.exists(updatesPath):
 				with open(updatesPath) as f:
 					data = json.load(f)
@@ -464,7 +465,8 @@ class Comb:
 			if fromId<0:
 				publicName = vkapi.groups.getById( group_id = abs(fromId))[0]['name']
 			elif fromId>0:
-				publicName=vkapi.users.get(user_ids=str(fromId), fields='nickname')
+				publicName=vkapi.users.get(user_ids=str(fromId), fields='nickname')[0]['first_name']
+				publicName=publicName+' '+vkapi.users.get(user_ids=str(fromId), fields='nickname')[0]['last_name']
 			if os.path.isfile(updatesPath):
 				with open(updatesPath) as f:
 					data = json.load(f)
@@ -1128,7 +1130,7 @@ class Comb:
 				# TargetAlbumId=vkapi.video.addAlbum(owner_id=person[0], privacy='nobody', title=publicName, v=5.37)['album_id']
 
 			# elif publicName in albumTitles:
-			for i in vkapi.video.getAlbums(owner_id=person[0])['items']:
+			for i in vkapi.video.getAlbums(owner_id=person[0], extended=1)['items']:
 				if re.search(re.search('[^0-9\+][а-яa-z]+',publicName, flags=re.IGNORECASE).group(0), i['title']):
 					# TargetAlbumId=i['id']
 					albumIds.append(i['id'])
@@ -1140,7 +1142,7 @@ class Comb:
 					if vkapi.video.getAlbumById(album_id=i)['count']<1000:
 						TargetAlbumId=i
 
-					elif vkapi.video.getAlbumById(album_id=i)['count']==1000:
+					else:
 						TargetAlbumId=vkapi.video.addAlbum(owner_id=person[0], privacy='nobody', title=publicName+' '+str(len(albumIds)+1), v=5.37)['album_id']
 
 
@@ -1169,13 +1171,13 @@ class Comb:
 					if updateDate!=None:
 						if updateDate==i['date']:
 							break
-					add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(public_id)+'&album_id='+str(TargetAlbumId)+'&video_id='+str(i['id'])+'&access_token='+accTok).json()
+					add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(i['owner_id'])+'&album_id='+str(TargetAlbumId)+'&video_id='+str(i['id'])+'&access_token='+accTok).json()
 					time.sleep(1)
 					if 'error' in add:
 						print(add)
 						captchaSid=add['error']['captcha_sid']
 						captchaKey=Comb.captcha('self', add['error']['captcha_img'])
-						add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(public_id)+'&album_id='+str(TargetAlbumId)+'&video_id='+str(i['id'])+'&captcha_sid='+str(captchaSid)+'&captcha_key='+str(captchaKey)+'&access_token='+accTok).json()
+						add=requests.get('https://api.vk.com/method/video.addToAlbum?target_id='+str(person[0])+'&owner_id='+str(i['owner_id'])+'&album_id='+str(TargetAlbumId)+'&video_id='+str(i['id'])+'&captcha_sid='+str(captchaSid)+'&captcha_key='+str(captchaKey)+'&access_token='+accTok).json()
 						time.sleep(1)
 		elif source=='videobox':
 			Comb.UpdateData('self', public_id, [i['date']  for i in vkapi.video.get(owner_id=public_id, count=1)['items']][0], dtype, 'box')	
