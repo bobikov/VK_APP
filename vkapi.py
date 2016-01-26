@@ -20,7 +20,7 @@ app_id = '5040349'
 # app_id = '5038789'
 scope = 'wall, offline, status, messages, ads, groups, notes, photos, video, docs, friends, audio'
 redirect_url = 'https://oauth.vk.com/blank.html'
-api_version = 5.35
+api_version = 5.44
 display = 'page'
 params = urlencode({
 	'client_id' : app_id,

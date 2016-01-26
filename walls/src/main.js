@@ -23,8 +23,8 @@ $(document).ready(function(){
 		  },
 	  delegate: '.photos', // child items selector, by clicking on it popup will open
 	  type: 'image',
-      preloader: true,
-      mainClass: 'mfp-fade'
+      preloader: true
+      // mainClass: 'mfp-fade'
 	  // other options
 	});
   	for (var i = 0; i<posts.length; i++){

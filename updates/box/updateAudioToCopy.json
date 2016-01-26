@@ -13,10 +13,10 @@
         "date": 1439958401,
         "name": [
             {
-                "nickname": "|Nik Amol|",
-                "id": 25023,
                 "first_name": "Ivan",
-                "last_name": "Lomakin"
+                "id": 25023,
+                "last_name": "Lomakin",
+                "nickname": "|Nik Amol|"
             }
         ],
         "id": 25023
@@ -32,7 +32,7 @@
         "id": -29318096
     },
     {
-        "date": 1442853045,
+        "date": 1453818915,
         "name": "BBC Radio 1 / 1Xtra",
         "id": -20833574
     },
@@ -45,5 +45,15 @@
         "date": 1445585496,
         "name": "I N F S T E",
         "id": -24300838
+    },
+    {
+        "date": 1450990633,
+        "name": "IDM",
+        "id": -2266
+    },
+    {
+        "date": 1453591647,
+        "name": "TECHNOLOGY KILLED REALITY",
+        "id": -45327998
     }
 ]

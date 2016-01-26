@@ -1,0 +1,1702 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f30a4574-2abb-4c0e-a013-af83b70f5ac1" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.htaccess" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.swp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/500:" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/74K8INErsSg.jpg.mcdgy4qd.tmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/7S9zGyqePbE.jpg.__idedc6.tmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/8e9a0424f255.mp3.mi1mvkxf.tmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/9OMHXGWUXH4.jpg.1_k6tdj4.tmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Bookmarklet.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/G5nOIrNrS_0.jpg.wtvrmg8z.tmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/LD0bZNI10rA.jpg.0wyffsv3.tmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/QTH5-7rkgqs.jpg.teivygmg.tmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TESTY.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TQxd8nBkqPw.jpg.cms2laya.tmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Tkinter.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/VkApp.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bookmarklet2extension/Set Page Color Popup.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bookmarklet2extension/Set Page Color Popup_files/popup.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bookmarklet2extension/background.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bookmarklet2extension/banlist.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bookmarklet2extension/bookmarklet.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bookmarklet2extension/icon-128.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bookmarklet2extension/icon-16.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bookmarklet2extension/icon-48.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bookmarklet2extension/jquery-1.11.3.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bookmarklet2extension/jquery.cookie.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bookmarklet2extension/jsonParser.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bookmarklet2extension/main.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bookmarklet2extension/manifest.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bookmarklet2extension/popup.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bookmarklet2extension/popup.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bookmarklet2extension/robot-blue.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bookmarklet2extension/robot.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bookmarklet2extension/robots.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bookmarklet2extension/spamKiller.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cycle.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/doc8069473_192701232.cxvc_l0i.tmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eFhstaqnXrY.jpg.8_mc9uea.tmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/exec.spec" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/fileList.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/fileList.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ko5jnG_GVQ0.jpg.z8vztedi.tmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/nFUGoMihSm0.jpg.ihh96m1j.tmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ne1JczJqjn4.jpg._mcy28kz.tmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/newname.mp3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/qV0TDIi5_NI.jpg.ocj1j334.tmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rGChIuckDLM.jpg.4e8kgux8.tmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rgQ1PzWM02A.jpg.vr4x1l2z.tmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/start.spec" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/subscribes.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/supers.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/svg.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/t5jINQee0cM.jpg.1tfg1itq.tmp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/testMySql.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/testPostgresSQl.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/testQt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/untitled" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/updateAudioToCopy.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/updateGifData.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/updatePdfData.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/updatePhotoData.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/updateVideoToCopy.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/1sTUEV6jCzs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/4MqeCYCpklw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/6j8-Bxq0BUI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/7amlQzNTUYk (1).jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/AS9Fcdol7FY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/AmLfFiFu0Sw (1).jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/C5brrm4WzL4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/GFU-pU1zTmg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/I5Wb3H5TmZc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/JdHNwcjVXJE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/JiNWDl4MGoo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/Pk8gXBYHEGw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/T8VLLOa2Zsg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/TA0JfIROSKY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/UQ1dadWp16Y.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/UlIv3S0LbKs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/W8Dbwj64ctk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/ZHpjOy1eDWA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/Z_ocqhXqpIs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/a7G8ZsM_L84.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/cfFU1pkwPis.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/eyjTGoHZL9E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/gMKxGUL9nU8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/lDWb86qh1pU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/mtpoYAmUZbM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/imgs/u7yuxWdCgTI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/05Kq4AADKMI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/15BWiPr0_Pw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/25zLAaHZ-wQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/4_dbuAm3Nws.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/5Tj0yzfE85M.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/5XDUsGGx6es.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/62t9ljZwWIg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/7yCL8J4DQqI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/9O_7ch8ywNU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/DPcCWrqCK04.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/Dlo1dtJxYhg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/FgZGeej_iNE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/FqidLZfow1E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/Fs1Mc58M0GQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/HmZBzN0ohuI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/Ka49QBSkU7w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/MGynjNkvX30.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/SqTz3xr-iGI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/XKtNIX8E7es.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/XzhH86R7Nss.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/ZM6JzJ5vWvc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/_fMzi0kHUVs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/_jxxjjKhctY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/g_oeBl2-vdo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/h2EbUGnsClI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/hCFvm6vY88E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/iVoONjEpUZM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/ikAc4MIGoJI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/jorxiuJ5ZnE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/lvSYWfMDb7o.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/moxRRyy5BOU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/nFtZH7aVGEA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/o3GAhjD18lI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/pRaLgU11yTU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/stzyhKJuUiQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/uNg15lQ7Z80.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/vMZ_rA-9haQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/wSzRWhdfaW0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/w_tItZl-fM8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/wpqHsw3YuZI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/y1PwpFF1sO4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/yd_xjzbJT-8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/zOOziTqJWPs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Geektimes/imgs/zk8GDuM1DA0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/-0y3HSaG4RU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/-25pOnMGn7g.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/-9GEofSSoUU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/-9K299yqkMI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/-C96zJjAN-A.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/-CfyzNEdN0k.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/-FQdE_MDo9A.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/-POPFkUf6vI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/-QVD8Itbcdo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/-TYXSoqu-AA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/-VY_KaqXLE4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/-hQq3C7WxyE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/-rQoeyT3ogg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/0EWXP2rJugM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/0LjpwWIH1_k.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/0ZmsvbZ2R88.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/0elkfFAH9wI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/0fAgz6k4eCM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/0xuI-AGKrE0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/141VxwS3LGM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/19LKXLOW2mw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/1BCNMeGtLGo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/1d0pbQfzdV0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/1fMgdneSMxs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/1iA7fQywrw4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/1zTL67CiEWM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/20TpIxZdcV0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/251RRqREZrk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/2mOLfShwxG0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/33kBGjek1LY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/3D28-X4Q7Ew.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/3IlMAQ6X3fI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/3VvW8vYE7ro.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/3eMV1zG8NdY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/3kklgbO2mLA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/3q4rEu0yiJM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/3y60pq6ibBM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/46ljRZnTVfo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/49eVZGqAB8c.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/4XSSrESUhfA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/4Yp42_BXPzg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/50CqfQ6B_3o.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/52ZXW7_e8FI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/5AJDfKgS6c4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/6PzUcmx3_nw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/6UN8bcxRdMM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/6YwobrADKZk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/6b8XHZrQ8ks.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/7BYhv6TYv3A.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/7EDUVNfgzYA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/7_qB-0sRT5Q.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/7apRJxymb4I.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/7ixldOKHDHA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/7w3jz5SS8Gs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/7xp2ufgVN24.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/88fkpBbgtLw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/8IxHvAG6JiI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/8M5eS1VFedE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/8MPU2VJ2vEo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/8OnOuh-rukk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/8T8EopHQc0U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/8VZO1toA-0s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/8aohbdnhx5c.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/8e870UoG58Y.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/8gpcEGfrxe0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/91YpCGzQwHg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/9BNH77i-3TM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/A6046hOYVvc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/ACA9NZlvAzM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/ADyumgkP8jY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/AFzRszPPLiI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/AQCypaiczgE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/AT9uZcX7y_8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/ATbAu6p2x7o.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/AlBNnBlr35Q.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/AnHkGS6grQ0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/B2ubLVsEdKA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/B4pv-q45DsE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/B7UqzObtaEo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/BCyDULtb7Cs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/BGsX-c3i-kc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/BIVJB8oWGoo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/BMqYLkwWRG8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/BcIzScuYUlQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/BdjzIx_U3B4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/BqbiWs6G39E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/BvEzsLM8QVc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/CePx37CVn7E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/CpXUzXVZWgE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/CxRYonwLLxc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/D3YJnsldzx8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/DSDZk4uLHhw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/D_wR0eZot0g.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Db6j3oijNkY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/DsK23tIJqQQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/DvCNQGAmOHk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Dw5sjs5JRo0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Dz75NWZsSZg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Edds74xhbFQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/El_3JPOkJN8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/EnEKYGXPj_c.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/EroKAlMdS9U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/F93G62l7RuE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/FFebP46ybBA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/FToXoj92t10.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/FWOSp6dPtXk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/FgDBdd43wHM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/FgnbZAroQSo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/G4Uv651E2AQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/G9HVSIo3eB0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/GSpOJlWA1i0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/GWMsvd_NWTk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/G_umOOipuR8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/GeXfKgJVpDg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/GvCH4ITUM6I.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/HB0Tok55Mgs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/HCfMOVIbt5U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/HHsgb2eWjjs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Ha5wSSTroQo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Hf08P6prHmU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/HkWS3J5qxpo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Hlaw3ER4iBk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Hrm2ADfV6qQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/HtQYE3VItbo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/I3CU1CL1_aQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/IR1sJBnves0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/ISSMJiWYjlc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Igp3CLnkfqE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Ihf05yRO3z4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/IkDLZCayDAM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/IlrlM42RoPM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/InPdPB7Wi4M.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/IoNNknMz5Wg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/JUoc_G7WeMk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/JX5pIdeTk9E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/JoG8OVSU8T4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Jobt8aWEU9s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/K5xwF290OTM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/KOF2sdXaIBw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/KZANJri9cgU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/KdkM5ShPZ0c.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/KhozsefHijI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/KtkKaH7p1tI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/LCmdwIhpGxQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/LJ61vvsayzs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/LJQyXrhF-KY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/LMooMmeJqUg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/LYBTeOPh0Ws.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/LbM5bIFhGHo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/LbspOz3Ug2I.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Lne7_xZxOMw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/M97DuZiJJrE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/MDd16_aZ4zU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/MJsBTVi7UCE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/MKKSLViaDaw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/MPFWTcVIYLw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/MQZJJFitKt8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/MoMk0wjlrYk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/MrXy7PmU9_E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Mx3sIhKvHGs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/N7vS7jG4rPI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/NkkygGOleTk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/NuZO9ORmT_A.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/OJhFCKx2oQU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/OUX5517ShDQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/OdoMz2aDutI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/PCLDx-lnpNk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/PIpajnIYRa0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/PQQBAE9XXog.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/PXuFrwVC6BE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/PYDwMIW5qqo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/PnRt8gvC6hE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Q5ZZcOg-0Tk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/QCIG_B5nzuY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/QHNBAdx5eRk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/QM7XkJioBK0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/QU3HHeHXsgI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Qu9yrSIpJGc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Qwq_CjYOh78.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/R0ie5eNhwCM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/R4xBftUMLi4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/RBKxLgPhh1E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/RDR2QDetAYo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/RKy4q_R3lYw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/RLW5bMr97Ag.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/RQ1FclAj_Zk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Rg_1RxJq0X4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/S0SB_ZHsOWI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/S1NpPif5QoA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/S2Hihc_Nq9Y.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/SCdifFR8nU8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/SKzwVAXTBEc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/So1S9HNBz5w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/T5cANoOaiY0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/TKJ_kwmxD1U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/T_kD4BTwh2s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Tef0-ip4_cw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/TsUkkZo95us.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Tup5Fvrh91c.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/TvJ5s7io8aw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/TxtT-359deI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/U8gYYxVPcx0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/U8o1Bzn21VU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/UGdLPDWyrFI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/UI1nevdQKG8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/UN2KSdVB8SA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/UQTWeOd92ig.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/USrD4zqbNHo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/UhFI4OImAbs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Ul-kI3Myxqc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/UvCIbVKBbww.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/V8rjudUDDYE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/VQX_d4tIgKY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/VbIUeTwjHng.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/VgvaZ737Ls8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/W1mqhESoC8E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/WBhWu2F5CkY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/WHF0bezqjiw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/WTHDjBQO2J0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/WazM9Zcjmls.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Wd1wSfkvcwY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/WgkMKTWiJKI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/WjvIxWl4G90.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/XGPgX4hW-no.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/XLF1aU4f3i8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Xck5jzopmU0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Xnk0lgnF-9E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Xw5iZrzEkRY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Y3rD8y4y-I0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Y6YouXtnI7w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Y7ALNnxNd1k.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Y8i_Z0wfIVY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/YIgoTTOJ8EA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/YIpxirSUunk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/YSdmQtNgh1Y.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/YXv_5uOHdCE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/YYY8o5InPQo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/YiAwTF0_lB8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Ym7pufTbM5s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Yt6WPIOWgX4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/Z4mzdEZRQlA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/ZUx59j8xIrk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/ZpfsaQKcJ2g.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/_3j1Qignes8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/_3rJHx_UtEY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/_PgGBHR2eWU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/_SctJ_V-bNk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/_Var8G2BOfg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/__m1OzJoWQk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/_rVjPsCFBbU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/_t-WEXbw-RI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/a393Aebxcy0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/a6PYt3bdD4o.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/a7ABtf_K6RQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/aCQ8Cjkyq6U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/aEhXFWfWdQs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/aGgG_1vbgDc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/aL9zGwXW6Js.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/ab5KGnvoc2E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/anHaVFbalTk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/anXam7ReB4Y.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/aw30fWTMWUk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/bG2la5wHbKY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/bKcp9-5XJ3Y.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/bQPRb5khX1I.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/be8xGjSKSIQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/bjYbr3VagHY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/c1P61iJ63Fs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/c22yt0qKfAU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/cKxvR-h_vRA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/cNXvwsL7kdo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/cQIX03PtqHA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/cfxgWHyyuNo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/ckVVQVkM21U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/cmmazFIngac.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/dNGnVQeD6So.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/dOmkOOJfeQk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/dTk8BpCpHfc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/dYYSiVndOvw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/d_SQjWUk8j0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/dj348AZyDa4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/dv0xSIfpcak.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/dvxFncwXmwM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/e9wPtmg931g.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/eADj4IrgmB0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/eHzIhvff7EI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/eJsbNS7oQ3k.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/eKZqQBdz6Kk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/ezihJbfeEDs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/f2qulOd4k-E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/f6_NNFoEY0g.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/fROJPPkMTNQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/fv3aGwYYV3o.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/gDRFtMer9p8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/gNZTJIbRvHg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/gTfZ17PIg64.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/gUOgWhImdDc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/g_mZfrRsRn4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/gb_6NCxjDYU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/gfsZSRPJAwU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/gk4pkxYUA7k.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/gohCb8Jrydw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/gyb2lo3c5Q0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/h6W6vtkNxxo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/hZP3MgfphdE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/hctTzqFP460.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/hhs4N7kgHiA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/hqr6dXMv5mQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/iG5w7JLjyog.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/iGUc1d18DfY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/ihA7M3SiYMw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/ihBKtM_6BcA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/iohN0DKOTDI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/ivXgdIyR9vg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/j07krBDK-fo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/j4esbZ-J9fw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/jXy_NhrzG_Y.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/jaxMx1oE36Y.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/k8eZ8BTrwG0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/k92h-Dvyt3Y.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/kAH2H_8E0zE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/kBDlblAiWgY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/kVsyWqYFUoo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/k_BU2_RXZSo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/k_MH0Xwa3tM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/ke7mXXXKX80.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/kjpd5BoMbRg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/kkm93-QuL_s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/kmajVjLf5TE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/kuJxQ0EYBik.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/kx-bd5BLZ-s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/kycHh3dJWl8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/l5VdzolHg2Q.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/lWbD2AIRDsI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/lah2X9JV0F8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/m8Ji1TVsIjY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/mTEkyHjCSxY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/mYWfN9JW40k.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/mrlGJU4O4RA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/n0ilbMGIjSo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/n2QGrm2nuU0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/n7l4mT1bIxo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/nCtHJhdHR7I.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/neyCixnLKhY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/nvtTsyCEr7A.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/o0rDT78yte0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/o1EctVkTlLM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/oDD6TwjwVqs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/oDroHs6wlUk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/oLAfmF5iJMc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/oMYC2l1x54E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/oXwFNIdUcbo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/o_a4BfeTEJE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/opJYZq_XptQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/owYaW_l-fpo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/p69hlcylKv4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/p9G27fH4Vh0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/pEIXT2OkwhI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/pKLy1XoZ60s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/pOmF7LL7kzA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/pTg9IPcQb3M.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/pTwqtMKshKo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/pW97oJv5pVU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/pXFxSjkLk-k.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/pYgnueywHgY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/pacH56jPTSM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/pbT-MOX3fw8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/pgtBo6Jyxzs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/pha51msYPW8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/piSfDMhsOqg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/pmvTbSDznRE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/q4z02GZ3-4U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/q7DVLFVEbrI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/qDPF4PW5Gm8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/qi-GOR4s3tY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/qilxfjRUd6U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/qkOKhTXzYTM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/qx-ITLgOxLs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/rGt-51RksMw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/rK465DUUhRc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/rSFP3vLuedQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/rjJtnYCoiow.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/rmP6VijLwOs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/rqAzMlCq02c.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/s9vGyt33_iQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/saPdBqumFvY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/sc0eaWlCbmA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/swmfM0VEIQA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/sz3phqWIvyw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/tE_bXI3dS1o.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/tFwNZ7IcP0k.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/tLwJFuEBvKQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/tTWr5xM2lwQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/tU88aNQcTvI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/tswscTGter4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/tw2Rdqr2Ydc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/twpyHiIUFkg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/tx6-0aXUEbs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/txtL06nm49w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/tzSGlg4KRgE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/tzoyOeIXth8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/u3Apr83KU_g.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/u3n8PGyJNBc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/u5R-S6FDXok.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/u6gg2Bkq76w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/uFBkjEbFdu4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/uVUhJc_ehG8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/ufvQCqUB7Xk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/ugnNBbvRgng.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/uqAYisCt5Lo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/uumLA6vPTt0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/v3J3env1rd8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/vGQKUnmGmy0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/vMd6g9Q6_uY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/vTuZ0qLO9DQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/vXS8N2r-rnw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/vvaNktnzw0Q.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/w4eejYv3MvU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/wInGz-rxNW0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/wMAGEMBuzRc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/wUaCnNp7IzU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/wbjycFlnfAE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/wg4V742VGaQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/xOj25rhjzaA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/xTVDXmpVuC0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/xYsqMwSEPcE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/xrB-FN8sI2E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/yDF-ucoU-VM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/ycvtAih-Y2E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/yiQJJ8x6T4I.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/yn3ChlhNav0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/z5QBPsomk8w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/z8tobVUkkRE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/zDSNOVQ6xOQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/zHfS0kX7eKc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/zZ3CIyJvuUI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/z_KaasIu290.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/zdP7M7pi0As.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/zmFqHd8iLmM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/How much?/imgs/zrVTwI5hxuU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/.jshintrc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/.travis.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/Gruntfile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/composer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/dist/jquery.magnific-popup.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/dist/jquery.magnific-popup.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/dist/magnific-popup.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/libs/jquery-loader.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/libs/jquery/jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/libs/qunit/qunit.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/libs/qunit/qunit.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/magnific-popup.jquery.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/src/css/_settings.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/src/css/main.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/src/js/ajax.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/src/js/core.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/src/js/fastclick.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/src/js/gallery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/src/js/iframe.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/src/js/image.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/src/js/inline.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/src/js/retina.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/src/js/zoom.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/website/_includes/analytics.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/website/_includes/build-tool.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/website/_includes/examples.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/website/_includes/logo.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/website/_includes/signup.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/website/_layouts/default.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/website/documentation.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/website/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/website/site-assets/ajax/test-ajax-2.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/website/site-assets/ajax/test-ajax.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/website/site-assets/site.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/website/third-party-libs/jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/website/third-party-libs/jquery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/website/third-party-libs/uglify.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/website/third-party-libs/zepto.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/website/third-party-libs/zepto.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Magnific-Popup/website/wordpress.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/main.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/main.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/HELP-US-OUT.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/css/font-awesome.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/css/font-awesome.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/fonts/FontAwesome.otf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/fonts/fontawesome-webfont.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/fonts/fontawesome-webfont.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/fonts/fontawesome-webfont.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/fonts/fontawesome-webfont.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/fonts/fontawesome-webfont.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/less/animated.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/less/bordered-pulled.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/less/core.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/less/fixed-width.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/less/font-awesome.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/less/icons.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/less/larger.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/less/list.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/less/mixins.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/less/path.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/less/rotated-flipped.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/less/stacked.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/less/variables.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/scss/_animated.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/scss/_bordered-pulled.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/scss/_core.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/scss/_fixed-width.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/scss/_icons.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/scss/_larger.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/scss/_list.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/scss/_mixins.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/scss/_path.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/scss/_rotated-flipped.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/scss/_stacked.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/scss/_variables.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/src/font-awesome-4.4.0/scss/font-awesome.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/-09UIAS7luc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/-BjdGp8Y5h8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/-MRu8S7uf6s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/-QDSu8KeiYk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/-QYrj7EG3wM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/-UnRuLec4-c.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/-UsOLHzb7GY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/-VhuyOjoRI0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/-XYnvDM4wvQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/-fexRqZC8mM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/-tdge6n1PfM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/03ghM1om8lw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/0tA75OeWKpM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/0ua4G2pR97g.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/11pgb33fk2M.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/16LsXSeMsaA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/1J5bLd2SiAk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/1TkmVGWA4MA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/1VuRIiJiOIQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/1aH40z8EihM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/1d5EB7GZ6JI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/1ooh9_ajD5U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/27vQdTVacsI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/2MEghFF94QE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/2OnWJFxSPyo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/2PKa7AgJr8g.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/2lSzVdJv6CQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/2pIi8O1lzQc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/2zpbdWY78oA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/353OJG39P3U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/38OxdgP0T_0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/3aHT6xy_nmA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/3bhOHnTniwY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/3p0KmzkYG8Q.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/3qK7mSGd0P4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/490cxG6CmZM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/4KfQWkNoz9s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/4SDQbMSJbCA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/4UIgz8WOe2o.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/4VfQDzlJtIc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/4XhxwAOMrVs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/4bupaxw0e_M.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/50p0p5CWobI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/54NT0qC_JuA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/5JSEJXBFe6I.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/5PBPGtDHZiY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/5UMSe90BJOU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/5XEZWCfw-CY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/5km09BCazOs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/5pOTnddJ11o.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/66Vyua03j8A.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/6Bcsf91Tt4Q.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/6U6lAYNUlJI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/6_nBxskEjYs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/6d4V0NmsNpE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/6eXHnqNWLas.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/6uWcUczjRx8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/6v-KxRzZm5k.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/7Hp8iVMW1Kk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/7IfR2EVLknc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/7fdykfKouMY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/7pjC86jdwps.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/83ae-2YLhBk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/85hm3zxsa7I.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/8EYeEkJo5IM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/8G2RoPOtJfw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/8LFj1cMwJbA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/8_IM9DujUk0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/8hIa6BUcsuw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/8r3vJl5XjCY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/8rhb-YJXLso.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/92qQqnNR_58.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/94CM5UEWP24.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/959NUETirEY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/96Njnc9Puu8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/9VATQj_dv0o.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/9xzw8ZGXZno.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/A6k0lV0F51k.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/AFN9JF9QVBo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/APE6t5s9ZTo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/AQjy1B77Yv0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/AVn_cH6z25I.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/AZCKBLf-uws.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/AkeOhX5zBWI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/B5EFJLJqPwA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/BEcwAyG6mMo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/BMcZcphE2T8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/BXgzZO-OBM8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/B_1Y_6wtACw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/B_UZn0ueLXg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/BrSxTf2k7rQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/BxpSTBmR6C0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/C7PbmuoXpMc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/CAz1FQxZt68.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/CBskIq6ZxrI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/CEzHQzVUGQ0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/CF9aUki3GZo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/CKVvzq0K0x8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/CP6xrT1XYf4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/C_NYfFuIc2c.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/CdLKNL_pFhs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/CqKSyXKODbo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/D3mngWn5UEg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/DEcenss2Z_c.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/EuT9Uqkpa_g.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Ew_P72Ow4es.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/FDSYVu2tAeQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/FIPxhhtQ6cs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/FVFtliWto1w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/FXgMBhCV64A.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Fd1Ylh0ST4A.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Fmec1r2H9rg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/FsiWxY23GIc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/GEtL3jOhCDE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/GLgzb_NX0yM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/GZs9prnBIPw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/GdL3PQg6B1w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/GgCVa48s2Gg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Gkn5grGnxXE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Gt67VRhRRnY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/H0Ga1VdB63s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/HEvDNdksf08.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/HOb4zy_5aqA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/HSsAQY1Xk6w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/HTK64-cCl-U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/HVfoFHT_WGI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Hk-FznRTnPg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/I3XXzWhX71E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/I7m8IAKIJ0U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/IDYbp7pHqck.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/IJafc_LrPU8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/I_sAvKdpAaE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/IfLAAQyKWhs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Ij2stjdcXNU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/IqNJaSRS4Rw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/J3ygoZbLMPk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/JMCdlaMArjA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/JNObHD-6Gb4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/JQWxTeP4bvc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/JiGQxJV8QCI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Jp4ht4V73SQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/JslhPe2pm4M.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/JutlwWua8NM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/K4AtBdNg4bg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/KLi6cFrpz84.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Kb3WLF0tALY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Kldzw5md25A.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/KqMJXBtny9o.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/LC12P5OF5dk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/LD0bZNI10rA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/LkEmaCP8KH8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/LrciLhsxziI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/LsxJ3hUZhKc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/M0k7SL7pCug.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/MF3YZFYEH_s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/MOEhGFccsgs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/MQtxY-lXs-k.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/MV2ww_bxUTc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/MrKNY9hd_e4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/MrlQw8meNfs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Mw-Lqy3Ern8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/NbMafCDzVQ8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Nm0D0IxWvpc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/No_rmP9QiZw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/NsZE5Ef4TCY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/NzXifbg_dtI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/O1o-hswjI8o.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Ot5SrGzrQSI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/P0iDn3HENKY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/P5tpO1abKRw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/P9enqaFDIho.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/PDwL8ZbhceE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/PYDAR9xiOpg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/PttNTQtb3mo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Q56NTWRXtcM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Q9-bVv_KGCQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/QEH3MpCkEJM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/QFSFDP5k-qA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/QghADWNqaVw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Qm_JupYJpCU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/RG8Vutc8kWA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/RYI8PXjyDBQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/RcXVC92AB8I.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/RslgkDPMoJw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/RswqVHY9PeM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Rw8wOFELa_8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/SDYEO4HHNTU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/SMJw61A8Nb0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/SQHpRl-8uFs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/SUa-GL0iGNo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/SX3hk9evJXU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/SX4-3xq2me0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/ScxOrnI5AG8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/SjtNTHjSxeg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/T0cJHGNPUDE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/T67iY9lOA00.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/T7HGXiZE2co.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/TDBGJuutfEE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/TGeiJ6GsulY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/TIx98iLKNGg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/TRgPdQ8NJGw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/TUJnFzVBKAI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/TYaFpo8d-aA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/T_lWGkQ9HeA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/TcZizmBGE9w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/TdhmEh_hqb0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/U-GvlqnKs0k.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/UFgGtMt2nwI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/UHG49i5dF8E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/UKxleBxJ6Ng.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/ULzpkaNrsNo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/UMynYoWXQjg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/US6H5s4QOWQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/V7Y6sglR4-4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/VAco7uqXgrY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/VBBUi92AQRg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/VIXUt8ZH5oo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/VMHDTEftlJA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Vgatx-UshzQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/VtMMmDbLJro.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/VwSYqfjOztM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/W5upoZbO--8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/WFLskZW9Jsk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/WPeGZcs_3kU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/WTniNfJkvls.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/WZYLQcDBsfU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/W_76zvTZ1Qc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/WeLauwO6g-U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/WgXmawzrpvo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Wi2yFAOhRaI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/WmpVwIsyimw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/WnoZmPRqj0Y.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/WyDio1LT0Tg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/X1cHyTUTyqA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/XZPXCExMKWc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/XeMHi3DZIGE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Xf_FIRRBf-k.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/XjP6NncBmE0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/XnDaE8SyMlk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Y80enDFOvg0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/YETrcS4-ORM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/YRUAPa7oLEE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/YbXDeNZruhw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/YkEjGJdFNBo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/Z6_VF_JwhO8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/ZFu0TODW25Y.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/ZXpeyDQgGs4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/ZZ44QPjc2PQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/ZxB9oluoytE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/_-CdRud6XcA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/_L1l-RA7fbg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/_PdEbO2oK0I.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/_QQCmbgIb18.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/_VjJsQeAwAs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/_YfShdAd9bI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/_ZzLr9uF-SU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/_pBKeB9qzo8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/_ublU3s7J70.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/a2t2R5w9BA8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/aHRgAowxVMM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/aPbukR0X8CE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/aR4mwgFsYIQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/aT-gAT8VFrM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/aTvZWBqn7bM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/abVQ0QTd19c.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/aeis7MYFLCI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/b31C67S0iCs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/bGaEkf0-yHM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/bTOwjtuIo1Q.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/bTsgp9_7T98.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/bUGoB12Ob-4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/b_Ty2lLoIMc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/bbuuAvpjK1M.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/bj-gJ8WMVSw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/cRH-poOy4bU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/c_N4AVes_n0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/csjIx2Gfygw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/d52gbdefxNI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/d6HLvVF0oQk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/dAYGo4uafpQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/dJe0Nl4ZhD8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/dQu8-qW5-fs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/dixdcQxHGPU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/dkB_nO2W7SY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/e6MpcQXLySA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/eADcXJDZ8Bw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/eRVDQuZL5Wo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/edGUk782Upk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/ek4ziVzoVGY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/ek_J6_K-W_U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/esK-QXTduLQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/f4krHXqIytQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/f77oiVk8deM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/fHkwrq3bUDY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/fUf_jTkUdRI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/fX1Rn6_9pQw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/fvvaYcUcXrU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/fyVzFmWHtE4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/fzX3arLpfBU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/g-HSMnVaB4k.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/g1uyl-CQqzE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/g9uWFQIP1E4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/gNHj9r8HC7A.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/goyyz4BoWoM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/gtd2vt8TMF0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/h-LpgEWVp10.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/h2QH8HoxqNA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/h3HqIt5QPnQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/hMws8knB-fg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/hYArEx29CRI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/hYdwWOzKrus.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/hiji1uL8Ptw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/hypBkGuYcmk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/i0dWYQJK-hU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/iQn0iB_6Flo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/iVkqn4KzE6M.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/iY0yTN8ommI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/ivcPZMad4ng.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/j5wp5snIvDw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/jAXJfCtf9-g.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/jQMV5h5bhuA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/jUb90by7wVM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/jW401cdL04A.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/jgWaWyTUDQg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/jpXayF-tZhg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/k2MXVB0twXw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/kCNwHU3-c60.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/kIlV_EqwIt8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/kLEEZw-HDNE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/kTerqNxxPH4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/kcmnyLXHvGw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/keRheVlwH8w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/khao843u14w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/kj-uKhEQocg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/kqdyLXQgQw8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/lGShL0FyWQo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/lJxchHGDaGk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/lQllV5WuH5E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/lSPvllu7UfE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/lgWfF9Fyono.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/liPtDrobn6U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/m8PgzOnAS4Q.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/mHFUC-4RgRQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/m_NDLqsMUKg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/mbu4Yyo_giE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/muM9iV_knNA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/n1Jcxsf3ctc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/nCjS8wkHSfM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/nEt3VM_EqvQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/nWEChgPK1MQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/nX4SdJw36C4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/nYWzRpNvaGs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/o16gTRPekMY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/o9Cal3zWT_g.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/oA2qzLLvvF4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/oT9mCQNbJh0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/oVCiDOAp8Kw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/oW-xNS14pFs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/of8VUUBqaZ8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/ofEeA_8bjWg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/p6UL0TIChzQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/pMlxEPdyTA0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/pOSt7J4DY5E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/pd8pu8w8ygs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/pdIZkIY1CRU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/ppP0DLIlVcE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/ptawAQsBpr0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/pvCtyOSXQqs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/q0uDIEEfkv4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/qKrvtGoFBx4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/qNhGPZyWj0g.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/qeHPnirqufM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/qjZjd0CpvYA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/qvWS8XI1QTo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/r2x_K_T6U1c.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/rGIzvAh4R6A.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/rHsFiKskiLo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/rJ5XLN2vupI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/rQu9c7j_pGg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/rREY4Hna5kI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/rVpnAXZqNWE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/raEfNRL7z8U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/rhw-77k8I1o.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/s8Un5MaR_Mo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/sT2Ns1jNEjM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/sUHNmvcApdI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/sULmMnS4dpY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/sVS-TsxlLZk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/s_oYWkOOchc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/sbc2i-DcXtY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/tH2MHsLWzeA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/tTTK1ZeWVz4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/tj0H3bYm5zM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/tkjwzj0h3Mw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/uDziNUuI2YM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/uFvhubnbv0U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/uLFaxD_ux9A.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/uTFcTE0K5nU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/ul8BUaT0-XA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/umTYOF77pD8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/us1kmNNWBuI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/uuEVRssVaRQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/v3SL4LDx2jQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/v6dotSCSHoA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/v90cEh8d5nA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/vC7o8TxXlJQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/vFGZ7SkhoRo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/vFOaZNMaR1o.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/vUmdfyLDi8Q.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/vVy9ofHKVZE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/vfy0bQWrzT0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/vpJgGPE4lB4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/vqGKgJVzN-c.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/wGr_uPN5heU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/wLY5Pj_8GRY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/wfyn1xoYLo8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/wgbiMX-MX44.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/wl2pMYl5Cxg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/x-wAJwknc4Y.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/xER9t0YY1EU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/xTze8XvAg9g.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/xXi6ZM1LI8c.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/x_qkzBUC0Dw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/xbJ_-tmoTgA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/xsHY1tx9Piw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/y5UEyv0Je_w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/y79d0ZU82Po.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/yBaNWmIqUYw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/yE7Mie-oCuE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/yNeso9f7NZc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/ybtPX8DDT0A.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/z-3z-ZXPuYQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/z9kkwwgF89Y.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/zKbZ3JjjIU0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/zOKr8afIurk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/zPELVlatC5w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/zYzy3Ulz3H0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/imgs/zapRwMgvyK8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Лайфхак/tee.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/-TpGKIDL4uU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/343fFzhx5hU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/3CCMotkGrTY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/3llKrVQZHtM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/4hxjONN5ld4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/5Ck3nTTdeqg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/6-hH3SMTlb0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/64r5TbyQ2UU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/7SsxLl3rpmQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/7sc-GtQACuw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/7w9avrbuSnI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/9GQTc6Lei94.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/9dEIKhpH23Y.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/AN1BFimPzDE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/Bi1cgqydQDI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/BqG_BdTE6Eg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/C8s2YQT7zec.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/CWiSF6d41fg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/FjUBpc330zs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/HNV-JuD8x3s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/IqnJn8b2o5U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/Iu6K_z7OCtE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/IuhFuLw41M8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/JCGYpdjGClc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/JPB64QulPa0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/KDQU5WzDGRE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/Kp5NxucMAic.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/LTTgJtez9ew.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/M8c_rOnsu-c.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/Nvz2CmGwnYE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/O-Qd8UOQOzw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/OJR_Lznn6-U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/QW2PY0dKP7k.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/Qa83dxI7zuM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/RL9zeVyhZJs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/SQ6zTj1Bu0Q.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/Sntb3_KeXdo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/SwZ-8wc1BuE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/TWehyHvSDjw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/TmARvp6qPIo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/W10oOi0J5Gk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/W9-NMrFrNso.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/WYxsnHKGcJI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/XTyXDYH8mh0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/YPDo4UdGleQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/Z32l0hxVJyQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/ZYF6K3eiX9Y.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/__stbfZdA1Q.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/aSuePCmPlyM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/bj7ghKfS_Ow.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/c14bjtbrLjA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/ciTj7xjsxek.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/eA41rYIvHew.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/eFhstaqnXrY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/eduWn5KPjQE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/ef6w0WB9DKI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/esSIlSh0Upc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/fnz-OUh11D0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/gQ9feulV51k.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/hT_eOhrTXRg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/iGHBsttJadk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/ivPY3ABOL-g.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/jovfEOIGJVE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/kFYSFpz4LNY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/kSFr5meaySU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/mbskBLA73lU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/n1xi325Erzg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/nHMqE-uromM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/oIchsM5eW9E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/oYiWIu4-SjY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/p7nBGQFrEsQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/pCF5qUVBa1Y.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/q1ZTnvlmhbM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/r-XQ8B2QmHU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/sWeKe4IT6ZU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/svkOs9MGlrw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/t5jINQee0cM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/tBggzQdFWUw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/tRDEDdmmHtk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/u1-0IdEs-O4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/ubuJuiRaBCo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/vpE7eJhvMt4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/wWDY06DSC_c.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/y7x7bEy46OA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/yRyKAQv1j-g.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/yV43d0WJvxM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/z9NxowcPKwI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Полезное образование/imgs/z9W7qYhkM6o.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Смотри, что я приготовил/imgs/CeVfh6pSNpA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Смотри, что я приготовил/imgs/TJyXlFHcnOM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Смотри, что я приготовил/imgs/YfFQh4PDAsk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Смотри, что я приготовил/imgs/bdAQ6cS-aBw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Смотри, что я приготовил/imgs/meLzU9ZT0aE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/01880Rxm0mQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/0UNfMc7PPYA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/1iecMhP6htw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/1oqqIma4-M8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/2G18-WTaDkE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/2Hno3bl6Beo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/2_w1PHp1lBM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/2axSNkZ4Eto.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/31YzpuHGbyw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/3rvIaCyz9i0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/3xD8zHLlkCY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/46wn3wF0TXc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/4GPa-q4X0LI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/4mWXgr45sc8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/581AQIyZ_Js.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/6QhTOu0HraA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/6_DEFRUDuSM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/6bt6pSALZro.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/6i9u606Nmx4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/6lUEJ8Mi5tA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/7BM3zK8KRxA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/7KzD4ff54DY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/7LdnT6LOeNc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/9oyrZq-IqlY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/A5Lf-H59QEQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/AM8nfDiT2X8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/CL6rBQHVGak.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/COArhJeZ3IY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/CQHvVTHjRzQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/Ct32OQMMC7A.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/DRvNvEEaHng.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/Dxoc7cImDDc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/EKnIpFZNVCQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/ERxSCokU5kk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/EVB5fcgpwjE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/Ep9_NCXm0vw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/GnbFuxZWSnU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/H1As7y4sEhI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/HLXHaHjEP3w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/HRh7eaWnYRI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/Hgxa2Uxt4X0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/HjEQyk75okw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/HlynrT0ASzw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/IXmnijoMLFQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/IZUxJi0xaBM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/ImHfPl6p3yY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/JMA5FSjV1xo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/JTvg5Q3vKlg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/Joy2dbAxVUA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/K4b6Ze5WH7Y.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/KLkGnn8u9WU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/KVt_qO2trAI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/KZkLFqwPLQg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/Knr9_B_lJN0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/LLo74pXFsow.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/M-QRFOmZRo8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/MfX9E07lToU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/Nfw2rF6bwb0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/PCrlRYbq1yw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/QF5dwOrxnbA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/QyOuPDexuXY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/SKhUbeSTqUk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/Sdg4gwXTWtU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/TivSAcJdcF8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/Ts2eHlBtczE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/U3t-bgTMFxo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/UpmkTjqrbos.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/UyiPOk3EqT4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/WHtLtn23YCw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/XLVDkwmfUIM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/XwlXJTqiFS8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/Y0QhKFi5dxI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/YKdbsRzLJgM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/YjuckB4V05E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/Z1AQnN6JATM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/Z2pKI25WKvQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/Z48PAiFys5g.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/Z9nXsnWp7V8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/ZufQPv3taLU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/_7vjKeMWP7Q.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/aQSslBvDL-U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/b-X2iLWOu2w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/btbjr2dB0Vg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/bzYt585EMDI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/cTGCB_4PXt0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/dJtMKBRmvlo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/dNGgUETYOXM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/e2chVaskzj0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/e6ZlI8V64x4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/f2D3Xq5uubo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/gKzJdkk7tiY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/gug25ds6cCI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/gzy2gldbWHA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/hL_xZAJkKI4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/hagtsai9k9A.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/k2Yjlcyh74A.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/k3VAh3YCqsE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/k76jfJtdjUs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/kmsiNGQqlkM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/mY7v6qlJIVA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/nI3eI-mEOt0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/naK73QAzkg8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/o8tx_xsnL14.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/oA7m77mQMOY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/ogNMpMj67sU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/p8MzfWyN1Nk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/pHBAVM0v0_M.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/puOkLGlu_p8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/q9NhTKUhR4o.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/qEoz-tgcp9g.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/rqidtyTae8M.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/s7dNCaj1zNo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/sHHxlFm6IBs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/sloRUiEkMRM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/smOKB-J028w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/tLrcN6P7FOI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/u1pLnLj3QUM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/uEOfOmUfU1M.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/uuR4T230jQo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/w2s8FRZE938.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/xukx4dA5uVY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/y63iZP-VEQs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/yf7Ldm5oh_w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/z5n3pqSDqoQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/imgs/zEe57MmwR_E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/-EAB6B952zk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/-Roaw4KNY68.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/-w55vf_OTiQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/0_hUCT1iuY8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/0moWfFt78So.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/34rx-AVvb4k.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/3ZCSGZ5cWpM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/3yoYD_yls-o.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/57B_LNVDFlY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/5hFzRPG9cKc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/5q6A6k5QYXo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/6C0yg-9QUKc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/8T0St27Wy7Y.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/8bOY9KGSa10.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/9sJio4nwlts.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/Bq3OA4P2x2M.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/F9_tUSLehzQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/FCYvEzFECKI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/FlKGBbkoGLs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/H5h01s1h1J8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/HfJ7A5N-ME0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/HhM7SWmaNUw.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/J33oBShz33Q.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/JOU-cTQ61SY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/Kq9AZflEyKU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/LQOa0OqHGZ4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/LSyXbwHS1Zc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/LpOkGKPAg0E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/MxNrzgUSwKo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/N3r_m8i8c6A.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/NOw63NUuBSk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/Nrof_Ph3EQc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/OX5br_P3i3s.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/O_5GFum3F3I.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/P81sbNHo6IM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/PIKy1vHz7fY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/PlAuI1XbH8I.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/RYUgN92GONo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/RmoTN45BaU0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/S3WyM_VpvtY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/T5NXX0w7cGU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/TN6Lcnxlcgo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/ULB_ZCS4aDg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/URuLGu1zI9Y.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/URxbo0OTQTA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/V0zdkkYpQVE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/VA6n32jUymA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/W3XmKhbw2VE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/WdF8pCzjUio.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/Wdlo9eTrWeU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/ZKDXNh1eGaM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/ZUuAbsIF8f0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/ZbkHuoXfxVY (1).jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/ZbkHuoXfxVY.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/_MfiyDYts-4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/aAPugpr1T2M.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/aJoQD1Eovk4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/b8X4QBubtJg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/bRNdtH7wVmM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/bjA_MhNIEDc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/buzzanpjRP0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/eliDeM_l_Wk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/erL5Z9jKDB8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/ewyAnlB8-jQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/f5fyIncaxLA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/fCNboXKv_YA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/fPQaesi8H-E.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/fUH3B7TVTxc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/gB0U99W0zGs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/gNkLx6O4RjQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/gNlHNHTwKw0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/h43D1NZdHfc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/h5Njf5iFSY0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/hpmjxMuJKoE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/iCEMed2sEVo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/iSvBniiqsOE.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/ic5GrB7gYOU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/juOd6Mr81UM.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/k74lTezQnXk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/kNyLsMb2xHI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/lNfRGcSo8xg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/lNrhinjijYQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/lkJxezzN-7o.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/lyngQBhhjnk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/mJf29rPCTd4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/pDHzl_WcW-4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/pfdfZxlEwM8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/poz661gKRHs.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/q106Gx7ASF8.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/qsbHOo7e0Rg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/sU0sytGDC4w.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/tRLJorgR6R0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/u7GWniDTZoA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/uAj9hlVEH64.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/uROmejdNXqk.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/uTqpBLt5NwA.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/ukuTLf1B2nQ.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/w50eoPyjr6g.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/wFvZR9q_a2U.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/yHpa_at4M-0.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/yb6Lyz5-WRI.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/ylLrTeJELHg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/zbr-asMALLc.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/zep8iyA7y7I.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/zf-QyuW8VRU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/imgs/ziVtUMjQcRU.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/walls/Я люблю русский язык!/wall.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wiki.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wikiAPI.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/words/withHeaders.txt" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyLog.txt" afterPath="$PROJECT_DIR$/MyLog.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/photoCaptions.json" afterPath="$PROJECT_DIR$/photoCaptions.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/start.py" afterPath="$PROJECT_DIR$/start.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/subb.html" afterPath="$PROJECT_DIR$/subb.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/updates/box/updateAudioToCopy.json" afterPath="$PROJECT_DIR$/updates/box/updateAudioToCopy.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/updates/box/updateVideoToCopy.json" afterPath="$PROJECT_DIR$/updates/box/updateVideoToCopy.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/updates/wall/updateAudioToCopy.json" afterPath="$PROJECT_DIR$/updates/wall/updateAudioToCopy.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/updates/wall/updatePhotoData.json" afterPath="$PROJECT_DIR$/updates/wall/updatePhotoData.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/updates/wall/updateVideoToCopy.json" afterPath="$PROJECT_DIR$/updates/wall/updateVideoToCopy.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/wall.html" afterPath="$PROJECT_DIR$/walls/Digital - журнал о технологиях/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Geektimes/wall.html" afterPath="$PROJECT_DIR$/walls/Geektimes/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Hi-tech/wall.html" afterPath="$PROJECT_DIR$/walls/Hi-tech/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/How much?/wall.html" afterPath="$PROJECT_DIR$/walls/How much?/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/IQ - интеллектуальный журнал/wall.html" afterPath="$PROJECT_DIR$/walls/IQ - интеллектуальный журнал/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Just Cook/wall.html" afterPath="$PROJECT_DIR$/walls/Just Cook/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/N + 1/wall.html" afterPath="$PROJECT_DIR$/walls/N + 1/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/TheQuestion – честные ответы на любые вопросы/wall.html" afterPath="$PROJECT_DIR$/walls/TheQuestion – честные ответы на любые вопросы/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Vert Dider/wall.html" afterPath="$PROJECT_DIR$/walls/Vert Dider/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/iTechnology | Наука и техника/wall.html" afterPath="$PROJECT_DIR$/walls/iTechnology | Наука и техника/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/src/main.js" afterPath="$PROJECT_DIR$/walls/src/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/updates/updatePageToCopy.json" afterPath="$PROJECT_DIR$/walls/updates/updatePageToCopy.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/ВЕСТИ.Наука/wall.html" afterPath="$PROJECT_DIR$/walls/ВЕСТИ.Наука/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Веб-стандарты/wall.html" afterPath="$PROJECT_DIR$/walls/Веб-стандарты/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Вести.Хайтек/wall.html" afterPath="$PROJECT_DIR$/walls/Вести.Хайтек/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Высокие Технологии/wall.html" afterPath="$PROJECT_DIR$/walls/Высокие Технологии/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Готовим дома: вкусно и просто/wall.html" afterPath="$PROJECT_DIR$/walls/Готовим дома: вкусно и просто/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Клуб National Geographic Россия/wall.html" afterPath="$PROJECT_DIR$/walls/Клуб National Geographic Россия/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Лайфхак/wall.html" afterPath="$PROJECT_DIR$/walls/Лайфхак/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Маленькие хитрости   Лайфхак/wall.html" afterPath="$PROJECT_DIR$/walls/Маленькие хитрости   Лайфхак/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Мания науки/wall.html" afterPath="$PROJECT_DIR$/walls/Мания науки/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Мир согласно Google Doodles/wall.html" afterPath="$PROJECT_DIR$/walls/Мир согласно Google Doodles/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Новости IT, Программисты, Сисадмины, Дизайнеры/wall.html" afterPath="$PROJECT_DIR$/walls/Новости IT, Программисты, Сисадмины, Дизайнеры/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Официальная группа iXBT.com/wall.html" afterPath="$PROJECT_DIR$/walls/Официальная группа iXBT.com/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Полезное образование/wall.html" afterPath="$PROJECT_DIR$/walls/Полезное образование/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Смотри, что я приготовил/wall.html" afterPath="$PROJECT_DIR$/walls/Смотри, что я приготовил/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Уроки и туториалы/wall.html" afterPath="$PROJECT_DIR$/walls/Уроки и туториалы/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Физика/wall.html" afterPath="$PROJECT_DIR$/walls/Физика/wall.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/walls/Хабрахабр/wall.html" afterPath="$PROJECT_DIR$/walls/Хабрахабр/wall.html" />
+    </list>
+    <ignored path="VK_APP.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="VK_APP" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="updateVideoToCopy.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/updates/wall/updateVideoToCopy.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.9590723">
+              <caret line="87" column="27" selection-start-line="87" selection-start-column="27" selection-end-line="87" selection-end-column="27" />
+              <folding>
+                <marker date="1453319747000" expanded="true" signature="1770:1989" placeholder="{&quot;name&quot;: &quot;ГЛОБАЛЬНАЯ ВОЛНА — интеллектуальное движение&quot;...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="start.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/start.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="335" column="40" selection-start-line="335" selection-start-column="40" selection-end-line="335" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/updates/wall/updateVideoToCopy.json" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsBuildToolPackageJson" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="83" />
+    <option name="y" value="23" />
+    <option name="width" value="1294" />
+    <option name="height" value="854" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VK_APP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VK_APP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VK_APP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-options />
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f30a4574-2abb-4c0e-a013-af83b70f5ac1" name="Default" comment="" />
+      <created>1453319456252</created>
+      <option name="number" value="Default" />
+      <updated>1453319456252</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="83" y="23" width="1294" height="854" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20865533" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/updates/wall/updateVideoToCopy.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1453319747000" expanded="true" signature="1770:1989" placeholder="{&quot;name&quot;: &quot;ГЛОБАЛЬНАЯ ВОЛНА — интеллектуальное движение&quot;...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/start.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="335" column="40" selection-start-line="335" selection-start-column="40" selection-end-line="335" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/updates/wall/updateVideoToCopy.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9590723">
+          <caret line="87" column="27" selection-start-line="87" selection-start-column="27" selection-end-line="87" selection-end-column="27" />
+          <folding>
+            <marker date="1453319747000" expanded="true" signature="1770:1989" placeholder="{&quot;name&quot;: &quot;ГЛОБАЛЬНАЯ ВОЛНА — интеллектуальное движение&quot;...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
