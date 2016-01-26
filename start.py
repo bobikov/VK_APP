@@ -47,7 +47,7 @@ from prettytable import PrettyTable
 # https://api.vk.com/method/photos.get?owner_id=-77093415&album_id=wall&count=40&access_token=00af0cff7458595045e1893775acf9b561dad00d6df9de580f9839e2722d5090e3fbf819a471461094666
 # User and app info
 session = vk.Session( access_token = 'f98576da13f80eb5b3ab0949e1527ef48c9da72155005b7140362908471415d707eecb765bea05aa2852f')
-vkapi = vk.API(session, v=5.44 )
+vkapi = vk.API(session, v=5.44 , timeout=50)
 vkerror = vk.api.VkAPIError
 other = [-72580409, -61330688]
 person = [179349317]
@@ -551,7 +551,7 @@ class Comb:
 					copyPhotos = requests.get("https://api.vk.com/method/photos.copy?owner_id="+str(from_id)+"&photo_id="+str(a['id'])+"&v=5.35&access_token="+accTok).json()
 					
 					if 'error' in copyPhotos:
-						# if copyPhotos['error']['error_code'] == 14:
+						# if copyPhotos['error']['code'] == 14:
 						self.captchaSid=copyPhotos['error']['captcha_sid']
 						# webbrowser.open_new_tab(copyPhotos['error']['captcha_img'])
 						# self.captchaKey=input('enter captcha: ')
@@ -599,7 +599,7 @@ class Comb:
 				
 				if 'error' in copyPhotos:
 
-					if copyPhotos['error']['error_code'] == 14:
+					if copyPhotos['error']['code'] == 14:
 						self.captchaSid=copyPhotos['error']['captcha_sid']
 						self.captchaKey = Comb.captcha('self', copyPhotos['error']['captcha_img'])
 						copyPhotos = requests.get("https://api.vk.com/method/photos.copy?owner_id="+str(from_id)+"&photo_id="+str(a['id'])+"&captcha_sid="+str(self.captchaSid)+"&captcha_key="+str(self.captchaKey)+"&access_token="+accTok).json()
@@ -857,7 +857,7 @@ class Comb:
 					captcha_key=e['key']
 					addLikes = vkapi.likes.add(owner_id="owner",type="post", item_id=i['id'])
 					time.sleep(0.5)
-					if e.error_code == 9:
+					if e.code == 9:
 						print(e.message)
 						break
 						
@@ -919,7 +919,7 @@ class Comb:
 			# 	# vkapi.status.set(owner_id=person[0], text=text)
 			# 	req=requests.get("https://api.vk.com/method/status.set?owner_id="+str(person[0])+"&text="+text+"&v=5.37&access_token="+accTok).json()
 			# 	time.sleep(5)
-			# 	if 'error' in req and req['error']['error_code'] == 14:
+			# 	if 'error' in req and req['error']['code'] == 14:
 			# 		self.captchaSid=req['error']['captcha_sid']
 			# 		webbrowser.open_new_tab(req['error']['captcha_img'])
 			# 		self.captchaKey = input('enter captcha: ')
@@ -929,7 +929,7 @@ class Comb:
 				# vkap.status.set(owner_id=person[0], text=weather('Майами', 'current'))
 				req=requests.get('https://api.vk.com/method/status.set?owner_id='+str(person[0])+'&text='+weather('Майами', 'current')+'&v=5.37&access_token='+accTok).json()
 				time.sleep(timer)
-				if 'error' in req and req['error']['error_code'] == 14:
+				if 'error' in req and req['error']['code'] == 14:
 					self.captchaSid=req['error']['captcha_sid']
 					# webbrowser.open_new_tab(req['error']['captcha_img'])
 					# self.captchaKey = input('enter captcha: ')
@@ -940,7 +940,7 @@ class Comb:
 			elif step==2:
 				req=requests.get('https://api.vk.com/method/status.set?owner_id='+str(person[0])+'&text='+equake()+'&v=5.37&access_token='+accTok).json()
 				time.sleep(timer)
-				if 'error' in req and req['error']['error_code'] == 14:
+				if 'error' in req and req['error']['code'] == 14:
 					self.captchaSid=req['error']['captcha_sid']
 					# webbrowser.open_new_tab(req['error']['captcha_img'])
 					# self.captchaKey = input('enter captcha: ')
@@ -951,7 +951,7 @@ class Comb:
 			elif step==3:
 				req=requests.get('https://api.vk.com/method/status.set?owner_id='+str(person[0])+'&text='+getFires()+'&v=5.37&access_token='+accTok).json()
 				time.sleep(timer)
-				if 'error' in req and req['error']['error_code'] == 14:
+				if 'error' in req and req['error']['code'] == 14:
 					self.captchaSid=req['error']['captcha_sid']
 					# webbrowser.open_new_tab(req['error']['captcha_img'])
 					# self.captchaKey = input('enter captcha: ')
@@ -1144,15 +1144,14 @@ class Comb:
 					print(i['owner_id'])
 					try:
 						add=vkapi.video.addToAlbum(target_id=person[0], owner_id=i['owner_id'], album_id=TargetAlbumId, video_id=i['id'])
+						time.sleep(1)
 					except vkerror as e:
-						if e.error_code==10:
-							print(add)
+						if e.code==800:
 							continue
 						captcha_key=e['key']
 						captcha_sid=e['sid']
 						add=vkapi.video.addToAlbum(target_id=person[0], owner_id=i['owner_id'], album_id=TargetAlbumId, video_id=i['id'], captcha_sid=captcha_sid, captcha_key=captcha_key)
-
-					time.sleep(1)
+						time.sleep(1)
 				
 		elif source=='wall':
 			ld=[]
@@ -1179,9 +1178,9 @@ class Comb:
 									captcha_key=e['key']
 									captcha_sid=e['sid']
 									add=vkapi.video.addToAlbum(target_id=person[0], owner_id=jo['video']['owner_id'], album_id=TargetAlbumId, video_id=jo['video']['id'], captcha_key=captcha_key, captcha_sid=captcha_sid)
-									if e.error_code==10:
+									if e.code==10:
 										continue
-							time.sleep(1)
+									time.sleep(1)
 
 	def getSubs(self, userId):
 				names=[]
@@ -1241,7 +1240,7 @@ class Comb:
 								if addToMyDocs==True:
 									req = requests.get("https://api.vk.com/method/docs.add?owner_id="+str(a['doc']["owner_id"])+"&doc_id="+str(a['doc']['id'])+"&v=5.37&access_token="+accTok).json()
 									time.sleep(1)
-									if 'error' in req and req['error']['error_code']==14:
+									if 'error' in req and req['error']['code']==14:
 										self.captchaSid=req['error']['captcha_sid']
 										self.captchaKey=Comb.captcha('self', req['error']['captcha_img'])
 										req = requests.get("https://api.vk.com/method/docs.add?owner_id="+str(a['doc']["owner_id"])+"&doc_id="+str(a['doc']['id'])+"&captcha_sid="+str(self.captchaSid)+"&captcha_key="+str(self.captchaKey)+"&access_token="+accTok).json()
