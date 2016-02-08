@@ -1196,6 +1196,7 @@ class Comb:
 				if updateDate!=None:
 					if updateDate==i['date']:
 						break
+						
 				if 'attachments' in i:
 					for jo in i['attachments']:
 						if jo['type']=='video':
