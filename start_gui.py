@@ -283,14 +283,14 @@ class myapp():
 					album_id.append(albumIdToCopyTo)
 
 
-				with open(os.path.join('updates', source, "updatePhotoData.json")) as f:
-					data = json.load(f)	
-					for i in data:
-						if i['id']==from_id:
-							updateDate=i['date']
-					date1=[i['date'] for i in vkapi.wall.get(owner_id=from_id, count=10)['items'] if 'is_pinned' not in i][0]
-					if albumIdToCopyFrom=='wall':
-						self.UpdateData(from_id, date1, 'photo', 'wall')
+				#with open(os.path.join('updates', source, "updatePhotoData.json")) as f:
+				#	data = json.load(f)	
+				#	for i in data:
+				#		if i['id']==from_id:
+				#			updateDate=i['date']
+				#	date1=[i['date'] for i in vkapi.wall.get(owner_id=from_id, count=10)['items'] if 'is_pinned' not in i][0]
+				#	if albumIdToCopyFrom=='wall':
+				#		self.UpdateData(from_id, date1, 'photo', 'wall')
 				if offset:
 					step=offset
 				else:
@@ -315,8 +315,8 @@ class myapp():
 						
 						self.pb['value']+=1
 						self.pb_label.configure(text="%s of %s" % (self.postCounter, self.countPhotosToCopyFrom))
-						if i['date']==updateDate:
-								self.stop=True
+						#if i['date']==updateDate:
+						#		self.stop=True
 						if 'attachments' in i:
 							for a in i['attachments']:
 								if a['type']=='photo':
@@ -450,9 +450,14 @@ class myapp():
 				self.stop=True
 
 			def copyphoto(event):
+				#if self.album_name_to.get()=='':
+				#	self.create_album=True
+				#else:
+				#	self.create_album=False
+
 				title = self.publicName + ' ' + self.titleAlbumToCopyTo
-				if not self.leftCount and self.album_name_from.get()!='':
-					print(self.restart, self.leftCount)
+				if self.leftCount==None and self.album_name_from.get!='' and self.album_name_to.get()=='':
+
 					self.albumIdToCopyTo=vkapi.photos.createAlbum(owner_id=person[0], title=title, privacy_view='nobody')['id']
 				self.albumNameToCopyTo = self.publicName + ' ' + self.titleAlbumToCopyTo
 
@@ -462,16 +467,7 @@ class myapp():
 						self.offset=-1
 						self.postCounter=-1
 						self.countPhotosToCopyFrom=int(self.count_palbums_enter.get())
-					#if self.restart==True:
-					#	self.public_id_to_copy=self.public_id_enter.get()
-					#	self.offset=-1
-					#	self.postCounter=-1
-					#	self.countPhotosToCopyFrom=int(self.count_palbums_enter.get())
-					# print(self.countPhotosToCopyFrom)
-				#elif type(self.albumIdToCopyFrom)==int:
-					#if self.restart==True:
-						#self.offset=None
-						#self.photoCounter=0
+			
 
 				if type(self.albumIdToCopyFrom)==int:
 
