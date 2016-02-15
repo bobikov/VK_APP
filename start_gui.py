@@ -55,7 +55,7 @@ running=True
 class myapp():
 		def __init__(self, master):
 			self.master = master
-			self.actions_list = ['Multi-post', 'Download photos', 'Copy photos', 'Comments Bot', 'Get text from wall', 'Cross delete posts', 'Delete from board', 'Messages Bot', 'Delete photos', 'Likes', 'wheather test', 'test tkinter', 'Upload owner photo', 'Status change', 'Get Videos', 'equake', 'Copy docs', 'Download docs', 'get subscriptions', 'Friends Add', 'Get Fires', 'Get Artists', 'Set Photos captions', 'Copy Audio', 'Copy video', 'Get groups', 'Delete video album', 'Delete audio album']
+			self.actions_list = ['Multi-post', 'Download photos', 'Copy photos', 'Copy video', 'Copy Audio']
 			self.radiovar=IntVar()
 			self.master.geometry("1000x800+300+0")
 			# self.image = ImageTk.PhotoImage(Image.open("captcha.png"))
@@ -71,25 +71,29 @@ class myapp():
 			self.frame4.pack(side = LEFT, fill=Y)
 			self.actions_label=Label(self.frame1, text = "Action:", bg="#f7f7f7")
 			self.actions_label.pack()
-			self.label = Label(self.frame2, text="Options:", bg="#f7f7f7")
+
+			self.options_label = Label(self.frame2, text="Options:", bg="#f7f7f7")
+
 			self.list1 = Listbox(self.frame1, height = 400, bd=0)
-			self.label = Label(self.frame3, text="From album:", bg="#f7f7f7" )
-			self.label.pack()
+			self.from_album_label = Label(self.frame3, text="From album:", bg="#f7f7f7" )
+			self.from_album_label.pack()
 			self.list3 = Listbox(self.frame3, height = 400, width=30, bd=0)
-			self.label = Label(self.frame4, text="To album:", bg="#f7f7f7")
-			self.label.pack()
+			self.to_album_label = Label(self.frame4, text="To album:", bg="#f7f7f7")
+			self.to_album_label.pack()
 			self.list4 = Listbox(self.frame4, height = 400, width=70, bd=0)
-			self.label = Label(self.frame2, text="Public Id:", bg="#f7f7f7")
-			self.public_id_enter=Entry(self.frame2)
-			self.label = Label(self.frame2, text="AlbumID from copy: ", bg="#f7f7f7")
-			self.album_name_from=Entry(self.frame2)
-			self.label = Label(self.frame2, text = "AlbumID to copy:", bg="#f7f7f7")
-			self.album_name_to=Entry(self.frame2)
-			self.label = Label(self.frame2, text='New album title:', bg='#f7f7f7')
-			self.new_album_name_enter=Entry(self.frame2)
-			self.label = Label(self.frame2, text="count", bg='#f7f7f7')
-			self.count_palbums_enter = Entry(self.frame2)
-			self.label = Label(self.frame2, text="Create album:", bg="#f7f7f7")
+
+			self.public_id_copyphoto_label = Label(self.frame2, text="Public Id:", bg="#f7f7f7")
+			self.public_id_copyphoto_enter = Entry(self.frame2)
+			self.album_id_copyphoto_from_label = Label(self.frame2, text="AlbumID from copy: ", bg="#f7f7f7")
+			self.album_name_from_copyphoto_enter=Entry(self.frame2)
+			self.album_id_to_copyphoto_label = Label(self.frame2, text = "AlbumID to copy:", bg="#f7f7f7")
+			self.album_name_copyphoto_to_enter=Entry(self.frame2)
+			self.new_album_copyphoto_label = Label(self.frame2, text='New album title:', bg='#f7f7f7')
+			self.new_album_name_copyphoto_enter=Entry(self.frame2)
+			self.count_copyphoto_label = Label(self.frame2, text="count", bg='#f7f7f7')
+			self.count_photoalbums_enter = Entry(self.frame2)
+			self.create_photoalbum_label = Label(self.frame2, text="Create album:", bg="#f7f7f7")
+
 			self.list1.bind('<<ListboxSelect>>', functools.partial(self.CurSelet, param1="list1", maction=True))
 			self.list3.bind('<<ListboxSelect>>', functools.partial(self.CurSelet, param1="list3", maction=False))
 			self.list4.bind('<<ListboxSelect>>', functools.partial(self.CurSelet, param1="list4", maction=False))
@@ -97,13 +101,12 @@ class myapp():
 			self.list1.pack()
 			self.list3.pack()
 			self.list4.pack()
-			self.copy_photos=False
-			self.copy_videos=False
+
 			self.photoAlbumsToCopyFrom=[]
 			self.photoAlbumsToCopyTo=[]
 			self.titleAlbumToCopyTo=str
 			self.countPhotosToCopyTo=int
-			self.publicName=str
+			self.photo_public_name=str
 			self.titleAlbumToCopyTo=str
 			self.albumIdToCopyFrom = int
 			self.countPhotosToCopyFrom=int
@@ -126,6 +129,7 @@ class myapp():
 			self.restart=False
 			self.stop=False
 			self.readPoint=self.savepointRead()
+			self.selector=0
 
 		def UpdateData(self, fromId, date, dtype, source, album_id=False):
 			names=[]
@@ -207,12 +211,12 @@ class myapp():
 					file1.close()
 
 		def savepointWrite(self, data):
-			with open("savepoint.json", "w") as file:
+			with open("photoSavepoint.json", "w") as file:
 				file.write(json.dumps(data, indent=4, ensure_ascii=False))
 
 		def savepointRead(self):
-			if os.stat("savepoint.json").st_size != 0:
-				with open("savepoint.json", "r") as file:
+			if os.stat("photoSavepoint.json").st_size != 0:
+				with open("photoSavepoint.json", "r") as file:
 					data = json.load(file)	
 					if data:
 						self.offset=data['offset']
@@ -223,19 +227,19 @@ class myapp():
 						self.albumIdToCopyTo=data['album_id']
 						if data['album_id_from']:
 							self.photoCounter=self.offset
-							self.publicName=data['public_name'] 
+							self.photo_public_name=data['public_name'] 
 							self.titleAlbumToCopyTo=data['album_title_from']
 							self.albumIdToCopyFrom=data['album_id_from']
-						self.public_id_enter.delete(0, END)
-						self.public_id_enter.insert(END, self.fromId)
-						self.count_palbums_enter.delete(0, END)
-						self.count_palbums_enter.insert(END, self.leftCount)
+						self.public_id_copyphoto_enter.delete(0, END)
+						self.public_id_copyphoto_enter.insert(END, self.fromId)
+						self.count_photoalbums_enter.delete(0, END)
+						self.count_photoalbums_enter.insert(END, self.leftCount)
 			else:
 				self.photoCounter=0
 				self.leftCount=None
 				self.offset=None
 				self.postCounter=-1
-				self.maxCount=None			
+				#self.count=None			
 
 		def captcha(self):
 			def getKey(event):
@@ -277,8 +281,8 @@ class myapp():
 					source='wall'
 				else:
 					source='album'
-				if self.album_name_to.get() != '':
-					album_id.append(int(self.album_name_to.get()))
+				if self.album_name_copyphoto_to_enter.get() != '':
+					album_id.append(int(self.album_name_copyphoto_to_enter.get()))
 				else:
 					album_id.append(albumIdToCopyTo)
 
@@ -310,7 +314,7 @@ class myapp():
 						self.restart=True
 					else:
 						complete=False
-					self.savepointWrite({'id':from_id, 'offset':step, 'album_id':album_id[0], 'left_count':countPhotos-self.postCounter, 'max_count':countPhotos, 'complete': complete, 'album_id_from': None, 'public_name': self.publicName})
+					self.savepointWrite({'id':from_id, 'offset':step, 'album_id':album_id[0], 'left_count':countPhotos-self.postCounter, 'max_count':countPhotos, 'complete': complete, 'album_id_from': None, 'public_name': self.photo_public_name})
 					for i in photosGet['items']:
 						
 						self.pb['value']+=1
@@ -375,7 +379,7 @@ class myapp():
 					complete=False
 					self.processStatus=False
 
-				self.savepointWrite({'id':from_id, 'offset':step, 'album_id':album_id[0], 'left_count':countPhotos-self.photoCounter, 'max_count':countPhotos, 'complete': complete, 'album_id_from': albumIdToCopyFrom, 'public_name': self.publicName, 'album_title_from': self.titleAlbumToCopyTo })
+				self.savepointWrite({'id':from_id, 'offset':step, 'album_id':album_id[0], 'left_count':countPhotos-self.photoCounter, 'max_count':countPhotos, 'complete': complete, 'album_id_from': albumIdToCopyFrom, 'public_name': self.photo_public_name, 'album_title_from': self.titleAlbumToCopyTo })
 				try:
 					photosGet=vkapi.photos.get(owner_id=from_id, album_id=albumIdToCopyFrom, count=1, offset=step, rev=rev)
 					for a in photosGet['items']:
@@ -442,42 +446,48 @@ class myapp():
 				#self.processStatus=False
 				#self.leftCount=None
 				self.restart=True
-				with open('savepoint.json', 'w'): pass
+				with open('photoSavepoint.json', 'w'): pass
 				self.savepointRead()
 
 			def stopCopy():
 				self.savepointRead()
 				self.stop=True
+				print(self.photoCounter)
+				print(self.leftCount)
+				print(self.offset)
+				print(self.postCounter)
+				print(self.maxCount)	
 
 			def copyphoto(event):
-				#if self.album_name_to.get()=='':
+				#if self.album_name_copyphoto_to_enter.get()=='':
 				#	self.create_album=True
 				#else:
 				#	self.create_album=False
 
-				title = self.publicName + ' ' + self.titleAlbumToCopyTo
-				if self.leftCount==None and self.album_name_from.get!='' and self.album_name_to.get()=='':
+				title = self.photo_public_name + ' ' + self.titleAlbumToCopyTo
+				if self.leftCount==None and self.album_name_from_copyphoto_enter.get!='' and self.album_name_copyphoto_to_enter.get()=='':
 
 					self.albumIdToCopyTo=vkapi.photos.createAlbum(owner_id=person[0], title=title, privacy_view='nobody')['id']
-				self.albumNameToCopyTo = self.publicName + ' ' + self.titleAlbumToCopyTo
+				self.albumNameToCopyTo = self.photo_public_name + ' ' + self.titleAlbumToCopyTo
 
 				if type(self.albumIdToCopyFrom)==str:
-					if not self.leftCount and self.processStatus==False:
-						self.public_id_to_copy=self.public_id_enter.get()
+					if self.leftCount==None and self.processStatus==False:
+						self.public_id_to_copy=self.public_id_copyphoto_enter.get()
 						self.offset=-1
 						self.postCounter=-1
-						self.countPhotosToCopyFrom=int(self.count_palbums_enter.get())
-			
+						self.countPhotosToCopyFrom=int(self.count_photoalbums_enter.get())
 
+					print(self.leftCount, self.processStatus)
 				if type(self.albumIdToCopyFrom)==int:
 
 					if self.processStatus==False and self.leftCount: 
-						
+							
 						self.pb.configure(maximum=self.countPhotosToCopyFrom)
 						self.pb.configure(value=self.countPhotosToCopyFrom-self.leftCount)
 						threading.Thread(target=self.copyPhotoToAlbum, args=(person[0], self.fromId, self.albumNameToCopyTo, self.albumIdToCopyTo, self.albumIdToCopyFrom, self.countPhotosToCopyFrom, self.offset, False, False, None, None)).start()
 					else:
-						print(self.albumIdToCopyFrom)
+						self.photoCounter=0
+						self.offset=0
 						self.pb.configure(maximum=self.countPhotosToCopyFrom)
 						self.pb.configure(value=0)
 						threading.Thread(target=self.copyPhotoToAlbum, args=(person[0], self.fromId, self.albumNameToCopyTo, self.albumIdToCopyTo, self.albumIdToCopyFrom, self.countPhotosToCopyFrom, None, False, None, None)).start()
@@ -494,11 +504,14 @@ class myapp():
 
 			if param1=="list1":	
 				selection=self.list1.curselection()
-				# action=int(re.search("\d+", list1.get(selection[0])).group(0))
-				# list2.delete(0, END)
-
-				for i in self.frame2.winfo_children(): i.pack_forget()
-				if re.search("3", self.list1.get(selection[0])).group(0) and maction:
+				selection = int(re.findall("[0-9]", self.list1.get(selection[0]))[0])
+				if selection==3:
+					self.selector=3
+				elif selection==4:
+					self.selector=4
+				
+				if self.selector==3:
+					for i in self.frame2.winfo_children(): i.pack_forget()
 					if len(self.frame2.winfo_children())<14:
 						self.rdb1=Radiobutton(self.frame2, text="Yes", value=1, variable=self.radiovar, command=selradio, bg="#F7F7F7")
 						self.rdb2=Radiobutton(self.frame2, text="No", value=2, variable=self.radiovar, command=selradio, bg="#F7F7F7")
@@ -519,24 +532,22 @@ class myapp():
 						self.link.bind('<Button-1>', test_album)
 						self.rdb2.select()
 					for i in self.frame2.winfo_children(): i.pack()
-					
-
-					self.copy_photos=True
 					if self.leftCount: self.CurSelet('dd', 'load', False)
-					# sources = [{'number':1, 'title':'Albums'}, {'number':2,'title':'Wall'}];
-					# for i in sources:
-					# 	list2.insert(END, str(i['number'])+'. '+i['title'])
+				elif self.selector==4:
+					for i in self.frame2.winfo_children(): i.pack_forget()
+					print(self.selector)
+					
 			if param1=="load":
 
 				self.list3.delete(0, END)
 				self.list4.delete(0, END)
 				self.list3.insert(0, "----- wall -----")
 				self.list3.insert(0, "---- profile -----")
-				if self.copy_photos and not maction:
-					if self.public_id_enter.get() != '':
-						self.fromId=int(self.public_id_enter.get())
-						self.publicName = vkapi.groups.getById(group_id=str(abs(self.fromId)))[0]['name']
-						self.photoAlbumsToCopyFrom = self.getAlbums(int(self.public_id_enter.get()))
+				if self.selector==3 and not maction:
+					if self.public_id_copyphoto_enter.get() != '':
+						self.fromId=int(self.public_id_copyphoto_enter.get())
+						self.photo_public_name = vkapi.groups.getById(group_id=str(abs(self.fromId)))[0]['name']
+						self.photoAlbumsToCopyFrom = self.getAlbums(int(self.public_id_copyphoto_enter.get()))
 						for i in self.photoAlbumsToCopyFrom:
 							self.list3.insert(END, str(i['number'])+'. '+re.search('[\w\s]+', i['title']).group(0))
 						self.photoAlbumsToCopyTo=self.getAlbums(person[0])
@@ -545,15 +556,15 @@ class myapp():
 			#OPTIONS 2
 			if param1=="list3":
 				selection=self.list3.curselection()
-				if self.copy_photos and not maction:
-					self.public_id_to_copy=self.public_id_enter.get()
+				if self.selector==3 and not maction:
+					self.public_id_to_copy=self.public_id_copyphoto_enter.get()
 					# print(public_id_enter.get())
 					# print(type(public_id_to_copy))
 					if "wall" in self.list3.get(selection[0]):
 						self.albumIdToCopyFrom=str
 						self.albumIdToCopyFrom="wall"
-						self.album_name_from.delete(0, END)
-						self.album_name_from.insert(END, str(self.albumIdToCopyFrom))
+						self.album_name_from_copyphoto_enter.delete(0, END)
+						self.album_name_from_copyphoto_enter.insert(END, str(self.albumIdToCopyFrom))
 						self.titleAlbumToCopyTo='wall'
 					else:
 						self.selectedAlbumToCopyFrom=int(re.search("\d+", self.list3.get(selection[0])).group(0))
@@ -563,14 +574,14 @@ class myapp():
 									self.albumIdToCopyFrom = i['id']
 									self.countPhotosToCopyFrom=i['count']
 									self.titleAlbumToCopyTo=i['title']
-							self.album_name_from.delete(0, END)
-							self.album_name_from.insert(END, str(self.albumIdToCopyFrom))
+							self.album_name_from_copyphoto_enter.delete(0, END)
+							self.album_name_from_copyphoto_enter.insert(END, str(self.albumIdToCopyFrom))
 					
 
 						
 			if param1=="list4":
 				selection=self.list4.curselection()
-				if self.copy_photos and not maction:
+				if self.selector==3 and not maction:
 					self.selectedAlbumToCopyTo=int(re.search("\d+", self.list4.get(selection[0])).group(0))
 					if self.selectedAlbumToCopyTo:
 
@@ -579,8 +590,8 @@ class myapp():
 								self.albumIdToCopyTo = i['id']
 								self.countPhotosToCopyTo=i['count']
 								self.titleAlbumToCopyFrom=i['title']
-						self.album_name_to.delete(0, END)
-						self.album_name_to.insert(END, str(self.albumIdToCopyTo))	
+						self.album_name_copyphoto_to_enter.delete(0, END)
+						self.album_name_copyphoto_to_enter.insert(END, str(self.albumIdToCopyTo))	
 				
 window=Tk()
 my_app=myapp(window)
