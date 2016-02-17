@@ -62,11 +62,11 @@ class myapp():
 			self.master.title('VK API')
 			# self.image = ImageTk.PhotoImage(Image.open("captcha.png"))
 			
-			self.frame1 = Frame(self.master, height=2, bg='#F7F7F7', bd=1,  padx=5, pady=5, relief=SUNKEN)
-			self.superFrame = Frame(self.master, height=2, bd=1, padx=5, pady=5, relief=SUNKEN)
-			self.frame2 = Frame(self.superFrame, height=2, bg='#F7F7F7', bd=1,  padx=5, pady=5, relief=SUNKEN)
-			self.frame3 = Frame(self.superFrame, height=2, bg='#F7F7F7', bd=1,  padx=5, pady=5, relief=SUNKEN)
-			self.frame4 = Frame(self.superFrame, height=2, bg='#F7F7F7', bd=1,  padx=5, pady=5, relief=SUNKEN)
+			self.frame1 = Frame(self.master, height=2, bg='#F7F7F7', bd=1,  padx=5, pady=5)
+			self.superFrame = Frame(self.master, height=2, bd=1, padx=5, pady=5)
+			self.frame2 = Frame(self.superFrame, height=2, bg='#F7F7F7', bd=1,  padx=5, pady=5)
+			self.frame3 = Frame(self.superFrame, height=2, bg='#F7F7F7', bd=1,  padx=5, pady=5)
+			self.frame4 = Frame(self.superFrame, height=2, bg='#F7F7F7', bd=1,  padx=5, pady=5)
 			
 			self.frame1.pack(side = LEFT, fill=Y)
 			self.frame2.pack(side = LEFT, fill=Y)
@@ -147,6 +147,7 @@ class myapp():
 			self.PhotoProcessStatus=False
 			self.restart=False
 			self.PhotoStop=False
+			self.PhotoDefaultCount=1000
 			self.readPoint=self.savepointRead('photo')
 			
 			self.VideoAlbumsToCopyFrom=[]
@@ -165,6 +166,9 @@ class myapp():
 			self.VideoLeftCount=None
 			self.TitleVideoAlbumToCopyTo=str
 			self.VideoAlbumIdToCopyTo=None
+			self.VideoAlbumIdToCopyFrom=None
+			self.VideoDefaultCount=1000
+		
 			#self.readPoint=self.savepointRead()
 			self.readPoint=self.savepointRead('video')
 
@@ -572,19 +576,7 @@ class myapp():
 							self.captcha_send=True
 							self.VideoStop=True
 							break
-							#print(TargetAlbumId)
-							#print(count-self.VideoCounter)
-							#print(count)
-							#print(self.VideoProcessStatus)
-							#print(self.VideoAlbumIdToCopyFrom)
-							#print(publicName)
-							#print(self.TitleVideoAlbumToCopyTo)
-							#print(step)
-							#print(public_id)
-
-
-							
-					
+		
 			elif source=='wall':
 				self.VideoStop=False
 				ld=[]
@@ -682,6 +674,9 @@ class myapp():
 			def TestPhotoAlbum(event):
 				webbrowser.open_new("https://vk.com/album%s_%s" % (self.PhotoPublicIdToCopy, self.PhotoAlbumIdToCopyFrom ))
 
+			def TestVideoAlbum(event):
+				webbrowser.open_new("https://vk.com/videos%s?section=album_%s" % (self.VideoPublicIdToCopy, self.VideoAlbumIdToCopyFrom ))
+
 			def PhotoSelRadio():
 				self.CreateNewPhotoAlbumState = self.photo_radiovar.get()
 			def VideoSelRadio():
@@ -692,6 +687,12 @@ class myapp():
 				#self.photoCounter=0
 				#self.PhotoProcessStatus=False
 				#self.PhotoLeftCount=None
+				self.photo_progressbar.configure(value=0)
+				self.photo_progressbar_label.configure(text='%s of %s' % (0, 0))
+				self.count_copyphoto_enter.delete(0, END)
+				self.count_copyphoto_enter.insert(END, self.PhotoDefaultCount)
+				self.public_id_copyphoto_enter.delete(0, END)
+				album_name_from_copyphoto_enter.delete(0, END)
 				self.restart=True
 				with open('photoSavepoint.json', 'w'): pass
 				self.savepointRead("photo")
@@ -701,6 +702,12 @@ class myapp():
 				#self.photoCounter=0
 				#self.PhotoProcessStatus=False
 				#self.PhotoLeftCount=None
+				self.video_progressbar.configure(value=0)
+				self.video_progressbar_label.configure(text='%s of %s' % (0, 0))
+				self.count_copyvideo_enter.delete(0, END)
+				self.count_copyvideo_enter.insert(END, self.VideoDefaultCount)
+				self.public_id_copyvideo_enter.delete(0, END)
+				self.album_name_from_copyvideo_enter.delete(0, END)
 				self.restart=True
 				self.captcha_send=False
 				with open('videoSavepoint.json', 'w'): pass
@@ -864,7 +871,7 @@ class myapp():
 						self.video_progressbar['maximum'] = self.CountVideosToCopyFrom
 						self.video_progressbar['value'] = self.CountVideosToCopyFrom-self.VideoLeftCount
 
-					#self.test_photoalbum_link.bind('<Button-1>', TestVideoAlbum)
+					self.test_videoalbum_link.bind('<Button-1>', TestVideoAlbum)
 					self.video_radio_button_2.select()
 
 					self.public_id_copyvideo_label.pack()
@@ -915,6 +922,7 @@ class myapp():
 					self.list3.insert(0, "---- videobox -----")
 					if self.public_id_copyvideo_enter.get()!='':
 						self.VideoFromId=int(self.public_id_copyvideo_enter.get())
+						self.VideoPublicIdToCopy=self.VideoFromId
 						self.VideoPublicName = vkapi.groups.getById(group_id=str(abs(self.VideoFromId)))[0]['name']
 						self.VideoAlbumsToCopyFrom = self.getAlbums(int(self.public_id_copyvideo_enter.get()), "video")
 						for i in self.VideoAlbumsToCopyFrom:
@@ -994,6 +1002,9 @@ class myapp():
 								self.TitleVideoAlbumToCopyTo=i['title']
 					self.album_name_copyvideo_to_enter.delete(0, END)
 					self.album_name_copyvideo_to_enter.insert(END, str(self.VideoAlbumIdToCopyTo))
+
+
+
 window=Tk()
 my_app=myapp(window)
 window.mainloop()		
