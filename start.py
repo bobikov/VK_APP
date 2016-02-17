@@ -1073,7 +1073,7 @@ class Comb:
 
 		elif public_id<0:
 			publicName = vkapi.groups.getById( group_id = abs(public_id))[0]['name']
-			print(publicName)
+
 		albumTitles=[]
 		fname='updateVideoToCopy.json'
 		dtype='video'
