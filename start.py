@@ -330,8 +330,8 @@ class Comb:
 
 		if wall == 'yes':
 			if download=='yes':
-				photoFromWall = Combain.getWall('no', wall_id, 'photo', count)
-				for i in photoFromWall:
+				photo_from_wall = Combain.getWall('no', wall_id, 'photo', count)
+				for i in photo_from_wall:
 					if not os.path.exists(path+groupName):
 						os.mkdir(path=path+groupName)
 
@@ -341,8 +341,8 @@ class Comb:
 						wget.download( i, out=path+groupName )
 			elif download == 'no':
 				ids=[]
-				photoFromWall = self.getWall('no', 'no', wall_id, 'photo', 'no', count)  
-				for i in photoFromWall:
+				photo_from_wall = self.getWall('no', 'no', wall_id, 'photo', 'no', count)
+				for i in photo_from_wall:
 					ids.append(i)
 				return ids
 		else:
@@ -360,7 +360,7 @@ class Comb:
 						elif dtype == 'url':
 							pho.append(i['photo_604'])
 			
-				return print(pho)
+				return pho
 
 			elif multi == 'yes' and type(album) == list:
 				urls=[]

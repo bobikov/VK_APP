@@ -1,7 +1,8 @@
 #!/usr/local/bin/python3
-# coding: UTF-8
+# -*- coding: utf-8 -*-
 from words import *
 from zakon import *
+import emoji
 import vk
 import sys
 import urllib
@@ -31,6 +32,7 @@ import easy_date
 import tkinter
 from tkinter import *
 from tkinter import ttk
+import tkinter.messagebox
 #from tkinter.ttk import *
 import base64
 from PIL import Image
@@ -55,23 +57,24 @@ running=True
 class myapp():
 		def __init__(self, master):
 			self.master = master
-			self.actions_list = ['Multi-post', 'Download photos', 'Copy photos', 'Copy video', 'Copy Audio']
+			self.actions_list = ['Multi-post', 'Download photos', 'Copy photos', 'Copy video', 'Copy Audio', 'Wall Post']
 			self.photo_radiovar=IntVar()
 			self.video_radiovar=IntVar()
 			self.master.geometry("1000x800+300+0")
 			self.master.title('VK API')
 			# self.image = ImageTk.PhotoImage(Image.open("captcha.png"))
-			
-			self.frame1 = Frame(self.master, height=2, bg='#F7F7F7', bd=1,  padx=5, pady=5)
-			self.superFrame = Frame(self.master, height=2, bd=1, padx=5, pady=5)
+			self.e = threading.Event()
+			self.frame1 = Frame(self.master, height=2, bg='#F7F7F7', bd=0,  padx=5, pady=5)
+			self.superFrame = Frame(self.master, height=2, bd=0)
+			self.superFrameInner1 = Frame(self.superFrame, height=2, bd=0)
+			#self.superFrameInner2 = Frame(self.superFrame, height=2, bd=0)
 			self.frame2 = Frame(self.superFrame, height=2, bg='#F7F7F7', bd=1,  padx=5, pady=5)
-			self.frame3 = Frame(self.superFrame, height=2, bg='#F7F7F7', bd=1,  padx=5, pady=5)
-			self.frame4 = Frame(self.superFrame, height=2, bg='#F7F7F7', bd=1,  padx=5, pady=5)
-			
+			self.frame3 = Frame(self.superFrameInner1, height=2, bg='#F7F7F7', bd=1,  padx=1, pady=5)
+			self.frame4 = Frame(self.superFrameInner1, height=2, bg='#F7F7F7', bd=1,  padx=1, pady=5)
+
 			self.frame1.pack(side = LEFT, fill=Y)
 			self.frame2.pack(side = LEFT, fill=Y)
-			self.frame3.pack(side = LEFT, fill=Y)
-			self.frame4.pack(side = LEFT, fill=Y)
+			
 			self.actions_label=Label(self.frame1, text = "Action:", bg="#f7f7f7")
 			self.actions_label.pack()
 
@@ -81,6 +84,7 @@ class myapp():
 			self.from_album_label = Label(self.frame3, text="From album:", bg="#f7f7f7" )
 			self.from_album_label.pack()
 			self.list3 = Listbox(self.frame3, height = 400, width=30, bd=0)
+		
 			self.to_album_label = Label(self.frame4, text="To album:", bg="#f7f7f7")
 			self.to_album_label.pack()
 			self.list4 = Listbox(self.frame4, height = 400, width=70, bd=0)
@@ -117,8 +121,19 @@ class myapp():
 			self.list3.pack()
 			self.list4.pack()
 
+
+			self.post_button_send=Button(self.frame2, text='Send')
+			self.post_button_send.bind("<Button-1>", self.make_post)
+			self.post_button_send_stop=Button(self.frame2, text='Stop', command=self.stop_post)
+			self.post_textarea=Text(self.superFrameInner1)
+			
+			#self.PostOwnerId=None
+			self.PostMessage="""📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 """
+			#self.PostMessage="Добавлю"
 			self.selector=0
 			self.menu=self.menu()
+			self.copy_video_running=False
+			self.copy_photo_running=False
 
 			self.photoAlbumsToCopyFrom=[]
 			self.photoAlbumsToCopyTo=[]
@@ -148,6 +163,8 @@ class myapp():
 			self.restart=False
 			self.PhotoStop=False
 			self.PhotoDefaultCount=1000
+			self.PhotoPrivatesAlbum='nobody'
+
 			self.readPoint=self.savepointRead('photo')
 			
 			self.VideoAlbumsToCopyFrom=[]
@@ -168,7 +185,10 @@ class myapp():
 			self.VideoAlbumIdToCopyTo=None
 			self.VideoAlbumIdToCopyFrom=None
 			self.VideoDefaultCount=1000
-		
+			self.VideoPrivatesAlbum='nobody'
+			self.run=True
+			self.job=None
+			self.ok=True
 			#self.readPoint=self.savepointRead()
 			self.readPoint=self.savepointRead('video')
 
@@ -280,6 +300,8 @@ class myapp():
 								self.VideoAlbumIdToCopyFrom =data['album_id_from']
 							self.public_id_copyvideo_enter.delete(0, END)
 							self.public_id_copyvideo_enter.insert(END, self.VideoFromId)
+							self.album_name_from_copyvideo_enter.delete(0, END)
+							self.album_name_from_copyvideo_enter.insert(END, self.VideoAlbumIdToCopyFrom)
 							self.count_copyvideo_enter.delete(0, END)
 							self.count_copyvideo_enter.insert(END, self.VideoLeftCount)
 				else:
@@ -308,6 +330,8 @@ class myapp():
 								self.PhotoAlbumIdToCopyFrom =data['album_id_from']
 							self.public_id_copyphoto_enter.delete(0, END)
 							self.public_id_copyphoto_enter.insert(END, self.PhotoFromId)
+							self.album_name_from_copyphoto_enter.delete(0, END)
+							self.album_name_from_copyphoto_enter.insert(END, self.PhotoAlbumIdToCopyFrom)
 							self.count_photoalbums_enter.delete(0, END)
 							self.count_photoalbums_enter.insert(END, self.PhotoLeftCount)
 	
@@ -328,6 +352,13 @@ class myapp():
 				elif dtype=='video':
 					threading.Thread(target=self.copyVideo, args=(self.VideoFromId, self.CountVideosToCopyFrom, self.VideoAlbumIdToCopyFrom, self.VideoOffset, self.captcha_send, self.captcha_sid, key)).start()
 					#print(self.VideoFromId, self.CountVideosToCopyFrom, self.VideoAlbumIdToCopyFrom, self.VideoOffset, self.captcha_sid, key)
+				elif dtype=="post":
+					#threading.Thread(target=self.make_post, args=(self.captcha_send, self.captcha_sid, key)).start()
+					#print(self.captcha_send, self.captcha_sid, key)
+					#self.make_post(self.captcha_send, self.captcha_sid, key)
+					self.ok=True
+					self.e.set()
+
 				window2.destroy()
 
 			dtype=dtype
@@ -398,7 +429,7 @@ class myapp():
 						self.restart=True
 					else:
 						complete=False
-					self.savepointWrite({'id':from_id, 'offset':step, 'album_id':album_id[0], 'left_count':countPhotos-self.PhotoPostCounter, 'max_count':countPhotos, 'complete': complete, 'album_id_from': None, 'public_name': self.PhotoPublicName}, 'photo')
+					self.savepointWrite({'id':from_id, 'offset':step, 'album_id':album_id[0], 'left_count':countPhotos-self.PhotoPostCounter, 'max_count':countPhotos, 'complete': complete, 'album_id_from': albumIdToCopyFrom, 'public_name': self.PhotoPublicName, 'album_title_from': self.TitlePhotoAlbumToCopyTo}, 'photo')
 					for i in photosGet['items']:
 						
 						self.photo_progressbar['value']+=1
@@ -428,13 +459,13 @@ class myapp():
 										self.captcha_send=True
 										self.download_captcha(e.captcha_img)
 										self.captcha_sid=e.captcha_sid
-										self.captcha_key=self.captcha()
+										self.captcha_key=self.captcha('photo')
 										self.PhotoStop=True
 										break
 									
 			copyAction()
 
-		def copyPhotoToAlbum(self, to_id, from_id, albumNameToCopyTo, albumIdToCopyTo, albumIdToCopyFrom, countPhotos, offset=None, text=False, captcha_send=False, captcha_sid=None, captcha_key=None):
+		def copyPhotoToAlbum(self, to_id, from_id, albumNameToCopyTo, albumIdToCopyTo, albumIdToCopyFrom, countPhotos,  offset=None, text=False, captcha_send=False, captcha_sid=None, captcha_key=None):
 			album_id = []
 			photo_id = []
 			albumsFromIds = []
@@ -483,12 +514,12 @@ class myapp():
 					self.PhotoAlbumIdToCopyTo=album_id[0]
 					self.download_captcha(e.captcha_img)
 					self.captcha_sid=e.captcha_sid
-					self.captcha_key=self.captcha()
+					self.captcha_key=self.captcha('photo')
 					self.captcha_send=True
 					self.PhotoStop=True
 					break
 
-		def copyVideo(self, public_id, count, source, offset=None, captcha_send=False, captcha_sid=None, captcha_key=None):
+		def copyVideo(self, public_id, count, source, offset=None, captcha_send=False, captcha_sid=None, captcha_key=None, privates=None):
 			if public_id>0:
 				publicName = vkapi.users.get(user_ids=str(public_id), fields='nickname')[0]['first_name']
 				publicName = publicName + ' ' + vkapi.users.get(user_ids=str(public_id), fields='nickname')[0]['last_name']
@@ -505,9 +536,9 @@ class myapp():
 
 	
 			if offset:
-				step=offset
+				step=offset-1
 			else:
-				step=0
+				step=-1
 			
 			
 			if source=='wall' or source=='videobox':
@@ -517,7 +548,7 @@ class myapp():
 							albumIds.append(i['id'])
 		
 				if len(albumIds)==0:
-					TargetAlbumId=vkapi.video.addAlbum(owner_id=person[0], privacy="nobody", title=publicName+' '+str(len(albumIds)+1))['album_id']
+					TargetAlbumId=vkapi.video.addAlbum(owner_id=person[0], privacy=privates, title=publicName+' '+str(len(albumIds)+1))['album_id']
 					#print('no albums')
 				else:
 					for i in albumIds:
@@ -525,7 +556,7 @@ class myapp():
 							TargetAlbumId=i
 							break
 						else:
-							TargetAlbumId=vkapi.video.addAlbum(owner_id=person[0], privacy='nobody', title=publicName+' '+str(len(albumIds)+1))['album_id']
+							TargetAlbumId=vkapi.video.addAlbum(owner_id=person[0], privacy=privates, title=publicName+' '+str(len(albumIds)+1))['album_id']
 						#print('albums with < 1k not found')
 
 			if type(source)==int:
@@ -542,7 +573,7 @@ class myapp():
 					step+=1
 					if self.VideoStop==True:
 						break
-					if self.VideoCounter==count: 
+					if step==count: 
 						complete=True
 						self.VideoProcessStatus=complete
 						self.restart=True
@@ -550,11 +581,11 @@ class myapp():
 						complete=False
 						self.VideoProcessStatus=False
 
-					self.savepointWrite({'id':public_id, 'offset': step, 'album_id': TargetAlbumId, 'left_count':count-self.VideoCounter, 'max_count':count, 'complete': complete, 'album_id_from': self.VideoAlbumIdToCopyFrom, 'public_name': publicName, 'album_title_from': self.TitleVideoAlbumToCopyTo }, 'video')
-					for i in vkapi.video.get(owner_id=public_id, offset=step, count=1)['items']:
+					self.savepointWrite({'id':public_id, 'offset': step, 'album_id': TargetAlbumId, 'left_count':count-step, 'max_count':count, 'complete': complete, 'album_id_from': self.VideoAlbumIdToCopyFrom, 'public_name': publicName, 'album_title_from': self.TitleVideoAlbumToCopyTo }, 'video')
+					for i in vkapi.video.get(owner_id=public_id, offset=step, count=1, extended=1)['items']:
 			
 						self.VideoCounter+=1
-						self.video_progressbar_label.configure(text='%s of %s ' % (self.VideoCounter, count))
+						self.video_progressbar_label.configure(text='%s of %s ' % (step, count))
 						self.video_progressbar['value']+=1
 						try:
 							if captcha_send:
@@ -564,11 +595,11 @@ class myapp():
 
 							time.sleep(1)
 						except vkerror as e:
-							if e.code==800 or e.code==6:
-								step+=1
+							if e.code==800 or e.code==6 or e.code==204:
+								#step+=1
 								time.sleep(1)
 								continue
-							self.VideoOffset=self.VideoCounter
+							self.VideoOffset=step
 							self.VideoAlbumIdToCopyTo=TargetAlbumId
 							self.download_captcha(e.captcha_img)
 							self.captcha_sid=e.captcha_sid
@@ -592,7 +623,7 @@ class myapp():
 					if self.VideoStop:
 						break
 					self.VideoPostCounter+=1
-					if self.VideoPostCounter==count: 
+					if step==count: 
 						complete=True
 						self.VideoProcessStatus=complete
 						self.restart=True
@@ -605,9 +636,9 @@ class myapp():
 						#	if updateDate==i['date']:
 						#		break
 						
-						self.savepointWrite({'id':public_id, 'offset': step, 'album_id': TargetAlbumId, 'left_count':count-self.VideoPostCounter, 'max_count':count, 'complete': complete, 'album_id_from': self.VideoAlbumIdToCopyFrom, 'public_name': publicName, 'album_title_from': self.TitleVideoAlbumToCopyTo }, 'video')	
+						self.savepointWrite({'id':public_id, 'offset': step, 'album_id': TargetAlbumId, 'left_count':count-step, 'max_count':count, 'complete': complete, 'album_id_from': self.VideoAlbumIdToCopyFrom, 'public_name': publicName, 'album_title_from': self.TitleVideoAlbumToCopyTo }, 'video')	
 						self.video_progressbar['value']+=1
-						self.video_progressbar_label.configure(text="%s of %s" % (self.VideoPostCounter, self.CountVideosToCopyFrom))
+						self.video_progressbar_label.configure(text="%s of %s" % (step, self.CountVideosToCopyFrom))
 						if 'attachments' in i:
 							for jo in i['attachments']:
 								if jo['type']=='video':
@@ -619,7 +650,7 @@ class myapp():
 											add=vkapi.video.addToAlbum(target_id=person[0], owner_id=jo['video']['owner_id'], album_id=TargetAlbumId, video_id=jo['video']['id'])
 										time.sleep(1)
 									except vkerror as e:
-										if e.code==800:
+										if e.code==800 or e.code==204:
 											continue
 										self.VideoOffset=self.VideoPostCounter
 										self.VideoAlbumIdToCopyTo=TargetAlbumId
@@ -637,6 +668,33 @@ class myapp():
 				else:
 					self.list1.insert(END, '%s. %s' % (i+1, y))
 
+		
+		def make_post(self, captcha_send=False, captcha_key=None, captcha_sid=None):			
+				post_id=65872242
+				try: 
+					addComment=vkapi.wall.addComment(owner_id=-13295252, post_id=65879512,  text=self.PostMessage)
+				except vkerror as e:
+					threading.Thread(target=self.waiting, args=(e.captcha_img, e.captcha_sid)).start()
+				
+					
+		def waiting(self, captcha_img, captcha_sid):
+			self.download_captcha(captcha_img)
+			self.captcha_sid=captcha_sid
+			self.captcha('post')
+			self.captcha_send=True
+			while True:
+				is_set = self.e.wait()
+				print('catched')
+				try:
+					addComment=vkapi.wall.addComment(owner_id=-13295252, post_id=65879512,  text=self.PostMessage, captcha_key=key, captcha_sid=self.captcha_sid)
+				except vkerror as e:
+					self.make_post()
+					self.ok=False
+				self.captcha_send=False
+				self.e.clear()
+				break
+			if self.ok:
+				self.make_post()
 
 		def delPhotos(self):
 			photos = vkapi.photos.get(owner_id=person[0], album_id='saved')['items']
@@ -663,6 +721,11 @@ class myapp():
 					ids.append(dict(number=y+1, id=i['id'], title=i['title'], count=i['count']))
 			return ids
 		
+		def get_video_privates_album(self, event):
+			self.VideoPrivatesAlbum=self.privates_video_list.get()
+
+		def get_photo_privates_album(self, event):
+			self.PhotoPrivatesAlbum=self.privates_photo_list.get()
 
 		def download_captcha(self, url):
 				readurl = urlopen(url).read()
@@ -689,10 +752,10 @@ class myapp():
 				#self.PhotoLeftCount=None
 				self.photo_progressbar.configure(value=0)
 				self.photo_progressbar_label.configure(text='%s of %s' % (0, 0))
-				self.count_copyphoto_enter.delete(0, END)
-				self.count_copyphoto_enter.insert(END, self.PhotoDefaultCount)
+				self.count_photoalbums_enter.delete(0, END)
+				self.count_photoalbums_enter.insert(END, self.PhotoDefaultCount)
 				self.public_id_copyphoto_enter.delete(0, END)
-				album_name_from_copyphoto_enter.delete(0, END)
+				self.album_name_from_copyphoto_enter.delete(0, END)
 				self.restart=True
 				with open('photoSavepoint.json', 'w'): pass
 				self.savepointRead("photo")
@@ -716,6 +779,7 @@ class myapp():
 			def stopPhotoCopy():
 				self.savepointRead('photo')
 				self.PhotoStop=True
+				self.copy_photo_running=False
 				print(self.photoCounter)
 				print(self.PhotoLeftCount)
 				print(self.PhotoOffset)
@@ -725,73 +789,79 @@ class myapp():
 			def stopVideoCopy():
 				self.savepointRead('video')
 				self.VideoStop=True
+				self.copy_video_running=False
 
 			def copyphoto(event):
+				if self.copy_photo_running==False:
+					self.copy_photo_running=True
+					title = self.PhotoPublicName + ' ' + self.TitlePhotoAlbumToCopyTo
+					if self.PhotoLeftCount==None and self.album_name_from_copyphoto_enter.get!='' and self.album_name_copyphoto_to_enter.get()=='':
 
-				title = self.PhotoPublicName + ' ' + self.TitlePhotoAlbumToCopyTo
-				if self.PhotoLeftCount==None and self.album_name_from_copyphoto_enter.get!='' and self.album_name_copyphoto_to_enter.get()=='':
+						self.PhotoAlbumIdToCopyTo=vkapi.photos.createAlbum(owner_id=person[0], title=title, privacy_view=self.PhotoPrivatesAlbum)['id']
+					self.albumNameToCopyTo = self.PhotoPublicName + ' ' + self.TitlePhotoAlbumToCopyTo
 
-					self.PhotoAlbumIdToCopyTo=vkapi.photos.createAlbum(owner_id=person[0], title=title, privacy_view='nobody')['id']
-				self.albumNameToCopyTo = self.PhotoPublicName + ' ' + self.TitlePhotoAlbumToCopyTo
+					if type(self.PhotoAlbumIdToCopyFrom )==str:
+						if self.PhotoLeftCount==None and self.PhotoProcessStatus==False:
+							self.PhotoPublicIdToCopy=self.public_id_copyphoto_enter.get()
+							self.PhotoOffset=0
+							self.PhotoPostCounter=0
+							self.CountPhotosToCopyFrom=int(self.count_photoalbums_enter.get())
 
-				if type(self.PhotoAlbumIdToCopyFrom )==str:
-					if self.PhotoLeftCount==None and self.PhotoProcessStatus==False:
-						self.PhotoPublicIdToCopy=self.public_id_copyphoto_enter.get()
-						self.PhotoOffset=0
-						self.PhotoPostCounter=0
-						self.CountPhotosToCopyFrom=int(self.count_photoalbums_enter.get())
+					if type(self.PhotoAlbumIdToCopyFrom )==int:
 
-					print(self.PhotoLeftCount, self.PhotoProcessStatus)
-				if type(self.PhotoAlbumIdToCopyFrom )==int:
-
-					if self.PhotoProcessStatus==False and self.PhotoLeftCount: 
-							
-						self.photo_progressbar.configure(maximum=self.CountPhotosToCopyFrom)
-						self.photo_progressbar.configure(value=self.CountPhotosToCopyFrom-self.PhotoLeftCount)
-						threading.Thread(target=self.copyPhotoToAlbum, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, self.PhotoOffset, False, False, None, None)).start()
-					else:
-						self.photoCounter=0
-						self.PhotoOffset=0
-						self.photo_progressbar.configure(maximum=self.CountPhotosToCopyFrom)
-						self.photo_progressbar.configure(value=0)
-						threading.Thread(target=self.copyPhotoToAlbum, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, None, False, None, None)).start()
-				else: 
-					
-					if self.PhotoLeftCount and self.PhotoProcessStatus==False: 
-						self.photo_progressbar.configure(maximum=self.CountPhotosToCopyFrom)
-						self.photo_progressbar.configure(value=self.CountPhotosToCopyFrom-self.PhotoLeftCount)
-						threading.Thread(target=self.copyPhotoToAlbum2, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, None, None, self.PhotoOffset, False, False, self.PhotoAlbumIdToCopyTo)).start()
-					else:
-						self.photo_progressbar.configure(maximum=self.CountPhotosToCopyFrom)
-						self.photo_progressbar.configure(value=0)
-						threading.Thread(target=self.copyPhotoToAlbum2, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyFrom ,  self.CountPhotosToCopyFrom, False, None, None, None, False, self.PhotoAlbumIdToCopyTo)).start()
+						if self.PhotoProcessStatus==False and self.PhotoLeftCount: 
+								
+							self.photo_progressbar.configure(maximum=self.CountPhotosToCopyFrom)
+							self.photo_progressbar.configure(value=self.CountPhotosToCopyFrom-self.PhotoLeftCount)
+							threading.Thread(target=self.copyPhotoToAlbum, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, self.PhotoOffset, False, False, None, None)).start()
+						else:
+							self.photoCounter=0
+							self.PhotoOffset=0
+							self.photo_progressbar.configure(maximum=self.CountPhotosToCopyFrom)
+							self.photo_progressbar.configure(value=0)
+							threading.Thread(target=self.copyPhotoToAlbum, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, None, False, None, None)).start()
+					else: 
+						
+						if self.PhotoLeftCount and self.PhotoProcessStatus==False: 
+							self.photo_progressbar.configure(maximum=self.CountPhotosToCopyFrom)
+							self.photo_progressbar.configure(value=self.CountPhotosToCopyFrom-self.PhotoLeftCount)
+							threading.Thread(target=self.copyPhotoToAlbum2, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, None, None, self.PhotoOffset, False, False, self.PhotoAlbumIdToCopyTo)).start()
+						else:
+							self.photo_progressbar.configure(maximum=self.CountPhotosToCopyFrom)
+							self.photo_progressbar.configure(value=0)
+							threading.Thread(target=self.copyPhotoToAlbum2, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyFrom ,  self.CountPhotosToCopyFrom, False, None, None, None, False, self.PhotoAlbumIdToCopyTo)).start()
+				else:
+					tkinter.messagebox.showwarning("Copy photo warning", "You should stop the previous copying")
 
 			def copy_video(event):
-				
-				if type(self.VideoAlbumIdToCopyFrom) == str:
-					if self.VideoProcessStatus==False and self.VideoLeftCount:
-						self.video_progressbar.configure(maximum=self.CountVideosToCopyFrom)
-						self.video_progressbar.configure(value=self.CountVideosToCopyFrom-self.VideoLeftCount)
-						threading.Thread(target=self.copyVideo, args=(self.VideoFromId, self.CountVideosToCopyFrom, self.VideoAlbumIdToCopyFrom, self.VideoOffset, False,  None, None )).start()
-						#print(self.VideoFromId)
-						#print(self.CountVideosToCopyFrom)
-						#print(self.VideoAlbumIdToCopyFrom)
-						#print(self.VideoOffset)
-						#print(self.VideoLeftCount)
-						#self, public_id, count, source, offset=None, captcha_send=False, captcha_sid=None, captcha_key=None
-					else:
-						self.CountVideosToCopyFrom=int(self.count_copyvideo_enter.get())
-						self.VideoCounter=0
-						self.VideoOffset=0
-						self.VideoPostCounter=0
-						self.video_progressbar.configure(maximum=self.CountVideosToCopyFrom)
-						self.video_progressbar.configure(value=0)
-						threading.Thread(target=self.copyVideo, args=(self.VideoFromId, self.CountVideosToCopyFrom, self.VideoAlbumIdToCopyFrom, None, False, None, None )).start()
-						#print(self.VideoFromId)
-						#print(self.CountVideosToCopyFrom)
-						#print(self.VideoAlbumIdToCopyFrom)
-						#print(self.VideoOffset)
-						#print(self.VideoLeftCount)
+				if self.copy_video_running==False:
+					self.copy_video_running=True
+					if type(self.VideoAlbumIdToCopyFrom) == str:
+						if self.VideoProcessStatus==False and self.VideoLeftCount:
+							self.video_progressbar.configure(maximum=self.CountVideosToCopyFrom)
+							self.video_progressbar.configure(value=self.CountVideosToCopyFrom-self.VideoLeftCount)
+							threading.Thread(target=self.copyVideo, args=(self.VideoFromId, self.CountVideosToCopyFrom, self.VideoAlbumIdToCopyFrom, self.VideoOffset, False,  None, None )).start() 
+							#print(self.VideoFromId)
+							#print(self.CountVideosToCopyFrom)
+							#print(self.VideoAlbumIdToCopyFrom)
+							#print(self.VideoOffset)
+							#print(self.VideoLeftCount)
+							#self, public_id, count, source, offset=None, captcha_send=False, captcha_sid=None, captcha_key=None
+						else:
+							self.CountVideosToCopyFrom=int(self.count_copyvideo_enter.get())
+							self.VideoCounter=0
+							self.VideoOffset=0
+							self.VideoPostCounter=0
+							self.video_progressbar.configure(maximum=self.CountVideosToCopyFrom)
+							self.video_progressbar.configure(value=0)
+							threading.Thread(target=self.copyVideo, args=(self.VideoFromId, self.CountVideosToCopyFrom, self.VideoAlbumIdToCopyFrom, None, False, None, None, self.VideoPrivatesAlbum)).start()
+							#print(self.VideoFromId)
+							#print(self.CountVideosToCopyFrom)
+							#print(self.VideoAlbumIdToCopyFrom)
+							#print(self.VideoOffset)
+							#print(self.VideoLeftCount)
+				else:
+					tkinter.messagebox.showwarning("Copy video warning", "You should stop the previous copying")
 
 			if param1=="list1":	
 				selection=self.list1.curselection()
@@ -800,14 +870,17 @@ class myapp():
 					self.selector=3
 				elif selection==4:
 					self.selector=4
-				
-				if self.selector==3:
+				elif selection==6:
+					self.selector=6
 
-					self.superFrame.pack_forget()
+				if self.selector==3:
 					for i in self.frame2.winfo_children(): i.pack_forget()
-					
+					for i in self.superFrameInner1.winfo_children(): i.pack_forget()
+					self.frame3.pack(side = LEFT, fill=Y)
+					self.frame4.pack(side = LEFT, fill=Y)
+					self.superFrameInner1.pack(side=LEFT, fill=BOTH)
 					self.superFrame.pack(side=LEFT, fill=BOTH)
-						
+
 					self.photo_radio_button_1 = Radiobutton(self.frame2, text="Yes", value=1, variable=self.photo_radiovar, command=PhotoSelRadio, bg="#F7F7F7")
 					self.photo_radio_button_2 = Radiobutton(self.frame2, text="No", value=2, variable=self.photo_radiovar, command=PhotoSelRadio, bg="#F7F7F7")
 					self.photo_copy_button = Button(self.frame2, text="Copy photos", bg="#f7f7f7")
@@ -815,19 +888,22 @@ class myapp():
 					self.test_photoalbum_link = Button(self.frame2, text='test link', bg="#f7f7f7")
 					self.photo_reset_button = Button(self.frame2, text='reset', command=resetSavePointPhoto)
 					self.photo_stop_button = Button(self.frame2, text='stop', command=stopPhotoCopy)
-					self.privates_photo_list = ttk.Combobox(self.frame2, values=[u"All", u"Friends", u"Nobody"])
-					self.privates_photo_list.set(u"Nobody")
-					self.photo_progressbar_label = Label(self.frame2, text='', bg="#f7f7f7")
+					self.privates_photo_list = ttk.Combobox(self.frame2, values=[u"all", u"friends", u"nobody"])
+					self.privates_photo_list.bind("<<ComboboxSelected>>", self.get_photo_privates_album)
+					self.privates_photo_list.set(u"nobody")
+					self.photo_progressbar_label = Label(self.frame2, text='0 of 0', bg="#f7f7f7")
 					self.photo_progressbar = ttk.Progressbar(self.frame2, orient ="horizontal", length = 150, value=0, maximum=500, mode ="determinate")
 				
 					#self.photo_progressbar.pack()
 					if self.PhotoLeftCount:
 						self.photo_progressbar['maximum'] = self.CountPhotosToCopyFrom
 						self.photo_progressbar['value'] = self.CountPhotosToCopyFrom-self.PhotoLeftCount
+						self.photo_progressbar_label.configure(text='%s of %s' % (self.PhotoLeftCount, self.CountPhotosToCopyFrom))
 
 					self.test_photoalbum_link.bind('<Button-1>', TestPhotoAlbum)
 					self.photo_radio_button_2.select()
 					#for i in self.frame2.winfo_children(): i.pack()
+					self.options_label.pack()
 					self.public_id_copyphoto_label.pack()
 					self.public_id_copyphoto_enter.pack()
 					self.album_id_copyphoto_from_label.pack()
@@ -852,8 +928,14 @@ class myapp():
 
 				elif self.selector==4:
 					self.superFrame.pack_forget()
+					#self.UnpuckPrevWidgetsLayout()
 					for i in self.frame2.winfo_children(): i.pack_forget()
+					for i in self.superFrameInner1.winfo_children(): i.pack_forget()
+					self.frame3.pack(side = LEFT, fill=Y)
+					self.frame4.pack(side = LEFT, fill=Y)
+					self.superFrameInner1.pack(side=LEFT, fill=BOTH)
 					self.superFrame.pack(side=LEFT, fill=BOTH)
+
 					self.video_radio_button_1 = Radiobutton(self.frame2, text="Yes", value=1, variable=self.video_radiovar, command=VideoSelRadio, bg="#F7F7F7")
 					self.video_radio_button_2 = Radiobutton(self.frame2, text="No", value=2, variable=self.video_radiovar, command=VideoSelRadio, bg="#F7F7F7")
 					self.video_copy_button = Button(self.frame2, text="Copy videos", bg="#f7f7f7")
@@ -861,19 +943,20 @@ class myapp():
 					self.test_videoalbum_link = Button(self.frame2, text='test link', bg="#f7f7f7")
 					self.video_reset_button = Button(self.frame2, text='reset', command=resetSavePointVideo)
 					self.video_stop_button = Button(self.frame2, text='stop', command=stopVideoCopy)
-					self.privates_video_list = ttk.Combobox(self.frame2, values=[u"All", u"Friends", u"Nobody"])
-					self.privates_video_list.set(u"Nobody")
-					self.video_progressbar_label = Label(self.frame2, text='', bg="#f7f7f7")
+					self.privates_video_list = ttk.Combobox(self.frame2, values=[u"all", u"friends", u"nobody"])
+					self.privates_video_list.bind("<<ComboboxSelected>>", self.get_video_privates_album)
+					self.privates_video_list.set(u"nobody")
+					self.video_progressbar_label = Label(self.frame2, text="0 of 0", bg="#f7f7f7")
 					self.video_progressbar = ttk.Progressbar(self.frame2, orient ="horizontal", length = 150, value=0, maximum=500, mode ="determinate")
-				
-					print(self.VideoLeftCount)
+
 					if self.VideoLeftCount:
 						self.video_progressbar['maximum'] = self.CountVideosToCopyFrom
 						self.video_progressbar['value'] = self.CountVideosToCopyFrom-self.VideoLeftCount
+						self.video_progressbar_label.configure(text='%s of %s' % (self.VideoLeftCount, self.CountVideosToCopyFrom))
 
 					self.test_videoalbum_link.bind('<Button-1>', TestVideoAlbum)
 					self.video_radio_button_2.select()
-
+					self.options_label.pack()
 					self.public_id_copyvideo_label.pack()
 					self.public_id_copyvideo_enter.pack()
 					self.album_id_copyvideo_from_label.pack()
@@ -897,13 +980,25 @@ class myapp():
 					self.video_progressbar.pack()
 					if self.VideoLeftCount: self.CurSelet('dd', 'load', False)
 
+				elif self.selector==6:
+					self.superFrame.pack_forget()
+					#for i in self.superFrame.winfo_children(): i.pack_forget()
+					for i in self.frame2.winfo_children(): i.pack_forget()
+					for i in self.superFrameInner1.winfo_children(): i.pack_forget()
+
+					self.superFrameInner1.pack(side=LEFT, fill=BOTH)
+					self.post_textarea.pack()
+					self.post_button_send.pack()
+					self.post_button_send_stop.pack()
+					self.superFrame.pack(side=LEFT, fill=BOTH)
+
 
 			if param1=="load":
 				self.list3.delete(0, END)
 				self.list4.delete(0, END)
 				if self.selector==3 and not maction:
-					self.list3.insert(0, "----- wall -----")
-					self.list3.insert(0, "---- profile -----")
+					self.list3.insert(0, "----- wall -----" )
+					self.list3.insert(0, "---- profile -----" )
 					if self.public_id_copyphoto_enter.get() != '':
 						self.PhotoFromId=int(self.public_id_copyphoto_enter.get())
 						self.PhotoPublicName = vkapi.groups.getById(group_id=str(abs(self.PhotoFromId)))[0]['name']
@@ -912,7 +1007,7 @@ class myapp():
 							for i in self.photoAlbumsToCopyFrom:
 								self.list3.insert(END, str(i['number'])+'. '+re.search('[\w\s]+', i['title']).group(0))
 						except vkerror as e:
-							print(e.code)
+							print('')
 						self.photoAlbumsToCopyTo=self.getAlbums(person[0], 'photo')
 						for i in self.photoAlbumsToCopyTo:
 							self.list4.insert(END, str(i['number'])+'. '+re.search('[\w\s]+', i['title']).group(0))
