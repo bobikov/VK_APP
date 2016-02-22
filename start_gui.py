@@ -60,6 +60,7 @@ class myapp():
 			self.actions_list = ['Multi-post', 'Download photos', 'Copy photos', 'Copy video', 'Copy Audio', 'Wall Post']
 			self.photo_radiovar=IntVar()
 			self.video_radiovar=IntVar()
+			self.photo_cpature_radiovar=IntVar()
 			self.master.geometry("1000x800+300+0")
 			self.master.title('VK API')
 			# self.image = ImageTk.PhotoImage(Image.open("captcha.png"))
@@ -113,6 +114,7 @@ class myapp():
 			self.count_copyvideo_enter = Entry(self.frame2)
 			self.create_videoalbum_label = Label(self.frame2, text="Create album:", bg="#f7f7f7")
 
+
 			self.list1.bind('<<ListboxSelect>>', functools.partial(self.CurSelet, param1="list1", maction=True))
 			self.list3.bind('<<ListboxSelect>>', functools.partial(self.CurSelet, param1="list3", maction=False))
 			self.list4.bind('<<ListboxSelect>>', functools.partial(self.CurSelet, param1="list4", maction=False))
@@ -149,6 +151,7 @@ class myapp():
 			self.PhotoFromId=int
 			self.CreateNewPhotoAlbumState=int
 			self.CreateNewVideoAlbumState=int
+			self.PhotoCaptureTextState=False
 			self.PhotoPublicIdToCopy=str
 			
 			self.PhotoOffset=None
@@ -164,6 +167,7 @@ class myapp():
 			self.PhotoStop=False
 			self.PhotoDefaultCount=1000
 			self.PhotoPrivatesAlbum='nobody'
+			self.photo_capture_text_captcha=False
 
 			self.readPoint=self.savepointRead('photo')
 			
@@ -189,6 +193,7 @@ class myapp():
 			self.run=True
 			self.job=None
 			self.ok=True
+			self.t=None
 			#self.readPoint=self.savepointRead()
 			self.readPoint=self.savepointRead('video')
 
@@ -348,7 +353,7 @@ class myapp():
 				global key
 				key = e1.get()
 				if dtype=='photo':
-					threading.Thread(target=self.copyPhotoToAlbum2, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, self.captcha_sid, key, self.PhotoOffset, False, self.captcha_send, self.PhotoAlbumIdToCopyTo)).start()
+					threading.Thread(target=self.copyPhotoToAlbum2, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, self.captcha_sid, key, self.PhotoOffset, False, self.captcha_send, self.PhotoAlbumIdToCopyTo, self.PhotoCaptureTextState)).start()
 				elif dtype=='video':
 					threading.Thread(target=self.copyVideo, args=(self.VideoFromId, self.CountVideosToCopyFrom, self.VideoAlbumIdToCopyFrom, self.VideoOffset, self.captcha_send, self.captcha_sid, key)).start()
 					#print(self.VideoFromId, self.CountVideosToCopyFrom, self.VideoAlbumIdToCopyFrom, self.VideoOffset, self.captcha_sid, key)
@@ -360,7 +365,13 @@ class myapp():
 					self.e.set()
 
 				window2.destroy()
-
+			def close_window():
+				#self.t.join()
+				global key
+				key=None
+				self.e.set()
+				self.ok=False
+				window2.destroy()
 			dtype=dtype
 			image = ImageTk.PhotoImage(Image.open("captcha.png"))
 			window2 = Toplevel(self.master)
@@ -376,10 +387,11 @@ class myapp():
 			button1 = Button(window2, text='Send')
 			button1.bind('<Button-1>', getKey)
 			button1.pack(side=TOP)
+			window2.protocol("WM_DELETE_WINDOW", close_window)
 			window2.attributes("-topmost", True)
 			return key
 
-		def copyPhotoToAlbum2(self, to_id, from_id, albumNameToCopyTo,  albumIdToCopyFrom, countPhotos, captcha_sid=None, captcha_key=None, offset=None, text=False, captcha_send=False, albumIdToCopyTo=None):	
+		def copyPhotoToAlbum2(self, to_id, from_id, albumNameToCopyTo,  albumIdToCopyFrom, countPhotos, captcha_sid=None, captcha_key=None, offset=None, text=False, captcha_send=False, albumIdToCopyTo=None, capture_text=False):	
 			def copyAction():
 				self.PhotoStop=False
 				album_id = []
@@ -392,6 +404,7 @@ class myapp():
 				phlist=[]
 				st=0
 				getAlbumsTo = self.getAlbums(to_id,'photo')
+				captured_text=None
 				if albumIdToCopyFrom=='wall':
 					source='wall'
 				else:
@@ -415,9 +428,10 @@ class myapp():
 				else:
 					step=-1
 				while step<countPhotos:
-					step+=1
 					if self.PhotoStop==True:
 						break
+					step+=1
+					
 
 					#time.sleep(1)
 					photosGet=vkapi.wall.get(owner_id=from_id, count=1, offset=step)
@@ -431,24 +445,49 @@ class myapp():
 						complete=False
 					self.savepointWrite({'id':from_id, 'offset':step, 'album_id':album_id[0], 'left_count':countPhotos-self.PhotoPostCounter, 'max_count':countPhotos, 'complete': complete, 'album_id_from': albumIdToCopyFrom, 'public_name': self.PhotoPublicName, 'album_title_from': self.TitlePhotoAlbumToCopyTo}, 'photo')
 					for i in photosGet['items']:
-						
+						if i['date']==updateDate:
+							self.PhotoStop=True
 						self.photo_progressbar['value']+=1
 						self.photo_progressbar_label.configure(text="%s of %s" % (self.PhotoPostCounter, self.CountPhotosToCopyFrom))
-						if i['date']==updateDate:
-								self.PhotoStop=True
+						if capture_text is True:
+							if 'text' in i and i['text']!='':
+								if len(i['text'])>500:
+									f = re.search("[\w\W]{500}", i['text'])
+									captured_text=f.group(0)
+								else:
+									captured_text=i['text']
+							else:
+								captured_text=None
+						
 						if 'attachments' in i:
 							for a in i['attachments']:
 								if a['type']=='photo':
 									try:
-										if captcha_send:
+										if captcha_send  is True:
 											copyPhotos = vkapi.photos.copy(owner_id=a['photo']['owner_id'], photo_id=a['photo']['id'], captcha_key=captcha_key, captcha_sid=captcha_sid)
 										else:
 											copyPhotos = vkapi.photos.copy(owner_id=a['photo']['owner_id'], photo_id=a['photo']['id'])
-										# print(copyPhotos)
-										if  copyPhotos and text1!=None:
-												toFile.append({"id":copyPhotos, "text":text1})
+										time.sleep(1)
 										movePhotos = vkapi.photos.move(owner_id=to_id, target_album_id=album_id[0], photo_id=copyPhotos)
 										time.sleep(1)
+										if  copyPhotos and captured_text is not None:
+											try:
+												if self.photo_capture_text_captcha is True:
+													vkapi.photos.edit(owner_id=person[0], photo_id=copyPhotos, caption=captured_text, captcha_key=captcha_key, captcha_sid=captcha_sid)
+												else:
+													vkapi.photos.edit(owner_id=person[0], photo_id=copyPhotos, caption=captured_text)
+												time.sleep(1)
+											except vkerror as e:
+												self.PhotoOffset=self.PhotoPostCounter
+												self.PhotoAlbumIdToCopyTo=album_id[0]
+												self.download_captcha(e.captcha_img)
+												self.captcha_sid=e.captcha_sid
+												self.captcha_key=self.captcha('photo')
+												self.PhotoStop=True
+												self.captcha_send=False
+												self.photo_capture_text_captcha=True
+												break
+
 									except vkerror as e:
 										if e.code==15:
 											time.sleep(1)
@@ -670,32 +709,42 @@ class myapp():
 
 		
 		def make_post(self, captcha_send=False, captcha_key=None, captcha_sid=None):			
-				post_id=65872242
-				try: 
-					addComment=vkapi.wall.addComment(owner_id=-13295252, post_id=65879512,  text=self.PostMessage)
+				public_id=-13295252
+				for i in vkapi.wall.get(owner_id=public_id, count=2, extended=1)['items']:
+					post_id=i['id']
+				try:
+					while 1:
+						addComment=vkapi.wall.addComment(owner_id=public_id, post_id=post_id,  text=self.PostMessage)
+						time.sleep(1)
 				except vkerror as e:
-					threading.Thread(target=self.waiting, args=(e.captcha_img, e.captcha_sid)).start()
+					self.t=threading.Thread(target=self.waiting, args=(public_id, e.captcha_img, e.captcha_sid, post_id))
+					self.t.daemon=True
+					self.t.start()
 				
 					
-		def waiting(self, captcha_img, captcha_sid):
+		def waiting(self, public_id, captcha_img, captcha_sid, post_id):
 			self.download_captcha(captcha_img)
 			self.captcha_sid=captcha_sid
 			self.captcha('post')
 			self.captcha_send=True
+			global key
 			while True:
 				is_set = self.e.wait()
 				print('catched')
-				try:
-					addComment=vkapi.wall.addComment(owner_id=-13295252, post_id=65879512,  text=self.PostMessage, captcha_key=key, captcha_sid=self.captcha_sid)
-				except vkerror as e:
-					self.make_post()
-					self.ok=False
+				if post_id and key:
+					try:
+						addComment=vkapi.wall.addComment(owner_id=public_id, post_id=post_id,  text=self.PostMessage, captcha_key=key, captcha_sid=self.captcha_sid)
+					except vkerror as e:
+						self.make_post()
+						self.ok=False
 				self.captcha_send=False
 				self.e.clear()
 				break
 			if self.ok:
 				self.make_post()
 
+		def stop_post(self):
+			self.t.join()
 		def delPhotos(self):
 			photos = vkapi.photos.get(owner_id=person[0], album_id='saved')['items']
 			for i in photos:
@@ -731,6 +780,7 @@ class myapp():
 				readurl = urlopen(url).read()
 				with open("captcha.png", 'wb') as captcha:
 					captcha.write(readurl)
+		
 
 		def CurSelet(self, event, param1, maction ):
 						
@@ -744,6 +794,11 @@ class myapp():
 				self.CreateNewPhotoAlbumState = self.photo_radiovar.get()
 			def VideoSelRadio():
 				self.CreateNewVideoAlbumState = self.video_radiovar.get()
+			def PhotoSelCaptureTextRadio():
+				if self.photo_cpature_radiovar.get()==1:
+					self.PhotoCaptureTextState=True
+				else:
+					self.PhotoCaptureTextState=False
 
 			def resetSavePointPhoto():
 				#self.PhotoOffset=None
@@ -792,6 +847,7 @@ class myapp():
 				self.copy_video_running=False
 
 			def copyphoto(event):
+
 				if self.copy_photo_running==False:
 					self.copy_photo_running=True
 					title = self.PhotoPublicName + ' ' + self.TitlePhotoAlbumToCopyTo
@@ -813,25 +869,25 @@ class myapp():
 								
 							self.photo_progressbar.configure(maximum=self.CountPhotosToCopyFrom)
 							self.photo_progressbar.configure(value=self.CountPhotosToCopyFrom-self.PhotoLeftCount)
-							threading.Thread(target=self.copyPhotoToAlbum, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, self.PhotoOffset, False, False, None, None)).start()
+							threading.Thread(target=self.copyPhotoToAlbum, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, self.PhotoOffset, False, False, None, None, self.PhotoCaptureTextState)).start()
 						else:
 							self.photoCounter=0
 							self.PhotoOffset=0
 							self.photo_progressbar.configure(maximum=self.CountPhotosToCopyFrom)
 							self.photo_progressbar.configure(value=0)
-							threading.Thread(target=self.copyPhotoToAlbum, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, None, False, None, None)).start()
+							threading.Thread(target=self.copyPhotoToAlbum, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, None, False, None, None, self.PhotoCaptureTextState)).start()
 					else: 
 						
 						if self.PhotoLeftCount and self.PhotoProcessStatus==False: 
 							self.photo_progressbar.configure(maximum=self.CountPhotosToCopyFrom)
 							self.photo_progressbar.configure(value=self.CountPhotosToCopyFrom-self.PhotoLeftCount)
-							threading.Thread(target=self.copyPhotoToAlbum2, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, None, None, self.PhotoOffset, False, False, self.PhotoAlbumIdToCopyTo)).start()
+							threading.Thread(target=self.copyPhotoToAlbum2, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, None, None, self.PhotoOffset, False, False, self.PhotoAlbumIdToCopyTo, self.PhotoCaptureTextState)).start()
 						else:
 							self.photo_progressbar.configure(maximum=self.CountPhotosToCopyFrom)
 							self.photo_progressbar.configure(value=0)
-							threading.Thread(target=self.copyPhotoToAlbum2, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyFrom ,  self.CountPhotosToCopyFrom, False, None, None, None, False, self.PhotoAlbumIdToCopyTo)).start()
+							threading.Thread(target=self.copyPhotoToAlbum2, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyFrom ,  self.CountPhotosToCopyFrom, False, None, None, None, False, self.PhotoAlbumIdToCopyTo, self.PhotoCaptureTextState)).start()
 				else:
-					tkinter.messagebox.showwarning("Copy photo warning", "You should stop the previous copying")
+						tkinter.messagebox.showwarning("Copy photo warning", "You should stop the previous copying")
 
 			def copy_video(event):
 				if self.copy_video_running==False:
@@ -888,12 +944,15 @@ class myapp():
 					self.test_photoalbum_link = Button(self.frame2, text='test link', bg="#f7f7f7")
 					self.photo_reset_button = Button(self.frame2, text='reset', command=resetSavePointPhoto)
 					self.photo_stop_button = Button(self.frame2, text='stop', command=stopPhotoCopy)
+					self.capture_copyphoto_text_label = Label(self.frame2, text="Capture text: ", bg="#f7f7f7")
+					self.capture_copyphoto_text_radio_y=Radiobutton(self.frame2, text='Yes', value=1, variable=self.photo_cpature_radiovar, command=PhotoSelCaptureTextRadio, bg="#f7f7f7")
+					self.capture_copyphoto_text_radio_n=Radiobutton(self.frame2, text='No', value=2, variable=self.photo_cpature_radiovar, command=PhotoSelCaptureTextRadio, bg="#f7f7f7")
 					self.privates_photo_list = ttk.Combobox(self.frame2, values=[u"all", u"friends", u"nobody"])
 					self.privates_photo_list.bind("<<ComboboxSelected>>", self.get_photo_privates_album)
 					self.privates_photo_list.set(u"nobody")
 					self.photo_progressbar_label = Label(self.frame2, text='0 of 0', bg="#f7f7f7")
 					self.photo_progressbar = ttk.Progressbar(self.frame2, orient ="horizontal", length = 150, value=0, maximum=500, mode ="determinate")
-				
+					
 					#self.photo_progressbar.pack()
 					if self.PhotoLeftCount:
 						self.photo_progressbar['maximum'] = self.CountPhotosToCopyFrom
@@ -921,6 +980,10 @@ class myapp():
 					self.test_photoalbum_link.pack()
 					self.photo_reset_button.pack()
 					self.photo_stop_button.pack()
+					self.capture_copyphoto_text_label.pack()
+					self.capture_copyphoto_text_radio_y.pack()
+					self.capture_copyphoto_text_radio_n.pack()
+					self.capture_copyphoto_text_radio_n.select()
 					self.privates_photo_list.pack()
 					self.photo_progressbar_label.pack()
 					self.photo_progressbar.pack()

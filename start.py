@@ -1657,7 +1657,7 @@ class Comb:
 					# 	texta = text1
 					except vkerror as e:
 						captcha_sid=e.captcha_sid
-						captcha_key=Comb.captcha('self', e.captcha_img)
+						captcha_key=self.captcha(e.captcha_img)
 						cap = vkapi.photos.edit(owner_id=person[0], photo_id=i['id'], caption=i['text'], captcha_sid=captcha_sid, captcha_key=captcha_key)
 						time.sleep(1)
 	def saveWalls(self, public):
