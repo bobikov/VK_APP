@@ -38,7 +38,7 @@ from math import *
 from operator import itemgetter, attrgetter
 from requests.utils import quote
 from urllib.parse import urlparse
-from pync import Notifier
+# from pync import Notifier
 from prettytable import PrettyTable
 # cgitb.enable()
 
@@ -2510,7 +2510,14 @@ if __name__ == "__main__":
 			while 1:
 				Combain.statusSet2()
 				time.sleep(60*5)
-
+		elif int(action) == 39:
+			files = {
+			    'file1': ('mem.png', open('mem.png', 'rb'), 'image/png'),
+			}
+			headers={"User-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.75 Safari/537.36"}
+			server = vkapi.photos.getUploadServer(owner_id=person[0], album_id=228583889)['upload_url']
+			r = requests.post(server, files=files, headers=headers).json()
+			vkapi.photos.save(album_id=228583889, owner_id=person[0], hash=r['hash'], server=r['server'], photos_list=r['photos_list'])
 		
 	if sys.argv[1] == 'manual':
 		actions()

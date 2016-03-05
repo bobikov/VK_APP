@@ -1,28 +1,43 @@
-from tkinter import *
+# from oauth2client.client import flow_from_clientsecrets
+# import requests
+import webbrowser
+# import httplib2
+# from apiclient.discovery import build
+# from oauth2client.file import Storage
+from tumblpy import Tumblpy
+from urllib.request import urlopen
+import requests
+import vk
+import re
+from html.parser import HTMLParser
+from bs4.dammit import EntitySubstitution
+import wget
+htmlparser=HTMLParser()
+esub=EntitySubstitution()
+# storage = Storage('a_credentials_file')
+# credentials =storage.get()
 
-class MyDialog:
+# flow = flow_from_clientsecrets('./client_secret.json',
+#                                scope='https://www.googleapis.com/auth/cse',
+#                                redirect_uri='http://localhost/auth')
+# auth_uri = flow.step1_get_authorize_url()
+# webbrowser.open_new(auth_uri)
+# code=input('Enter code: ')
+# credentials = flow.step2_exchange(code)
 
-    def __init__(self, parent):
+# http=httplib2.Http()
+# http=credentials.authorize(http)
+# service = build('customsearch', 'v1', http=http)
+# # storage = Storage('a_credentials_file')
+# # storage.put(credentials)
+# res = service.cse().list(q='ancient sex', searchType='image', num=10, start=20, imgType='photo', imgSize='large', safe='off', cx='017774293269012910926:g4hh4a422po').execute()
+# for i in res['items']:
+#     print(i['link'])
+s="Hello &amp; &laquo"
 
-        top = self.top = Toplevel(parent)
 
-        Label(top, text="Value").pack()
+unsubbed = htmlparser.unescape(s)
+print(unsubbed)
 
-        self.e = Entry(top)
-        Text(top,width=40,height=15,font="12").pack()
-        self.e.pack(padx=5)
 
-        b = Button(top, text="OK", command=self.ok)
-        b.pack(pady=5)
 
-    def ok(self):
-
-        print ("value is", self.e.get())
-
-        self.top.destroy()
-root = Tk()
-Button(root, text="Hello!").pack()
-root.update()
-
-d = MyDialog(root)
-root.mainloop()
