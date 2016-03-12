@@ -31,6 +31,7 @@ import easy_date
 import tkinter
 from tkinter import *
 import base64
+from grab import Grab
 from PIL import Image
 from PIL import ImageTk
 import io
@@ -40,6 +41,8 @@ from requests.utils import quote
 from urllib.parse import urlparse
 # from pync import Notifier
 from prettytable import PrettyTable
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 # cgitb.enable()
 
 # print('Content-type: text/html')
@@ -2511,14 +2514,75 @@ if __name__ == "__main__":
 				Combain.statusSet2()
 				time.sleep(60*5)
 		elif int(action) == 39:
-			files = {
-			    'file1': ('mem.png', open('mem.png', 'rb'), 'image/png'),
-			}
-			headers={"User-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.75 Safari/537.36"}
-			server = vkapi.photos.getUploadServer(owner_id=person[0], album_id=228583889)['upload_url']
-			r = requests.post(server, files=files, headers=headers).json()
-			vkapi.photos.save(album_id=228583889, owner_id=person[0], hash=r['hash'], server=r['server'], photos_list=r['photos_list'])
-		
+			g=Grab()
+			urls=[]
+			public_id=int(input('public_id:'))
+			if public_id>0:
+				target_album_id=vkapi.photos.createAlbum(owner_id=public_id, title='aif.ru', privacy_view='nobody')['id']
+			else:
+				target_album_id=vkapi.photos.createAlbum(group_id=public_id, title='aif.ru', privacy_view='nobody')['id']
+
+			if public_id>0:
+				uploadUrl = vkapi.photos.getUploadServer(owner_id=public_id, album_id=target_album_id)['upload_url']
+			else:
+				uploadUrl = vkapi.photos.getUploadServer(group_id=public_id, album_id=target_album_id)['upload_url']
+
+
+			driver = webdriver.Firefox()
+			driver.get("http://www.aif.ru/infographic#")
+			#assert "Инфографика" in driver.title
+			clickers=0
+			items=driver.find_elements_by_xpath("//a[@class='rubric_img']")
+			for i in items:
+				g.go(i.get_attribute('href'))
+				if g.doc.select('//img[@class="sharable_picture"]'):
+					if g.doc.select('//div[@class="mbottom10"]'):
+						captured_text=g.doc.select('//div[@class="mbottom10"]').text()
+					else:
+						captured_text=''
+					url = g.doc.select('//img[@class="sharable_picture"]').attr('src')
+					print(url)
+					with open('temp_data/image_infa.jpg', 'wb') as file:
+						file.write(urlopen(url).read())
+
+
+					r = requests.post(uploadUrl, files={ 'file' : open('temp_data/image_infa.jpg','rb') }).json()
+					if public_id>0:
+						vkapi.photos.save(album_id=target_album_id, owner_id=public_id, caption=captured_text, hash=r['hash'], server=r['server'], photos_list=r['photos_list'])
+					else:
+						vkapi.photos.save(album_id=target_album_id, group_id=public_id, caption=captured_text, hash=r['hash'], server=r['server'], photos_list=r['photos_list'])
+			while clickers < 5:
+				clickers+=1
+				elem = driver.find_element_by_xpath("//a[@class='load_more']")
+				elem.click()
+				time.sleep(2)
+				
+			items=driver.find_elements_by_xpath("//a[@class='rubric_img']")
+			for i in items:
+				g.go(i.get_attribute('href'))
+				if g.doc.select('//img[@class="sharable_picture"]'):
+					if g.doc.select('//div[@class="mbottom10"]'):
+						captured_text=g.doc.select('//div[@class="mbottom10"]').text()
+					else:
+						captured_text=''
+					url = g.doc.select('//img[@class="sharable_picture"]').attr('src')
+					print(url)
+					with open('temp_data/image_infa.jpg', 'wb') as file:
+						file.write(urlopen(url).read())
+
+					r = requests.post(uploadUrl, files={ 'file' : open('temp_data/image_infa.jpg','rb') }).json()
+					if public_id>0:
+						vkapi.photos.save(album_id=target_album_id, owner_id=public_id, caption=captured_text, hash=r['hash'], server=r['server'], photos_list=r['photos_list'])
+					else:
+						vkapi.photos.save(album_id=target_album_id, group_id=public_id, caption=captured_text, hash=r['hash'], server=r['server'], photos_list=r['photos_list'])
+
+					# except Exception:
+					# 	continue
+				# elem = driver.find_element_by_xpath("//a[@class='load_more']")
+				# elem.click()
+				# time.sleep(3)
+			driver.close()
+			
 	if sys.argv[1] == 'manual':
 		actions()
 

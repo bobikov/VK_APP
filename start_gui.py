@@ -45,21 +45,27 @@ from requests.utils import quote
 from urllib.parse import urlparse
 #from pync import Notifier
 import functools
-
+import multiprocessing
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from grab import Grab
+from pyvirtualdisplay import Display
+from urllib.parse import urlencode
 #from prettytable import PrettyTable
+#from pinata.client import PinterestPinata
 
-session = vk.Session( access_token = '14b115dd450f382c77849d90f62eef11c18e0c353c4ebaba0aa57f8de7495bc6656d64445692eb5fd2301')
+session = vk.Session( access_token = '')
 vkapi = vk.API(session, v=5.45 , timeout=50)
 vkerror = vk.api.VkAPIError
 person = [179349317]
 app_id = 5040349
 key=str
 running=True
-t = Tumblpy("zpp8l7tvAl5CaNq0Z6zIBSg91kA2brPdQRF6f7bjYL75QI2rj9", "ZTJDMVXpzeRPPxEiyOvKkTLJUVZk1t2CBEvJ8ZakOKxKPjggt0", "CYVmCiHgwwpU6dgCbnVEjScPU1ZV6c5RFwHDqrjM15o3ypnwPo", "ajn0xJ8KqykaZjTEGKRgaiMDmqAkPE9xjjNDC2bh0Jqo5xekkF" )
+t = Tumblpy("")
 class myapp():
 		def __init__(self, master):
 			self.master = master
-			self.actions_list = ['Multi-post', 'Download photos', 'Copy photos', 'Copy video', 'Copy Audio', 'Wall Post', 'Delete Photo Albums', 'Tumblr copy photo']
+			self.actions_list = ['Multi-post', 'Download photos', 'Copy photos', 'Copy video', 'Copy Audio', 'Wall Post', 'Delete Photo Albums', 'Tumblr copy photo', 'Change privates photo albums', 'Pinterest upload photo']
 			self.photo_radiovar=IntVar()
 			self.video_radiovar=IntVar()
 			self.wall_post_radiovar=IntVar()
@@ -177,7 +183,10 @@ class myapp():
 			self.tumblr_copyphoto_blog_url_label=Label(self.frame2, bg='#f7f7f7', text='Blog URL (http://title.tumblr.com): ')
 			self.tumblr_copyphoto_blog_url_enter=Entry(self.frame2, bg='#f7f7f7')
 			self.tumblr_copyphoto_public_id_label=Label(self.frame2, bg='#f7f7f7', text='Public ID:')
-			self.tumblr_copyphoto_public_id_enter=Entry(self.frame2)
+			#self.tumblr_copyphoto_public_id_enter=Entry(self.frame2)
+			self.tumblr_copyphoto_public_id_enter=ttk.Combobox(self.frame2, values=[person[0]]+[-i for i in vkapi.groups.get(owner_id=person[0], filter='admin')['items']])
+			self.tumblr_copyphoto_public_id_enter.set(person[0])
+			#self.tumblr_copyphoto_public_id_enter.bind("<<ComboboxSelected>>", self.)
 			self.tumblr_copyphoto_album_id_to_label=Label(self.frame2, text="Album ID to copy: ", bg='#f7f7f7')
 			self.tumblr_copyphoto_album_id_to_enter=Entry(self.frame2)
 			self.tumblr_copyphoto_count_label=Label(self.frame2, text='count:', bg='#f7f7f7')
@@ -197,6 +206,16 @@ class myapp():
 			self.tumblr_copyphoto_progressbar_label=Label(self.frame2, text='0 of 0', bg='#f7f7f7')
 			self.tumblr_copyphoto_progressbar=ttk.Progressbar(self.frame2, orient='horizontal', length=130, value=0, maximum=500, mode='determinate')
 
+			self.photo_privates_list_wrap=Frame(self.superFrameInner1, bg="#f7f7f7", padx=1, pady=5)
+			self.photo_privates_list_label=Label(self.photo_privates_list_wrap, bg='#f7f7f7', text='Photo albums:')
+			self.photo_privates_list=Listbox(self.photo_privates_list_wrap, bd=0, selectmode="multiple")
+
+			self.photo_infograf_select_public_id_enter=ttk.Combobox(self.frame2, values=[person[0]]+[-i for i in vkapi.groups.get(owner_id=person[0], filter='admin')['items']])
+
+			self.photo_infograf_board_url=Entry(self.frame2)
+			self.photo_infograf_select_public_id_enter.set(person[0])
+			self.photo_infograf_button=Button(self.frame2, text='Upload')
+			self.photo_infograf_button.bind('<Button-1>', self.PhotoUploadFromPinterest)
 
 			#self.PostOwnerId=None
 			#self.photo_delete_albums_list = ttk.Treeview(self.superFrameInner1)
@@ -210,7 +229,8 @@ class myapp():
 			#self.photo_delete_albums_list.insert("" , 0,    text="Line 1", values=("1A","1b"))
 			#self.photo_delete_albums_list.insert("" , 0,    text="Line 2", values=("1A","1b"))
 
-			self.PostMessage="""📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 """
+			#self.PostMessage="""📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 ДОБАВЛЮ📣📣📣📣📣📣📣 ДОБАВЛЮ 📣📣📣📣📣📣📣 """
+			self.PostMessage="""🏀⚽️🏈⚾️🎾🏐 ДОБАВЛЮ 🏉🏐🏀🏈⚽️ ДОБАВЛЮ ⚾️🏀🏀🎾🏈 ДОБАВЛЮ 🍩🍿🍫🍭🍪 ДОБАВЛЮ ⛸🏹🏆🎣 ДОБАВЛЮ 🎟🏵🎻🎬👾🎯 ДОБАВЛЮ 🎖🏅🎹🎷🎺 ДОБАВЛЮ 🍏🍎🍐🍊🍌 ДОБАВЛЮ 🍑🍒🍓🍇🍈 ДОБАВЛЮ 🍾🍶🍵☕️🎳 ДОБАВЛЮ 🚴🚴🚵🛀 ДОБАВЛЮ 🛥🚤⛴🛳🚀⛵️ ДОБАВЛЮ 🛰💺⚓️🚦🚥 ДОБАВЛЮ 🏀⚽️🏈⚾️🎾🏐 ДОБАВЛЮ 🏉🏐🏀🏈⚽️ ДОБАВЛЮ ⚾️🏀🏀🎾🏈 ДОБАВЛЮ 🍩🍿🍫🍭🍪 ДОБАВЛЮ ⛸🏹🏆🎣 ДОБАВЛЮ 🎟🏵🎻🎬👾🎯 ДОБАВЛЮ 🎖🏅🎹🎷🎺 ДОБАВЛЮ 🍏🍎🍐🍊🍌 ДОБАВЛЮ 🍑🍒🍓🍇🍈 ДОБАВЛЮ 🍾🍶🍵☕️🎳 ДОБАВЛЮ 🚴🚴🚵🛀 ДОБАВЛЮ 🛥🚤⛴🛳🚀⛵️ ДОБАВЛЮ 🛰💺⚓️🚦🚥 ДОБАВЛЮ 🏀⚽️🏈⚾️🎾🏐 ДОБАВЛЮ 🏉🏐🏀🏈⚽️ ДОБАВЛЮ ⚾️🏀🏀🎾🏈 ДОБАВЛЮ 🍩🍿🍫🍭🍪 ДОБАВЛЮ ⛸🏹🏆🎣 ДОБАВЛЮ 🎟🏵🎻🎬👾🎯 ДОБАВЛЮ 🎖🏅🎹🎷🎺 ДОБАВЛЮ 🍏🍎🍐🍊🍌 ДОБАВЛЮ 🍑🍒🍓🍇🍈 ДОБАВЛЮ 🍾🍶🍵☕️🎳 ДОБАВЛЮ 🚴🚴🚵🛀 ДОБАВЛЮ 🛥🚤⛴🛳🚀⛵️ ДОБАВЛЮ 🛰💺⚓️🚦🚥 ДОБАВЛЮ 🏀⚽️🏈⚾️🎾🏐 ДОБАВЛЮ 🏉🏐🏀🏈⚽️ ДОБАВЛЮ ⚾️🏀🏀🎾🏈 ДОБАВЛЮ 🍩🍿🍫🍭🍪 ДОБАВЛЮ ⛸🏹🏆🎣 ДОБАВЛЮ 🎟🏵🎻🎬👾🎯 ДОБАВЛЮ 🎖🏅🎹🎷🎺 ДОБАВЛЮ 🍏🍎🍐🍊🍌 ДОБАВЛЮ 🍑🍒🍓🍇🍈 ДОБАВЛЮ 🍾🍶🍵☕️🎳 ДОБАВЛЮ 🚴🚴🚵🛀 ДОБАВЛЮ 🛥🚤⛴🛳🚀⛵️ ДОБАВЛЮ 🛰💺⚓️🚦🚥"""
 			#self.PostMessage="Добавлю"
 			self.selector=0
 			self.menu=self.menu()
@@ -298,6 +318,11 @@ class myapp():
 			self.savepointRead('tumblr_photo')
 			self.TumblrDefaultCountPhoto=1000
 			self.TumblrSelectedFormat='jpg'
+			self.TumblrJpgThread=None
+			self.PhotoPrivatesAlbums=None
+			self.PhotoChangePrivatesSelected='nobody'
+
+			self.PhotoPinterestUrl=None
 
 		def UpdateData(self, fromId, date, dtype, source, album_id=False):
 			names=[]
@@ -383,20 +408,20 @@ class myapp():
 
 		def savepointWrite(self, data, dtype):
 			if dtype=='photo':
-				with open("photoSavepoint.json", "w") as file:
+				with open("savepoints/photoSavepoint.json", "w") as file:
 					file.write(json.dumps(data, indent=4, ensure_ascii=False))
 			elif dtype=='video':
-				with open("videoSavepoint.json", "w") as file:
+				with open("savepoints/videoSavepoint.json", "w") as file:
 					file.write(json.dumps(data, indent=4, ensure_ascii=False))
 			elif dtype=='tumblr_photo':
-				with open("tumblrPhotoSavepoint.json", "w") as file:
+				with open("savepoints/tumblrPhotoSavepoint.json", "w") as file:
 					file.write(json.dumps(data, indent=4, ensure_ascii=False))
 
 		def savepointRead(self, dtype):
 			if dtype=='video':
 				fname="videoSavepoint.json"
-				if os.stat(fname).st_size != 0:
-					with open(fname, "r") as file:
+				if os.stat(os.path.join("savepoints", fname)).st_size != 0:
+					with open(os.path.join('savepoints', fname), "r") as file:
 						data = json.load(file)	
 						if data:
 							self.VideoOffset=data['offset']
@@ -425,8 +450,8 @@ class myapp():
 					#
 			elif dtype=='photo':
 				fname="photoSavepoint.json"
-				if os.stat(fname).st_size != 0:
-					with open("photoSavepoint.json", "r") as file:
+				if os.stat(os.path.join('savepoints', fname)).st_size != 0:
+					with open(os.path.join('savepoints', fname), "r") as file:
 						data = json.load(file)	
 						if data:
 							self.PhotoOffset=data['offset']
@@ -456,9 +481,9 @@ class myapp():
 					#self.count=None			
 			elif dtype=='tumblr_photo':
 				fname="tumblrPhotoSavepoint.json"
-				if os.stat(fname).st_size!=0:
+				if os.stat(os.path.join("savepoints", fname)).st_size!=0:
 					print('not empty')
-					with open("tumblrPhotoSavepoint.json", 'r') as file:
+					with open(os.path.join("savepoints", fname), 'r') as file:
 						data = json.load(file)
 					if data:
 						self.TumblrPhotoOffset=data['offset']
@@ -487,8 +512,11 @@ class myapp():
 			def getKey(event):
 				global key
 				key = e1.get()
-				if dtype=='photo':
-					threading.Thread(target=self.copyPhotoToAlbum2, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, self.captcha_sid, key, self.PhotoOffset, False, self.captcha_send, self.PhotoAlbumIdToCopyTo, self.PhotoCaptureTextState)).start()
+				if dtype=='photo wall':
+					threading.Thread(target=self.copyPhotoToAlbum2, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, self.captcha_sid, key, self.PhotoOffset, self.captcha_send, self.PhotoAlbumIdToCopyTo, self.PhotoCaptureTextState)).start()
+				elif dtype =="photo album":
+					threading.Thread(target=self.copyPhotoToAlbum, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, self.PhotoOffset, self.captcha_send, self.captcha_sid, key, self.PhotoCaptureTextState)).start()
+
 				elif dtype=='video':
 					threading.Thread(target=self.copyVideo, args=(self.VideoFromId, self.CountVideosToCopyFrom, self.VideoAlbumIdToCopyFrom, self.VideoOffset, self.captcha_send, self.captcha_sid, key)).start()
 					#print(self.VideoFromId, self.CountVideosToCopyFrom, self.VideoAlbumIdToCopyFrom, self.VideoOffset, self.captcha_sid, key)
@@ -511,7 +539,7 @@ class myapp():
 				window2.grab_release()
 				window2.destroy()
 			dtype=dtype
-			image = ImageTk.PhotoImage(Image.open("captcha.png"))
+			image = ImageTk.PhotoImage(Image.open("temp_data/captcha.png"))
 			window2 = Toplevel(self.master)
 			window2.geometry("200x200+600+200")
 			window2.bind('<Return>', getKey)
@@ -602,7 +630,7 @@ class myapp():
 								for a in i['attachments']:
 									if a['type']=='photo':
 										try:
-											if captcha_send  is True:
+											if captcha_send:
 												copyPhotos = vkapi.photos.copy(owner_id=a['photo']['owner_id'], photo_id=a['photo']['id'], captcha_key=captcha_key, captcha_sid=captcha_sid)
 											else:
 												copyPhotos = vkapi.photos.copy(owner_id=a['photo']['owner_id'], photo_id=a['photo']['id'])
@@ -613,6 +641,7 @@ class myapp():
 												try:
 													if self.photo_capture_text_captcha is True:
 														vkapi.photos.edit(owner_id=person[0], photo_id=copyPhotos, caption=captured_text, captcha_key=captcha_key, captcha_sid=captcha_sid)
+														self.photo_capture_text_captcha=False
 													else:
 														vkapi.photos.edit(owner_id=person[0], photo_id=copyPhotos, caption=captured_text)
 													time.sleep(1)
@@ -621,7 +650,7 @@ class myapp():
 													self.PhotoAlbumIdToCopyTo=album_id[0]
 													self.download_captcha(e.captcha_img)
 													self.captcha_sid=e.captcha_sid
-													self.captcha_key=self.captcha('photo')
+													self.captcha_key=self.captcha('photo wall')
 													self.PhotoStop=True
 													self.captcha_send=False
 													self.photo_capture_text_captcha=True
@@ -637,13 +666,13 @@ class myapp():
 											self.captcha_send=True
 											self.download_captcha(e.captcha_img)
 											self.captcha_sid=e.captcha_sid
-											self.captcha_key=self.captcha('photo')
+											self.captcha_key=self.captcha('photo wall')
 											self.PhotoStop=True
 											break
 									
 			copyAction()
 
-		def copyPhotoToAlbum(self, to_id, from_id, albumNameToCopyTo, albumIdToCopyTo, albumIdToCopyFrom, countPhotos,  offset=None, text=False, captcha_send=False, captcha_sid=None, captcha_key=None):
+		def copyPhotoToAlbum(self, to_id, from_id, albumNameToCopyTo, albumIdToCopyTo, albumIdToCopyFrom, countPhotos,  offset=None, captcha_send=False, captcha_sid=None, captcha_key=None, capture_text=False):
 			album_id = []
 			photo_id = []
 			albumsFromIds = []
@@ -681,18 +710,38 @@ class myapp():
 						self.photo_progressbar_label.configure(text="%s of %s" % (self.photoCounter, self.CountPhotosToCopyFrom))
 						if captcha_send:
 							copyPhotos = vkapi.photos.copy(owner_id=from_id, photo_id=a['id'], captcha_key=captcha_key, captcha_sid=captcha_sid)
-
 						else:
 							copyPhotos = vkapi.photos.copy(owner_id=from_id, photo_id=a['id'])
+						
 						movePhotos = vkapi.photos.move(owner_id=to_id, target_album_id=album_id[0], photo_id=copyPhotos)
 						time.sleep(1)
+						if capture_text==True:
+							captured_text=a['text']
+							try:
+								if self.photo_capture_text_captcha:
+									
+									vkapi.photos.edit(owner_id=to_id, photo_id=copyPhotos, caption=captured_text, captcha_key=captcha_key, captcha_sid=captcha_sid)
+									self.photo_capture_text_captcha=False
+								else:
+									vkapi.photos.edit(owner_id=to_id, photo_id=copyPhotos, caption=captured_text)
+								time.sleep(1)
+							except vkerror as e:
+								self.PhotoOffset=self.photoCounter
+								self.PhotoAlbumIdToCopyTo=album_id[0]
+								self.download_captcha(e.captcha_img)
+								self.captcha_sid=e.captcha_sid
+								self.captcha_key=self.captcha('photo album')
+								self.PhotoStop=True
+								self.captcha_send=False
+								self.photo_capture_text_captcha=True
+								break
 
 				except vkerror as e:
 
 					self.PhotoAlbumIdToCopyTo=album_id[0]
 					self.download_captcha(e.captcha_img)
 					self.captcha_sid=e.captcha_sid
-					self.captcha_key=self.captcha('photo')
+					self.captcha_key=self.captcha('photo album')
 					self.captcha_send=True
 					self.PhotoStop=True
 					break
@@ -866,7 +915,7 @@ class myapp():
 						post_id=i['id']
 					try:
 						while 1:
-							if self.PostRunning is False:
+							if self.PostRunning == False:
 								break
 							addComment=vkapi.wall.addComment(owner_id=public_id, post_id=post_id,  text=self.PostMessage)
 							time.sleep(2)
@@ -947,7 +996,11 @@ class myapp():
 			if dtype=='photo':
 				albums = vkapi.photos.getAlbums( owner_id = public_id)['items']
 				for y,i in zip(range(len(albums)), albums):
-					ids.append(dict(number=y+1, id=i['id'], title=i['title'], count=i['size']))
+					if public_id==person[0]:
+						ids.append(dict(number=y+1, id=i['id'], title=i['title'], count=i['size'], privacy_view=i['privacy_view'][0]))
+					else:
+						ids.append(dict(number=y+1, id=i['id'], title=i['title'], count=i['size']))
+
 
 			elif dtype=='video':
 				while step<200:
@@ -966,8 +1019,90 @@ class myapp():
 
 		def download_captcha(self, url):
 				readurl = urlopen(url).read()
-				with open("captcha.png", 'wb') as captcha:
+				with open("temp_data/captcha.png", 'wb') as captcha:
 					captcha.write(readurl)
+
+		def PhotoUploadFromPinterest(self, event):
+			token="AWVZBp0pbMDy1O2B72oC1nZgHP4VFDrUvRtGHfFCweBu2eBHowAAAAA"
+			public_id=int(self.photo_infograf_select_public_id_enter.get())
+			self.PhotoPinterestUrl=self.photo_infograf_board_url.get()
+			title=self.PhotoPinterestUrl
+			if public_id>0:
+				album_id=vkapi.photos.createAlbum(owner_id=public_id,  title=title, privacy_view='nobody')['id']
+				uploadUrl = vkapi.photos.getUploadServer(owner_id=public_id, album_id=album_id)['upload_url']
+			else:
+				album_id=vkapi.photos.createAlbum(group_id=public_id,  title=title, privacy_view='nobody')['id']
+				uploadUrl = vkapi.photos.getUploadServer(group_id=public_id, album_id=album_id)['upload_url']
+
+			url='https://api.pinterest.com/v1/boards/%s/pins/?' % (self.PhotoPinterestUrl)
+
+
+			items=requests.get(url, params=urlencode({"access_token":token, "fields":"image, url, id, note, metadata, creator"})).json()
+			stop=None
+			#print(json.dumps(items, sort_keys=True, indent=4))
+			while stop == None:
+				#time.sleep(1)
+				for i in items['data']:
+					if 'image' in i:
+						url=i['image']['original']['url']
+						with open('temp_data/image_pinterest.jpg', 'wb') as file:
+							file.write(urlopen(url).read())
+						r = requests.post(uploadUrl, files={ 'file' : open('temp_data/image_pinterest.jpg','rb') }).json()
+						if public_id>0:
+							text=re.sub('(http:\/\/)?(www)\..+\.\w{1,3}\/(.+){1,100}', '', i['note'])
+							vkapi.photos.save(album_id=album_id, owner_id=public_id, caption=text,  hash=r['hash'], server=r['server'], photos_list=r['photos_list'])
+						else:
+							vkapi.photos.save(album_id=album_id, group_id=public_id, caption=text, hash=r['hash'], server=r['server'], photos_list=r['photos_list'])
+
+				if items['page']['next']:
+					items=requests.get(items['page']['next']).json()
+				else:
+					stop='sss'
+					print('end')
+
+				#print(items['page'])
+		def PhotoInfografUpload(self, event):
+			def start():
+				g=Grab()
+				urls=[]
+				public_id=int(self.photo_infograf_select_public_id_enter.get())
+				if public_id>0:
+					target_album_id=vkapi.photos.createAlbum(owner_id=public_id, title='aif.ru', privacy_view='nobody')['id']
+				else:
+					target_album_id=vkapi.photos.createAlbum(group_id=public_id, title='aif.ru', privacy_view='nobody')['id']
+
+				if public_id>0:
+					uploadUrl = vkapi.photos.getUploadServer(owner_id=public_id, album_id=target_album_id)['upload_url']
+				else:
+					uploadUrl = vkapi.photos.getUploadServer(group_id=public_id, album_id=target_album_id)['upload_url']
+
+
+				driver = webdriver.Firefox()
+				driver.get("http://www.aif.ru/infographic#")
+				#assert "Инфографика" in driver.title
+				elem = driver.find_element_by_xpath("//div[@class='material_box']/a[@class='load_more']")
+				elem.click()
+				items=driver.find_elements_by_xpath("//a[@class='rubric_img']")
+				for i in items:
+					g.go(i.get_attribute('href'))
+					try:
+						captured_text=g.xpath_text('//div[@class="mbottom10"]')
+						url = g.doc.select('//img[@class="sharable_picture"]').attr('src')
+						print(url)
+						r = requests.post(uploadUrl, files={ 'file' : url }).json()
+						if public_id>0:
+							vkapi.photos.save(album_id=target_album_id, owner_id=public_id, caption=captured_text, hash=r['hash'], server=r['server'], photos_list=r['photos_list'])
+						else:
+							vkapi.photos.save(album_id=target_album_id, group_id=public_id, caption=captured_text, hash=r['hash'], server=r['server'], photos_list=r['photos_list'])
+					except Exception:
+						continue
+				driver.close()
+			threading.Thread(target=start, args=()).start()
+
+
+		def PhotoChangePrivatesSelect(self, event):
+			self.PhotoChangePrivatesSelected=self.photo_privates_select.get()
+			print(self.PhotoChangePrivatesSelected)
 
 		def SelectPostType(self):
 			if self.wall_post_radiovar.get()==1:
@@ -993,13 +1128,14 @@ class myapp():
 				self.PhotoCaptureTextState=True
 			else:
 				self.PhotoCaptureTextState=False
+			print(self.PhotoCaptureTextState)
 
 		def TumblrCaptureSelect(self):
 			if self.tumblr_copyphoto_capture_radiovar.get()==1:
 				self.TumblrCaptureState=True
 			elif self.tumblr_copyphoto_capture_radiovar.get()==2:
 				self.TumblrCaptureState=False
-			print(self.TumblrCaptureState)
+			
 
 		def resetSavePointPhoto(self):
 			#self.PhotoOffset=None
@@ -1013,7 +1149,7 @@ class myapp():
 			self.public_id_copyphoto_enter.delete(0, END)
 			self.album_name_from_copyphoto_enter.delete(0, END)
 			self.restart=True
-			with open('photoSavepoint.json', 'w'): pass
+			with open('savepoints/photoSavepoint.json', 'w'): pass
 			self.savepointRead("photo")
 
 		def resetSavePointVideo(self):
@@ -1029,7 +1165,7 @@ class myapp():
 			self.album_name_from_copyvideo_enter.delete(0, END)
 			self.restart=True
 			self.captcha_send=False
-			with open('videoSavepoint.json', 'w'): pass
+			with open('savepoints/videoSavepoint.json', 'w'): pass
 			self.savepointRead("video")
 
 		def stopPhotoCopy(self):
@@ -1047,7 +1183,8 @@ class myapp():
 			self.VideoStop=True
 			self.copy_video_running=False
 
-		def tumblrCopyPhotoStart(self, public_id, album_id, count, offset=None, captcha_send=False, captcha_sid=None, captcha_key=None, capture_text=False):
+		def tumblrCopyPhotoStart(self, public_id, album_id, count, offset=None, captcha_send=False , captcha_sid=None, captcha_key=None, capture_text=False):
+			public_id=int(public_id)
 			if offset:
 				step=offset-1
 			else:
@@ -1065,9 +1202,17 @@ class myapp():
 						else:
 							updateDate=None
 			if self.TumblrSelectedFormat=='gif':
-				uploadUrl = vkapi.docs.getUploadServer(owner_id=int(public_id))['upload_url']
+				if public_id>0:
+					uploadUrl = vkapi.docs.getUploadServer(owner_id=public_id)['upload_url']
+				else:
+					uploadUrl = vkapi.docs.getUploadServer(group_id=abs(public_id))['upload_url']
+
 			else:
-				uploadUrl = vkapi.photos.getUploadServer(owner_id=int(public_id), album_id=album_id)['upload_url']
+				if public_id>0:
+					uploadUrl = vkapi.photos.getUploadServer(owner_id=public_id, album_id=album_id)['upload_url']
+				else:
+					uploadUrl = vkapi.photos.getUploadServer(group_id=abs(public_id), album_id=album_id)['upload_url']
+
 			posts=t.get('posts', blog_url=self.TumblrBlogUrl, params={"limit":1})
 			date1=[i['timestamp'] for i in posts['posts']][0]
 			if self.TumblrSelectedFormat !='gif':
@@ -1102,18 +1247,25 @@ class myapp():
 							if self.TumblrSelectedFormat == 'jpg':
 								if re.findall("(?<=\.)\w+$", a['original_size']['url'])[0] != 'gif':
 									fileto = urlopen(a['original_size']['url']).read()
-									with open('image_tumblr.jpg', 'wb') as file:
+									with open('temp_data/image_tumblr.jpg', 'wb') as file:
 										file.write(fileto)
-									r = requests.post(uploadUrl, files={ 'file' : open('image_tumblr.jpg', 'rb') }).json()
+									r = requests.post(uploadUrl, files={ 'file' : open('temp_data/image_tumblr.jpg', 'rb') }).json()
 									if capture_text is True:
-										vkapi.photos.save(album_id=album_id, owner_id=public_id, caption=caption, hash=r['hash'], server=r['server'], photos_list=r['photos_list'])
+										
+										if public_id>0:
+											vkapi.photos.save(album_id=album_id, owner_id=public_id, caption=caption, hash=r['hash'], server=r['server'], photos_list=r['photos_list'])
+										else:
+											vkapi.photos.save(album_id=album_id, group_id=abs(public_id), caption=caption, hash=r['hash'], server=r['server'], photos_list=r['photos_list'])
 									else:
-										vkapi.photos.save(album_id=album_id, owner_id=public_id, hash=r['hash'], server=r['server'], photos_list=r['photos_list'])
+										if int(public_id)>0:
+											vkapi.photos.save(album_id=album_id, owner_id=public_id, hash=r['hash'], server=r['server'], photos_list=r['photos_list'])
+										else:
+											vkapi.photos.save(album_id=album_id, group_id=abs(public_id), hash=r['hash'], server=r['server'], photos_list=r['photos_list'])
 
 							elif self.TumblrSelectedFormat == 'gif':
 								if re.findall("(?<=\.)\w+$", a['original_size']['url'])[0]=='gif':
 									fileto = urlopen(a['original_size']['url']).read()
-									doc_name='image_doc_id%s.gif' % (public_id) 
+									doc_name='temp_data/image_doc_id%s.gif' % (public_id) 
 									with open(doc_name, 'wb') as file:
 										file.write(fileto)
 									r = requests.post(uploadUrl, files={ 'file' : open(doc_name, 'rb') }).json()
@@ -1147,13 +1299,17 @@ class myapp():
 						self.tumblr_copyphoto_progressbar.configure(maximum=self.TumblrPhotoCount)
 						self.tumblr_copyphoto_progressbar.configure(value=self.TumblrPhotoCount-self.TumblrPhotoLeftCount)
 						threading.Thread(target=self.tumblrCopyPhotoStart, args=(self.TumblrCopyPhotoPublicId, self.TumblrCopyPhotoAlbumId, self.TumblrPhotoCount, self.TumblrPhotoOffset, False, None, None, True)).start()
+						#threading.Thread(target=self.tumblrCopyPhotoStart, args=(self.TumblrCopyPhotoPublicId, self.TumblrCopyPhotoAlbumId, self.TumblrPhotoCount, self.TumblrPhotoOffset, False, None, None, True)).start()
 						#self, public_id, album_id, count, offset=None, captcha_send=False, captcha_sid=None, captcha_key=None, capture_text=False):
 					elif self.TumblrCopyPhotoProcess==False and self.TumblrPhotoLeftCount is None:
 						if self.tumblr_copyphoto_album_id_to_enter.get():
 							album_id=int(self.tumblr_copyphoto_album_id_to_enter.get())
 							
 						if self.TumblrPhotoLeftCount==None and self.tumblr_copyphoto_album_id_to_enter!='' and self.tumblr_copyphoto_album_id_to_enter.get()=='':
-							album_id=vkapi.photos.createAlbum(owner_id=int(self.tumblr_copyphoto_public_id_enter.get()), privacy_view='nobody', title=target_album_name)['id']
+							if int(self.tumblr_copyphoto_public_id_enter.get())>0:
+								album_id=vkapi.photos.createAlbum(owner_id=int(self.tumblr_copyphoto_public_id_enter.get()), privacy_view='nobody', title=target_album_name)['id']
+							else:
+								album_id=vkapi.photos.createAlbum(group_id=abs(int(self.tumblr_copyphoto_public_id_enter.get())), privacy_view='all', title=target_album_name, upload_by_admins_only=1)['id']
 						self.TumblrPhotoCounter=0
 						self.TumblrPhotoOffset=0
 						self.TumblrPhotoCount=int(self.tumblr_copyphoto_count_enter.get())
@@ -1163,8 +1319,10 @@ class myapp():
 						self.tumblr_copyphoto_progressbar.configure(maximum=self.TumblrPhotoCount)
 						self.tumblr_copyphoto_progressbar.configure(value=0)
 						threading.Thread(target=self.tumblrCopyPhotoStart, args=(self.TumblrCopyPhotoPublicId, album_id, self.TumblrPhotoCount, None, False, None, None, True)).start()
+						#self.TumblrJpgThread=multiprocessing.Process(target=self.tumblrCopyPhotoStart, args=(self.TumblrCopyPhotoPublicId, album_id, self.TumblrPhotoCount, None, False, None, None, True)).start()
+						#print(self.TumblrJpgThread.is_alive())
 				else:
-					if self.TumblrPhotoLeftCount is not None and self.TumblrCopyPhotoProcess==False:
+					if self.TumblrPhotoLeftCount != None and self.TumblrCopyPhotoProcess==False:
 						self.tumblr_copyphoto_progressbar.configure(maximum=self.TumblrPhotoCount)
 						self.tumblr_copyphoto_progressbar.configure(value=self.TumblrPhotoCount-self.TumblrPhotoLeftCount)
 						threading.Thread(target=self.tumblrCopyPhotoStart, args=(self.TumblrCopyPhotoPublicId, 'tumblr gif', self.TumblrPhotoCount, self.TumblrPhotoOffset, False, None, None, True)).start()
@@ -1178,6 +1336,7 @@ class myapp():
 						self.tumblr_copyphoto_progressbar.configure(maximum=self.TumblrPhotoCount)
 						self.tumblr_copyphoto_progressbar.configure(value=0)
 						threading.Thread(target=self.tumblrCopyPhotoStart, args=(self.TumblrCopyPhotoPublicId, 'tumblr gif', self.TumblrPhotoCount, None, False, None, None, True)).start()
+
 			else:
 				tkinter.messagebox.showwarning('Tumlbr copy photo', 'Yoy have running copying')
 
@@ -1185,6 +1344,8 @@ class myapp():
 			self.TumblrCopyRunning=False
 			self.TumblrPhotoStop=True
 			self.savepointRead('tumblr_photo')
+			print(threading.active_count())
+
 
 		def tumblrReset(self):
 			self.tumblr_copyphoto_progressbar['value']=0
@@ -1194,7 +1355,7 @@ class myapp():
 			self.tumblr_copyphoto_public_id_enter.delete(0, END)
 			self.tumblr_copyphoto_public_id_enter.insert(END, person[0])
 			self.captcha_send=False
-			with open('tumblrPhotoSavepoint.json', 'w'): pass
+			with open('savepoints/tumblrPhotoSavepoint.json', 'w'): pass
 			self.savepointRead('tumblr_photo')
 
 		def copyphoto(self, event):
@@ -1206,6 +1367,8 @@ class myapp():
 
 						self.PhotoAlbumIdToCopyTo=vkapi.photos.createAlbum(owner_id=person[0], title=title, privacy_view=self.PhotoPrivatesAlbum)['id']
 					self.albumNameToCopyTo = self.PhotoPublicName + ' ' + self.TitlePhotoAlbumToCopyTo
+
+					description=vkapi.photos.editAlbum(owner_id=person[0], album_id=self.PhotoAlbumIdToCopyTo, description="скопировано из %s | %s" % (self.PhotoPublicIdToCopy, self.PhotoPublicName))
 
 					if type(self.PhotoAlbumIdToCopyFrom )==str:
 						if self.PhotoLeftCount==None and self.PhotoProcessStatus==False:
@@ -1220,13 +1383,13 @@ class myapp():
 								
 							self.photo_progressbar.configure(maximum=self.CountPhotosToCopyFrom)
 							self.photo_progressbar.configure(value=self.CountPhotosToCopyFrom-self.PhotoLeftCount)
-							threading.Thread(target=self.copyPhotoToAlbum, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, self.PhotoOffset, False, False, None, None, self.PhotoCaptureTextState)).start()
+							threading.Thread(target=self.copyPhotoToAlbum, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, self.PhotoOffset, False, None, None, self.PhotoCaptureTextState)).start()
 						else:
 							self.photoCounter=0
 							self.PhotoOffset=0
 							self.photo_progressbar.configure(maximum=self.CountPhotosToCopyFrom)
 							self.photo_progressbar.configure(value=0)
-							threading.Thread(target=self.copyPhotoToAlbum, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, None, False, None, None, self.PhotoCaptureTextState)).start()
+							threading.Thread(target=self.copyPhotoToAlbum, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyTo, self.PhotoAlbumIdToCopyFrom , self.CountPhotosToCopyFrom, False, None, None, None, self.PhotoCaptureTextState)).start()
 					else: 
 						
 						if self.PhotoLeftCount and self.PhotoProcessStatus==False: 
@@ -1237,27 +1400,36 @@ class myapp():
 							self.photo_progressbar.configure(maximum=self.CountPhotosToCopyFrom)
 							self.photo_progressbar.configure(value=0)
 							threading.Thread(target=self.copyPhotoToAlbum2, args=(person[0], self.PhotoFromId, self.albumNameToCopyTo, self.PhotoAlbumIdToCopyFrom ,  self.CountPhotosToCopyFrom, False, None, None, None, False, self.PhotoAlbumIdToCopyTo, self.PhotoCaptureTextState)).start()
+
+
+							#self, to_id, from_id, albumNameToCopyTo, albumIdToCopyTo, albumIdToCopyFrom, countPhotos,  offset=None, text=False, captcha_send=False, captcha_sid=None, captcha_key=None, capture_text=False
 				else:
 						tkinter.messagebox.showwarning("Copy photo warning", "You should stop the previous copying")
 
 		def PhotoAlbumsDelete(self, event):
+				public_id=int(self.photo_albums_delete_public_id_enter.get())
 				items = self.photo_delete_albums_list.curselection()
 				#print(len(self.photo_delete_albums_list.curselection()))
-				#
+				titles=[]
+				self.PhotoAlbumsToDelete=self.getAlbums(public_id, 'photo')
 				self.PhotoSelectedAlbumsToDelete=[]
 				for i in range(len(items)):
 					for y in  self.PhotoAlbumsToDelete:
 						if y['number'] == int(re.findall('\d+', self.photo_delete_albums_list.get(items[i]))[0]):
-							
+							titles.append(y['title'])
 							self.PhotoSelectedAlbumsToDelete.append(y['id'])
 				#print(self.PhotoSelectedAlbumsToDelete)
 				if self.PhotoSelectedAlbumsToDelete:
-					message_result=tkinter.messagebox.askquestion('Delete photo albums' , 'Do you realy want to delete these photo albums?\n%s'%( str(self.PhotoSelectedAlbumsToDelete)))
+					message_result=tkinter.messagebox.askquestion('Delete photo albums' , 'Do you realy want to delete these photo albums?\n%s'%( str(titles)))
 					if message_result == 'yes':
 						for i in self.PhotoSelectedAlbumsToDelete:
-							vkapi.photos.deleteAlbum(owner_id=person[0], album_id=i)
+							if public_id>0:
+								vkapi.photos.deleteAlbum(owner_id=public_id, album_id=i)
+							else:
+								vkapi.photos.deleteAlbum(group_id=abs(public_id), album_id=i)
+
 							time.sleep(0.6)
-						self.PhotoAlbumsToDelete=self.getAlbums(person[0], 'photo')
+						self.PhotoAlbumsToDelete=self.getAlbums(public_id, 'photo')
 						self.photo_delete_albums_list.delete(0, END)
 						for i in self.PhotoAlbumsToDelete:
 							self.photo_delete_albums_list.insert(END, '%s. %s  count: %s' % (i['number'], re.search('[\w\s]+', i['title']).group(0), i['count']))
@@ -1265,6 +1437,36 @@ class myapp():
 						print('canceled delete photo albums')
 				else:
 					tkinter.messagebox.showwarning('Delete photo albums', 'Select any albums')
+
+		def PhotoChnageDefaultSet(self, event):
+			items=self.photo_privates_list.get(0, END)
+
+			self.PhotoSelectedAlbumsToChange=[]
+			for i in range(len(items)):
+				for y in self.PhotoPrivatesAlbums:
+					if 'friends' in items[i]:
+						if y['number']==int(re.findall('\d+', items[i])[0]):
+							self.PhotoSelectedAlbumsToChange.append(y['id'])
+							self.photo_privates_list.selection_set(i)
+
+			print(self.PhotoSelectedAlbumsToChange)
+
+			#self.photo_privates_list.selection_set(0)
+
+		def PhotoChangePrivates(self, event):
+			items=self.photo_privates_list.curselection()
+			self.PhotoSelectedAlbumsToChange=[]
+			for i in range(len(items)):
+				for y in self.PhotoPrivatesAlbums:
+					if y['number'] == int(re.findall('\d+', self.photo_privates_list.get(items[i]))[0]):
+						self.PhotoSelectedAlbumsToChange.append(y['id'])
+			for i in self.PhotoSelectedAlbumsToChange:
+				vkapi.photos.editAlbum(owner_id=person[0], privacy_view=self.PhotoChangePrivatesSelected, album_id=i)
+				time.sleep(0.5)
+			self.PhotoPrivatesAlbums=self.getAlbums(person[0], 'photo')
+			self.photo_privates_list.delete(0, END)
+			for i in self.PhotoPrivatesAlbums:
+				self.photo_privates_list.insert(END, '%s. %s Privacy: %s' % (i['number'], re.search('[\w\s]+', i['title']).group(0), i['privacy_view']))
 
 		def copy_video(self, event):
 				if self.copy_video_running==False:
@@ -1296,23 +1498,35 @@ class myapp():
 				else:
 					tkinter.messagebox.showwarning("Copy video warning", "You should stop the previous copying")
 
+		def PhotoAlbumsLoadOnSelect(self, event):
+			public_id=self.photo_albums_delete_public_id_enter.get()
+			albums=self.getAlbums(public_id, 'photo')
+			self.photo_delete_albums_list.delete(0, END)
+			for i in albums:
+				self.photo_delete_albums_list.insert(END, '%s. %s  count: %s' % (i['number'], re.search('[\w\s]+', i['title']).group(0), i['count']))
+
 		def CurSelet(self, event, param1, maction ):
 
 			if param1=="list1":	
 				selection=self.list1.curselection()
-				selection = int(re.findall("[0-9]", self.list1.get(selection[0]))[0])
+				selection = int(re.findall("[0-9]+", self.list1.get(selection[0]))[0])
 				if selection==3:
 					self.selector=3
 				elif selection==4:
 					self.selector=4
 				elif selection==6:
 					self.selector=6
-				elif selection is 7:
+				elif selection == 7:
 					self.selector = 7
-				elif selection is 8:
+				elif selection == 8:
 					 self.selector = 8
+				elif selection == 9:
+					self.selector=9
+				elif selection == 10:
+					self.selector=10
 
 				if self.selector==3:
+
 					for i in self.frame2.winfo_children(): i.pack_forget()
 					for i in self.superFrameInner1.winfo_children(): i.pack_forget()
 					self.frame3.pack(side = LEFT, fill=Y)
@@ -1427,6 +1641,10 @@ class myapp():
 
 					for i in self.frame2.winfo_children(): i.pack_forget()
 					for i in self.superFrameInner1.winfo_children(): i.pack_forget()
+					self.photo_albums_delete_public_id_enter=ttk.Combobox(self.frame2, values=[person[0]]+[-i for i in vkapi.groups.get(owner_id=person[0], filter='admin')['items']])
+					self.photo_albums_delete_public_id_enter.set(person[0])
+					self.photo_albums_delete_public_id_enter.bind("<<ComboboxSelected>>", self.PhotoAlbumsLoadOnSelect)
+					self.photo_albums_delete_public_id_enter.pack()
 					self.photo_albums_delete_button=Button(self.frame2, text="Delete albums")
 					self.photo_albums_delete_button.bind("<Button-1>", self.PhotoAlbumsDelete)
 					self.photo_albums_delete_button.pack()
@@ -1449,6 +1667,7 @@ class myapp():
 					self.superFrame.pack_forget()
 					for i in self.frame2.winfo_children(): i.pack_forget()
 					for i in self.superFrameInner1.winfo_children(): i.pack_forget()
+					self.superFrameInner1.pack_forget()
 					self.tumblr_copyphoto_albums_list_label.pack()
 					self.tumblr_copyphoto_albums_list_wrap.pack(fill=BOTH, expand=True)
 					self.tumblr_copyphoto_albums_list.pack(fill=BOTH, expand=True)
@@ -1477,6 +1696,44 @@ class myapp():
 					self.tumblr_copyphoto_albums_list.delete(0, END)
 					for i in self.TumblrPhotoAlbumsToCopyTo:
 						self.tumblr_copyphoto_albums_list.insert(END, '%s. %s  count: %s' % (i['number'], re.search('[\w\s]+', i['title']).group(0), i['count']))
+
+				elif self.selector==9:
+					self.superFrame.pack_forget()
+					for i in self.frame2.winfo_children(): i.pack_forget()
+					for i in self.superFrameInner1.winfo_children(): i.pack_forget()
+					self.superFrameInner1.pack_forget()
+					self.photo_privates_select=ttk.Combobox(self.frame2, values=[u'nobody', u'friends', u'all'])
+					self.photo_privates_select.bind("<<ComboboxSelected>>", self.PhotoChangePrivatesSelect)
+					self.photo_privates_select.set('nobody')
+					self.photo_privates_select.pack()
+
+					self.photo_privates_change_button=Button(self.frame2, text="Change")
+					self.photo_privates_change_button.bind('<Button-1>', self.PhotoChangePrivates)
+					self.photo_privates_change_button.pack()
+					self.photo_privates_select_button=Button(self.frame2, text="Select")
+					self.photo_privates_select_button.bind('<Button-1>', self.PhotoChnageDefaultSet)
+					self.photo_privates_select_button.pack()
+					self.photo_privates_list_label.pack()
+					self.photo_privates_list_wrap.pack(fill=BOTH, expand=True)
+					self.photo_privates_list.pack(fill=BOTH, expand=True)
+					self.superFrameInner1.pack(side=LEFT, fill=BOTH, expand=True)
+					self.superFrame.pack(side=LEFT, fill=BOTH, expand=True)
+					self.PhotoPrivatesAlbums=self.getAlbums(person[0], 'photo')
+					self.photo_privates_list.delete(0, END)
+
+					for i in self.PhotoPrivatesAlbums:
+						self.photo_privates_list.insert(END, '%s. %s Privacy: %s' % (i['number'], re.search('[\w\s]+', i['title']).group(0), i['privacy_view']))
+
+				elif self.selector==10:
+					self.superFrame.pack_forget()
+					for i in self.frame2.winfo_children(): i.pack_forget()
+					for i in self.superFrameInner1.winfo_children(): i.pack_forget()
+					self.superFrameInner1.pack_forget()
+					self.photo_infograf_board_url.pack()
+					self.photo_infograf_select_public_id_enter.pack()
+					self.photo_infograf_button.pack()
+					#elf.superFrameInner1.pack(side=LEFT, fill=BOTH, expand=True)
+					self.superFrame.pack(side=LEFT, fill=BOTH, expand=True)
 
 			if param1=="load":
 				self.list3.delete(0, END)
