@@ -1023,7 +1023,7 @@ class myapp():
 					captcha.write(readurl)
 
 		def PhotoUploadFromPinterest(self, event):
-			token="AWVZBp0pbMDy1O2B72oC1nZgHP4VFDrUvRtGHfFCweBu2eBHowAAAAA"
+			token=""
 			public_id=int(self.photo_infograf_select_public_id_enter.get())
 			self.PhotoPinterestUrl=self.photo_infograf_board_url.get()
 			title=self.PhotoPinterestUrl
