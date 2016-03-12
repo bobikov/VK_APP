@@ -49,7 +49,7 @@ from selenium.webdriver.common.keys import Keys
 # print()
 # https://api.vk.com/method/photos.get?owner_id=-77093415&album_id=wall&count=40&access_token=00af0cff7458595045e1893775acf9b561dad00d6df9de580f9839e2722d5090e3fbf819a471461094666
 # User and app info
-session = vk.Session( access_token = 'f98576da13f80eb5b3ab0949e1527ef48c9da72155005b7140362908471415d707eecb765bea05aa2852f')
+session = vk.Session( access_token = '')
 vkapi = vk.API(session, v=5.44 , timeout=50)
 vkerror = vk.api.VkAPIError
 other = [-72580409, -61330688]
@@ -58,7 +58,7 @@ person = [179349317]
 # person = [319315119]
 # app_id = 4967352
 app_id = 5040349
-accTok = 'f98576da13f80eb5b3ab0949e1527ef48c9da72155005b7140362908471415d707eecb765bea05aa2852f'
+accTok = ''
 
 supercitat = []
 end = 0
